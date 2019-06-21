@@ -33,11 +33,14 @@ Partial Class Form1
         Me.btnSave = New System.Windows.Forms.Button()
         Me.cbPlayer1Win = New System.Windows.Forms.CheckBox()
         Me.cbPlayer2Win = New System.Windows.Forms.CheckBox()
+        Me.groupWinner = New System.Windows.Forms.GroupBox()
+        Me.btnReg = New System.Windows.Forms.Button()
+        Me.groupWinner.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbPlayer1
         '
-        Me.tbPlayer1.Location = New System.Drawing.Point(31, 112)
+        Me.tbPlayer1.Location = New System.Drawing.Point(32, 55)
         Me.tbPlayer1.Name = "tbPlayer1"
         Me.tbPlayer1.Size = New System.Drawing.Size(161, 20)
         Me.tbPlayer1.TabIndex = 0
@@ -49,23 +52,23 @@ Partial Class Form1
         '
         'tbPlayer2
         '
-        Me.tbPlayer2.Location = New System.Drawing.Point(315, 112)
+        Me.tbPlayer2.Location = New System.Drawing.Point(320, 55)
         Me.tbPlayer2.Name = "tbPlayer2"
         Me.tbPlayer2.Size = New System.Drawing.Size(161, 20)
         Me.tbPlayer2.TabIndex = 2
         '
         'txtWins
         '
-        Me.txtWins.Location = New System.Drawing.Point(64, 154)
+        Me.txtWins.Location = New System.Drawing.Point(95, 81)
         Me.txtWins.Name = "txtWins"
-        Me.txtWins.Size = New System.Drawing.Size(99, 20)
+        Me.txtWins.Size = New System.Drawing.Size(33, 20)
         Me.txtWins.TabIndex = 3
         '
         'txtWins2
         '
-        Me.txtWins2.Location = New System.Drawing.Point(347, 154)
+        Me.txtWins2.Location = New System.Drawing.Point(397, 81)
         Me.txtWins2.Name = "txtWins2"
-        Me.txtWins2.Size = New System.Drawing.Size(84, 20)
+        Me.txtWins2.Size = New System.Drawing.Size(30, 20)
         Me.txtWins2.TabIndex = 4
         '
         'txtResults
@@ -73,7 +76,7 @@ Partial Class Form1
         Me.txtResults.Location = New System.Drawing.Point(150, 226)
         Me.txtResults.Multiline = True
         Me.txtResults.Name = "txtResults"
-        Me.txtResults.Size = New System.Drawing.Size(216, 82)
+        Me.txtResults.Size = New System.Drawing.Size(216, 37)
         Me.txtResults.TabIndex = 5
         '
         'lblError
@@ -102,7 +105,7 @@ Partial Class Form1
         'cbPlayer1Win
         '
         Me.cbPlayer1Win.AutoSize = True
-        Me.cbPlayer1Win.Location = New System.Drawing.Point(111, 189)
+        Me.cbPlayer1Win.Location = New System.Drawing.Point(16, 21)
         Me.cbPlayer1Win.Name = "cbPlayer1Win"
         Me.cbPlayer1Win.Size = New System.Drawing.Size(45, 17)
         Me.cbPlayer1Win.TabIndex = 8
@@ -112,12 +115,34 @@ Partial Class Form1
         'cbPlayer2Win
         '
         Me.cbPlayer2Win.AutoSize = True
-        Me.cbPlayer2Win.Location = New System.Drawing.Point(386, 189)
+        Me.cbPlayer2Win.Location = New System.Drawing.Point(281, 19)
         Me.cbPlayer2Win.Name = "cbPlayer2Win"
         Me.cbPlayer2Win.Size = New System.Drawing.Size(45, 17)
         Me.cbPlayer2Win.TabIndex = 9
         Me.cbPlayer2Win.Text = "Win"
         Me.cbPlayer2Win.UseVisualStyleBackColor = True
+        '
+        'groupWinner
+        '
+        Me.groupWinner.Controls.Add(Me.cbPlayer1Win)
+        Me.groupWinner.Controls.Add(Me.cbPlayer2Win)
+        Me.groupWinner.Location = New System.Drawing.Point(95, 107)
+        Me.groupWinner.Name = "groupWinner"
+        Me.groupWinner.Size = New System.Drawing.Size(332, 44)
+        Me.groupWinner.TabIndex = 10
+        Me.groupWinner.TabStop = False
+        Me.groupWinner.Text = "Winner"
+        '
+        'btnReg
+        '
+        Me.btnReg.BackColor = System.Drawing.Color.MediumSpringGreen
+        Me.btnReg.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReg.Location = New System.Drawing.Point(205, 269)
+        Me.btnReg.Name = "btnReg"
+        Me.btnReg.Size = New System.Drawing.Size(112, 36)
+        Me.btnReg.TabIndex = 11
+        Me.btnReg.Text = "Register"
+        Me.btnReg.UseVisualStyleBackColor = False
         '
         'Form1
         '
@@ -125,8 +150,8 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
         Me.ClientSize = New System.Drawing.Size(539, 391)
-        Me.Controls.Add(Me.cbPlayer2Win)
-        Me.Controls.Add(Me.cbPlayer1Win)
+        Me.Controls.Add(Me.btnReg)
+        Me.Controls.Add(Me.groupWinner)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.lblError)
         Me.Controls.Add(Me.txtResults)
@@ -136,6 +161,8 @@ Partial Class Form1
         Me.Controls.Add(Me.tbPlayer1)
         Me.Name = "Form1"
         Me.Text = "Form1"
+        Me.groupWinner.ResumeLayout(False)
+        Me.groupWinner.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -151,4 +178,6 @@ Partial Class Form1
     Friend WithEvents btnSave As Button
     Friend WithEvents cbPlayer1Win As CheckBox
     Friend WithEvents cbPlayer2Win As CheckBox
+    Friend WithEvents groupWinner As GroupBox
+    Friend WithEvents btnReg As Button
 End Class
