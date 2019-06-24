@@ -6,6 +6,8 @@ Public Class Form1
     Dim connectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jwhitis\source\repos\Pool\Pool\LocalResults.mdf;Integrated Security=True"
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'PlayerNames.Players' table. You can move, or remove it, as needed.
+        Me.PlayersTableAdapter.Fill(Me.PlayerNames.Players)
         Dim player1 As New PlayerStats
         Dim player2 As New PlayerStats
         Dim lstPlayers As New List(Of PlayerStats)
@@ -79,12 +81,63 @@ Public Class Form1
     End Sub
 
     Private Sub btnReg_Click(sender As Object, e As EventArgs) Handles btnReg.Click
+        Dim player1 As String = String.Empty
+        Dim wins As Integer = 0
+        Dim command As String = "exec [dbo].[selPlayers_v1.1]"
+        Dim adapter As New SqlDataAdapter
+        Dim ds As New DataSet
+        Dim dbCommand As New SqlCommand
+        Dim sqlConnection As New SqlConnection
+
+
+        If Not String.IsNullOrEmpty(tbPlayer1.Text) And Not String.IsNullOrEmpty(tbPlayer2.Text) Then
+
+                With sqlConnection
+                    .ConnectionString = connectionString
+                    .Open()
+                End With
+
+            adapter = New SqlDataAdapter("select player1win,player2win,player1name,player2name from games where player1name like '" & tbPlayer1.Text & "'" & "and player2name like '" & tbPlayer2.Text & "'", sqlConnection)
+            adapter.Fill(ds)
+
+
+                Try
+
+                If ds.Tables(0).Rows(0).Item("player1win") / ds.Tables(0).Rows(0).Item("player2win") * 100 >= 50 Or ds.Tables(0).Rows(0).Item("player2win") / ds.Tables(0).Rows(0).Item("player1win") * 100 >= 50 Then
+                    lblError.Text = "RIVALARY!!!"
+                    lblError.Visible = True
+
+                End If
+            Catch ex As Exception
+                    sqlConnection.Close()
+                    lblError.Text = "Name not found"
+                    lblError.Visible = True
+                Finally
+                    sqlConnection.Close()
+
+                End Try
+
+
+
+            End If
 
 
 
 
 
 
+
+
+
+
+    End Sub
+
+    Private Sub FillByToolStripButton_Click(sender As Object, e As EventArgs)
+        Try
+            Me.PlayersTableAdapter.FillBy(Me.PlayerNames.Players)
+        Catch ex As System.Exception
+            System.Windows.Forms.MessageBox.Show(ex.Message)
+        End Try
 
     End Sub
 End Class
