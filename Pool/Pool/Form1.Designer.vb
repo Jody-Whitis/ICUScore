@@ -40,19 +40,27 @@ Partial Class Form1
         Me.LocalResultsDataSet = New Pool.LocalResultsDataSet()
         Me.LocalResultsDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.PlayersTableAdapter = New Pool.PlayerNamesTableAdapters.PlayersTableAdapter()
+        Me.cbPlayer1 = New System.Windows.Forms.ComboBox()
+        Me.cbPlayer2 = New System.Windows.Forms.ComboBox()
+        Me.PlayersBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.LocalResultsDataSet1 = New Pool.LocalResultsDataSet1()
+        Me.PlayersTableAdapter1 = New Pool.LocalResultsDataSet1TableAdapters.PlayersTableAdapter()
         Me.groupWinner.SuspendLayout()
         CType(Me.PlayersBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PlayerNames, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LocalResultsDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LocalResultsDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PlayersBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LocalResultsDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tbPlayer1
         '
-        Me.tbPlayer1.Location = New System.Drawing.Point(32, 55)
+        Me.tbPlayer1.Location = New System.Drawing.Point(75, 55)
         Me.tbPlayer1.Name = "tbPlayer1"
         Me.tbPlayer1.Size = New System.Drawing.Size(161, 20)
         Me.tbPlayer1.TabIndex = 0
+        Me.tbPlayer1.Visible = False
         '
         'ContextMenuStrip1
         '
@@ -61,21 +69,22 @@ Partial Class Form1
         '
         'tbPlayer2
         '
-        Me.tbPlayer2.Location = New System.Drawing.Point(320, 55)
+        Me.tbPlayer2.Location = New System.Drawing.Point(260, 55)
         Me.tbPlayer2.Name = "tbPlayer2"
         Me.tbPlayer2.Size = New System.Drawing.Size(161, 20)
         Me.tbPlayer2.TabIndex = 2
+        Me.tbPlayer2.Visible = False
         '
         'txtWins
         '
-        Me.txtWins.Location = New System.Drawing.Point(95, 81)
+        Me.txtWins.Location = New System.Drawing.Point(134, 81)
         Me.txtWins.Name = "txtWins"
         Me.txtWins.Size = New System.Drawing.Size(33, 20)
         Me.txtWins.TabIndex = 3
         '
         'txtWins2
         '
-        Me.txtWins2.Location = New System.Drawing.Point(397, 81)
+        Me.txtWins2.Location = New System.Drawing.Point(336, 81)
         Me.txtWins2.Name = "txtWins2"
         Me.txtWins2.Size = New System.Drawing.Size(30, 20)
         Me.txtWins2.TabIndex = 4
@@ -93,7 +102,7 @@ Partial Class Form1
         Me.lblError.AutoSize = True
         Me.lblError.Font = New System.Drawing.Font("Microsoft Sans Serif", 26.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblError.ForeColor = System.Drawing.Color.Red
-        Me.lblError.Location = New System.Drawing.Point(207, 154)
+        Me.lblError.Location = New System.Drawing.Point(141, 154)
         Me.lblError.Name = "lblError"
         Me.lblError.Size = New System.Drawing.Size(95, 39)
         Me.lblError.TabIndex = 6
@@ -177,12 +186,50 @@ Partial Class Form1
         '
         Me.PlayersTableAdapter.ClearBeforeFill = True
         '
+        'cbPlayer1
+        '
+        Me.cbPlayer1.DataSource = Me.PlayersBindingSource
+        Me.cbPlayer1.DisplayMember = "PlayerName"
+        Me.cbPlayer1.FormattingEnabled = True
+        Me.cbPlayer1.Location = New System.Drawing.Point(95, 28)
+        Me.cbPlayer1.Name = "cbPlayer1"
+        Me.cbPlayer1.Size = New System.Drawing.Size(121, 21)
+        Me.cbPlayer1.TabIndex = 12
+        Me.cbPlayer1.ValueMember = "PlayerName"
+        '
+        'cbPlayer2
+        '
+        Me.cbPlayer2.DataSource = Me.PlayersBindingSource1
+        Me.cbPlayer2.DisplayMember = "PlayerName"
+        Me.cbPlayer2.FormattingEnabled = True
+        Me.cbPlayer2.Location = New System.Drawing.Point(282, 28)
+        Me.cbPlayer2.Name = "cbPlayer2"
+        Me.cbPlayer2.Size = New System.Drawing.Size(121, 21)
+        Me.cbPlayer2.TabIndex = 14
+        Me.cbPlayer2.ValueMember = "PlayerName"
+        '
+        'PlayersBindingSource1
+        '
+        Me.PlayersBindingSource1.DataMember = "Players"
+        Me.PlayersBindingSource1.DataSource = Me.LocalResultsDataSet1
+        '
+        'LocalResultsDataSet1
+        '
+        Me.LocalResultsDataSet1.DataSetName = "LocalResultsDataSet1"
+        Me.LocalResultsDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'PlayersTableAdapter1
+        '
+        Me.PlayersTableAdapter1.ClearBeforeFill = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
         Me.ClientSize = New System.Drawing.Size(539, 391)
+        Me.Controls.Add(Me.cbPlayer2)
+        Me.Controls.Add(Me.cbPlayer1)
         Me.Controls.Add(Me.btnReg)
         Me.Controls.Add(Me.groupWinner)
         Me.Controls.Add(Me.btnSave)
@@ -200,6 +247,8 @@ Partial Class Form1
         CType(Me.PlayerNames, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LocalResultsDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LocalResultsDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PlayersBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LocalResultsDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -222,4 +271,9 @@ Partial Class Form1
     Friend WithEvents PlayerNames As PlayerNames
     Friend WithEvents PlayersBindingSource As BindingSource
     Friend WithEvents PlayersTableAdapter As PlayerNamesTableAdapters.PlayersTableAdapter
+    Friend WithEvents cbPlayer1 As ComboBox
+    Friend WithEvents cbPlayer2 As ComboBox
+    Friend WithEvents LocalResultsDataSet1 As LocalResultsDataSet1
+    Friend WithEvents PlayersBindingSource1 As BindingSource
+    Friend WithEvents PlayersTableAdapter1 As LocalResultsDataSet1TableAdapters.PlayersTableAdapter
 End Class
