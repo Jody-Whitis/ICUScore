@@ -1,0 +1,14 @@
+C:\Users\jwhitis\source\repos\Pool\Pool\bin\Debug\LocalResults.mdf
+C:\Users\jwhitis\source\repos\Pool\Pool\bin\Debug\LocalResults_log.ldf
+C:\Users\jwhitis\source\repos\Pool\Pool\bin\Debug\Pool.exe.config
+C:\Users\jwhitis\source\repos\Pool\Pool\bin\Debug\Pool.exe
+C:\Users\jwhitis\source\repos\Pool\Pool\bin\Debug\Pool.pdb
+C:\Users\jwhitis\source\repos\Pool\Pool\bin\Debug\Pool.xml
+C:\Users\jwhitis\source\repos\Pool\Pool\obj\Debug\Pool.vbprojAssemblyReference.cache
+C:\Users\jwhitis\source\repos\Pool\Pool\obj\Debug\Pool.Form1.resources
+C:\Users\jwhitis\source\repos\Pool\Pool\obj\Debug\Pool.Resources.resources
+C:\Users\jwhitis\source\repos\Pool\Pool\obj\Debug\Pool.vbproj.GenerateResource.cache
+C:\Users\jwhitis\source\repos\Pool\Pool\obj\Debug\Pool.vbproj.CoreCompileInputs.cache
+C:\Users\jwhitis\source\repos\Pool\Pool\obj\Debug\Pool.exe
+C:\Users\jwhitis\source\repos\Pool\Pool\obj\Debug\Pool.xml
+C:\Users\jwhitis\source\repos\Pool\Pool\obj\Debug\Pool.pdb
