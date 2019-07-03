@@ -6,26 +6,25 @@ Public Class Form1
     Dim connectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jwhitis\source\repos\Pool\Pool\LocalResults.mdf;Integrated Security=True"
     Dim player1Set As Boolean = False
     Dim player2Set As Boolean = False
-
+    Dim playerStats1 As New PlayerStats
+    Dim playerStats2 As New PlayerStats
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'LocalResultsDataSet1.Players' table. You can move, or remove it, as needed.
         Me.PlayersTableAdapter1.Fill(Me.LocalResultsDataSet1.Players)
         'TODO: This line of code loads data into the 'PlayerNames.Players' table. You can move, or remove it, as needed.
         Me.PlayersTableAdapter.Fill(Me.PlayerNames.Players)
-        Dim player1 As New PlayerStats
-        Dim player2 As New PlayerStats
+
         Dim lstPlayers As New List(Of PlayerStats)
         Dim results As String = String.Empty
 
         lblError.Visible = False
         groupWinner.Visible = False
-        player1.PlayerName1 = tbPlayer1.ToString
-        player2.PlayerName1 = tbPlayer2.ToString
+
 
 
         With lstPlayers
-            .Add(player1)
-            .Add(player2)
+            .Add(playerStats1)
+            .Add(playerStats2)
         End With
 
 
@@ -46,42 +45,86 @@ Public Class Form1
         tbPlayer2.Visible = False
         lblError.Visible = False
 
-        'If Not String.IsNullOrEmpty(tbPlayer1.Text) And Not String.IsNullOrEmpty(tbPlayer2.Text) Then
 
-        '    With sqlConnection
-        '        .ConnectionString = connectionString
-        '        .Open()
-        '    End With
 
         If Not String.IsNullOrEmpty(cbPlayer1.SelectedValue.ToString) And Not String.IsNullOrEmpty(cbPlayer2.SelectedValue.ToString) Then
-            With sqlConnection
-                .ConnectionString = connectionString
-                .Open()
-            End With
+
+
+
+
+#Region "if wins are not empty then add new game, else display wins"
+            If Not String.IsNullOrEmpty(txtWins.Text) AndAlso Not String.IsNullOrEmpty(txtWins2.Text) Then
+
+                With sqlConnection
+                    .ConnectionString = connectionString
+                    .Open()
+                End With
+
+                playerStats1.Wins1 += 1
+                playerStats2.Wins1 += 1
+
+
+                adapter = New SqlDataAdapter("exec dbo.[insWins_v1.1] @newPlayer = '" & playerStats1.PlayerName1 & "',@wins = " & playerStats1.Wins1 & " exec dbo.[insWins_v1.1] @newPlayer = '" & playerStats2.PlayerName1 & "',@wins = " & playerStats2.Wins1, sqlConnection)
+                adapter.Fill(ds)
+
+
+                Try
+                    'txtWins.Text = ds.Tables(0).Rows(0).Item(0).ToString
+                    'txtWins2.Text = ds.Tables(0).Rows(1).Item(0).ToString
+
+
+                Catch ex As Exception
+                    sqlConnection.Close()
+                    lblError.Text = "Game not saved"
+                    lblError.Visible = True
+                Finally
+                    sqlConnection.Close()
+
+                End Try
+
+
+
+            Else 'we'll open current wins
+                With sqlConnection
+                    .ConnectionString = connectionString
+                    .Open()
+                End With
+
+                adapter = New SqlDataAdapter("select wins from Players where playerName in ('" & cbPlayer1.SelectedValue.ToString & "','" & cbPlayer2.SelectedValue.ToString & "')", sqlConnection)
+                adapter.Fill(ds)
+
+                'save new wins if null txtbox wins, else then insert new game results.
+                Try
+                    txtWins.Text = ds.Tables(0).Rows(0).Item(0).ToString
+                    txtWins2.Text = ds.Tables(0).Rows(1).Item(0).ToString
+
+
+                Catch ex As Exception
+                    sqlConnection.Close()
+                    lblError.Text = "Name not found"
+                    lblError.Visible = True
+                Finally
+                    sqlConnection.Close()
+
+                End Try
+
+
+                With playerStats1
+                    .PlayerName1 = cbPlayer1.SelectedValue.ToString
+                    .Wins1 = txtWins.Text
+                End With
+
+                With playerStats2
+                    .PlayerName1 = cbPlayer2.SelectedValue.ToString
+                    .Wins1 = txtWins2.Text
+                End With
+
+            End If
+
+#End Region
+
+
         End If
-
-        adapter = New SqlDataAdapter("select wins from Players where playerName in ('" & cbPlayer1.SelectedValue.ToString & "','" & cbPlayer2.SelectedValue.ToString & "')", sqlConnection)
-        adapter.Fill(ds)
-
-
-            Try
-                txtWins.Text = ds.Tables(0).Rows(0).Item(0).ToString
-                txtWins2.Text = ds.Tables(0).Rows(1).Item(0).ToString
-
-
-            Catch ex As Exception
-                sqlConnection.Close()
-                lblError.Text = "Name not found"
-                lblError.Visible = True
-            Finally
-                sqlConnection.Close()
-
-            End Try
-
-
-
-        ' End If
-
 
 
 
@@ -108,7 +151,7 @@ Public Class Form1
         tbPlayer2.Visible = True
 
 
-
+        'If players have names, then update cbox and add them to db
         If Not String.IsNullOrEmpty(tbPlayer1.Text) And Not String.IsNullOrEmpty(tbPlayer2.Text) Then
 
             With sqlConnection
@@ -153,6 +196,7 @@ Public Class Form1
             cbPlayer1.Visible = True
             cbPlayer2.Visible = True
 
+#Region "logic for future rivalry stats"
             'With sqlConnection
             '    .ConnectionString = connectionString
             '    .Open()
@@ -180,6 +224,9 @@ Public Class Form1
             '    sqlConnection.Close()
 
             'End Try
+
+            'if no players, then turn on tboxes to added them
+#End Region
 
         Else
 
