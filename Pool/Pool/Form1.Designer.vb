@@ -45,6 +45,8 @@ Partial Class Form1
         Me.PlayersBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.LocalResultsDataSet1 = New Pool.LocalResultsDataSet1()
         Me.PlayersTableAdapter1 = New Pool.LocalResultsDataSet1TableAdapters.PlayersTableAdapter()
+        Me.btnPlayer1win = New System.Windows.Forms.Button()
+        Me.btnPlayer2Wins = New System.Windows.Forms.Button()
         Me.groupWinner.SuspendLayout()
         CType(Me.PlayersBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PlayerNames, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -91,7 +93,7 @@ Partial Class Form1
         '
         'txtResults
         '
-        Me.txtResults.Location = New System.Drawing.Point(150, 226)
+        Me.txtResults.Location = New System.Drawing.Point(150, 196)
         Me.txtResults.Multiline = True
         Me.txtResults.Name = "txtResults"
         Me.txtResults.Size = New System.Drawing.Size(216, 37)
@@ -113,7 +115,7 @@ Partial Class Form1
         '
         Me.btnSave.BackColor = System.Drawing.Color.MediumSpringGreen
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(205, 333)
+        Me.btnSave.Location = New System.Drawing.Point(205, 325)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(112, 36)
         Me.btnSave.TabIndex = 7
@@ -222,12 +224,38 @@ Partial Class Form1
         '
         Me.PlayersTableAdapter1.ClearBeforeFill = True
         '
+        'btnPlayer1win
+        '
+        Me.btnPlayer1win.BackColor = System.Drawing.Color.MediumSpringGreen
+        Me.btnPlayer1win.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPlayer1win.Location = New System.Drawing.Point(12, 269)
+        Me.btnPlayer1win.Name = "btnPlayer1win"
+        Me.btnPlayer1win.Size = New System.Drawing.Size(187, 36)
+        Me.btnPlayer1win.TabIndex = 15
+        Me.btnPlayer1win.Text = """Wins"" !"
+        Me.btnPlayer1win.UseVisualStyleBackColor = False
+        Me.btnPlayer1win.Visible = False
+        '
+        'btnPlayer2Wins
+        '
+        Me.btnPlayer2Wins.BackColor = System.Drawing.Color.MediumSpringGreen
+        Me.btnPlayer2Wins.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPlayer2Wins.Location = New System.Drawing.Point(323, 269)
+        Me.btnPlayer2Wins.Name = "btnPlayer2Wins"
+        Me.btnPlayer2Wins.Size = New System.Drawing.Size(192, 36)
+        Me.btnPlayer2Wins.TabIndex = 16
+        Me.btnPlayer2Wins.Text = """Wins""!"
+        Me.btnPlayer2Wins.UseVisualStyleBackColor = False
+        Me.btnPlayer2Wins.Visible = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
         Me.ClientSize = New System.Drawing.Size(539, 391)
+        Me.Controls.Add(Me.btnPlayer2Wins)
+        Me.Controls.Add(Me.btnPlayer1win)
         Me.Controls.Add(Me.cbPlayer2)
         Me.Controls.Add(Me.cbPlayer1)
         Me.Controls.Add(Me.btnReg)
@@ -276,4 +304,6 @@ Partial Class Form1
     Friend WithEvents LocalResultsDataSet1 As LocalResultsDataSet1
     Friend WithEvents PlayersBindingSource1 As BindingSource
     Friend WithEvents PlayersTableAdapter1 As LocalResultsDataSet1TableAdapters.PlayersTableAdapter
+    Friend WithEvents btnPlayer1win As Button
+    Friend WithEvents btnPlayer2Wins As Button
 End Class
