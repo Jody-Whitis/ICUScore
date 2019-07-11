@@ -50,7 +50,8 @@ Public Class Form1
         tbPlayer1.Visible = False
         tbPlayer2.Visible = False
         lblError.Visible = False
-
+        txtWins.Visible = True
+        txtWins2.Visible = True
 
         If Not String.IsNullOrEmpty(cbPlayer1.SelectedValue.ToString) And Not String.IsNullOrEmpty(cbPlayer2.SelectedValue.ToString) Then
 
@@ -171,7 +172,11 @@ Public Class Form1
             tbPlayer2.Visible = False
             cbPlayer1.Visible = True
             cbPlayer2.Visible = True
-
+            btnSave.Visible = True
+            cbPlayer1.ResetText()
+            cbPlayer2.ResetText()
+            cbPlayer1.Refresh()
+            cbPlayer2.Refresh()
 #Region "logic for future rivalry stats"
             'With sqlConnection
             '    .ConnectionString = connectionString
@@ -209,6 +214,7 @@ Public Class Form1
             tbPlayer2.Visible = True
             cbPlayer1.Visible = False
             cbPlayer2.Visible = False
+            btnSave.Visible = False
         End If
 
 
