@@ -8,6 +8,16 @@ Public Class Form1
     Dim player2Set As Boolean = False
     Dim playerStats1 As New PlayerStats
     Dim playerStats2 As New PlayerStats
+    Dim screen As New AppState
+    Public Enum AppState
+        Start = 0
+        Register = 1
+        SelectPlayer = 2
+        Winner = 3
+
+    End Enum
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'LocalResultsDataSet1.Players' table. You can move, or remove it, as needed.
         Me.PlayersTableAdapter1.Fill(Me.LocalResultsDataSet1.Players)
@@ -25,6 +35,7 @@ Public Class Form1
             .Add(playerStats2)
         End With
 
+        screen = AppState.Start
 
     End Sub
 
@@ -57,7 +68,15 @@ Public Class Form1
 
 #Region "if wins are not empty then add new game, else display wins"
             If Not String.IsNullOrEmpty(txtWins.Text) AndAlso Not String.IsNullOrEmpty(txtWins2.Text) Then
+                With playerStats1
+                    .PlayerName1 = cbPlayer1.SelectedValue.ToString
+                    .Wins1 = txtWins.Text
+                End With
 
+                With playerStats2
+                    .PlayerName1 = cbPlayer2.SelectedValue.ToString
+                    .Wins1 = txtWins2.Text
+                End With
                 btnPlayer1win.Text = playerStats1.PlayerName1 & "  WINS! "
                 btnPlayer2Wins.Text = playerStats2.PlayerName1 & "  WINS!"
                 btnPlayer1win.Visible = True
@@ -89,15 +108,7 @@ Public Class Form1
                 End Try
 
 
-                With playerStats1
-                    .PlayerName1 = cbPlayer1.SelectedValue.ToString
-                    .Wins1 = txtWins.Text
-                End With
 
-                With playerStats2
-                    .PlayerName1 = cbPlayer2.SelectedValue.ToString
-                    .Wins1 = txtWins2.Text
-                End With
 
 #Region "future rivlary game title"
                 'isRivarly = getRivarly(playerStats1.Wins1, playerStats2.Wins1)
@@ -134,6 +145,7 @@ Public Class Form1
 
         'If players have names, then update cbox and add them to db
         If Not String.IsNullOrEmpty(tbPlayer1.Text) And Not String.IsNullOrEmpty(tbPlayer2.Text) Then
+            screen = AppState.Register
 
             With sqlConnection
                 .ConnectionString = connectionString
@@ -160,7 +172,6 @@ Public Class Form1
 
             cbPlayer1.EndUpdate()
             cbPlayer2.EndUpdate()
-
 
 
 
@@ -210,14 +221,33 @@ Public Class Form1
 #End Region
 
         Else
-            tbPlayer1.Visible = True
-            tbPlayer2.Visible = True
-            cbPlayer1.Visible = False
-            cbPlayer2.Visible = False
-            btnSave.Visible = False
+            If screen = 1 Then
+                lblError.Text = "Back"
+                lblError.Visible = True
+                tbPlayer1.ResetText()
+                tbPlayer2.ResetText()
+                tbPlayer1.Visible = False
+                tbPlayer2.Visible = False
+                cbPlayer1.Visible = True
+                cbPlayer2.Visible = True
+                btnSave.Visible = True
+                cbPlayer1.ResetText()
+                cbPlayer2.ResetText()
+                cbPlayer1.Refresh()
+                cbPlayer2.Refresh()
+            Else
+                tbPlayer1.Visible = True
+                tbPlayer2.Visible = True
+                cbPlayer1.Visible = False
+                cbPlayer2.Visible = False
+                btnSave.Visible = False
+                screen = AppState.Register
+            End If
+
+
         End If
 
-
+        Refresh()
     End Sub
 
     Private Sub FillByToolStripButton_Click(sender As Object, e As EventArgs)
@@ -260,7 +290,7 @@ Public Class Form1
         Dim ds As New DataSet
         Dim dbCommand As New SqlCommand
         Dim sqlConnection As New SqlConnection
-
+        screen = AppState.Winner
 
         With SqlConnection
             .ConnectionString = connectionString
@@ -272,10 +302,9 @@ Public Class Form1
         adapter.Fill(ds)
 
         Try
-            adapter = New SqlDataAdapter("select wins from Players where playerName in ('" & cbPlayer1.SelectedValue.ToString & "','" & cbPlayer2.SelectedValue.ToString & "')", SqlConnection)
+            adapter = New SqlDataAdapter("select wins from Players where playerName in ('" & cbPlayer1.SelectedValue.ToString & "')", sqlConnection)
             adapter.Fill(ds)
             txtWins.Text = ds.Tables(0).Rows(0).Item(0).ToString
-            txtWins2.Text = ds.Tables(0).Rows(1).Item(0).ToString
         Catch ex As Exception
             SqlConnection.Close()
             lblError.Text = "Game not saved"
@@ -295,6 +324,7 @@ Public Class Form1
         Dim ds As New DataSet
         Dim dbCommand As New SqlCommand
         Dim sqlConnection As New SqlConnection
+        screen = AppState.Winner
 
 
         With sqlConnection
@@ -307,10 +337,10 @@ Public Class Form1
         adapter.Fill(ds)
 
         Try
-            adapter = New SqlDataAdapter("select wins from Players where playerName in ('" & cbPlayer1.SelectedValue.ToString & "','" & cbPlayer2.SelectedValue.ToString & "')", sqlConnection)
+            adapter = New SqlDataAdapter("select wins from Players where playerName in ('" & cbPlayer2.SelectedValue.ToString & "')", sqlConnection)
             adapter.Fill(ds)
-            txtWins.Text = ds.Tables(0).Rows(0).Item(0).ToString
-            txtWins2.Text = ds.Tables(0).Rows(1).Item(0).ToString
+
+            txtWins2.Text = ds.Tables(0).Rows(0).Item(0).ToString
         Catch ex As Exception
             sqlConnection.Close()
             lblError.Text = "Game not saved"
