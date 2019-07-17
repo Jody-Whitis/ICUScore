@@ -14,7 +14,7 @@ Public Class Form1
         Register = 1
         SelectPlayer = 2
         Winner = 3
-
+        Switch = 4
     End Enum
 
 
@@ -68,21 +68,49 @@ Public Class Form1
 
 #Region "if wins are not empty then add new game, else display wins"
             If Not String.IsNullOrEmpty(txtWins.Text) AndAlso Not String.IsNullOrEmpty(txtWins2.Text) Then
-                With playerStats1
-                    .PlayerName1 = cbPlayer1.SelectedValue.ToString
-                    .Wins1 = txtWins.Text
-                End With
 
-                With playerStats2
-                    .PlayerName1 = cbPlayer2.SelectedValue.ToString
-                    .Wins1 = txtWins2.Text
-                End With
-                btnPlayer1win.Text = playerStats1.PlayerName1 & "  WINS! "
-                btnPlayer2Wins.Text = playerStats2.PlayerName1 & "  WINS!"
-                btnPlayer1win.Visible = True
-                btnPlayer2Wins.Visible = True
-                btnReg.Visible = False
-                btnSave.Visible = False
+                If screen = 4 Then
+                    With sqlConnection
+                        .ConnectionString = connectionString
+                        .Open()
+                    End With
+
+                    adapter = New SqlDataAdapter("Select wins from Players where playerName In ('" & cbPlayer1.SelectedValue.ToString & "','" & cbPlayer2.SelectedValue.ToString & "')", sqlConnection)
+                    adapter.Fill(ds)
+
+                    'save new wins if null txtbox wins, else then insert new game results.
+                    Try
+                        txtWins.Text = ds.Tables(0).Rows(0).Item(0).ToString
+                        txtWins2.Text = ds.Tables(0).Rows(1).Item(0).ToString
+                    Catch ex As Exception
+                        sqlConnection.Close()
+                        lblError.Text = "Name not found"
+                        lblError.Visible = True
+                    Finally
+                        sqlConnection.Close()
+
+                    End Try
+
+
+                Else
+                    With playerStats1
+                        .PlayerName1 = cbPlayer1.SelectedValue.ToString
+                        .Wins1 = txtWins.Text
+                    End With
+
+                    With playerStats2
+                        .PlayerName1 = cbPlayer2.SelectedValue.ToString
+                        .Wins1 = txtWins2.Text
+                    End With
+                    btnPlayer1win.Text = playerStats1.PlayerName1 & "  WINS! "
+                    btnPlayer2Wins.Text = playerStats2.PlayerName1 & "  WINS!"
+                    btnPlayer1win.Visible = True
+                    btnPlayer2Wins.Visible = True
+                    btnReg.Visible = False
+                    btnSave.Visible = False
+                    screen = 4
+                End If
+
 
 
             Else 'we'll open current wins
@@ -235,6 +263,7 @@ Public Class Form1
                 cbPlayer2.ResetText()
                 cbPlayer1.Refresh()
                 cbPlayer2.Refresh()
+                screen = AppState.Switch
             Else
                 tbPlayer1.Visible = True
                 tbPlayer2.Visible = True
@@ -269,11 +298,81 @@ Public Class Form1
     End Sub
 
     Private Sub cbPlayer1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPlayer1.SelectedIndexChanged
-        player1Set = True
+        Dim player1 As String = String.Empty
+        Dim wins As Integer = 0
+        Dim command As String = "exec [dbo].[selPlayers_v1.1]"
+        Dim adapter As New SqlDataAdapter
+        Dim ds As New DataSet
+        Dim dbCommand As New SqlCommand
+        Dim sqlConnection As New SqlConnection
+        Dim isRivarly As Boolean = False
+        tbPlayer1.Visible = False
+        tbPlayer2.Visible = False
+        lblError.Visible = False
+        txtWins.Visible = True
+        txtWins2.Visible = True
+
+        With SqlConnection
+            .ConnectionString = connectionString
+            .Open()
+        End With
+
+
+
+        'save new wins if null txtbox wins, else then insert new game results.
+        Try
+            adapter = New SqlDataAdapter("Select wins from Players where playerName In ('" & cbPlayer1.SelectedValue.ToString & "')", sqlConnection)
+            adapter.Fill(ds)
+            txtWins.Text = ds.Tables(0).Rows(0).Item(0).ToString
+        Catch ex As Exception
+            sqlConnection.Close()
+            lblError.Text = "Name not found"
+            lblError.Visible = True
+        Finally
+            sqlConnection.Close()
+
+        End Try
+
+
     End Sub
 
     Private Sub cbPlayer2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPlayer2.SelectedIndexChanged
-        player2Set = True
+        Dim player1 As String = String.Empty
+        Dim wins As Integer = 0
+        Dim command As String = "exec [dbo].[selPlayers_v1.1]"
+        Dim adapter As New SqlDataAdapter
+        Dim ds As New DataSet
+        Dim dbCommand As New SqlCommand
+        Dim sqlConnection As New SqlConnection
+        Dim isRivarly As Boolean = False
+        tbPlayer1.Visible = False
+        tbPlayer2.Visible = False
+        lblError.Visible = False
+        txtWins.Visible = True
+        txtWins2.Visible = True
+
+        With SqlConnection
+            .ConnectionString = connectionString
+            .Open()
+        End With
+
+
+
+        'save new wins if null txtbox wins, else then insert new game results.
+        Try
+            adapter = New SqlDataAdapter("Select wins from Players where playerName In ('" & cbPlayer2.SelectedValue.ToString & "')", sqlConnection)
+            adapter.Fill(ds)
+            txtWins2.Text = ds.Tables(0).Rows(0).Item(0).ToString
+        Catch ex As Exception
+            sqlConnection.Close()
+            lblError.Text = "Name not found"
+            lblError.Visible = True
+        Finally
+            sqlConnection.Close()
+
+        End Try
+
+
     End Sub
 
     Private Sub FillByToolStripButton_Click_1(sender As Object, e As EventArgs)
