@@ -28,7 +28,6 @@ Public Class Form1
         Dim results As String = String.Empty
 
         lblError.Visible = False
-        groupWinner.Visible = False
 
         With lstPlayers
             .Add(playerStats1)
@@ -38,16 +37,6 @@ Public Class Form1
         screen = AppState.Start
 
     End Sub
-
-    Private Function getRivarly(ByVal wins As Integer, ByVal wins2 As Integer) As Boolean
-        Dim totalGames As Integer = wins + wins2
-
-        If wins / totalGames * 100 > 45 Or wins2 / totalGames * 100 > 45 Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim player1 As String = String.Empty
@@ -126,6 +115,8 @@ Public Class Form1
                 Try
                     txtWins.Text = ds.Tables(0).Rows(0).Item(0).ToString
                     txtWins2.Text = ds.Tables(0).Rows(1).Item(0).ToString
+
+
                 Catch ex As Exception
                     sqlConnection.Close()
                     lblError.Text = "Name not found"
@@ -155,7 +146,7 @@ Public Class Form1
     End Sub
 
 
-    Private Sub cbPlayer1Win_CheckedChanged(sender As Object, e As EventArgs) Handles cbPlayer1Win.CheckedChanged
+    Private Sub cbPlayer1Win_CheckedChanged(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -202,7 +193,7 @@ Public Class Form1
             cbPlayer2.EndUpdate()
 
 
-
+#Region "Controls"
             lblError.Text = "New Players Added"
             lblError.Visible = True
             tbPlayer1.ResetText()
@@ -216,6 +207,7 @@ Public Class Form1
             cbPlayer2.ResetText()
             cbPlayer1.Refresh()
             cbPlayer2.Refresh()
+#End Region
 #Region "logic for future rivalry stats"
             'With sqlConnection
             '    .ConnectionString = connectionString
@@ -250,6 +242,7 @@ Public Class Form1
 
         Else
             If screen = 1 Then
+#Region "Controls"
                 lblError.Text = "Back"
                 lblError.Visible = True
                 tbPlayer1.ResetText()
@@ -264,6 +257,7 @@ Public Class Form1
                 cbPlayer1.Refresh()
                 cbPlayer2.Refresh()
                 screen = AppState.Switch
+#End Region
             Else
                 tbPlayer1.Visible = True
                 tbPlayer2.Visible = True
@@ -324,6 +318,16 @@ Public Class Form1
             adapter = New SqlDataAdapter("Select wins from Players where playerName In ('" & cbPlayer1.SelectedValue.ToString & "')", sqlConnection)
             adapter.Fill(ds)
             txtWins.Text = ds.Tables(0).Rows(0).Item(0).ToString
+            playerStats1.Wins1 = txtWins.Text
+            If (Not String.IsNullOrEmpty(txtWins.Text) AndAlso Not String.IsNullOrEmpty(txtWins2.Text)) Then
+                If playerStats1.getRivarly(txtWins2.Text) Then
+                    lblError.Text = "Rivarly Game"
+                    lblError.Text = Visible
+                    lblError.ForeColor = Color.Black
+                End If
+            End If
+
+
         Catch ex As Exception
             sqlConnection.Close()
             lblError.Text = "Name not found"
@@ -356,13 +360,23 @@ Public Class Form1
             .Open()
         End With
 
-
-
         'save new wins if null txtbox wins, else then insert new game results.
         Try
             adapter = New SqlDataAdapter("Select wins from Players where playerName In ('" & cbPlayer2.SelectedValue.ToString & "')", sqlConnection)
             adapter.Fill(ds)
             txtWins2.Text = ds.Tables(0).Rows(0).Item(0).ToString
+            playerStats2.Wins1 = txtWins2.Text
+
+            If (Not String.IsNullOrEmpty(txtWins.Text) AndAlso Not String.IsNullOrEmpty(txtWins2.Text)) Then
+                If playerStats2.getRivarly(txtWins2.Text) Then
+                    lblError.Text = "Rivarly Game"
+                    lblError.Text = Visible
+                    lblError.ForeColor = Color.Black
+
+                End If
+            End If
+
+
         Catch ex As Exception
             sqlConnection.Close()
             lblError.Text = "Name not found"

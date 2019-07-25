@@ -59,4 +59,15 @@
             winsAgainst = value
         End Set
     End Property
+
+
+    Public Overridable Function getRivarly(ByVal challengerWins) As Boolean
+        Dim totalGames As Integer = Wins + challengerWins
+        Dim averageWins As Double = Wins / totalGames
+        If averageWins >= 0.45 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 End Class
