@@ -55,7 +55,7 @@ Partial Class Form1
         'tbPlayer1
         '
         Me.tbPlayer1.Location = New System.Drawing.Point(150, 106)
-        Me.tbPlayer1.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.tbPlayer1.Margin = New System.Windows.Forms.Padding(6)
         Me.tbPlayer1.Name = "tbPlayer1"
         Me.tbPlayer1.Size = New System.Drawing.Size(318, 31)
         Me.tbPlayer1.TabIndex = 0
@@ -70,7 +70,7 @@ Partial Class Form1
         'tbPlayer2
         '
         Me.tbPlayer2.Location = New System.Drawing.Point(520, 106)
-        Me.tbPlayer2.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.tbPlayer2.Margin = New System.Windows.Forms.Padding(6)
         Me.tbPlayer2.Name = "tbPlayer2"
         Me.tbPlayer2.Size = New System.Drawing.Size(318, 31)
         Me.tbPlayer2.TabIndex = 2
@@ -79,7 +79,7 @@ Partial Class Form1
         'txtWins
         '
         Me.txtWins.Location = New System.Drawing.Point(268, 156)
-        Me.txtWins.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.txtWins.Margin = New System.Windows.Forms.Padding(6)
         Me.txtWins.Name = "txtWins"
         Me.txtWins.Size = New System.Drawing.Size(62, 31)
         Me.txtWins.TabIndex = 3
@@ -87,7 +87,7 @@ Partial Class Form1
         'txtWins2
         '
         Me.txtWins2.Location = New System.Drawing.Point(672, 156)
-        Me.txtWins2.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.txtWins2.Margin = New System.Windows.Forms.Padding(6)
         Me.txtWins2.Name = "txtWins2"
         Me.txtWins2.Size = New System.Drawing.Size(56, 31)
         Me.txtWins2.TabIndex = 4
@@ -95,7 +95,7 @@ Partial Class Form1
         'txtResults
         '
         Me.txtResults.Location = New System.Drawing.Point(300, 377)
-        Me.txtResults.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.txtResults.Margin = New System.Windows.Forms.Padding(6)
         Me.txtResults.Multiline = True
         Me.txtResults.Name = "txtResults"
         Me.txtResults.Size = New System.Drawing.Size(428, 67)
@@ -119,7 +119,7 @@ Partial Class Form1
         Me.btnSave.BackColor = System.Drawing.Color.MediumSpringGreen
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.Location = New System.Drawing.Point(410, 625)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(6)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(224, 69)
         Me.btnSave.TabIndex = 7
@@ -131,7 +131,7 @@ Partial Class Form1
         Me.btnReg.BackColor = System.Drawing.Color.MediumSpringGreen
         Me.btnReg.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnReg.Location = New System.Drawing.Point(410, 517)
-        Me.btnReg.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnReg.Margin = New System.Windows.Forms.Padding(6)
         Me.btnReg.Name = "btnReg"
         Me.btnReg.Size = New System.Drawing.Size(224, 69)
         Me.btnReg.TabIndex = 11
@@ -164,11 +164,9 @@ Partial Class Form1
         '
         'cbPlayer1
         '
-        Me.cbPlayer1.DataSource = Me.PlayersBindingSource
-        Me.cbPlayer1.DisplayMember = "PlayerName"
         Me.cbPlayer1.FormattingEnabled = True
         Me.cbPlayer1.Location = New System.Drawing.Point(190, 54)
-        Me.cbPlayer1.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.cbPlayer1.Margin = New System.Windows.Forms.Padding(6)
         Me.cbPlayer1.Name = "cbPlayer1"
         Me.cbPlayer1.Size = New System.Drawing.Size(238, 33)
         Me.cbPlayer1.TabIndex = 12
@@ -176,11 +174,9 @@ Partial Class Form1
         '
         'cbPlayer2
         '
-        Me.cbPlayer2.DataSource = Me.PlayersBindingSource1
-        Me.cbPlayer2.DisplayMember = "PlayerName"
         Me.cbPlayer2.FormattingEnabled = True
         Me.cbPlayer2.Location = New System.Drawing.Point(564, 54)
-        Me.cbPlayer2.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.cbPlayer2.Margin = New System.Windows.Forms.Padding(6)
         Me.cbPlayer2.Name = "cbPlayer2"
         Me.cbPlayer2.Size = New System.Drawing.Size(238, 33)
         Me.cbPlayer2.TabIndex = 14
@@ -205,7 +201,7 @@ Partial Class Form1
         Me.btnPlayer1win.BackColor = System.Drawing.Color.MediumSpringGreen
         Me.btnPlayer1win.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPlayer1win.Location = New System.Drawing.Point(24, 517)
-        Me.btnPlayer1win.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnPlayer1win.Margin = New System.Windows.Forms.Padding(6)
         Me.btnPlayer1win.Name = "btnPlayer1win"
         Me.btnPlayer1win.Size = New System.Drawing.Size(374, 69)
         Me.btnPlayer1win.TabIndex = 15
@@ -218,7 +214,7 @@ Partial Class Form1
         Me.btnPlayer2Wins.BackColor = System.Drawing.Color.MediumSpringGreen
         Me.btnPlayer2Wins.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPlayer2Wins.Location = New System.Drawing.Point(646, 517)
-        Me.btnPlayer2Wins.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnPlayer2Wins.Margin = New System.Windows.Forms.Padding(6)
         Me.btnPlayer2Wins.Name = "btnPlayer2Wins"
         Me.btnPlayer2Wins.Size = New System.Drawing.Size(384, 69)
         Me.btnPlayer2Wins.TabIndex = 16
@@ -244,7 +240,7 @@ Partial Class Form1
         Me.Controls.Add(Me.txtWins)
         Me.Controls.Add(Me.tbPlayer2)
         Me.Controls.Add(Me.tbPlayer1)
-        Me.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.Margin = New System.Windows.Forms.Padding(6)
         Me.Name = "Form1"
         Me.Text = "Form1"
         CType(Me.PlayersBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
