@@ -1,4 +1,4 @@
-# Pool
+# Score Board
 Wins Score Board -
 
 project created when being bored. 
