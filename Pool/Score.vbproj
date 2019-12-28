@@ -241,9 +241,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PoolDBConnect\PoolDBConnect.vbproj">
+    <ProjectReference Include="..\PoolDBConnect\ICUScoreDBConnect.vbproj">
       <Project>{9f80e797-554b-4526-aa0d-98875816cd78}</Project>
-      <Name>PoolDBConnect</Name>
+      <Name>ICUScoreDBConnect</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

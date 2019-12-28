@@ -361,7 +361,7 @@ Partial Class Form1
         Me.Controls.Add(Me.tbEdit)
         Me.Margin = New System.Windows.Forms.Padding(6)
         Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Text = "PvP"
         CType(Me.PlayersBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PlayerNames, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LocalResultsDataSet, System.ComponentModel.ISupportInitialize).EndInit()
