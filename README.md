@@ -2,6 +2,4 @@
 Wins Score Board -
 
 project created when being bored. 
-Keeps track of PvP games
-
-(Universal score board in ver 2 for high scores)
+Keeps track of PvP games and high scores for game modes.
