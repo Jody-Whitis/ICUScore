@@ -1,12 +1,13 @@
 ﻿Imports System.IO
 
-Public Class Form1
+Public Class PvP
+    Dim test As New ScoreTheme(Me)
     'Dim connectionString As String = ("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & Path.GetDirectoryName(Application.StartupPath) & "\LocalResults.mdf;Integrated Security=True").Replace("\bin", "")
     'Dim connectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jwhitis\source\repos\Pool\Pool\LocalResults.mdf;Integrated Security=True"
 #Region "Global to form"
     Dim player1 As New PlayerStats
     Dim player2 As New PlayerStats
-    Dim screen As New AppState
+    'Dim screen As New Test.AppState
     Dim isRiv As Boolean = False
     Dim allplayers As New Hashtable
     Dim allWins As New DataSet
@@ -18,16 +19,16 @@ Public Class Form1
     Dim pvpSet1 As New DataSet
     Dim pvpSet2 As New DataSet
 #End Region
-    Public Enum AppState
-        NoPlayerEx = -1
-        Start = 0
-        Register = 1
-        SelectPlayer = 2
-        Winner = 3
-        Switch = 4
-        Delete = 5
-        Edit = 6
-    End Enum
+    'Public Enum AppState
+    '    NoPlayerEx = -1
+    '    Start = 0
+    '    Register = 1
+    '    SelectPlayer = 2
+    '    Winner = 3
+    '    Switch = 4
+    '    Delete = 5
+    '    Edit = 6
+    'End Enum
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'LocalResultsDataSet1.Players' table. You can move, or remove it, as needed.
@@ -64,34 +65,34 @@ Public Class Form1
         allWins = player1.GetAllResults("exec selAllWins @output=0")
         allplayers = player1.IDBConnect_GetAllPlayers()
         GetHighScores()
-        FillBox(cbPlayer1, allplayers)
-        FillBox(cbPlayer2, allplayers)
-        FillBox(cbDelete, allplayers)
+        test.FillBoxfromHT(cbPlayer1, allplayers)
+        test.FillBoxfromHT(cbPlayer2, allplayers)
+        test.FillBoxfromHT(cbDelete, allplayers)
 #End Region
 
         Dim background = Me.BackColor.ToString
         Dim font = Me.btnEdit.Font
         Dim buttonColor = Me.btnEdit.BackColor.ToString
-        SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2, txtWinsagainst, txtTotalAgainst, txtWinsAgainst2}, False)
-        SetVisibiltyButton(New Button() {btnSave}, False)
+        test.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2, txtWinsagainst, txtTotalAgainst, txtWinsAgainst2}, False)
+        test.SetVisibiltyButton(New Button() {btnSave}, False)
         Dim results As String = String.Empty
         lblError.Visible = False
-        If screen = -1 Then
+        If test.Screen = -1 Then
             lblError.Visible = True
             lstAllWins.Visible = True
         Else
-            screen = AppState.Start
+            test.Screen = ScoreTheme.AppState.Start
         End If
     End Sub
 
-    Private Sub FillBox(ByRef cBox As ComboBox, allPlayersDT As Hashtable)
-        cBox.Items.Clear()
-        For Each player As DictionaryEntry In allPlayersDT
-            If Not player.Value.Equals("Error") Then
-                cBox.Items.Add(player.Value)
-            End If
-        Next
-    End Sub
+    'Private Sub test.FillBoxfromHT(ByRef cBox As ComboBox, allPlayersDT As Hashtable)
+    '    cBox.Items.Clear()
+    '    For Each player As DictionaryEntry In allPlayersDT
+    '        If Not player.Value.Equals("Error") Then
+    '            cBox.Items.Add(player.Value)
+    '        End If
+    '    Next
+    'End Sub
     Private Sub GetHighScores()
         If allWins.Tables(0).Rows.Count > 0 Then
             lstAllWins.Items.Clear()
@@ -105,38 +106,38 @@ Public Class Form1
             Catch ex As Exception
                 Debug.WriteLine(ex.ToString)
                 lblError.Text = ex.Message.ToString
-                SetError(lblError)
+                test.SetErrorLabel(lblError)
             End Try
         End If
     End Sub
 
-    Private Sub SetVisiblityTxtBox(ByRef txtBox As TextBox(), ByVal toggle As Boolean)
-        For Each tBox As TextBox In txtBox
-            tBox.Visible = toggle
-        Next
-    End Sub
+    'Private Sub test.SetVisiblityTxtBox(ByRef txtBox As TextBox(), ByVal toggle As Boolean)
+    '    For Each tBox As TextBox In txtBox
+    '        tBox.Visible = toggle
+    '    Next
+    'End Sub
 
-    Private Sub SetVisibiltyButton(ByRef btn As Button(), ByVal toggle As Boolean)
-        For Each button In btn
-            button.Visible = toggle
-        Next
-    End Sub
+    'Private Sub test.SetVisibiltyButton(ByRef btn As Button(), ByVal toggle As Boolean)
+    '    For Each button In btn
+    '        button.Visible = toggle
+    '    Next
+    'End Sub
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim player1String As String = String.Empty
         Dim wins As Integer = 0
         Dim isRivarly As Boolean = False
-        SetVisiblityTxtBox(New TextBox() {tbEdit}, False)
-        SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
+        test.SetVisiblityTxtBox(New TextBox() {tbEdit}, False)
+        test.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
         'tbPlayer1.Visible = False
         lblError.Visible = False
         'txtWins.Visible = True
         'txtWins2.Visible = True
 
-        If screen > AppState.Start Then
+        If test.Screen > ScoreTheme.AppState.Start Then
             If Not String.IsNullOrEmpty(cbPlayer1.SelectedItem.ToString) And Not String.IsNullOrEmpty(cbPlayer2.SelectedItem.ToString) Then
 #Region "if wins are not empty then add new game, else display wins"
                 If Not String.IsNullOrEmpty(txtWins.Text) AndAlso Not String.IsNullOrEmpty(txtWins2.Text) Then
-                    screen = AppState.Winner
+                    test.Screen = ScoreTheme.AppState.Winner
 #Region "beta get games SQL"
                     'With sqlConnection
                     '    .ConnectionString = connectionString
@@ -169,13 +170,13 @@ Public Class Form1
                     End With
                     btnPlayer1win.Text = Me.player1.PlayerName1 & "  WINS! "
                     btnPlayer2Wins.Text = player2.PlayerName1 & "  WINS!"
-                    SetVisibiltyButton(New Button() {btnReg, btnSave, btnEdit, btnDelete}, False)
+                    test.SetVisibiltyButton(New Button() {btnReg, btnSave, btnEdit, btnDelete}, False)
                     btnPlayer1win.Visible = True
                     btnPlayer2Wins.Visible = True
                     'btnReg.Visible = False
                     'btnSave.Visible = False
                     btnQuit.Text = "Back"
-                    screen = AppState.Switch
+                    test.Screen = ScoreTheme.AppState.Switch
                 Else 'we'll open current wins
 #Region "beta games SQL"
                     'With sqlConnection
@@ -199,7 +200,7 @@ Public Class Form1
 
                     'End Try
 #End Region
-                    screen = AppState.SelectPlayer
+                    test.Screen = ScoreTheme.AppState.SelectPlayer
                     Dim currentWins As String() = Nothing
                     Dim winResult = Me.player1.GetAllResults($"exec [selPlayers_v1.1] @playerId={Me.player1.PID}")
                     Dim winResult2 = Me.player1.GetAllResults($"exec [selPlayers_v1.1] @playerId={Me.player2.PID}")
@@ -209,29 +210,29 @@ Public Class Form1
                     Catch ex As Exception
                         lblError.Text = "Error"
                     End Try
-                    SetError(lblError)
+                    test.SetErrorLabel(lblError)
                 End If
 #End Region
             End If
         Else
             lblError.Text = "Error: Select Both Players"
-            SetError(lblError)
-            screen = -1
+            test.SetErrorLabel(lblError)
+            test.Screen = -1
         End If
     End Sub
 
     Private Sub btnReg_Click(sender As Object, e As EventArgs) Handles btnReg.Click
-        SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2, txtTotalAgainst, txtWinsAgainst2, txtWinsagainst}, False)
+        test.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2, txtTotalAgainst, txtWinsAgainst2, txtWinsagainst}, False)
         btnReg.Text = "Register"
         'txtWins.Visible = False
         'txtWins2.Visible = False
         lblError.Visible = False
         cbDelete.SelectedItem = String.Empty
         Dim retVal As String = String.Empty
-        SetVisibiltyButton(New Button() {btnSave, btnDelete, btnEdit}, False)
+        test.SetVisibiltyButton(New Button() {btnSave, btnDelete, btnEdit}, False)
         'If players have names, then update cbox and add them to db
-        If screen = AppState.Register AndAlso Not String.IsNullOrEmpty(tbEdit.Text) Then
-            screen = AppState.Register
+        If test.Screen = ScoreTheme.AppState.Register AndAlso Not String.IsNullOrEmpty(tbEdit.Text) Then
+            test.Screen = ScoreTheme.AppState.Register
             cbPlayer1.BeginUpdate()
             cbPlayer2.BeginUpdate()
 
@@ -243,7 +244,7 @@ Public Class Form1
             Catch ex As Exception
                 lblError.Text = ex.ToString
             End Try
-            SetError(lblError)
+            test.SetErrorLabel(lblError)
 
 #Region "Beta add player sql"
             'With sqlConnection
@@ -274,9 +275,9 @@ Public Class Form1
             allWins = player1.GetAllResults("exec selAllWins @output=0")
             GetHighScores()
             allplayers = player1.IDBConnect_GetAllPlayers()
-            FillBox(cbPlayer1, allplayers)
-            FillBox(cbPlayer2, allplayers)
-            FillBox(cbDelete, allplayers)
+            test.FillBoxfromHT(cbPlayer1, allplayers)
+            test.FillBoxfromHT(cbPlayer2, allplayers)
+            test.FillBoxfromHT(cbDelete, allplayers)
 #Region "Controls"
 
             'With cbPlayer1.Items
@@ -295,15 +296,15 @@ Public Class Form1
             cbPlayer2.Visible = True
             cbDelete.Visible = False
             'btnSave.Visible = True
-            SetVisibiltyButton(New Button() {btnDelete, btnEdit, btnSave}, False)
+            test.SetVisibiltyButton(New Button() {btnDelete, btnEdit, btnSave}, False)
             'btnDelete.Visible = False
             btnQuit.Visible = True
             cbPlayer1.SelectedItem = Nothing
             cbPlayer2.SelectedItem = Nothing
-            screen = AppState.Start
+            test.Screen = ScoreTheme.AppState.Start
 #End Region
         Else
-            If screen = AppState.Register Then
+            If test.Screen = ScoreTheme.AppState.Register Then
 #Region "Controls"
                 lblError.Text = "Back"
                 lblError.Visible = True
@@ -311,29 +312,29 @@ Public Class Form1
                 tbEdit.Visible = False
                 cbPlayer1.Visible = True
                 cbPlayer2.Visible = True
-                SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
+                test.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
                 'txtWins.Visible = True
                 'txtWins2.Visible = True
                 'btnSave.Visible = True
                 cbPlayer1.Refresh()
                 cbPlayer2.Refresh()
-                SetVisibiltyButton(New Button() {btnDelete, btnEdit, btnSave}, False)
+                test.SetVisibiltyButton(New Button() {btnDelete, btnEdit, btnSave}, False)
                 'btnDelete.Visible = False
                 cbDelete.Visible = False
                 btnQuit.Visible = True
                 cbPlayer1.SelectedItem = Nothing
                 cbPlayer2.SelectedItem = Nothing
-                screen = AppState.Start
+                test.Screen = ScoreTheme.AppState.Start
 #End Region
             Else
                 tbEdit.Visible = True
                 cbPlayer1.Visible = False
                 cbPlayer2.Visible = False
-                SetVisibiltyButton(New Button() {btnDelete, btnEdit}, True)
+                test.SetVisibiltyButton(New Button() {btnDelete, btnEdit}, True)
                 btnSave.Visible = False
                 btnQuit.Visible = False
                 tbEdit.ResetText()
-                screen = AppState.Register
+                test.Screen = ScoreTheme.AppState.Register
             End If
 
         End If
@@ -364,18 +365,18 @@ Public Class Form1
         lblError.Visible = False
         'txtWins.Visible = True
         'txtWins2.Visible = True
-        SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
+        test.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
         player1.WinsAgainst1 = 0
         player2.WinsAgainst1 = 0
         txtWinsagainst.Text = player1.WinsAgainst1
         txtWinsAgainst2.Text = player2.WinsAgainst1
-        If screen <> AppState.Register Then
+        If test.Screen <> ScoreTheme.AppState.Register Then
             player1 = New PlayerStats
             player1.PlayerName1 = cbPlayer1.SelectedItem
             Integer.TryParse((From row As DictionaryEntry In allplayers
                               Where row.Value Like player1.PlayerName1 Select row.Key).ToArray.First, player1.PID)
             lblError.Text = player1.GetPlayers()
-            SetError(lblError)
+            test.SetErrorLabel(lblError)
 #Region "beta sql"
             'With sqlConnection
             '    .ConnectionString = connectionString
@@ -409,13 +410,13 @@ Public Class Form1
             txtWins.Text = player1.Wins1
 
             If cbPlayer2.SelectedItem IsNot Nothing Then
-                screen = AppState.Switch
-                SetVisibiltyButton(New Button() {btnSave}, True)
+                test.Screen = ScoreTheme.AppState.Switch
+                test.SetVisibiltyButton(New Button() {btnSave}, True)
                 If player2.PID > 0 Then
                     SetPVPSets()
                 End If
             Else
-                screen = AppState.Start
+                test.Screen = ScoreTheme.AppState.Start
             End If
             If player1.PID > 0 AndAlso player2.PID > 0 AndAlso pvpSet2.Tables(0).Rows.Count > 0 Then
                 'Integer.TryParse(pvpSet1.Tables(0).Rows(0).Item("Wins"), player1.WinsAgainst1)
@@ -424,13 +425,13 @@ Public Class Form1
                 txtWinsAgainst2.Text = player2.WinsAgainst1.ToString
                 txtTotalAgainst.Text = totalGamesPvP.ToString
                 isRiv = player1.getRivarly(player2.WinsAgainst1)
-                SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
+                test.SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
             Else
-                SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, False)
+                test.SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, False)
             End If
             If isRiv Then
                 lblError.Text = "Rivarly"
-                SetError(lblError)
+                test.SetErrorLabel(lblError)
             End If
         End If
 
@@ -440,29 +441,29 @@ Public Class Form1
         Dim isRivarly As Boolean = False
         tbEdit.Visible = False
         lblError.Visible = False
-        SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
+        test.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
         'txtWins.Visible = True
         'txtWins2.Visible = True
         player1.WinsAgainst1 = 0
         player2.WinsAgainst1 = 0
         txtWinsagainst.Text = player1.WinsAgainst1
         txtWinsAgainst2.Text = player2.WinsAgainst1
-        If screen <> AppState.Register Then
+        If test.Screen <> ScoreTheme.AppState.Register Then
             player2 = New PlayerStats
             player2.PlayerName1 = cbPlayer2.SelectedItem
             Integer.TryParse((From row As DictionaryEntry In allplayers
                               Where row.Value Like player2.PlayerName1 Select row.Key).ToArray.First, player2.PID)
             lblError.Text = player2.GetPlayers()
-            SetError(lblError)
+            test.SetErrorLabel(lblError)
             txtWins2.Text = player2.Wins1
             If cbPlayer1.SelectedItem IsNot Nothing Then
-                screen = AppState.Switch
-                SetVisibiltyButton(New Button() {btnSave}, True)
+                test.Screen = ScoreTheme.AppState.Switch
+                test.SetVisibiltyButton(New Button() {btnSave}, True)
                 If player1.PID > 0 Then
                     SetPVPSets()
                 End If
             Else
-                screen = AppState.Start
+                test.Screen = ScoreTheme.AppState.Start
             End If
             If player2.PID > 0 AndAlso player1.PID > 0 AndAlso pvpSet1.Tables(0).Rows.Count > 0 Then
                 'Integer.TryParse(pvpSet1.Tables(0).Rows(0).Item("Wins"), player1.WinsAgainst1)
@@ -471,13 +472,13 @@ Public Class Form1
                 txtWinsAgainst2.Text = player2.WinsAgainst1.ToString
                 txtTotalAgainst.Text = totalGamesPvP.ToString
                 isRiv = player2.getRivarly(player1.WinsAgainst1)
-                SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
+                test.SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
             Else
-                SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, False)
+                test.SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, False)
             End If
             If isRiv Then
                 lblError.Text = "Rivarly"
-                SetError(lblError)
+                test.SetErrorLabel(lblError)
             End If
         End If
     End Sub
@@ -519,7 +520,7 @@ Public Class Form1
     End Function
 
     Private Sub btnPlayer1win_Click(sender As Object, e As EventArgs) Handles btnPlayer1win.Click
-        screen = AppState.Winner
+        test.Screen = ScoreTheme.AppState.Winner
         Dim gameResults As String = String.Empty
 #Region "Beta sql"
         'With SqlConnection
@@ -563,17 +564,17 @@ Public Class Form1
             txtWinsAgainst2.Text = player2.WinsAgainst1.ToString
             txtTotalAgainst.Text = totalGamesPvP.ToString
             isRiv = player1.getRivarly(player2.WinsAgainst1)
-            SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
+            test.SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
         End If
         player1.WinsAgainst1 += 1
         txtWinsagainst.Text = player1.WinsAgainst1
         lblError.Text = player1.InsertPvPStats(player2.PID, pvpID)
         totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
         txtTotalAgainst.Text = totalGamesPvP.ToString
-        SetError(lblError)
-        SetVisibiltyButton(New Button() {btnReg, btnSave}, True)
-        SetVisibiltyButton(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
-        SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
+        test.SetErrorLabel(lblError)
+        test.SetVisibiltyButton(New Button() {btnReg, btnSave}, True)
+        test.SetVisibiltyButton(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
+        test.SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
         'btnPlayer1win.Visible = False
         'btnPlayer2Wins.Visible = False
         'btnReg.Visible = True
@@ -581,7 +582,7 @@ Public Class Form1
     End Sub
 
     Private Sub btnPlayer2Wins_Click(sender As Object, e As EventArgs) Handles btnPlayer2Wins.Click
-        screen = AppState.Winner
+        test.Screen = ScoreTheme.AppState.Winner
         Dim gameResults As String = String.Empty
 #Region "beta sql"
         'With sqlConnection
@@ -627,17 +628,17 @@ Public Class Form1
             txtWinsAgainst2.Text = player2.WinsAgainst1.ToString
             txtTotalAgainst.Text = totalGamesPvP.ToString
             isRiv = player2.getRivarly(player1.WinsAgainst1)
-            SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
+            test.SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
         End If
         player2.WinsAgainst1 += 1
         txtWinsAgainst2.Text = player2.WinsAgainst1
         lblError.Text = player2.InsertPvPStats(player1.PID, pvpID2)
         totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
         txtTotalAgainst.Text = totalGamesPvP.ToString
-        SetError(lblError)
-        SetVisibiltyButton(New Button() {btnReg, btnSave}, True)
-        SetVisibiltyButton(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
-        SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
+        test.SetErrorLabel(lblError)
+        test.SetVisibiltyButton(New Button() {btnReg, btnSave}, True)
+        test.SetVisibiltyButton(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
+        test.SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
         'btnPlayer1win.Visible = False
         'btnPlayer2Wins.Visible = False
         'btnReg.Visible = True
@@ -645,17 +646,17 @@ Public Class Form1
         btnQuit.Text = "Quit"
     End Sub
 
-    Protected Sub SetError(ByRef errorText As Label)
-        If errorText.Text.Contains("Error") Then
-            errorText.ForeColor = Color.Red
-            errorText.Visible = True
-        ElseIf errorText.Text.Contains("Rivarly") Then
-            errorText.ForeColor = Color.GreenYellow
-            errorText.Visible = True
-        Else
-            errorText.Visible = False
-        End If
-    End Sub
+    'Protected Sub test.SetErrorLabel(ByRef errorText As Label)
+    '    If errorText.Text.Contains("Error") Then
+    '        errorText.ForeColor = Color.Red
+    '        errorText.Visible = True
+    '    ElseIf errorText.Text.Contains("Rivarly") Then
+    '        errorText.ForeColor = Color.GreenYellow
+    '        errorText.Visible = True
+    '    Else
+    '        errorText.Visible = False
+    '    End If
+    'End Sub
 
     Private Sub btnHighScore_Click(sender As Object, e As EventArgs) Handles btnHighScore.Click
         Dim myForm As New HighScores
@@ -664,9 +665,9 @@ Public Class Form1
     End Sub
 
     Private Sub btnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
-        If screen = AppState.Switch Then
+        If test.Screen = ScoreTheme.AppState.Switch Then
             Application.Restart()
-            screen = AppState.Start
+            test.Screen = ScoreTheme.AppState.Start
         Else
             Application.Exit()
 
@@ -674,7 +675,7 @@ Public Class Form1
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        If screen.Equals(AppState.Delete) Then
+        If test.Screen.Equals(ScoreTheme.AppState.Delete) Then
             'grab player obj from cbox
             Try
                 deletedPlayer.PlayerName1 = cbDelete.SelectedItem.ToString
@@ -682,7 +683,7 @@ Public Class Form1
                                   Where row.Value Like deletedPlayer.PlayerName1 Select row.Key).ToArray.First, deletedPlayer.PID)
             Catch ex As Exception
                 lblError.Text = "Error: Select a player to Delete!!!!!!"
-                SetError(lblError)
+                test.SetErrorLabel(lblError)
                 Exit Sub
             End Try
 
@@ -697,25 +698,25 @@ Public Class Form1
                     allWins = player1.GetAllResults("exec selAllWins @output=0")
                     GetHighScores()
                     allplayers = deletedPlayer.IDBConnect_GetAllPlayers()
-                    FillBox(cbPlayer1, allplayers)
-                    FillBox(cbPlayer2, allplayers)
-                    FillBox(cbDelete, allplayers)
+                    test.FillBoxfromHT(cbPlayer1, allplayers)
+                    test.FillBoxfromHT(cbPlayer2, allplayers)
+                    test.FillBoxfromHT(cbDelete, allplayers)
                     cbDelete.Visible = False
                     cbDelete.SelectedItem = Nothing
-                    screen = AppState.Register
+                    test.Screen = ScoreTheme.AppState.Register
                     lblError.Text = $"{deletedPlayer.PlayerName1} is gone"
                     lblError.Visible = True
                     cbDelete.SelectedItem = Nothing
                     btnEdit.Visible = True
                     btnReg.Text = "Register"
                 Else
-                    screen = AppState.Delete
+                    test.Screen = ScoreTheme.AppState.Delete
                     btnEdit.Visible = False
                 End If
             End If
         Else
             btnReg.Text = "Back"
-            screen = AppState.Delete
+            test.Screen = ScoreTheme.AppState.Delete
             cbDelete.SelectedItem = Nothing
             cbDelete.Visible = True
         End If
@@ -724,11 +725,11 @@ Public Class Form1
     Private Sub cbDelete_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDelete.SelectedIndexChanged
         editPlayer = New PlayerStats
         editPlayer.PlayerName1 = cbDelete.SelectedItem.ToString
-        SetVisibiltyButton(New Button() {btnEdit, btnDelete}, True)
+        test.SetVisibiltyButton(New Button() {btnEdit, btnDelete}, True)
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        If screen = AppState.Edit Then
+        If test.Screen = ScoreTheme.AppState.edit Then
             Dim newName As String = tbEdit.Text
             'grab player obj from cbox
             Try
@@ -736,7 +737,7 @@ Public Class Form1
                                   Where row.Value Like editPlayer.PlayerName1 Select row.Key).ToArray.First, editPlayer.PID)
             Catch ex As Exception
                 lblError.Text = "Error: Select a player to Change"
-                SetError(lblError)
+                test.SetErrorLabel(lblError)
                 Exit Sub
             End Try
 
@@ -750,13 +751,13 @@ Public Class Form1
                     allWins = player1.GetAllResults("exec selAllWins @output=0")
                     GetHighScores()
                     allplayers = editPlayer.IDBConnect_GetAllPlayers()
-                    FillBox(cbPlayer1, allplayers)
-                    FillBox(cbPlayer2, allplayers)
-                    FillBox(cbDelete, allplayers)
+                    test.FillBoxfromHT(cbPlayer1, allplayers)
+                    test.FillBoxfromHT(cbPlayer2, allplayers)
+                    test.FillBoxfromHT(cbDelete, allplayers)
                     tbEdit.ResetText()
                     cbDelete.Visible = False
                     cbDelete.SelectedItem = Nothing
-                    screen = AppState.Register
+                    test.Screen = ScoreTheme.AppState.Register
                     lblError.Text = $"{editPlayer.PlayerName1} is now {newName}"
                     lblError.Visible = True
                     btnReg.Text = "Register"
@@ -764,7 +765,7 @@ Public Class Form1
                     cbDelete.SelectedItem = Nothing
                 Else
                     btnDelete.Visible = False
-                    screen = AppState.Edit
+                    test.Screen = ScoreTheme.AppState.edit
                 End If
             End If
         Else
@@ -773,7 +774,7 @@ Public Class Form1
             cbDelete.Visible = True
             tbEdit.Visible = True
             btnDelete.Visible = False
-            screen = AppState.Edit
+            test.Screen = ScoreTheme.AppState.edit
         End If
     End Sub
 End Class

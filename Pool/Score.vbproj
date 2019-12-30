@@ -91,11 +91,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
+    <Compile Include="PvP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="PvP.Designer.vb">
+      <DependentUpon>PvP.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Games.vb" />
@@ -141,11 +141,11 @@
       <DependentUpon>PlayerNames.xsd</DependentUpon>
     </Compile>
     <Compile Include="PlayerStats.vb" />
-    <Compile Include="Test.vb" />
+    <Compile Include="ScoreTheme.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="PvP.resx">
+      <DependentUpon>PvP.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HighScores.resx">
       <DependentUpon>HighScores.vb</DependentUpon>
