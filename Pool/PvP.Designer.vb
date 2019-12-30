@@ -43,7 +43,7 @@ Partial Class PvP
         Me.btnPlayer1win = New System.Windows.Forms.Button()
         Me.btnPlayer2Wins = New System.Windows.Forms.Button()
         Me.btnHighScore = New System.Windows.Forms.Button()
-        Me.btnQuit = New System.Windows.Forms.Button()
+        Me.btnBack = New System.Windows.Forms.Button()
         Me.lstAllWins = New System.Windows.Forms.ListBox()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.cbDelete = New System.Windows.Forms.ComboBox()
@@ -237,17 +237,17 @@ Partial Class PvP
         Me.btnHighScore.Text = "HighScores"
         Me.btnHighScore.UseVisualStyleBackColor = False
         '
-        'btnQuit
+        'btnBack
         '
-        Me.btnQuit.BackColor = System.Drawing.Color.MediumSpringGreen
-        Me.btnQuit.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuit.Location = New System.Drawing.Point(816, 625)
-        Me.btnQuit.Margin = New System.Windows.Forms.Padding(6)
-        Me.btnQuit.Name = "btnQuit"
-        Me.btnQuit.Size = New System.Drawing.Size(235, 69)
-        Me.btnQuit.TabIndex = 18
-        Me.btnQuit.Text = "Quit"
-        Me.btnQuit.UseVisualStyleBackColor = False
+        Me.btnBack.BackColor = System.Drawing.Color.MediumSpringGreen
+        Me.btnBack.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBack.Location = New System.Drawing.Point(816, 625)
+        Me.btnBack.Margin = New System.Windows.Forms.Padding(6)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(235, 69)
+        Me.btnBack.TabIndex = 18
+        Me.btnBack.Text = "Back"
+        Me.btnBack.UseVisualStyleBackColor = False
         '
         'lstAllWins
         '
@@ -334,7 +334,7 @@ Partial Class PvP
         Me.btnEdit.UseVisualStyleBackColor = False
         Me.btnEdit.Visible = False
         '
-        'Form1
+        'PvP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -347,7 +347,7 @@ Partial Class PvP
         Me.Controls.Add(Me.cbDelete)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.lstAllWins)
-        Me.Controls.Add(Me.btnQuit)
+        Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.btnHighScore)
         Me.Controls.Add(Me.btnPlayer2Wins)
         Me.Controls.Add(Me.btnPlayer1win)
@@ -360,7 +360,7 @@ Partial Class PvP
         Me.Controls.Add(Me.txtWins)
         Me.Controls.Add(Me.tbEdit)
         Me.Margin = New System.Windows.Forms.Padding(6)
-        Me.Name = "Form1"
+        Me.Name = "PvP"
         Me.Text = "PvP"
         CType(Me.PlayersBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PlayerNames, System.ComponentModel.ISupportInitialize).EndInit()
@@ -393,7 +393,7 @@ Partial Class PvP
     Friend WithEvents btnPlayer1win As Button
     Friend WithEvents btnPlayer2Wins As Button
     Friend WithEvents btnHighScore As Button
-    Friend WithEvents btnQuit As Button
+    Friend WithEvents btnBack As Button
     Friend WithEvents lstAllWins As ListBox
     Friend WithEvents btnDelete As Button
     Friend WithEvents cbDelete As ComboBox

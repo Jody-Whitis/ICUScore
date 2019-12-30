@@ -36,13 +36,13 @@ Public Class ScoreTheme
             _form = value
         End Set
     End Property
-
     Public Sub SetErrorLabel(ByRef errorText As Label)
         If errorText.Text.Contains("Error") Then
             errorText.ForeColor = Color.Red
             errorText.Visible = True
         Else
             errorText.Visible = False
+            errorText.ForeColor = Color.Green
         End If
     End Sub
     Public Function GetKey(ByVal values As String, ByVal col As Hashtable) As Integer
@@ -90,7 +90,7 @@ Public Class ScoreTheme
 
     Public Sub SetBackground(ByRef t As Form)
         With t
-            .BackColor = Color.Aquamarine
+            .BackColor = Color.RoyalBlue
         End With
     End Sub
 
@@ -98,6 +98,8 @@ Public Class ScoreTheme
         For Each btn In buttons
             With btn
                 .BackColor = Color.Aquamarine
+                .Font = New Font("Gill Sans Ultra", 9,
+                FontStyle.Bold)
             End With
         Next
     End Sub
@@ -106,7 +108,8 @@ Public Class ScoreTheme
         For Each tbox In tBoxes
             With tbox
                 .BackColor = Color.Aquamarine
-
+                .Font = New Font("Gill Sans Ultra", 9,
+               FontStyle.Bold)
             End With
         Next
     End Sub
