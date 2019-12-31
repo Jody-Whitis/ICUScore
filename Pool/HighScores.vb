@@ -22,6 +22,7 @@ Public Class HighScores
     ''' <param name="e"></param>
     Private Sub HighScores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToScreen()
+        btnSubmit.Visible = False
         lstScores.Visible = False
         highScoreTheme.Screen = ScoreTheme.AppState.Start
         allPlayers = player.IDBConnect_GetAllPlayers()
@@ -56,7 +57,7 @@ Public Class HighScores
         If highScoreTheme.Screen > 0 Then
             'got a player
 
-            If Not String.IsNullOrEmpty(highScoreTheme.ValidateCBox(cbPlayers)) Then
+            If highScoreTheme.ValidateCBox(cbPlayers).Equals(True) Then
                 'got a new score
                 If Not String.IsNullOrEmpty(txtScore.Text) Then
                     If Integer.TryParse(txtScore.Text.Trim, score) Then
@@ -135,7 +136,7 @@ Public Class HighScores
         If highScoreTheme.Screen = ScoreTheme.AppState.SelectPlayer Then
             player.PlayerName1 = cbPlayers.SelectedItem
             highScoreTheme.SetErrorLabel(lblError)
-            If highScoreTheme.ValidateCBox(cbGames) AndAlso Not String.IsNullOrEmpty(txtScore.Text) Then
+            If highScoreTheme.ValidateCBox(cbGames).Equals(True) Then
                 btnSubmit.Visible = True
             Else
                 btnSubmit.Visible = False
@@ -180,7 +181,7 @@ Public Class HighScores
         games.GameMode = cbGames.SelectedItem
         GetHighScores(games.GameMode)
         highScoreTheme.SetErrorLabel(lblError)
-        If highScoreTheme.ValidateCBox(cbPlayers) AndAlso Not String.IsNullOrEmpty(txtScore.Text) Then
+        If highScoreTheme.ValidateCBox(cbPlayers).Equals(True) Then
             btnSubmit.Visible = True
         Else
             btnSubmit.Visible = False

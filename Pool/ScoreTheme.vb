@@ -122,11 +122,11 @@ Public Class ScoreTheme
         Next
     End Sub
 
-    Public Function ValidateCBox(ByRef cBox As ComboBox) As String
-        If cBox.SelectedItem Is Nothing Then
-            Return String.Empty
+    Public Function ValidateCBox(ByRef cBox As ComboBox) As Boolean
+        If cBox.SelectedItem IsNot Nothing AndAlso Not String.IsNullOrEmpty(cBox.SelectedItem.ToString) Then
+            Return True
         Else
-            Return cBox.SelectedItem.ToString
+            Return False
         End If
     End Function
 End Class
