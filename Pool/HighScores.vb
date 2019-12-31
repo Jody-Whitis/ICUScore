@@ -104,8 +104,8 @@ Public Class HighScores
 
     End Sub
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        PvP.Show()
-        Me.Hide()
+        Home.Show()
+        Me.Close()
     End Sub
     Private Sub cbPlayers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPlayers.SelectedIndexChanged
         If highScoreTheme.Screen = ScoreTheme.AppState.SelectPlayer Then
@@ -175,5 +175,10 @@ Public Class HighScores
                 highScoreTheme.Screen = ScoreTheme.AppState.SelectPlayer
             End If
         End If
+    End Sub
+
+    Private Sub btnPvP_Click(sender As Object, e As EventArgs) Handles btnPvP.Click
+        PvP.Show()
+        Me.Close()
     End Sub
 End Class

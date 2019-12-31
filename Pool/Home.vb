@@ -7,6 +7,8 @@ Public Class Home
         homeTheme.Screen = AppState.Start
         homeTheme.SetBackground(Me)
         homeTheme.SetButtons(New Button() {btnPvP, btnHS, btnQuit})
+        lblHome.ForeColor = Color.Aquamarine
+        lblHome.Font = New Font("Gill Sans Ultra", 15, FontStyle.Bold)
         Me.ShowIcon = True
     End Sub
 
