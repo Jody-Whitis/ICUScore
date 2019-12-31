@@ -122,4 +122,11 @@ Public Class ScoreTheme
         Next
     End Sub
 
+    Public Function ValidateCBox(ByRef cBox As ComboBox) As String
+        If cBox.SelectedItem Is Nothing Then
+            Return String.Empty
+        Else
+            Return cBox.SelectedItem.ToString
+        End If
+    End Function
 End Class

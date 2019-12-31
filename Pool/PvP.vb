@@ -112,7 +112,7 @@ Public Class PvP
         'txtWins2.Visible = True
 
         If pvpTheme.Screen > ScoreTheme.AppState.Start Then
-            If Not String.IsNullOrEmpty(cbPlayer1.SelectedItem.ToString) And Not String.IsNullOrEmpty(cbPlayer2.SelectedItem.ToString) Then
+            If Not String.IsNullOrEmpty(pvpTheme.ValidateCBox(cbPlayer1)) And Not String.IsNullOrEmpty(pvpTheme.ValidateCBox(cbPlayer2)) Then
 #Region "if wins are not empty then add new game, else display wins"
                 If Not String.IsNullOrEmpty(txtWins.Text) AndAlso Not String.IsNullOrEmpty(txtWins2.Text) Then
                     pvpTheme.Screen = ScoreTheme.AppState.Winner
@@ -308,6 +308,7 @@ Public Class PvP
                 tbEdit.Visible = True
                 cbPlayer1.Visible = False
                 cbPlayer2.Visible = False
+                cbDelete.Visible = False
                 pvpTheme.SetVisibiltyButton(New Button() {btnDelete, btnEdit}, True)
                 btnSave.Visible = False
                 btnBack.Visible = False
@@ -448,7 +449,7 @@ Public Class PvP
             lblError.Text = player2.GetPlayers()
             pvpTheme.SetErrorLabel(lblError)
             txtWins2.Text = player2.Wins1
-            If cbPlayer1.SelectedItem IsNot Nothing Then
+            If Not String.IsNullOrEmpty(pvpTheme.ValidateCBox(cbPlayer1)) Then
                 pvpTheme.Screen = ScoreTheme.AppState.Switch
                 pvpTheme.SetVisibiltyButton(New Button() {btnSave}, True)
                 If player1.PID > 0 Then
@@ -722,6 +723,7 @@ Public Class PvP
                     cbDelete.SelectedItem = Nothing
                     btnEdit.Visible = True
                     btnReg.Text = "Register"
+                    cbDelete.Visible = False
                 Else
                     pvpTheme.Screen = ScoreTheme.AppState.Delete
                     btnEdit.Visible = False
@@ -729,8 +731,10 @@ Public Class PvP
             End If
         Else
             btnReg.Text = "Back"
+            btnEdit.Visible = False
+            cbDelete.Visible = True
+            cbDelete.SelectedText = String.Empty
             pvpTheme.Screen = ScoreTheme.AppState.Delete
-            cbDelete.SelectedItem = Nothing
             cbDelete.Visible = True
         End If
     End Sub
@@ -742,7 +746,9 @@ Public Class PvP
     ''' <param name="e"></param>
     Private Sub cbDelete_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDelete.SelectedIndexChanged
         editPlayer = New PlayerStats
-        editPlayer.PlayerName1 = cbDelete.SelectedItem.ToString
+        If Not String.IsNullOrWhiteSpace(pvpTheme.ValidateCBox(cbDelete)) Then
+            editPlayer.PlayerName1 = cbDelete.SelectedItem.ToString
+        End If
         pvpTheme.SetVisibiltyButton(New Button() {btnEdit, btnDelete}, True)
     End Sub
 
@@ -788,6 +794,7 @@ Public Class PvP
                     btnReg.Text = "Register"
                     btnDelete.Visible = True
                     cbDelete.SelectedItem = Nothing
+                    cbDelete.Visible = False
                 Else
                     btnDelete.Visible = False
                     pvpTheme.Screen = ScoreTheme.AppState.edit
@@ -795,7 +802,7 @@ Public Class PvP
             End If
         Else
             btnReg.Text = "Back"
-            cbDelete.SelectedItem = Nothing
+            cbDelete.SelectedText = String.Empty
             cbDelete.Visible = True
             tbEdit.Visible = True
             btnDelete.Visible = False

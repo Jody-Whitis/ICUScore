@@ -55,7 +55,8 @@ Public Class HighScores
         Dim score As Integer = -1
         If highScoreTheme.Screen > 0 Then
             'got a player
-            If cbPlayers.SelectedItem IsNot Nothing Then
+
+            If Not String.IsNullOrEmpty(highScoreTheme.ValidateCBox(cbPlayers)) Then
                 'got a new score
                 If Not String.IsNullOrEmpty(txtScore.Text) Then
                     If Integer.TryParse(txtScore.Text.Trim, score) Then
@@ -134,6 +135,11 @@ Public Class HighScores
         If highScoreTheme.Screen = ScoreTheme.AppState.SelectPlayer Then
             player.PlayerName1 = cbPlayers.SelectedItem
             highScoreTheme.SetErrorLabel(lblError)
+            If highScoreTheme.ValidateCBox(cbGames) AndAlso Not String.IsNullOrEmpty(txtScore.Text) Then
+                btnSubmit.Visible = True
+            Else
+                btnSubmit.Visible = False
+            End If
         End If
     End Sub
 
@@ -174,6 +180,11 @@ Public Class HighScores
         games.GameMode = cbGames.SelectedItem
         GetHighScores(games.GameMode)
         highScoreTheme.SetErrorLabel(lblError)
+        If highScoreTheme.ValidateCBox(cbPlayers) AndAlso Not String.IsNullOrEmpty(txtScore.Text) Then
+            btnSubmit.Visible = True
+        Else
+            btnSubmit.Visible = False
+        End If
     End Sub
 
     ''' <summary>
