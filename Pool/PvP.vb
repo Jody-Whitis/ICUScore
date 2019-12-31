@@ -58,7 +58,7 @@ Public Class PvP
         pvpTheme.FillBoxfromHT(cbPlayer2, allplayers)
         pvpTheme.FillBoxfromHT(cbDelete, allplayers)
 #End Region
-
+        Me.CenterToScreen()
         Dim background = Me.BackColor.ToString
         Dim font = Me.btnEdit.Font
         Dim buttonColor = Me.btnEdit.BackColor.ToString
@@ -73,6 +73,9 @@ Public Class PvP
             pvpTheme.Screen = ScoreTheme.AppState.Start
         End If
     End Sub
+    ''' <summary>
+    ''' Get the columns and set the board
+    ''' </summary>
     Private Sub GetHighScores()
         If allWins.Tables(0).Rows.Count > 0 Then
             lstAllWins.Items.Clear()
@@ -90,6 +93,13 @@ Public Class PvP
             End Try
         End If
     End Sub
+
+    ''' <summary>
+    ''' If we are not in start state and both names are there, then if wins are theres, set objs and add
+    ''' If no new wins, just display
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim player1String As String = String.Empty
         Dim wins As Integer = 0
@@ -327,6 +337,13 @@ Public Class PvP
 
     End Sub
 
+    ''' <summary>
+    ''' If we are in this state, new obj and try to parse the Linq key from the hashtable
+    ''' if the other selected item is not nothing, then we have both. Set that state and get the pvpStats
+    ''' If we have both and the other pvpSet, then set those stats on the objs
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub cbPlayer1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPlayer1.SelectedIndexChanged
         Dim isRivarly As Boolean = False
         tbEdit.Visible = False
@@ -405,6 +422,13 @@ Public Class PvP
 
     End Sub
 
+    ''' <summary>
+    ''' If we are in this state, new obj and try to parse the Linq key from the hashtable
+    ''' if the other selected item is not nothing, then we have both. Set that state and get the pvpStats
+    ''' If we have both and the other pvpSet, then set those stats on the objs
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub cbPlayer2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPlayer2.SelectedIndexChanged
         Dim isRivarly As Boolean = False
         tbEdit.Visible = False
@@ -451,6 +475,11 @@ Public Class PvP
         End If
     End Sub
 
+    ''' <summary>
+    ''' Search for a record for ID1 and ID2, get those datasets
+    ''' Try to get the ID from those sets
+    ''' Try to parse from those, or if none then return -1
+    ''' </summary>
     Public Sub SetPVPSets()
         pvpSet1 = player1.SearchPvPStats(player2.PID)
         pvpID = GetPvPID(pvpSet1)
@@ -473,6 +502,12 @@ Public Class PvP
 
     End Sub
 
+    ''' <summary>
+    ''' Go through the dataset for the ID
+    ''' if we don't find one then return -1 to add a new one
+    ''' </summary>
+    ''' <param name="pvpStats"></param>
+    ''' <returns></returns>
     Private Function GetPvPID(ByVal pvpStats As DataSet) As Integer
         Dim pvpID As Integer = -1
         Try
@@ -487,6 +522,13 @@ Public Class PvP
         Return pvpID
     End Function
 
+    ''' <summary>
+    ''' Go to state, and increment from the obj to add new value
+    ''' Repopulate stats, set pvp set. If we have them, parse this against prop then check rivarly and enable controls.
+    ''' Insert new record on -1 PvPID or update the existing one
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub btnPlayer1win_Click(sender As Object, e As EventArgs) Handles btnPlayer1win.Click
         pvpTheme.Screen = ScoreTheme.AppState.Winner
         Dim gameResults As String = String.Empty
@@ -549,6 +591,13 @@ Public Class PvP
         'btnSave.Visible = True
     End Sub
 
+    ''' <summary>
+    ''' Go to state, and increment from the obj to add new value
+    ''' Repopulate stats, set pvp set. If we have them, parse this against prop then check rivarly and enable controls.
+    ''' Insert new record on -1 PvPID or update the existing one
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub btnPlayer2Wins_Click(sender As Object, e As EventArgs) Handles btnPlayer2Wins.Click
         pvpTheme.Screen = ScoreTheme.AppState.Winner
         Dim gameResults As String = String.Empty
@@ -586,7 +635,6 @@ Public Class PvP
             txtWins2.Text = gameResults
         End If
         allWins = player1.GetAllResults("exec selAllWins @output=0")
-        GetHighScores()
         GetHighScores()
         SetPVPSets()
         If pvpSet2.Tables(0).Rows.Count > 0 Then
@@ -632,6 +680,13 @@ Public Class PvP
         Me.Close()
     End Sub
 
+    ''' <summary>
+    ''' If we're in this state, try to parse key from hashtable to object
+    ''' If we have a number in the obj and they confirm, then remove and repopulate
+    ''' Do nothing on blank text in this state, if out of the state go to prev.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If pvpTheme.Screen.Equals(ScoreTheme.AppState.Delete) Then
             'grab player obj from cbox
@@ -680,12 +735,24 @@ Public Class PvP
         End If
     End Sub
 
+    ''' <summary>
+    ''' Set object from selected item and enable controls
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub cbDelete_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDelete.SelectedIndexChanged
         editPlayer = New PlayerStats
         editPlayer.PlayerName1 = cbDelete.SelectedItem.ToString
         pvpTheme.SetVisibiltyButton(New Button() {btnEdit, btnDelete}, True)
     End Sub
 
+    ''' <summary>
+    ''' Editing names, if we're in that state, try to parse this key into the ID
+    ''' If we have text, display dialog box to confirm, then add and repopulate the controls
+    ''' If empty do nothing, if not inthis state then go to prev.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         If pvpTheme.Screen = ScoreTheme.AppState.edit Then
             Dim newName As String = tbEdit.Text

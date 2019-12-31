@@ -4,6 +4,7 @@ Public Class Home
     Dim homeTheme As New ScoreTheme(Me)
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.CenterToScreen()
         homeTheme.Screen = AppState.Start
         homeTheme.SetBackground(Me)
         homeTheme.SetButtons(New Button() {btnPvP, btnHS, btnQuit})

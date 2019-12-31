@@ -12,7 +12,16 @@ Public Class HighScores
     Dim saveLoc As New Point
     Dim saveDim As New Drawing.Size
     Dim addDim As New Drawing.Size
+
+    ''' <summary>
+    ''' Load data to hashtables and fill controls
+    ''' if we're good, change state
+    ''' get location and sizes for nav
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub HighScores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.CenterToScreen()
         lstScores.Visible = False
         highScoreTheme.Screen = ScoreTheme.AppState.Start
         allPlayers = player.IDBConnect_GetAllPlayers()
@@ -33,12 +42,20 @@ Public Class HighScores
         addDim = btnAdd.Size
     End Sub
 
+    ''' <summary>
+    ''' To submit new entry. If we're are not in start state,
+    ''' check if selected item is not nothing, then if entry is numberic and set both object's prop
+    ''' Get the ids from the hash table key
+    ''' Search for existing stat to update, add if not found
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
         lblError.Visible = False
         Dim score As Integer = -1
         If highScoreTheme.Screen > 0 Then
             'got a player
-            If Not String.IsNullOrEmpty(cbPlayers.SelectedItem.ToString) Then
+            If cbPlayers.SelectedItem IsNot Nothing Then
                 'got a new score
                 If Not String.IsNullOrEmpty(txtScore.Text) Then
                     If Integer.TryParse(txtScore.Text.Trim, score) Then
@@ -101,12 +118,18 @@ Public Class HighScores
             highScoreTheme.SetErrorLabel(lblError)
             highScoreTheme.Screen = 1
         End If
-
     End Sub
+
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Home.Show()
         Me.Close()
     End Sub
+
+    ''' <summary>
+    ''' Set object if we're in this state
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub cbPlayers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPlayers.SelectedIndexChanged
         If highScoreTheme.Screen = ScoreTheme.AppState.SelectPlayer Then
             player.PlayerName1 = cbPlayers.SelectedItem
@@ -114,13 +137,17 @@ Public Class HighScores
         End If
     End Sub
 
+    ''' <summary>
+    ''' Using the selected item, run a Linq for that one.
+    ''' Then add to display
+    ''' </summary>
+    ''' <param name="gameMode"></param>
     Private Sub GetHighScores(ByVal gameMode As String)
         If highScores.Tables(0).Rows.Count > 0 Then
             lstScores.Items.Clear()
             Try
                 Dim scores = (From r In highScores.Tables(0).AsEnumerable Where r.Item("gameMode").Equals(gameMode)
-                              Select r
-                                  )
+                              Select r)
                 For Each score In scores
                     Dim playerNameScore As String = score.Item("playerName")
                     Dim playerScore As String = score.Item("highScore")
@@ -137,26 +164,40 @@ Public Class HighScores
         End If
     End Sub
 
+    ''' <summary>
+    ''' Set the mode on this item, them get all and display them
+    ''' set error label if any
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub cbGames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGames.SelectedIndexChanged
         games.GameMode = cbGames.SelectedItem
         GetHighScores(games.GameMode)
         highScoreTheme.SetErrorLabel(lblError)
     End Sub
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
 
+    ''' <summary>
+    ''' Adding new mode
+    ''' If we're not in this state, then enable controls to add
+    ''' If we're in this state and have text, we'll added it or go back
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If highScoreTheme.Screen <> ScoreTheme.AppState.Add Then
+            'transition to adding item
             highScoreTheme.Screen = ScoreTheme.AppState.Add
             cbGames.Visible = False
             cbPlayers.Visible = False
             txtScore.Visible = False
             lstScores.Visible = False
             txtNewGM.Visible = True
-            btnSubmit.Visible = False
-            btnBack.Visible = False
+            highScoreTheme.SetVisibiltyButton(New Button() {btnSubmit, btnBack}, False)
             btnAdd.Location = saveLoc
             btnAdd.Size = saveDim
         ElseIf highScoreTheme.Screen = ScoreTheme.AppState.Add Then
             If Not String.IsNullOrEmpty(txtNewGM.Text) Then
+                'try to insert if not blank
                 Dim newGM As String = $"[dbo].[insNewGame] @gameMode = '{txtNewGM.Text}'"
                 games.InsertGame(newGM)
                 allGames = games.GetAllPlayers()
@@ -168,15 +209,34 @@ Public Class HighScores
                 cbGames.Visible = True
                 cbPlayers.Visible = True
                 txtScore.Visible = True
-                btnSubmit.Visible = True
-                btnBack.Visible = True
+                highScoreTheme.SetVisibiltyButton(New Button() {btnSubmit, btnBack}, True)
                 btnAdd.Location = addLoc
                 btnAdd.Size = addDim
                 highScoreTheme.Screen = ScoreTheme.AppState.SelectPlayer
+            Else
+                'Go back to prev
+                txtNewGM.ResetText()
+                txtNewGM.Visible = False
+                lstScores.Visible = True
+                cbGames.Visible = True
+                cbPlayers.Visible = True
+                txtScore.Visible = True
+                highScoreTheme.SetVisibiltyButton(New Button() {btnSubmit, btnBack}, True)
+                btnAdd.Location = addLoc
+                btnAdd.Size = addDim
+                highScoreTheme.Screen = ScoreTheme.AppState.SelectPlayer
+                lblError.Text = "Back"
+                lblError.Visible = True
+                highScoreTheme.SetErrorLabel(lblError)
             End If
         End If
     End Sub
 
+    ''' <summary>
+    ''' Go to this screen and close this one
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub btnPvP_Click(sender As Object, e As EventArgs) Handles btnPvP.Click
         PvP.Show()
         Me.Close()
