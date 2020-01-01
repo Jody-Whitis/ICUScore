@@ -704,7 +704,7 @@ Public Class PvP
             Dim deleteSQL As String = $"exec [delPlayer] @playerID = {deletedPlayer.PID}, @result=0"
 
             If Not String.IsNullOrEmpty(deletedPlayer.PID) Then
-                Dim deletionAlert As DialogResult = MessageBox.Show($"Are you sure you want to erase {player1.PlayerName1}?",
+                Dim deletionAlert As DialogResult = MessageBox.Show($"Are you sure you want to erase {editPlayer.PlayerName1}?",
     "Erase Player", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
                 'are you sure??????????
                 If deletionAlert.Equals(DialogResult.Yes) Then
@@ -779,7 +779,7 @@ Public Class PvP
             End Try
 
             Dim editSQL As String = $"exec [insNewPlayer_v1.2] @pID = {editPlayer.PID}, @newPlayer='{newName}',@result=0"
-            If Not String.IsNullOrEmpty(editPlayer.PID) Then
+            If Not String.IsNullOrEmpty(editPlayer.PID) AndAlso Not String.IsNullOrEmpty(newName) Then
                 Dim editAlert As DialogResult = MessageBox.Show($"Are you sure you want to change {editPlayer.PlayerName1} to {newName}?",
     "Erase Player", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
                 'are you sure??????????
