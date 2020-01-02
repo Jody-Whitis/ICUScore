@@ -31,6 +31,14 @@ Public Class HighScores
         highScoreTheme.FillCBoxAll(allGames, cbGames, lblError)
         highScores = games.GetAllResults("exec selAllScores @output=0")
 
+        Try
+            Dim emailRecipents = New String() {"jodywhitis0407@gmail.com"}
+            Dim emailSet As New Email(emailRecipents, GetRecentStats(highScores.Tables(0)))
+            emailSet.SendWeekEmail()
+        Catch ex As Exception
+            Debug.Write(ex.ToString)
+        End Try
+
         lblError.Visible = False
         If highScoreTheme.Screen = -1 Then
             lblError.Visible = True
@@ -42,6 +50,22 @@ Public Class HighScores
         saveDim = btnSubmit.Size
         addDim = btnAdd.Size
     End Sub
+
+    ''' <summary>
+    ''' Filter the stats by the lastest in the past week
+    ''' </summary>
+    ''' <param name="allStats"></param>
+    ''' <returns></returns>
+    Public Function GetRecentStats(allStats As DataTable) As IEnumerable
+        Try
+            Dim recentScore As IEnumerable = (From row As DataRow In allStats.AsEnumerable
+                                              Where DateDiff(DateInterval.Day, row.Field(Of Date)("lastUpdated"), Now) >= 7
+                                              Order By row.Field(Of Integer)("highscore")).ToArray
+            Return recentScore
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
 
     ''' <summary>
     ''' To submit new entry. If we're are not in start state,
@@ -93,7 +117,7 @@ Public Class HighScores
                             player.IsFound = 0
                         End Try
 
-                        Dim sqlString = $"exec [dbo].[insScore_v1.1] @pid={player.PID},@score={games.Score},@gID={games.GameID},@result={player.IsFound}"
+                        Dim sqlString = $"exec [dbo].[insScore_v1.1] @pid={player.PID},@score={games.Score},@gID={games.GameID},@result={player.IsFound}, @lastUpdated='{Now.ToString}'"
                         lblError.Text = games.InsertGame(sqlString)
                         highScoreTheme.SetErrorLabel(lblError)
                         highScores.Clear()
