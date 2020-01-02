@@ -41,7 +41,6 @@ Public Class Games
         Dim allPlayers As New Hashtable
         Dim sqlString = String.Empty
         sqlString = $"exec selGames @wins=0"
-        'sqlString = "Select gameMode,gameId from Games"
         ds = scoresDB.DBSQL(sqlString)
         Try
             For i = 0 To ds.Tables(0).Rows.Count - 1

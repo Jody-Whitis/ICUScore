@@ -106,10 +106,7 @@ Public Class PvP
         Dim isRivarly As Boolean = False
         pvpTheme.SetVisiblityTxtBox(New TextBox() {tbEdit}, False)
         pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
-        'tbPlayer1.Visible = False
         lblError.Visible = False
-        'txtWins.Visible = True
-        'txtWins2.Visible = True
 
         If pvpTheme.Screen > ScoreTheme.AppState.Start Then
             If pvpTheme.ValidateCBox(cbPlayer1).Equals(True) And pvpTheme.ValidateCBox(cbPlayer2).Equals(True) Then
@@ -202,8 +199,6 @@ Public Class PvP
     Private Sub btnReg_Click(sender As Object, e As EventArgs) Handles btnReg.Click
         pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2, txtTotalAgainst, txtWinsAgainst2, txtWinsagainst}, False)
         btnReg.Text = "Register"
-        'txtWins.Visible = False
-        'txtWins2.Visible = False
         lblError.Visible = False
         cbDelete.SelectedItem = String.Empty
         Dim retVal As String = String.Empty
@@ -320,24 +315,6 @@ Public Class PvP
         Refresh()
     End Sub
 
-    Private Sub FillByToolStripButton_Click(sender As Object, e As EventArgs)
-        Try
-            Me.PlayersTableAdapter.FillBy(Me.PlayerNames.Players)
-        Catch ex As System.Exception
-            System.Windows.Forms.MessageBox.Show(ex.Message)
-        End Try
-
-    End Sub
-
-    Private Sub FillBy1ToolStripButton_Click(sender As Object, e As EventArgs)
-        Try
-            Me.PlayersTableAdapter.FillBy1(Me.PlayerNames.Players)
-        Catch ex As System.Exception
-            System.Windows.Forms.MessageBox.Show(ex.Message)
-        End Try
-
-    End Sub
-
     ''' <summary>
     ''' If we are in this state, new obj and try to parse the Linq key from the hashtable
     ''' if the other selected item is not nothing, then we have both. Set that state and get the pvpStats
@@ -349,8 +326,6 @@ Public Class PvP
         Dim isRivarly As Boolean = False
         tbEdit.Visible = False
         lblError.Visible = False
-        'txtWins.Visible = True
-        'txtWins2.Visible = True
         pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
         player1.WinsAgainst1 = 0
         player2.WinsAgainst1 = 0
@@ -435,8 +410,6 @@ Public Class PvP
         tbEdit.Visible = False
         lblError.Visible = False
         pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
-        'txtWins.Visible = True
-        'txtWins2.Visible = True
         player1.WinsAgainst1 = 0
         player2.WinsAgainst1 = 0
         txtWinsagainst.Text = player1.WinsAgainst1
@@ -586,10 +559,6 @@ Public Class PvP
         pvpTheme.SetVisibiltyButton(New Button() {btnReg, btnSave}, True)
         pvpTheme.SetVisibiltyButton(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
         pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
-        'btnPlayer1win.Visible = False
-        'btnPlayer2Wins.Visible = False
-        'btnReg.Visible = True
-        'btnSave.Visible = True
     End Sub
 
     ''' <summary>
@@ -656,10 +625,6 @@ Public Class PvP
         pvpTheme.SetVisibiltyButton(New Button() {btnReg, btnSave}, True)
         pvpTheme.SetVisibiltyButton(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
         pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
-        'btnPlayer1win.Visible = False
-        'btnPlayer2Wins.Visible = False
-        'btnReg.Visible = True
-        'btnSave.Visible = True
         btnBack.Text = "Back"
     End Sub
 
@@ -670,12 +635,6 @@ Public Class PvP
     End Sub
 
     Private Sub btnQuit_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        'If test.Screen = ScoreTheme.AppState.Switch Then
-        '    Application.Restart()
-        '    test.Screen = ScoreTheme.AppState.Start
-        'Else
-        '    Application.Exit()
-        'End If
         Home.Show()
         HighScores.Close()
         Me.Close()
