@@ -1,6 +1,7 @@
 ﻿Imports System.Text
 Imports System.Linq
 Public Class HighScores
+#Region "Global to form"
     Dim highScoreTheme As New ScoreTheme(Me)
     Dim player As New PlayerStats
     Dim games As New Games
@@ -12,6 +13,7 @@ Public Class HighScores
     Dim saveLoc As New Point
     Dim saveDim As New Drawing.Size
     Dim addDim As New Drawing.Size
+#End Region
 
     ''' <summary>
     ''' Load data to hashtables and fill controls
@@ -30,7 +32,28 @@ Public Class HighScores
         allGames = games.GetAllPlayers()
         highScoreTheme.FillCBoxAll(allGames, cbGames, lblError)
         highScores = games.GetAllResults("exec selAllScores @output=0")
+        lblError.Visible = False
+        If highScoreTheme.Screen = -1 Then
+            lblError.Visible = True
+        Else
+            highScoreTheme.Screen = ScoreTheme.AppState.SelectPlayer
+        End If
+        ProcessEmailStatbyWeek()
+#Region "control buttons loc/dimens"
+        addLoc = btnAdd.Location
+        saveLoc = btnSubmit.Location
+        saveDim = btnSubmit.Size
+        addDim = btnAdd.Size
+#End Region
+    End Sub
 
+    ''' <summary>
+    ''' Gets a list of recipents from db
+    ''' Get a stats from recent stats the past week without timestamps
+    ''' Pass in the email obj and call send function
+    ''' Using the stats just grabed, get their IDs and update timestamps
+    ''' </summary>
+    Private Sub ProcessEmailStatbyWeek()
         Try
             Dim emailRecipents As New List(Of String)
             emailRecipents = highScoreTheme.getSubs(games)
@@ -44,17 +67,6 @@ Public Class HighScores
         Catch ex As Exception
             Debug.Write(ex.ToString)
         End Try
-
-        lblError.Visible = False
-        If highScoreTheme.Screen = -1 Then
-            lblError.Visible = True
-        Else
-            highScoreTheme.Screen = ScoreTheme.AppState.SelectPlayer
-        End If
-        addLoc = btnAdd.Location
-        saveLoc = btnSubmit.Location
-        saveDim = btnSubmit.Size
-        addDim = btnAdd.Size
     End Sub
 
     ''' <summary>
@@ -67,7 +79,7 @@ Public Class HighScores
             Dim recentScore As IEnumerable = (From row As DataRow In allStats.AsEnumerable
                                               Where DateDiff(DateInterval.Day, row.Field(Of Date)("lastUpdated"), Now) <= 7 AndAlso
                                                    row.Field(Of Date?)("lastSent").ToString.Count <= 0
-                                              Order By row.Field(Of Integer)("highscore")).ToArray
+                                              Order By row.Field(Of Integer)("highscore") Descending).ToArray
             Return recentScore
         Catch ex As Exception
             Return Nothing

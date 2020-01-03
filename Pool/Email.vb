@@ -39,6 +39,13 @@ Public Class Email
         AddressList = eAddresses
     End Sub
 
+    ''' <summary>
+    ''' Check if we have a list of addresses.
+    ''' Using the app settings and the list of addresses passed,
+    ''' Send a table of all recent updated stats in the past week
+    ''' that were passed in constructor after condition checks.
+    ''' Only send of we have at least one row from the stats dataset.
+    ''' </summary>
     Public Sub SendWeekEmail()
         Try
             If AddressList Is Nothing Or AddressList.Count <= 0 Then
@@ -48,23 +55,24 @@ Public Class Email
             Dim eMail As New MailMessage()
             Dim bodyTable As New StringBuilder
             Dim counterStats As Integer = 0
-            smtp.UseDefaultCredentials = My.Settings.emailDefaultCreds
-            smtp.Credentials = New Net.NetworkCredential(My.Settings.emailCreds, My.Settings.passEmailCreds)
-            smtp.Port = My.Settings.emailPort
-            smtp.EnableSsl = True
-            smtp.Host = "smtp.gmail.com"
-
+            With smtp
+                .UseDefaultCredentials = My.Settings.emailDefaultCreds
+                .Credentials = New Net.NetworkCredential(My.Settings.emailCreds, My.Settings.passEmailCreds)
+                .Port = My.Settings.emailPort
+                .EnableSsl = True
+                .Host = My.Settings.emailServer
+            End With
             eMail = New MailMessage()
-            eMail.Sender = New MailAddress("scoretest@something.com")
-            eMail.From = New MailAddress("scores@score.com")
+            With eMail
+                .Sender = New MailAddress("scoretest@something.com")
+                .From = New MailAddress("scores@score.com")
+                .IsBodyHtml = True
+                .Subject = $"Scores for {Now.ToString("MM/dd/yyyy")}"
+            End With
             For Each address In AddressList
                 eMail.To.Add(address)
             Next
-            If ScoreList IsNot Nothing Then
-                eMail.Subject = $"Scores from {Now.ToString("MM/dd/yyyy")}"
-            End If
-            eMail.IsBodyHtml = True
-
+            'Table to be filled with stats
             With bodyTable
 #Region "Table header"
 
@@ -108,7 +116,6 @@ Public Class Email
                 .Append("</table>")
                 .Append("</b>")
             End With
-
             eMail.Body = bodyTable.ToString
             If counterStats > 0 Then
                 smtp.Send(eMail)

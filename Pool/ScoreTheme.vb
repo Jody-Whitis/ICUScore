@@ -1,6 +1,7 @@
 ﻿Imports System.Windows.Forms
 
 Public Class ScoreTheme
+#Region "Props"
     Public Enum AppState
         NoPlayerEx = -1
         Start = 0
@@ -36,6 +37,9 @@ Public Class ScoreTheme
             _form = value
         End Set
     End Property
+#End Region
+
+#Region "Set theme"
     Public Sub SetErrorLabel(ByRef errorText As Label)
         If errorText.Text.Contains("Error") Then
             errorText.ForeColor = Color.Red
@@ -45,23 +49,6 @@ Public Class ScoreTheme
             errorText.ForeColor = Color.Green
         End If
     End Sub
-    Public Function GetKey(ByVal values As String, ByVal col As Hashtable) As Integer
-        For Each items As DictionaryEntry In col
-            If items.Value.Equals(values) Then
-                Return items.Key
-            End If
-        Next
-        Return -1
-    End Function
-    Public Sub FillBoxfromHT(ByRef cBox As ComboBox, ByVal allPlayersDT As Hashtable)
-        cBox.Items.Clear()
-        For Each player As DictionaryEntry In allPlayersDT
-            If Not player.Value.Equals("Error") Then
-                cBox.Items.Add(player.Value)
-            End If
-        Next
-    End Sub
-
     Public Sub SetVisiblityTxtBox(ByRef txtBox As TextBox(), ByVal toggle As Boolean)
         For Each tBox As TextBox In txtBox
             tBox.Visible = toggle
@@ -71,20 +58,6 @@ Public Class ScoreTheme
     Public Sub SetVisibiltyButton(ByRef btn As Button(), ByVal toggle As Boolean)
         For Each button In btn
             button.Visible = toggle
-        Next
-    End Sub
-
-    Public Sub FillCBoxAll(ByVal allList As Hashtable, ByRef cBox As ComboBox, ByRef lblError As Label)
-        cBox.Items.Clear()
-        For Each name As DictionaryEntry In allList
-            If Screen = 0 AndAlso name.Value.ToString.Contains("Error") Then
-                Screen = -1
-                lblError.Text = "Error getting all players"
-                Exit For
-            Else
-                cBox.Items.Add(name.Value)
-                Screen = AppState.SelectPlayer
-            End If
         Next
     End Sub
 
@@ -119,6 +92,36 @@ Public Class ScoreTheme
             With cBox
                 .BackColor = Color.Aqua
             End With
+        Next
+    End Sub
+#End Region
+    Public Function GetKey(ByVal values As String, ByVal col As Hashtable) As Integer
+        For Each items As DictionaryEntry In col
+            If items.Value.Equals(values) Then
+                Return items.Key
+            End If
+        Next
+        Return -1
+    End Function
+    Public Sub FillBoxfromHT(ByRef cBox As ComboBox, ByVal allPlayersDT As Hashtable)
+        cBox.Items.Clear()
+        For Each player As DictionaryEntry In allPlayersDT
+            If Not player.Value.Equals("Error") Then
+                cBox.Items.Add(player.Value)
+            End If
+        Next
+    End Sub
+    Public Sub FillCBoxAll(ByVal allList As Hashtable, ByRef cBox As ComboBox, ByRef lblError As Label)
+        cBox.Items.Clear()
+        For Each name As DictionaryEntry In allList
+            If Screen = 0 AndAlso name.Value.ToString.Contains("Error") Then
+                Screen = -1
+                lblError.Text = "Error getting all players"
+                Exit For
+            Else
+                cBox.Items.Add(name.Value)
+                Screen = AppState.SelectPlayer
+            End If
         Next
     End Sub
 
