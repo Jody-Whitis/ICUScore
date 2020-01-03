@@ -41,57 +41,80 @@ Public Class Email
 
     Public Sub SendWeekEmail()
         Try
-            If AddressList Is Nothing OrElse AddressList.Count <= 0 Then
+            If AddressList Is Nothing Or AddressList.Count <= 0 Then
                 Exit Sub
             End If
             Dim smtp As New SmtpClient
             Dim eMail As New MailMessage()
             Dim bodyTable As New StringBuilder
-            smtp.UseDefaultCredentials = False
+            Dim counterStats As Integer = 0
+            smtp.UseDefaultCredentials = My.Settings.emailDefaultCreds
             smtp.Credentials = New Net.NetworkCredential(My.Settings.emailCreds, My.Settings.passEmailCreds)
             smtp.Port = My.Settings.emailPort
             smtp.EnableSsl = True
             smtp.Host = "smtp.gmail.com"
 
             eMail = New MailMessage()
-            eMail.From = New MailAddress("scoretest@something.com")
+            eMail.Sender = New MailAddress("scoretest@something.com")
+
             For Each address In AddressList
                 eMail.To.Add(address)
             Next
             If ScoreList Is Nothing Then
-                eMail.Subject = "HHHEYYYYYYYY"
+                eMail.Subject = $"Scores from {Now.ToString("MM/dd/yyyy")}"
             End If
             eMail.IsBodyHtml = True
 
             With bodyTable
 #Region "Table header"
-                .Append("<table style=""border: 2px solid blue"">")
-                .Append("<tr style=""border:1px solid green;width:30px"">")
-                .Append("<td style=""border:1px solid green;width:30px"">Name</td>")
-                .Append("<td style=""border:1px solid green;width:30px"">Mode</td>")
-                .Append("<td style=""border:1px solid green;width:30px"">Score</td>")
+
+                .Append("<table style=""border: 7px solid blue;margin-left:auto;margin-right:auto;background-color:Aqua;")
+                .Append("width:100%;border-collapse:collapse;border-spacing:0;"">")
+
+                .Append("<tr>")
+                .Append("<td style=""font-size:14px;text-align:center;color:green"">")
+                .Append("<b>")
+                .Append($"{Now.ToString("MM/dd/yyyy")}")
+                .Append("</b>")
+                .Append("</td>")
+                .Append("</tr>")
+                .Append("</table>")
+
+                .Append("<table style=""border: 2px solid blue;margin-left:auto;margin-right:auto;background-color:Aqua;")
+                .Append("width:100%;border-collapse:collapse;border-spacing:0;"">")
+                .Append("<tr style=""border:1px solid green;color:green;font-size:18px;background-color:Aqua;text-align:center;width:33%;border-collapse:collapse;border-spacing:0;"">")
+                .Append("<td style=""border:1px solid green;color:green;font-size:18px;background-color:Aqua;text-align:center;width:33%;border-collapse:collapse;border-spacing:0;""><b>Name</b></td>")
+                .Append("<td style=""border:1px solid green;color:green;font-size:18px;background-color:Aqua;text-align:center;width:33%;border-collapse:collapse;border-spacing:0;""><b>Mode</b></td>")
+                .Append("<td style=""border:1px solid green;color:green;font-size:18px;background-color:Aqua;text-align:center;width:33%;border-collapse:collapse;border-spacing:0;""><b>Score</b></td>")
                 .Append("</tr>")
 #End Region
                 For Each stat In ScoreList
-                    .Append("<tr>")
+                    .Append("<b>")
+                    .Append("<tr style=""border:1px solid green;color:green;font-size:18px;background-color:Aqua;text-align:center;width:33%;border-collapse:collapse;border-spacing:0;"">")
 #Region "Table cells"
-                    .Append("<td style=""border:1px solid green;width:30px"">")
+                    .Append("<td style=""border:1px solid green;width:33%;border-collapse:collapse;border-spacing:0;"">")
                     .Append(stat(0))
                     .Append("</td>")
-                    .Append("<td style=""border:1px solid green;width:30px"">")
+                    .Append("<td style=""border:1px solid green;width:33%;border-collapse:collapse;border-spacing:0;"">")
                     .Append(stat(1))
                     .Append("</td>")
-                    .Append("<td style=""border:1px solid green;width:30px"">")
+                    .Append("<td style=""border:1px solid green;width:33%;border-collapse:collapse;border-spacing:0;"">")
                     .Append(stat(2))
                     .Append("</td>")
 #End Region
                     .Append("</tr>")
+                    counterStats += 1
                 Next
                 .Append("</table>")
+                .Append("</b>")
             End With
 
             eMail.Body = bodyTable.ToString
-            smtp.Send(eMail)
+            If counterStats > 0 Then
+                smtp.Send(eMail)
+            Else
+                'MsgBox("nothing to send")
+            End If
         Catch ex As Exception
             MsgBox(ex.InnerException.ToString)
         End Try

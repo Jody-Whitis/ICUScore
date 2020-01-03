@@ -33,8 +33,13 @@ Public Class HighScores
 
         Try
             Dim emailRecipents = New String() {"jodywhitis0407@gmail.com"}
-            Dim emailSet As New Email(emailRecipents, GetRecentStats(highScores.Tables(0)))
+            Dim recentStats As IEnumerable = GetRecentStats(highScores.Tables(0))
+            Dim emailSet As New Email(emailRecipents, recentStats)
             emailSet.SendWeekEmail()
+            Dim sentID As String = GetStatsSent(recentStats)
+            If sentID.Length > 0 Then
+                games.InsertGame($"exec [updEmailSent] @hid='{sentID}',@timesent='{Now.ToString("")}'")
+            End If
         Catch ex As Exception
             Debug.Write(ex.ToString)
         End Try
@@ -59,12 +64,26 @@ Public Class HighScores
     Public Function GetRecentStats(allStats As DataTable) As IEnumerable
         Try
             Dim recentScore As IEnumerable = (From row As DataRow In allStats.AsEnumerable
-                                              Where DateDiff(DateInterval.Day, row.Field(Of Date)("lastUpdated"), Now) >= 7
+                                              Where DateDiff(DateInterval.Day, row.Field(Of Date)("lastUpdated"), Now) <= 7 AndAlso
+                                                   row.Field(Of Date?)("lastSent").ToString.Count <= 0
                                               Order By row.Field(Of Integer)("highscore")).ToArray
             Return recentScore
         Catch ex As Exception
             Return Nothing
         End Try
+    End Function
+
+    ''' <summary>
+    ''' Takes the list and get IDs from the email sent
+    ''' </summary>
+    ''' <param name="recents"></param>
+    ''' <returns></returns>
+    Private Function GetStatsSent(recents As IEnumerable) As String
+        Dim updateSent As New StringBuilder
+        For Each stat In recents
+            updateSent.Append(stat(5) & ",")
+        Next
+        Return updateSent.ToString.TrimEnd(",")
     End Function
 
     ''' <summary>
