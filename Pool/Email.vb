@@ -2,22 +2,22 @@
 Imports System.Text
 
 Public Class Email
-    Private _addressList As String()
+    Private _addressList As List(Of String)
     Private _scoreList As IEnumerable
     'Private Const userCreditals As String = "projtestcred@gmail.com"
     'Private Const passCreditals As String = "aolknqyzcrhcemec"
 
 #Region "Prop"
-    Public Sub New(eAddresses As String(), ds As IEnumerable)
+    Public Sub New(eAddresses As List(Of String), ds As IEnumerable)
         AddressList = eAddresses
         ScoreList = ds
     End Sub
 
-    Public Property AddressList As String()
+    Public Property AddressList As List(Of String)
         Get
             Return _addressList
         End Get
-        Set(value As String())
+        Set(value As List(Of String))
             _addressList = value
         End Set
     End Property
@@ -35,7 +35,7 @@ Public Class Email
     Public Sub New()
     End Sub
 
-    Public Sub New(eAddresses As String())
+    Public Sub New(eAddresses As List(Of String))
         AddressList = eAddresses
     End Sub
 
@@ -56,11 +56,11 @@ Public Class Email
 
             eMail = New MailMessage()
             eMail.Sender = New MailAddress("scoretest@something.com")
-
+            eMail.From = New MailAddress("scores@score.com")
             For Each address In AddressList
                 eMail.To.Add(address)
             Next
-            If ScoreList Is Nothing Then
+            If ScoreList IsNot Nothing Then
                 eMail.Subject = $"Scores from {Now.ToString("MM/dd/yyyy")}"
             End If
             eMail.IsBodyHtml = True

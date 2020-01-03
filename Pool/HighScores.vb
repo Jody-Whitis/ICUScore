@@ -32,7 +32,8 @@ Public Class HighScores
         highScores = games.GetAllResults("exec selAllScores @output=0")
 
         Try
-            Dim emailRecipents = New String() {"jodywhitis0407@gmail.com"}
+            Dim emailRecipents As New List(Of String)
+            emailRecipents = highScoreTheme.getSubs(games)
             Dim recentStats As IEnumerable = GetRecentStats(highScores.Tables(0))
             Dim emailSet As New Email(emailRecipents, recentStats)
             emailSet.SendWeekEmail()

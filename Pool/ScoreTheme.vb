@@ -129,4 +129,21 @@ Public Class ScoreTheme
             Return False
         End If
     End Function
+
+    Public Function getSubs(ByVal gameMode As Games) As List(Of String)
+        Dim listOfSubs As New List(Of String)
+        Dim subResults As New DataSet
+        Try
+            subResults = gameMode.GetAllResults("exec [selSubs]")
+            For i = 0 To subResults.Tables(0).Rows.Count - 1
+                With listOfSubs
+                    .Add(subResults.Tables(0).Rows(i).Item("emailAddress").ToString)
+                End With
+            Next
+            Return listOfSubs
+        Catch ex As Exception
+            Debug.WriteLine(ex.ToString)
+            Return Nothing
+        End Try
+    End Function
 End Class
