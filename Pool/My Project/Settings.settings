@@ -10,5 +10,20 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\LocalResults.mdf;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="emailCreds" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">projtestcred@gmail.com</Value>
+    </Setting>
+    <Setting Name="passEmailCreds" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">aolknqyzcrhcemec</Value>
+    </Setting>
+    <Setting Name="emailServer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">smtp.gmail.com</Value>
+    </Setting>
+    <Setting Name="emailPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">587</Value>
+    </Setting>
+    <Setting Name="emailDefaultCreds" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
