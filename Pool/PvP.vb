@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-
+Imports Pool.Logging
 Public Class PvP
     Dim pvpTheme As New ScoreTheme(Me)
     'Dim connectionString As String = ("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & Path.GetDirectoryName(Application.StartupPath) & "\LocalResults.mdf;Integrated Security=True").Replace("\bin", "")
@@ -87,6 +87,8 @@ Public Class PvP
                     lstAllWins.Items.Add(playerNameScore & "".PadRight(10) & ":" & "".PadRight(5) & playerScore)
                 Next
             Catch ex As Exception
+                Dim exceptionLog As New Logging(Now, "GetHighScores : ", ex.ToString)
+                exceptionLog.LogAction()
                 Debug.WriteLine(ex.ToString)
                 lblError.Text = ex.Message.ToString
                 pvpTheme.SetErrorLabel(lblError)
@@ -183,6 +185,8 @@ Public Class PvP
                         txtWins.Text = $"{winResult.Tables(0).Rows.Item(0).Item("wins").ToString}"
                         txtWins2.Text = $"{winResult2.Tables(0).Rows.Item(0).Item("wins").ToString}"
                     Catch ex As Exception
+                        Dim exceptionLog As New Logging(Now, "Wins Display: ", ex.ToString)
+                        exceptionLog.LogAction()
                         lblError.Text = "Error"
                     End Try
                     pvpTheme.SetErrorLabel(lblError)
@@ -215,6 +219,8 @@ Public Class PvP
             Try
                 lblError.Text = player1.InsertPlayer()
             Catch ex As Exception
+                Dim exceptionLog As New Logging(Now, "Add Players: ", ex.ToString)
+                exceptionLog.LogAction()
                 lblError.Text = ex.ToString
             End Try
             pvpTheme.SetErrorLabel(lblError)
@@ -467,14 +473,15 @@ Public Class PvP
         End If
     End Sub
 
-    Private Sub FillByToolStripButton_Click_1(sender As Object, e As EventArgs)
-        Try
-            Me.PlayersTableAdapter1.FillBy(Me.LocalResultsDataSet1.Players)
-        Catch ex As System.Exception
-            System.Windows.Forms.MessageBox.Show(ex.Message)
-        End Try
+    'Private Sub FillByToolStripButton_Click_1(sender As Object, e As EventArgs)
+    '    Try
+    '        Me.PlayersTableAdapter1.FillBy(Me.LocalResultsDataSet1.Players)
+    '    Catch ex As System.Exception
+    '        Dim exceptionLog As New Logging(Now, ex.InnerException.ToString, ex.ToString)
+    '        System.Windows.Forms.MessageBox.Show(ex.Message)
+    '    End Try
 
-    End Sub
+    'End Sub
 
     ''' <summary>
     ''' Go through the dataset for the ID
@@ -491,6 +498,8 @@ Public Class PvP
                 End If
             Next
         Catch ex As Exception
+            Dim exceptionLog As New Logging(Now, "Get PvP ID : ", ex.ToString)
+            exceptionLog.LogAction()
             Return pvpID
         End Try
         Return pvpID
@@ -655,6 +664,8 @@ Public Class PvP
                 Integer.TryParse((From row As DictionaryEntry In allplayers
                                   Where row.Value Like deletedPlayer.PlayerName1 Select row.Key).ToArray.First, deletedPlayer.PID)
             Catch ex As Exception
+                Dim exceptionLog As New Logging(Now, "Delete Player: ", ex.ToString)
+                exceptionLog.LogAction()
                 lblError.Text = "Error: Select a player to Delete!!!!!!"
                 pvpTheme.SetErrorLabel(lblError)
                 Exit Sub
@@ -732,6 +743,9 @@ Public Class PvP
                 Integer.TryParse((From row As DictionaryEntry In allplayers
                                   Where row.Value Like editPlayer.PlayerName1 Select row.Key).ToArray.First, editPlayer.PID)
             Catch ex As Exception
+                Dim exceptionLog As New Logging(Now, "Edit Players: ", ex.ToString)
+                exceptionLog.LogAction()
+                exceptionLog.LogActionEmail()
                 lblError.Text = "Error: Select a player to Change"
                 pvpTheme.SetErrorLabel(lblError)
                 Exit Sub

@@ -123,7 +123,69 @@ Public Class Email
                 'MsgBox("nothing to send")
             End If
         Catch ex As Exception
+            Dim exceptionLog As New Logging(Now, "Weekly Email: ", ex.ToString)
+            exceptionLog.LogAction()
             MsgBox(ex.InnerException.ToString)
         End Try
     End Sub
+
+    Public Function SendLogEmail(fileName As String) As Boolean
+        Dim logSend As Boolean = False
+        Try
+            If AddressList Is Nothing Or AddressList.Count <= 0 Then
+                Return logSend
+            End If
+            Dim smtp As New SmtpClient
+            Dim eMail As New MailMessage()
+            Dim bodyTable As New StringBuilder
+            With smtp
+                .UseDefaultCredentials = My.Settings.emailDefaultCreds
+                .Credentials = New Net.NetworkCredential(My.Settings.emailCreds, My.Settings.passEmailCreds)
+                .Port = My.Settings.emailPort
+                .EnableSsl = True
+                .Host = My.Settings.emailServer
+            End With
+            eMail = New MailMessage()
+            With eMail
+                .Sender = New MailAddress("scoretest@something.com")
+                .From = New MailAddress("scores@score.com")
+                .IsBodyHtml = True
+                .Subject = $"Log for {Now.ToString("MM/dd/yyyy")}"
+            End With
+            For Each address In AddressList
+                eMail.To.Add(address)
+            Next
+
+            With bodyTable
+#Region "Table header"
+
+                .Append("<table style=""border: 7px solid blue;margin-left:auto;margin-right:auto;background-color:Aqua;")
+                .Append("width:100%;border-collapse:collapse;border-spacing:0;"">")
+
+                .Append("<tr>")
+                .Append("<td style=""font-size:14px;text-align:center;color:red"">")
+                .Append("<b>")
+                .Append($"Log for {Now.ToString("MM/dd/yyyy")}")
+                .Append("</b>")
+                .Append("</td>")
+                .Append("</tr>")
+                .Append("</table>")
+#End Region
+
+            End With
+            Dim attachmentLog As System.Net.Mail.Attachment
+            attachmentLog = New System.Net.Mail.Attachment(fileName)
+            eMail.Attachments.Add(attachmentLog)
+            eMail.Body = bodyTable.ToString
+            If eMail.Attachments.Count > 0 Then
+                smtp.Send(eMail)
+                logSend = True
+            End If
+        Catch ex As Exception
+            Dim exceptionLog As New Logging(Now, "Log Email: ", ex.ToString)
+            exceptionLog.LogAction()
+            Return logSend
+        End Try
+        Return logSend
+    End Function
 End Class

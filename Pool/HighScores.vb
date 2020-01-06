@@ -1,5 +1,6 @@
 ﻿Imports System.Text
 Imports System.Linq
+Imports Pool.Logging
 Public Class HighScores
 #Region "Global to form"
     Dim highScoreTheme As New ScoreTheme(Me)
@@ -65,6 +66,8 @@ Public Class HighScores
                 games.InsertGame($"exec [updEmailSent] @hid='{sentID}',@timesent='{Now.ToString("")}'")
             End If
         Catch ex As Exception
+            Dim exceptionLog As New Logging(Now, "Process Email from HighScore", ex.ToString)
+            exceptionLog.LogAction()
             Debug.Write(ex.ToString)
         End Try
     End Sub
@@ -82,6 +85,8 @@ Public Class HighScores
                                               Order By row.Field(Of Integer)("highscore") Descending).ToArray
             Return recentScore
         Catch ex As Exception
+            Dim exceptionLog As New Logging(Now, "Get Recent Stats Filter: ", ex.ToString)
+            exceptionLog.LogAction()
             Return Nothing
         End Try
     End Function
@@ -146,6 +151,8 @@ Public Class HighScores
                                 player.IsFound = 0
                             End If
                         Catch ex As Exception
+                            Dim exceptionLog As New Logging(Now, "Player HS Found: ", ex.ToString)
+                            exceptionLog.LogAction()
                             player.IsFound = 0
                         End Try
 
@@ -166,6 +173,8 @@ Public Class HighScores
                     Try
                         txtScore.Text = String.Empty
                     Catch ex As Exception
+                        Dim exceptionLog As New Logging(Now, "Select Player from Empty score: ", ex.ToString)
+                        exceptionLog.LogAction()
                         lblError.Text = "error"
                     End Try
                     highScoreTheme.SetErrorLabel(lblError)
@@ -220,6 +229,8 @@ Public Class HighScores
                 lstScores.Visible = True
                 lstScores.Refresh()
             Catch ex As Exception
+                Dim exceptionLog As New Logging(Now, "Get High Score", ex.ToString)
+                exceptionLog.LogAction()
                 Debug.WriteLine(ex.ToString)
                 lblError.Text = ex.Message.ToString
                 highScoreTheme.SetErrorLabel(lblError)

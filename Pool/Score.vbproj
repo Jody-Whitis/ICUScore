@@ -102,6 +102,7 @@
     <Compile Include="Home.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Logging.vb" />
     <Compile Include="PvP.vb">
       <SubType>Form</SubType>
     </Compile>

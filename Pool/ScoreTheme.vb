@@ -1,5 +1,5 @@
 ﻿Imports System.Windows.Forms
-
+Imports Pool.Logging
 Public Class ScoreTheme
 #Region "Props"
     Public Enum AppState
@@ -145,6 +145,8 @@ Public Class ScoreTheme
             Next
             Return listOfSubs
         Catch ex As Exception
+            Dim exceptionLog As New Logging(Now, "Get subs", ex.ToString)
+            exceptionLog.LogAction()
             Debug.WriteLine(ex.ToString)
             Return Nothing
         End Try
