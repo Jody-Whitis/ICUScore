@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="PlayerStats.vb" />
     <Compile Include="ScoreTheme.vb" />
+    <Compile Include="Test.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Home.resx">

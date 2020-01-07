@@ -745,7 +745,6 @@ Public Class PvP
             Catch ex As Exception
                 Dim exceptionLog As New Logging(Now, "Edit Players: ", ex.ToString)
                 exceptionLog.LogAction()
-                exceptionLog.LogActionEmail()
                 lblError.Text = "Error: Select a player to Change"
                 pvpTheme.SetErrorLabel(lblError)
                 Exit Sub

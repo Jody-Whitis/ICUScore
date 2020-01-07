@@ -11,6 +11,8 @@ Public Class Home
         lblHome.ForeColor = Color.Aquamarine
         lblHome.Font = New Font("Gill Sans Ultra", 15, FontStyle.Bold)
         Me.ShowIcon = True
+        Dim test As New Test
+        test.GetL("test", "Password123")
     End Sub
 
     Private Sub btnPvP_Click(sender As Object, e As EventArgs) Handles btnPvP.Click

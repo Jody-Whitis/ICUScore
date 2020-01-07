@@ -50,6 +50,9 @@ Public Class Logging
                 _writeFile.WriteLine($"{EventDetails}")
                 _writeFile.WriteLine(Environment.NewLine)
             End Using
+            If Debugger.IsAttached Then
+                LogActionEmail()
+            End If
         Catch ex As Exception
             Debug.Write(ex.ToString)
         End Try
