@@ -14,6 +14,8 @@ Public Class Test
         Dim testdbhashed As New Games
 
         Dim dbstring As String = $"1500:{Convert.ToBase64String(salty)}:{Convert.ToBase64String(hash)}"
+        Dim sucess = testdbhashed.GetAllResults($"exec [insLoginUser] @user = '{txt}',@password='{dbstring}',@lastlogin ='{Now.ToString}' ")
+
         Dim stringfromdb As String = testdbhashed.GetAllResults("select top 1 password from Login").Tables(0).Rows(0).Item("password")
 
         Dim hashparts As String() = stringfromdb.ToString.Split(":")
