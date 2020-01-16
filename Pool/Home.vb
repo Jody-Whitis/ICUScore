@@ -14,12 +14,12 @@ Public Class Home
         Dim test As New Authenticate
         With test
             .User = "jodywhitis0407@gmail.com"
-            .Password = "assword123"
+            .Password = "password123"
         End With
         Dim loggedIn As Boolean = test.GetLogin()
         test.isLoggedIn = loggedIn
         If loggedIn.Equals(True) Then
-            test.ILogin_UpdatePassword("password123")
+            test.ILogin_UpdatePassword("123abc")
         End If
     End Sub
 

@@ -46,6 +46,8 @@ Public Class Authenticate : Implements ILogin
         'Get hashed string from db
         Dim pwdHashDS = hashedPasswordDS.GetAllResults($"exec [selUserPwdHashed] @user='{User}'")
         Dim hashpwdfromDB As String = pwdHashDS.Tables(0).Rows(0).Item("password")
+        Dim lastTimeupdated As New DateTime
+        DateTime.TryParse(pwdHashDS.Tables(0).Rows(0).Item("LastUpdated"), lastTimeupdated)
 
         'Split to get length:salt:hash
         Dim hashfromDB As New HashFormat
@@ -75,9 +77,13 @@ Public Class Authenticate : Implements ILogin
                 .Append($"@hashMatch = {Convert.ToInt32(isLoginCreds)},")
                 .Append($"@Success = {Convert.ToInt32(isLoginCreds)}")
             End With
+            If DateDiff(DateInterval.Month, lastTimeupdated, Now) >= 6 Then
+                Dim emailChangePassword As New Email(New String() {User}.ToList)
+                'send email remainder
+            End If
             Debug.WriteLine(hashedPasswordDS.GetAllResults(insertLoginSQl.ToString))
-        End If
-        Debug.WriteLine(isLoginCreds)
+            End If
+            Debug.WriteLine(isLoginCreds)
         Return isLoginCreds
     End Function
 
