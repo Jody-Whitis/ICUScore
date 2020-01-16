@@ -14,9 +14,13 @@ Public Class Home
         Dim test As New Authenticate
         With test
             .User = "jodywhitis0407@gmail.com"
-            .Password = "password123"
+            .Password = "assword123"
         End With
-        test.GetLogin()
+        Dim loggedIn As Boolean = test.GetLogin()
+        test.isLoggedIn = loggedIn
+        If loggedIn.Equals(True) Then
+            test.ILogin_UpdatePassword("password123")
+        End If
     End Sub
 
     Private Sub btnPvP_Click(sender As Object, e As EventArgs) Handles btnPvP.Click
