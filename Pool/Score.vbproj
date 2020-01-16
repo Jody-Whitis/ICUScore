@@ -102,7 +102,9 @@
     <Compile Include="Home.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ILogin.vb" />
     <Compile Include="Logging.vb" />
+    <Compile Include="Permissions.vb" />
     <Compile Include="PvP.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -154,7 +156,7 @@
     </Compile>
     <Compile Include="PlayerStats.vb" />
     <Compile Include="ScoreTheme.vb" />
-    <Compile Include="Test.vb" />
+    <Compile Include="Authenticate.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Home.resx">
