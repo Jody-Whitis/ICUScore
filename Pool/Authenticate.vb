@@ -1,4 +1,5 @@
 ﻿Imports System.Security.Cryptography
+Imports System.Text
 Imports Pool
 Imports Pool.Games
 Public Class Authenticate : Implements ILogin
@@ -43,6 +44,19 @@ Public Class Authenticate : Implements ILogin
         'If we make it to the end, then it's good
         isLoginCreds = CompareHash(hashBytefromForm, hashFromDB)
 
+        'If their login, then put a timestamp
+        If isLoginCreds.Equals(True) Then
+            Dim insertLoginSQl As New StringBuilder
+            With insertLoginSQl
+                .Append("exec [insLoginUser] ")
+                .Append($"@user = '{User}',")
+                .Append($"@lastLogin = '{Now.ToString}',")
+                .Append($"@loginDevice = '{Environment.MachineName.ToString}',")
+                .Append($"@hashMatch = {Convert.ToInt32(isLoginCreds)},")
+                .Append($"@Success = {Convert.ToInt32(isLoginCreds)}")
+            End With
+            Debug.WriteLine(hashedPasswordDS.GetAllResults(insertLoginSQl.ToString))
+        End If
         Debug.WriteLine(isLoginCreds)
         Return isLoginCreds
     End Function
