@@ -79,7 +79,7 @@ Public Class Authenticate : Implements ILogin
             End With
             If DateDiff(DateInterval.Month, lastTimeupdated, Now) >= 6 Then
                 Dim emailChangePassword As New Email(New String() {User}.ToList)
-                'send email remainder
+                Dim reminderSent As Boolean = emailChangePassword.SendPasswordReminder(User, lastTimeupdated)
             End If
             Debug.WriteLine(hashedPasswordDS.GetAllResults(insertLoginSQl.ToString))
             End If
