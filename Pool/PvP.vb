@@ -66,6 +66,10 @@ Public Class PvP
         pvpTheme.SetVisibiltyButton(New Button() {btnSave}, False)
         Dim results As String = String.Empty
         lblError.Visible = False
+        If Not String.IsNullOrEmpty(UserMod.UserEmail) Then
+            lblError.Text = $"Hello {UserMod.UserEmail}"
+            lblError.Visible = True
+        End If
         If pvpTheme.Screen = -1 Then
             lblError.Visible = True
             lstAllWins.Visible = True

@@ -34,6 +34,10 @@ Public Class HighScores
         highScoreTheme.FillCBoxAll(allGames, cbGames, lblError)
         highScores = games.GetAllResults("exec selAllScores @output=0")
         lblError.Visible = False
+        If Not String.IsNullOrEmpty(UserMod.UserEmail) Then
+            lblError.Text = $"Hello {UserMod.UserEmail}"
+            lblError.Visible = True
+        End If
         If highScoreTheme.Screen = -1 Then
             lblError.Visible = True
         Else

@@ -19,7 +19,9 @@ Public Class Home
         Dim loggedIn As Boolean = test.GetLogin()
         test.isLoggedIn = loggedIn
         If loggedIn.Equals(True) Then
-            test.ILogin_UpdatePassword("123abc")
+            UserMod.UserEmail = test.User
+            UserMod.IsLoggedIn = test.isLoggedIn
+            'test.ILogin_UpdatePassword("123abc")
         End If
     End Sub
 

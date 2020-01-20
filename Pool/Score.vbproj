@@ -157,6 +157,7 @@
     <Compile Include="PlayerStats.vb" />
     <Compile Include="ScoreTheme.vb" />
     <Compile Include="Authenticate.vb" />
+    <Compile Include="UserMod.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Home.resx">
