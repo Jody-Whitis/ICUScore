@@ -2,7 +2,7 @@
     Private _userEmail As String
     Private _displayName As String
     Private _permissions As Integer
-    Private _isLoggedIn As Boolean
+    Private _isLoggedIn As Boolean = False
 
     Public Property UserEmail As String
         Get

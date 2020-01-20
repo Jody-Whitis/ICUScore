@@ -46,22 +46,36 @@ Public Class Authenticate : Implements ILogin
         'Get hashed string from db
         Dim pwdHashDS = hashedPasswordDS.GetAllResults($"exec [selUserPwdHashed] @user='{User}'")
         Dim hashpwdfromDB As String = pwdHashDS.Tables(0).Rows(0).Item("password")
+        Dim hashFormatSplit = New String() {}
+        Try
+            hashFormatSplit = hashpwdfromDB.Split(":")
+        Catch ex As Exception
+            Dim logHashSplitFail As New Logging(Now, "Hash Split Failed", ex.ToString)
+            logHashSplitFail.LogAction()
+            logHashSplitFail.LogActionEmail()
+            Return False
+        End Try
+
         Dim lastTimeupdated As New DateTime
         DateTime.TryParse(pwdHashDS.Tables(0).Rows(0).Item("LastUpdated"), lastTimeupdated)
 
         'Split to get length:salt:hash
         Dim hashfromDB As New HashFormat
-        With hashfromDB
-            .length = hashpwdfromDB.Split(":").First
-            .salt = Convert.FromBase64String(hashpwdfromDB.Split(":")(1))
-            .hash = Convert.FromBase64String(hashpwdfromDB.Split(":").Last)
-        End With
+        Try
+            With hashfromDB
+                .length = hashFormatSplit.First
+                .salt = Convert.FromBase64String(hashFormatSplit(1))
+                .hash = Convert.FromBase64String(hashFormatSplit.Last)
+            End With
+        Catch ex As Exception
+            Dim logHashSplitFail As New Logging(Now, "Hash Split Failed", ex.ToString)
+            logHashSplitFail.LogAction()
+            logHashSplitFail.LogActionEmail()
+            Return False
+        End Try
 
-        'Generate hash from passed password
-        Dim hashtool As New Rfc2898DeriveBytes(Password, hashfromDB.salt)
-        hashtool.IterationCount = hashfromDB.length
-        Dim hashBytefromForm = hashtool.GetBytes(24)
-
+        'Generate hash from passed password      
+        Dim hashBytefromForm = CalculateHash(hashfromDB.salt, Password)
         'Compare until we find an incorrect byte
         'If we make it to the end, then it's good
         isLoginCreds = CompareHash(hashBytefromForm, hashfromDB.hash)
@@ -77,16 +91,24 @@ Public Class Authenticate : Implements ILogin
                 .Append($"@hashMatch = {Convert.ToInt32(isLoginCreds)},")
                 .Append($"@Success = {Convert.ToInt32(isLoginCreds)}")
             End With
-            If DateDiff(DateInterval.Month, lastTimeupdated, Now) >= 6 Then
-                Dim emailChangePassword As New Email(New String() {User}.ToList)
-                Dim reminderSent As Boolean = emailChangePassword.SendPasswordReminder(User, lastTimeupdated)
-            End If
+            CheckLastUpdated(lastTimeupdated)
             Debug.WriteLine(hashedPasswordDS.GetAllResults(insertLoginSQl.ToString))
-            End If
-            Debug.WriteLine(isLoginCreds)
+        End If
+        Debug.WriteLine(isLoginCreds)
         Return isLoginCreds
     End Function
 
+    ''' <summary>
+    ''' Check if it's been 6 months or more
+    ''' Update Password
+    ''' </summary>
+    ''' <param name="lastimeUpdated"></param>
+    Private Sub CheckLastUpdated(ByVal lastimeUpdated)
+        If DateDiff(DateInterval.Month, lastimeUpdated, Now) >= 6 Then
+            Dim emailChangePassword As New Email(New String() {User}.ToList)
+            Dim reminderSent As Boolean = emailChangePassword.SendPasswordReminder(User, lastimeUpdated)
+        End If
+    End Sub
 
     ''' <summary>
     ''' Update or create password
@@ -104,27 +126,38 @@ Public Class Authenticate : Implements ILogin
 
         'Produce the salt/hashed password for db
         ''''''''''''''''''''''''''''''''''''''''
-        Dim hashtool As New Rfc2898DeriveBytes(newPassword, saltyByteFromForm)
-        hashtool.IterationCount = 1500
-        Dim hashBytefromForm = hashtool.GetBytes(24)
+        Dim hashBytefromForm = CalculateHash(saltyByteFromForm, newPassword)
 
         'Hashed string for DB inserstion/login
 #Region "Compute Comparsion of new/old password hashes"
         Dim hashedPasswordfromForm As String = $"1500:{Convert.ToBase64String(saltyByteFromForm)}:{Convert.ToBase64String(hashBytefromForm)}"
         Dim compareHashesDS As DataSet = hashedPasswordDS.GetAllResults($"exec [selUserPwdHashed] @user='{User}'")
         Dim compareHashString As String = compareHashesDS.Tables(0).Rows(0).Item("password")
+        Dim compareHashFormatSplit = New String() {}
+        Try
+            compareHashFormatSplit = compareHashString.Split(":")
+        Catch ex As Exception
+            Dim logHashSplitFail As New Logging(Now, "Hash Split Fail", ex.ToString)
+            logHashSplitFail.LogAction()
+            logHashSplitFail.LogActionEmail()
+            Return False
+        End Try
         Dim compareHashesForUpdate As New HashFormat
-        With compareHashesForUpdate
-            .length = compareHashString.Split(":").First
-            .salt = Convert.FromBase64String(compareHashString.Split(":")(1))
-            .hash = Convert.FromBase64String(compareHashString.Split(":").Last)
-        End With
+        Try
+            With compareHashesForUpdate
+                .length = compareHashFormatSplit.First
+                .salt = Convert.FromBase64String(compareHashFormatSplit(1))
+                .hash = Convert.FromBase64String(compareHashFormatSplit.Last)
+            End With
+        Catch ex As Exception
+            Dim logHashSplitFail As New Logging(Now, "Hash Split Failed", ex.ToString)
+            logHashSplitFail.LogAction()
+            logHashSplitFail.LogActionEmail()
+        End Try
+
 #End Region
 
-        Dim hashtoolCompare As New Rfc2898DeriveBytes(newPassword, compareHashesForUpdate.salt)
-        hashtoolCompare.IterationCount = compareHashesForUpdate.length
-        Dim hashCompareByte = hashtoolCompare.GetBytes(24)
-
+        Dim hashCompareByte = CalculateHash(compareHashesForUpdate.salt, newPassword)
         If CompareHash(hashCompareByte, compareHashesForUpdate.hash).Equals(False) Then
             'Insert hash password/update
             Dim updPassword As New StringBuilder
@@ -147,6 +180,24 @@ Public Class Authenticate : Implements ILogin
         End If
 
         Return False
+    End Function
+
+    ''' <summary>
+    ''' Calulcate hash bytes
+    ''' </summary>
+    ''' <param name="saltyBytes"></param>
+    ''' <param name="vanillaString"></param>
+    ''' <returns></returns>
+    Private Function CalculateHash(saltyBytes As Byte(), vanillaString As String) As Byte()
+        Dim hashedPasswordDS As New Games
+        Dim updatedDS As New DataSet
+        'Produce the salt/hashed password for db
+        ''''''''''''''''''''''''''''''''''''''''
+        Dim hashtool As New Rfc2898DeriveBytes(vanillaString, saltyBytes)
+        hashtool.IterationCount = 1500
+        Dim hashBytefromForm = hashtool.GetBytes(24)
+
+        Return hashBytefromForm
     End Function
 
     ''' <summary>

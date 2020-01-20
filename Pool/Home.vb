@@ -10,6 +10,7 @@ Public Class Home
         homeTheme.SetButtons(New Button() {btnPvP, btnHS, btnQuit, btnLogin, btnLogout})
         homeTheme.SetVisibiltyButton(New Button() {btnPvP, btnHS, btnLogout}, False)
         homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnQuit}, True)
+        homeTheme.SetTBox(New TextBox() {txtUser, txtPassword})
         lblHome.ForeColor = Color.Aquamarine
         lblHome.Font = New Font("Gill Sans Ultra", 15, FontStyle.Bold)
         lblHome.Visible = False
@@ -34,17 +35,22 @@ Public Class Home
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Dim userAuthenticate As New Authenticate
+        Dim loggedIn As Boolean
+        'Password123
         With userAuthenticate
             .User = txtUser.Text.ToString
             .Password = txtPassword.Text.ToString
-            'password123
         End With
-        Dim loggedIn As Boolean = userAuthenticate.GetLogin()
-        userAuthenticate.isLoggedIn = loggedIn
+        If Not String.IsNullOrEmpty(userAuthenticate.User) AndAlso Not String.IsNullOrWhiteSpace(userAuthenticate.Password) Then
+            loggedIn = userAuthenticate.GetLogin()
+            userAuthenticate.isLoggedIn = loggedIn
+        Else
+            loggedIn = False
+        End If
         If loggedIn.Equals(True) Then
             UserMod.UserEmail = userAuthenticate.User
             UserMod.IsLoggedIn = userAuthenticate.isLoggedIn
-            ' userAuthenticate.ILogin_UpdatePassword("123abc") 
+            'userAuthenticate.ILogin_UpdatePassword("Password123")
             homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout}, True)
             homeTheme.SetVisibiltyButton(New Button() {btnLogin}, False)
             homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, False)
