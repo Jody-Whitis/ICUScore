@@ -94,6 +94,16 @@ Public Class ScoreTheme
             End With
         Next
     End Sub
+
+    Public Sub SetLabel(ByRef lbl As Label())
+        For Each label In lbl
+            With label
+                .ForeColor = Color.Aquamarine
+                .Font = New Font("Gill Sans Ultra", 9, FontStyle.Bold)
+            End With
+        Next
+    End Sub
+
 #End Region
     Public Function GetKey(ByVal values As String, ByVal col As Hashtable) As Integer
         For Each items As DictionaryEntry In col

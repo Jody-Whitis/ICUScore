@@ -7,14 +7,12 @@ Public Class Home
         Me.CenterToScreen()
         homeTheme.Screen = AppState.Start
         homeTheme.SetBackground(Me)
-        homeTheme.SetButtons(New Button() {btnPvP, btnHS, btnQuit, btnLogin, btnLogout})
+        homeTheme.SetButtons(New Button() {btnPvP, btnHS, btnQuit, btnLogin, btnLogout, btnNewUser})
         homeTheme.SetVisibiltyButton(New Button() {btnPvP, btnHS, btnLogout}, False)
         homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnQuit}, True)
         homeTheme.SetTBox(New TextBox() {txtUser, txtPassword})
+        homeTheme.SetLabel(New Label() {lblHome})
         mnuHome.ForeColor = Color.Aquamarine
-        lblHome.ForeColor = Color.Aquamarine
-        lblHome.ForeColor = Color.Aquamarine
-        lblHome.ForeColor = Color.Aquamarine
         lblHome.Font = New Font("Gill Sans Ultra", 15, FontStyle.Bold)
         lblHome.Visible = False
         Me.ShowIcon = True
@@ -81,5 +79,11 @@ Public Class Home
         If UserMod.IsLoggedIn.Equals(True) Then
             PasswordChange.Show()
         End If
+    End Sub
+
+    Private Sub btnNewUser_Click(sender As Object, e As EventArgs) Handles btnNewUser.Click
+        Register.Activate()
+        Register.Show()
+        Me.Hide()
     End Sub
 End Class

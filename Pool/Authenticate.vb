@@ -228,6 +228,22 @@ Public Class Authenticate : Implements ILogin
         Return False
     End Function
 
+    Public Function GetEncriptedString() As String
+        Dim saltCrpto As New RNGCryptoServiceProvider
+        Dim saltyByteForForm = New Byte(7) {}
+        Dim hashedPassword As String = String.Empty
+        Try
+            saltCrpto.GetBytes(saltyByteForForm)
+            Dim newHash As Byte() = CalculateHash(saltyByteForForm, Password)
+            hashedPassword = $"1500:{Convert.ToBase64String(saltyByteForForm)}:{Convert.ToBase64String(newHash)}"
+            Return hashedPassword
+        Catch ex As Exception
+            Return String.Empty
+            Dim hashError As New Logging(Now, "Hashing error: ", ex.ToString)
+        End Try
+        Return hashedPassword
+    End Function
+
     Public Function GetPermissions(userType As Integer, isLogin As Boolean) As Boolean Implements ILogin.GetPermissions
         Throw New NotImplementedException()
     End Function
