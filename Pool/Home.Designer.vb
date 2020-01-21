@@ -22,6 +22,7 @@ Partial Class Home
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.btnPvP = New System.Windows.Forms.Button()
         Me.btnHS = New System.Windows.Forms.Button()
         Me.btnQuit = New System.Windows.Forms.Button()
@@ -30,31 +31,43 @@ Partial Class Home
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.lblUser = New System.Windows.Forms.Label()
+        Me.lblPassword = New System.Windows.Forms.Label()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.mnuHome = New System.Windows.Forms.ToolStripMenuItem()
+        Me.editPasswordMnu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.logOutMnu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.quitMnu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnPvP
         '
-        Me.btnPvP.Location = New System.Drawing.Point(124, 205)
+        Me.btnPvP.Location = New System.Drawing.Point(50, 243)
+        Me.btnPvP.Margin = New System.Windows.Forms.Padding(2)
         Me.btnPvP.Name = "btnPvP"
-        Me.btnPvP.Size = New System.Drawing.Size(196, 77)
+        Me.btnPvP.Size = New System.Drawing.Size(131, 49)
         Me.btnPvP.TabIndex = 0
         Me.btnPvP.Text = "PVP"
         Me.btnPvP.UseVisualStyleBackColor = True
         '
         'btnHS
         '
-        Me.btnHS.Location = New System.Drawing.Point(490, 205)
+        Me.btnHS.Location = New System.Drawing.Point(327, 242)
+        Me.btnHS.Margin = New System.Windows.Forms.Padding(2)
         Me.btnHS.Name = "btnHS"
-        Me.btnHS.Size = New System.Drawing.Size(196, 77)
+        Me.btnHS.Size = New System.Drawing.Size(131, 49)
         Me.btnHS.TabIndex = 1
         Me.btnHS.Text = "HS"
         Me.btnHS.UseVisualStyleBackColor = True
         '
         'btnQuit
         '
-        Me.btnQuit.Location = New System.Drawing.Point(490, 361)
+        Me.btnQuit.Location = New System.Drawing.Point(327, 348)
+        Me.btnQuit.Margin = New System.Windows.Forms.Padding(2)
         Me.btnQuit.Name = "btnQuit"
-        Me.btnQuit.Size = New System.Drawing.Size(196, 77)
+        Me.btnQuit.Size = New System.Drawing.Size(131, 49)
         Me.btnQuit.TabIndex = 2
         Me.btnQuit.Text = "Quit"
         Me.btnQuit.UseVisualStyleBackColor = True
@@ -62,51 +75,125 @@ Partial Class Home
         'lblHome
         '
         Me.lblHome.AutoSize = True
-        Me.lblHome.Location = New System.Drawing.Point(219, 62)
-        Me.lblHome.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblHome.Location = New System.Drawing.Point(173, 56)
         Me.lblHome.Name = "lblHome"
-        Me.lblHome.Size = New System.Drawing.Size(188, 25)
+        Me.lblHome.Size = New System.Drawing.Size(124, 17)
         Me.lblHome.TabIndex = 3
         Me.lblHome.Text = "Pick a Game Type"
         '
         'txtUser
         '
-        Me.txtUser.Location = New System.Drawing.Point(241, 99)
+        Me.txtUser.Location = New System.Drawing.Point(176, 146)
+        Me.txtUser.Margin = New System.Windows.Forms.Padding(2)
         Me.txtUser.Name = "txtUser"
-        Me.txtUser.Size = New System.Drawing.Size(325, 31)
+        Me.txtUser.Size = New System.Drawing.Size(218, 22)
         Me.txtUser.TabIndex = 4
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(241, 151)
+        Me.txtPassword.Location = New System.Drawing.Point(176, 193)
+        Me.txtPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtPassword.Size = New System.Drawing.Size(325, 31)
+        Me.txtPassword.Size = New System.Drawing.Size(218, 22)
         Me.txtPassword.TabIndex = 5
         '
         'btnLogin
         '
-        Me.btnLogin.Location = New System.Drawing.Point(326, 207)
+        Me.btnLogin.Location = New System.Drawing.Point(204, 243)
+        Me.btnLogin.Margin = New System.Windows.Forms.Padding(2)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(140, 75)
+        Me.btnLogin.Size = New System.Drawing.Size(93, 48)
         Me.btnLogin.TabIndex = 6
         Me.btnLogin.Text = "Login"
         Me.btnLogin.UseVisualStyleBackColor = True
         '
         'btnLogout
         '
-        Me.btnLogout.Location = New System.Drawing.Point(124, 361)
+        Me.btnLogout.Location = New System.Drawing.Point(38, 349)
+        Me.btnLogout.Margin = New System.Windows.Forms.Padding(2)
         Me.btnLogout.Name = "btnLogout"
-        Me.btnLogout.Size = New System.Drawing.Size(196, 75)
+        Me.btnLogout.Size = New System.Drawing.Size(131, 48)
         Me.btnLogout.TabIndex = 7
         Me.btnLogout.Text = "Log Out"
         Me.btnLogout.UseVisualStyleBackColor = True
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
+        '
+        'lblUser
+        '
+        Me.lblUser.AutoSize = True
+        Me.lblUser.Location = New System.Drawing.Point(47, 149)
+        Me.lblUser.Name = "lblUser"
+        Me.lblUser.Size = New System.Drawing.Size(42, 17)
+        Me.lblUser.TabIndex = 9
+        Me.lblUser.Text = "User:"
+        '
+        'lblPassword
+        '
+        Me.lblPassword.AutoSize = True
+        Me.lblPassword.Location = New System.Drawing.Point(47, 198)
+        Me.lblPassword.Name = "lblPassword"
+        Me.lblPassword.Size = New System.Drawing.Size(73, 17)
+        Me.lblPassword.TabIndex = 10
+        Me.lblPassword.Text = "Password:"
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHome})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(530, 28)
+        Me.MenuStrip1.TabIndex = 11
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'mnuHome
+        '
+        Me.mnuHome.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.editPasswordMnu, Me.logOutMnu, Me.quitMnu})
+        Me.mnuHome.Name = "mnuHome"
+        Me.mnuHome.Size = New System.Drawing.Size(58, 24)
+        Me.mnuHome.Text = "Menu"
+        '
+        'editPasswordMnu
+        '
+        Me.editPasswordMnu.BackColor = System.Drawing.Color.DodgerBlue
+        Me.editPasswordMnu.ForeColor = System.Drawing.Color.Lime
+        Me.editPasswordMnu.Name = "editPasswordMnu"
+        Me.editPasswordMnu.Size = New System.Drawing.Size(216, 26)
+        Me.editPasswordMnu.Text = "Edit Password"
+        Me.editPasswordMnu.Visible = False
+        '
+        'logOutMnu
+        '
+        Me.logOutMnu.BackColor = System.Drawing.Color.DodgerBlue
+        Me.logOutMnu.ForeColor = System.Drawing.Color.Lime
+        Me.logOutMnu.Name = "logOutMnu"
+        Me.logOutMnu.Size = New System.Drawing.Size(216, 26)
+        Me.logOutMnu.Text = "Log Out"
+        Me.logOutMnu.Visible = False
+        '
+        'quitMnu
+        '
+        Me.quitMnu.BackColor = System.Drawing.Color.DodgerBlue
+        Me.quitMnu.ForeColor = System.Drawing.Color.Lime
+        Me.quitMnu.Name = "quitMnu"
+        Me.quitMnu.Size = New System.Drawing.Size(216, 26)
+        Me.quitMnu.Text = "Quit"
+        '
         'Home
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(530, 425)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.Controls.Add(Me.lblPassword)
+        Me.Controls.Add(Me.lblUser)
         Me.Controls.Add(Me.btnLogout)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.txtPassword)
@@ -115,8 +202,12 @@ Partial Class Home
         Me.Controls.Add(Me.btnQuit)
         Me.Controls.Add(Me.btnHS)
         Me.Controls.Add(Me.btnPvP)
+        Me.MainMenuStrip = Me.MenuStrip1
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Home"
         Me.Text = "Form1"
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -130,4 +221,12 @@ Partial Class Home
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents btnLogin As Button
     Friend WithEvents btnLogout As Button
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents lblUser As Label
+    Friend WithEvents lblPassword As Label
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents mnuHome As ToolStripMenuItem
+    Friend WithEvents editPasswordMnu As ToolStripMenuItem
+    Friend WithEvents logOutMnu As ToolStripMenuItem
+    Friend WithEvents quitMnu As ToolStripMenuItem
 End Class

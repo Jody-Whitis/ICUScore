@@ -11,6 +11,9 @@ Public Class Home
         homeTheme.SetVisibiltyButton(New Button() {btnPvP, btnHS, btnLogout}, False)
         homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnQuit}, True)
         homeTheme.SetTBox(New TextBox() {txtUser, txtPassword})
+        mnuHome.ForeColor = Color.Aquamarine
+        lblHome.ForeColor = Color.Aquamarine
+        lblHome.ForeColor = Color.Aquamarine
         lblHome.ForeColor = Color.Aquamarine
         lblHome.Font = New Font("Gill Sans Ultra", 15, FontStyle.Bold)
         lblHome.Visible = False
@@ -29,7 +32,7 @@ Public Class Home
         Me.Hide()
     End Sub
 
-    Private Sub btnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click
+    Private Sub btnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click, quitMnu.Click
         Application.Exit()
     End Sub
 
@@ -50,11 +53,12 @@ Public Class Home
         If loggedIn.Equals(True) Then
             UserMod.UserEmail = userAuthenticate.User
             UserMod.IsLoggedIn = userAuthenticate.isLoggedIn
-            'userAuthenticate.ILogin_UpdatePassword("Password123")
             homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout}, True)
             homeTheme.SetVisibiltyButton(New Button() {btnLogin}, False)
             homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, False)
             lblHome.Visible = True
+            editPasswordMnu.Visible = True
+            logOutMnu.Visible = True
         Else
             Dim incorrectAlert As DialogResult = MessageBox.Show($"Incorrect Email and/or/also/maybe Password",
     "Incorrect Creditials", MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -62,12 +66,20 @@ Public Class Home
         txtPassword.ResetText()
     End Sub
 
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click, logOutMnu.Click
         UserMod.UserEmail = String.Empty
         UserMod.IsLoggedIn = False
         homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout}, False)
         homeTheme.SetVisibiltyButton(New Button() {btnLogin}, True)
         homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, True)
         lblHome.Visible = False
+        editPasswordMnu.Visible = False
+        logOutMnu.Visible = False
+    End Sub
+
+    Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles editPasswordMnu.Click
+        If UserMod.IsLoggedIn.Equals(True) Then
+            PasswordChange.Show()
+        End If
     End Sub
 End Class

@@ -104,6 +104,12 @@
     </Compile>
     <Compile Include="ILogin.vb" />
     <Compile Include="Logging.vb" />
+    <Compile Include="PasswordChange.Designer.vb">
+      <DependentUpon>PasswordChange.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordChange.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Permissions.vb" />
     <Compile Include="PvP.vb">
       <SubType>Form</SubType>
@@ -162,6 +168,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordChange.resx">
+      <DependentUpon>PasswordChange.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PvP.resx">
       <DependentUpon>PvP.vb</DependentUpon>

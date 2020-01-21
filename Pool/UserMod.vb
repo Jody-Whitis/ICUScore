@@ -3,6 +3,7 @@
     Private _displayName As String
     Private _permissions As Integer
     Private _isLoggedIn As Boolean = False
+    Private _password As String
 
     Public Property UserEmail As String
         Get
@@ -37,6 +38,15 @@
         End Get
         Set(value As Boolean)
             _isLoggedIn = value
+        End Set
+    End Property
+
+    Public Property Password As String
+        Get
+            Return _password
+        End Get
+        Set(value As String)
+            _password = value
         End Set
     End Property
 End Module
