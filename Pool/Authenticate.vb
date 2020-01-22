@@ -57,7 +57,11 @@ Public Class Authenticate : Implements ILogin
         End Try
 
         Dim lastTimeupdated As New DateTime
-        DateTime.TryParse(pwdHashDS.Tables(0).Rows(0).Item("LastUpdated"), lastTimeupdated)
+        Try
+            DateTime.TryParse(pwdHashDS.Tables(0).Rows(0).Item("LastUpdated"), lastTimeupdated)
+        Catch ex As Exception
+            Debug.WriteLine("first time password")
+        End Try
 
         'Split to get length:salt:hash
         Dim hashfromDB As New HashFormat

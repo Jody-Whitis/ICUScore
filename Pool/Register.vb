@@ -1,9 +1,11 @@
-﻿Public Class Register
+﻿Imports System.Text
+
+Public Class Register
     Dim registerTheme As New ScoreTheme(Me)
     Dim allCurrentPlayers As New DataSet
     Dim getAllCurrent As New PlayerStats
     Dim currentPlayersHT As New Hashtable
-    Dim newUserRegister As New NewUser
+    Dim user As New NewUser
 
     Public Structure NewUser
         Public userEmail As String
@@ -49,25 +51,37 @@
     End Sub
 
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
+        Dim registerSQL As New StringBuilder
         If ValidateRegister(New TextBox() {txtUseremail, txtPassword, TxtPasswordConfirm, TxtPasswordConfirm}).Equals(True) Then
-            newUserRegister.userEmail = txtUseremail.Text
-            newUserRegister.passWord = TxtPasswordConfirm.Text
-            newUserRegister.displayName = GetDisplayName()
+            user.userEmail = txtUseremail.Text
+            user.passWord = TxtPasswordConfirm.Text
+            user.displayName = GetDisplayName()
             If txtPassword.Text.Equals(TxtPasswordConfirm.Text) Then
                 Dim hashPassword As New Authenticate(txtUseremail.Text, txtPassword.Text)
                 Dim insertPlayer As New PlayerStats
-                newUserRegister.passwordEncripted = hashPassword.GetEncriptedString()
+                user.passwordEncripted = hashPassword.GetEncriptedString()
 
-                'insertPlayer.GetAllResults($"")
+                With registerSQL
+                    .Append("exec [insNewUser] ")
+                    .Append($"@userEmail='{user.userEmail}', @password='{user.passwordEncripted}',@displayName='{user.displayName}',")
+                    .Append($"@timeStamp='{Now.ToString("MM/dd/yyyy")}',")
+                    If (user.pID > -1) Then
+                        .Append($"@pId = '{user.pID}'")
+                    End If
+                End With
+                'register an existing or create a new one in players and login
+                'We don't want to delete Player for wins records, just delete login
+                'and set Player register bit
+                insertPlayer.GetAllResults(registerSQL.ToString.TrimEnd(","))
 
                 Home.Activate()
                 Home.Show()
                 Me.Close()
             Else
-                '
+                'Confirm your password
             End If
         Else
-            ''''
+            'Enter all required fields.
         End If
 
     End Sub
@@ -104,12 +118,13 @@
         Try
             If cbCurrentPlayers.SelectedItem.Equals("Not Me!") Then
                 txtDisplayName.Visible = True
-                newUserRegister.displayName = String.Empty
+                user.displayName = String.Empty
+                user.pID = -1
             Else
-                newUserRegister.displayName = cbCurrentPlayers.SelectedItem.ToString
+                user.displayName = cbCurrentPlayers.SelectedItem.ToString
                 For Each existingName As DictionaryEntry In currentPlayersHT
                     If existingName.Value.Equals(cbCurrentPlayers.SelectedItem.ToString) Then
-                        newUserRegister.pID = existingName.Key
+                        user.pID = existingName.Key
                         Exit For
                     End If
                 Next
