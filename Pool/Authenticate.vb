@@ -98,6 +98,7 @@ Public Class Authenticate : Implements ILogin
             End With
             CheckLastUpdated(lastTimeupdated)
             Debug.WriteLine(hashedPasswordDS.GetAllResults(insertLoginSQl.ToString))
+            SetUser(hashedPasswordDS)
         End If
         Debug.WriteLine(isLoginCreds)
         Return isLoginCreds
@@ -113,6 +114,25 @@ Public Class Authenticate : Implements ILogin
             Dim emailChangePassword As New Email(New String() {User}.ToList)
             Dim reminderSent As Boolean = emailChangePassword.SendPasswordReminder(User, lastimeUpdated)
         End If
+    End Sub
+
+    Private Sub SetUser(ByVal userLogged As Games)
+        Dim getUserSQL As New StringBuilder
+        With getUserSQL
+            .Append($"exec [selUserData] @userEmail='{User}',")
+            .Append($"@isLogged=1")
+        End With
+        Dim userDS As New DataSet
+        userDS = userLogged.GetAllResults(getUserSQL.ToString)
+        Try
+            UserMod.UserEmail = userDS.Tables(0).Rows(0).Item("emailAddress")
+            UserMod.ID = userDS.Tables(0).Rows(0).Item("iD")
+            UserMod.IsLoggedIn = True
+            UserMod.DisplayName = userDS.Tables(0).Rows(0).Item("PlayerName")
+        Catch ex As Exception
+            Debug.WriteLine(ex.ToString)
+            Dim setUser As New Logging(Now, "User Log set error: ", ex.ToString)
+        End Try
     End Sub
 
     ''' <summary>

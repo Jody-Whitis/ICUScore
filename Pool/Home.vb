@@ -51,9 +51,11 @@ Public Class Home
         If loggedIn.Equals(True) Then
             UserMod.UserEmail = userAuthenticate.User
             UserMod.IsLoggedIn = userAuthenticate.isLoggedIn
-            homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout}, True)
+            homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
             homeTheme.SetVisibiltyButton(New Button() {btnLogin}, False)
             homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, False)
+            lblUser.Visible = False
+            lblPassword.Visible = False
             lblHome.Visible = True
             editPasswordMnu.Visible = True
             logOutMnu.Visible = True
@@ -67,9 +69,13 @@ Public Class Home
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click, logOutMnu.Click
         UserMod.UserEmail = String.Empty
         UserMod.IsLoggedIn = False
+        UserMod.ID = -1
+        UserMod.DisplayName = String.Empty
         homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout}, False)
         homeTheme.SetVisibiltyButton(New Button() {btnLogin}, True)
         homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, True)
+        lblUser.Visible = True
+        lblPassword.Visible = True
         lblHome.Visible = False
         editPasswordMnu.Visible = False
         logOutMnu.Visible = False

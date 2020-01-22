@@ -4,6 +4,7 @@
     Private _permissions As Integer
     Private _isLoggedIn As Boolean = False
     Private _password As String
+    Private _iD As Integer
 
     Public Property UserEmail As String
         Get
@@ -47,6 +48,15 @@
         End Get
         Set(value As String)
             _password = value
+        End Set
+    End Property
+
+    Public Property ID As Integer
+        Get
+            Return _iD
+        End Get
+        Set(value As Integer)
+            _iD = value
         End Set
     End Property
 End Module
