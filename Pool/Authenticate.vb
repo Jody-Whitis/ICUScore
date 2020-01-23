@@ -42,13 +42,13 @@ Public Class Authenticate : Implements ILogin
     Public Function GetLogin() As Boolean Implements ILogin.GetLogin
         Dim isLoginCreds As Boolean = False
         Dim hashedPasswordDS As New Games
-
+        Dim hashpwdFromDB As String = String.Empty
         'Get hashed string from db
         Dim pwdHashDS = hashedPasswordDS.GetAllResults($"exec [selUserPwdHashed] @user='{User}'")
-        Dim hashpwdfromDB As String = pwdHashDS.Tables(0).Rows(0).Item("password")
         Dim hashFormatSplit = New String() {}
         Try
-            hashFormatSplit = hashpwdfromDB.Split(":")
+            hashpwdFromDB = pwdHashDS.Tables(0).Rows(0).Item("password")
+            hashFormatSplit = hashpwdFromDB.Split(":")
         Catch ex As Exception
             Dim logHashSplitFail As New Logging(Now, "Hash Split Failed", ex.ToString)
             logHashSplitFail.LogAction()
@@ -98,7 +98,7 @@ Public Class Authenticate : Implements ILogin
             End With
             CheckLastUpdated(lastTimeupdated)
             Debug.WriteLine(hashedPasswordDS.GetAllResults(insertLoginSQl.ToString))
-            SetUser(hashedPasswordDS)
+            SetUser(hashedPasswordDS, isLoginCreds)
         End If
         Debug.WriteLine(isLoginCreds)
         Return isLoginCreds
@@ -116,11 +116,11 @@ Public Class Authenticate : Implements ILogin
         End If
     End Sub
 
-    Private Sub SetUser(ByVal userLogged As Games)
+    Private Sub SetUser(ByVal userLogged As Games, ByVal isLoggedCred As Boolean)
         Dim getUserSQL As New StringBuilder
         With getUserSQL
             .Append($"exec [selUserData] @userEmail='{User}',")
-            .Append($"@isLogged=1")
+            .Append($"@isLogged={Convert.ToInt32(isLoggedCred)}")
         End With
         Dim userDS As New DataSet
         userDS = userLogged.GetAllResults(getUserSQL.ToString)
