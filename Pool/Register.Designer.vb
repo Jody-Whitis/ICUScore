@@ -33,14 +33,14 @@ Partial Class Register
         '
         'txtUseremail
         '
-        Me.txtUseremail.Location = New System.Drawing.Point(175, 249)
+        Me.txtUseremail.Location = New System.Drawing.Point(163, 234)
         Me.txtUseremail.Name = "txtUseremail"
         Me.txtUseremail.Size = New System.Drawing.Size(357, 31)
         Me.txtUseremail.TabIndex = 0
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(175, 401)
+        Me.txtPassword.Location = New System.Drawing.Point(163, 434)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(357, 31)
@@ -48,7 +48,7 @@ Partial Class Register
         '
         'TxtPasswordConfirm
         '
-        Me.TxtPasswordConfirm.Location = New System.Drawing.Point(175, 475)
+        Me.TxtPasswordConfirm.Location = New System.Drawing.Point(163, 492)
         Me.TxtPasswordConfirm.Name = "TxtPasswordConfirm"
         Me.TxtPasswordConfirm.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TxtPasswordConfirm.Size = New System.Drawing.Size(357, 31)
@@ -56,7 +56,7 @@ Partial Class Register
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(46, 552)
+        Me.btnCancel.Location = New System.Drawing.Point(55, 552)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(170, 76)
         Me.btnCancel.TabIndex = 3
@@ -65,7 +65,7 @@ Partial Class Register
         '
         'btnConfirm
         '
-        Me.btnConfirm.Location = New System.Drawing.Point(486, 552)
+        Me.btnConfirm.Location = New System.Drawing.Point(479, 552)
         Me.btnConfirm.Name = "btnConfirm"
         Me.btnConfirm.Size = New System.Drawing.Size(170, 76)
         Me.btnConfirm.TabIndex = 4
@@ -75,14 +75,14 @@ Partial Class Register
         'cbCurrentPlayers
         '
         Me.cbCurrentPlayers.FormattingEnabled = True
-        Me.cbCurrentPlayers.Location = New System.Drawing.Point(175, 302)
+        Me.cbCurrentPlayers.Location = New System.Drawing.Point(163, 307)
         Me.cbCurrentPlayers.Name = "cbCurrentPlayers"
         Me.cbCurrentPlayers.Size = New System.Drawing.Size(357, 33)
         Me.cbCurrentPlayers.TabIndex = 5
         '
         'txtDisplayName
         '
-        Me.txtDisplayName.Location = New System.Drawing.Point(175, 341)
+        Me.txtDisplayName.Location = New System.Drawing.Point(163, 376)
         Me.txtDisplayName.Name = "txtDisplayName"
         Me.txtDisplayName.Size = New System.Drawing.Size(357, 31)
         Me.txtDisplayName.TabIndex = 6

@@ -63,7 +63,7 @@ Partial Class Home
         '
         'btnQuit
         '
-        Me.btnQuit.Location = New System.Drawing.Point(490, 544)
+        Me.btnQuit.Location = New System.Drawing.Point(479, 544)
         Me.btnQuit.Name = "btnQuit"
         Me.btnQuit.Size = New System.Drawing.Size(196, 77)
         Me.btnQuit.TabIndex = 2
@@ -73,10 +73,11 @@ Partial Class Home
         'lblHome
         '
         Me.lblHome.AutoSize = True
-        Me.lblHome.Location = New System.Drawing.Point(260, 88)
+        Me.lblHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHome.Location = New System.Drawing.Point(259, 108)
         Me.lblHome.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHome.Name = "lblHome"
-        Me.lblHome.Size = New System.Drawing.Size(188, 25)
+        Me.lblHome.Size = New System.Drawing.Size(241, 30)
         Me.lblHome.TabIndex = 3
         Me.lblHome.Text = "Pick a Game Type"
         '
@@ -97,7 +98,7 @@ Partial Class Home
         '
         'btnLogin
         '
-        Me.btnLogin.Location = New System.Drawing.Point(306, 380)
+        Me.btnLogin.Location = New System.Drawing.Point(449, 382)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(140, 75)
         Me.btnLogin.TabIndex = 6
@@ -106,7 +107,7 @@ Partial Class Home
         '
         'btnLogout
         '
-        Me.btnLogout.Location = New System.Drawing.Point(57, 545)
+        Me.btnLogout.Location = New System.Drawing.Point(75, 546)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(196, 75)
         Me.btnLogout.TabIndex = 7
@@ -122,20 +123,22 @@ Partial Class Home
         'lblUser
         '
         Me.lblUser.AutoSize = True
-        Me.lblUser.Location = New System.Drawing.Point(70, 233)
+        Me.lblUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUser.Location = New System.Drawing.Point(117, 217)
         Me.lblUser.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUser.Name = "lblUser"
-        Me.lblUser.Size = New System.Drawing.Size(63, 25)
+        Me.lblUser.Size = New System.Drawing.Size(112, 42)
         Me.lblUser.TabIndex = 9
         Me.lblUser.Text = "User:"
         '
         'lblPassword
         '
         Me.lblPassword.AutoSize = True
-        Me.lblPassword.Location = New System.Drawing.Point(70, 309)
+        Me.lblPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPassword.Location = New System.Drawing.Point(50, 294)
         Me.lblPassword.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPassword.Name = "lblPassword"
-        Me.lblPassword.Size = New System.Drawing.Size(112, 25)
+        Me.lblPassword.Size = New System.Drawing.Size(189, 39)
         Me.lblPassword.TabIndex = 10
         Me.lblPassword.Text = "Password:"
         '
@@ -187,7 +190,7 @@ Partial Class Home
         '
         'btnNewUser
         '
-        Me.btnNewUser.Location = New System.Drawing.Point(101, 383)
+        Me.btnNewUser.Location = New System.Drawing.Point(218, 383)
         Me.btnNewUser.Name = "btnNewUser"
         Me.btnNewUser.Size = New System.Drawing.Size(142, 74)
         Me.btnNewUser.TabIndex = 12

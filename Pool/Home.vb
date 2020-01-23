@@ -52,7 +52,7 @@ Public Class Home
             UserMod.UserEmail = userAuthenticate.User
             UserMod.IsLoggedIn = userAuthenticate.isLoggedIn
             homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
-            homeTheme.SetVisibiltyButton(New Button() {btnLogin}, False)
+            homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser}, False)
             homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, False)
             lblUser.Visible = False
             lblPassword.Visible = False
@@ -72,7 +72,7 @@ Public Class Home
         UserMod.ID = -1
         UserMod.DisplayName = String.Empty
         homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout}, False)
-        homeTheme.SetVisibiltyButton(New Button() {btnLogin}, True)
+        homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser}, True)
         homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, True)
         lblUser.Visible = True
         lblPassword.Visible = True

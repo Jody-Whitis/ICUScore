@@ -19,8 +19,10 @@ Public Class Register
         registerTheme.SetBackground(Me)
         registerTheme.SetButtons(New Button() {btnCancel, btnConfirm})
         registerTheme.SetTBox(New TextBox() {txtPassword, TxtPasswordConfirm, txtUseremail, txtDisplayName})
-        cbCurrentPlayers.BackColor = Color.RoyalBlue
-        cbCurrentPlayers.ForeColor = Color.Aquamarine
+        cbCurrentPlayers.BackColor = Color.Aquamarine
+        cbCurrentPlayers.ForeColor = Color.RoyalBlue
+        cbCurrentPlayers.Font = New Font("Gill Sans Ultra", 9,
+                FontStyle.Bold)
         allCurrentPlayers = getAllCurrent.GetAllResults("exec selAllPlayers @wins=0")
         FillCBox()
     End Sub
