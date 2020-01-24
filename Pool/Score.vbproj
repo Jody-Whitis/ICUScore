@@ -102,6 +102,15 @@
     <Compile Include="Home.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ILogin.vb" />
+    <Compile Include="Logging.vb" />
+    <Compile Include="PasswordChange.Designer.vb">
+      <DependentUpon>PasswordChange.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordChange.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Permissions.vb" />
     <Compile Include="PvP.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -152,11 +161,22 @@
       <DependentUpon>PlayerNames.xsd</DependentUpon>
     </Compile>
     <Compile Include="PlayerStats.vb" />
+    <Compile Include="Register.Designer.vb">
+      <DependentUpon>Register.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Register.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ScoreTheme.vb" />
+    <Compile Include="Authenticate.vb" />
+    <Compile Include="UserMod.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordChange.resx">
+      <DependentUpon>PasswordChange.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PvP.resx">
       <DependentUpon>PvP.vb</DependentUpon>
@@ -169,6 +189,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register.resx">
+      <DependentUpon>Register.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
