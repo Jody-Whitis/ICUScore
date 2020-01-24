@@ -64,7 +64,7 @@ Public Class Email
             End With
             eMail = New MailMessage()
             With eMail
-                .Sender = New MailAddress("scoretest@something.com")
+                .Sender = New MailAddress("projtestcred@gmail.com")
                 .From = New MailAddress("scores@score.com")
                 .IsBodyHtml = True
                 .Subject = $"Scores for {Now.ToString("MM/dd/yyyy")}"
@@ -147,7 +147,7 @@ Public Class Email
             End With
             eMail = New MailMessage()
             With eMail
-                .Sender = New MailAddress("scoretest@something.com")
+                .Sender = New MailAddress("projtestcred@gmail.com")
                 .From = New MailAddress("scores@score.com")
                 .IsBodyHtml = True
                 .Subject = $"Log for {Now.ToString("MM/dd/yyyy")}"
@@ -207,7 +207,7 @@ Public Class Email
             eMail = New MailMessage()
 
             With eMail
-                .Sender = New MailAddress("scoretest@something.com")
+                .Sender = New MailAddress("projtestcred@gmail.com")
                 .From = New MailAddress("scores@score.com")
                 .IsBodyHtml = True
                 .Subject = $"Password Reminder for {user}"

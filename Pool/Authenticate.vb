@@ -52,7 +52,7 @@ Public Class Authenticate : Implements ILogin
         Catch ex As Exception
             Dim logHashSplitFail As New Logging(Now, "Hash Split Failed", ex.ToString)
             logHashSplitFail.LogAction()
-            logHashSplitFail.LogActionEmail()
+            'logHashSplitFail.LogActionEmail()
             Return False
         End Try
 
@@ -167,7 +167,7 @@ Public Class Authenticate : Implements ILogin
         Catch ex As Exception
             Dim logHashSplitFail As New Logging(Now, "Hash Split Fail", ex.ToString)
             logHashSplitFail.LogAction()
-            logHashSplitFail.LogActionEmail()
+            'logHashSplitFail.LogActionEmail()
             Return False
         End Try
         Dim compareHashesForUpdate As New HashFormat
