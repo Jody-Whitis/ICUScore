@@ -257,6 +257,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EmailTemps\EmailPasswordReminder.html" />
+    <Content Include="EmailTemps\LogEmailTemp.html" />
+    <Content Include="EmailTemps\WeeklyScoreTemp.html" />
     <Content Include="LocalResults.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

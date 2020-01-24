@@ -1,6 +1,6 @@
 ﻿Imports System.Net.Mail
 Imports System.Text
-
+Imports System.IO
 Public Class Email
     Private _addressList As List(Of String)
     Private _scoreList As IEnumerable
@@ -131,6 +131,7 @@ Public Class Email
 
     Public Function SendLogEmail(fileName As String) As Boolean
         Dim logSend As Boolean = False
+        Dim emailLogTemp As String = File.ReadAllText("C:\Users\jwhitis\source\repos\Jody-Whitis\ICUScore\Pool\EmailTemps\LogEmailTemp.html").ToString
         Try
             If AddressList Is Nothing Or AddressList.Count <= 0 Then
                 Return logSend
@@ -159,17 +160,18 @@ Public Class Email
             With bodyTable
 #Region "Table header"
 
-                .Append("<table style=""border: 7px solid blue;margin-left:auto;margin-right:auto;background-color:Aqua;")
-                .Append("width:100%;border-collapse:collapse;border-spacing:0;"">")
+                '.Append("<table style=""border: 7px solid blue;margin-left:auto;margin-right:auto;background-color:Aqua;")
+                '.Append("width:100%;border-collapse:collapse;border-spacing:0;"">")
 
-                .Append("<tr>")
-                .Append("<td style=""font-size:14px;text-align:center;color:red"">")
-                .Append("<b>")
-                .Append($"Log for {Now.ToString("MM/dd/yyyy")}")
-                .Append("</b>")
-                .Append("</td>")
-                .Append("</tr>")
-                .Append("</table>")
+                '.Append("<tr>")
+                '.Append("<td style=""font-size:14px;text-align:center;color:red"">")
+                '.Append("<b>")
+                '.Append($"Log for {Now.ToString("MM/dd/yyyy")}")
+                '.Append("</b>")
+                '.Append("</td>")
+                '.Append("</tr>")
+                '.Append("</table>")
+                .Append(emailLogTemp.Replace("=Date=", Now.ToString("MM/dd/yyyy")))
 #End Region
 
             End With
@@ -195,6 +197,7 @@ Public Class Email
         Dim eMail As New MailMessage()
         Dim bodyTable As New StringBuilder
         Dim counterStats As Integer = 0
+        Dim emailPasswordTemp As String = File.ReadAllText("C:\Users\jwhitis\source\repos\Jody-Whitis\ICUScore\Pool\EmailTemps\EmailPasswordReminder.html").ToString
         timeStamp = "#1/17/2019#"
         Try
             With smtp
@@ -217,27 +220,28 @@ Public Class Email
             Next
 
             With bodyTable
-#Region "Table header"
+                '#Region "Table header"
 
-                .Append("<table style=""border: 7px solid blue;margin-left:auto;margin-right:auto;background-color:Aqua;")
-                .Append("width:100%;border-collapse:collapse;border-spacing:0;"">")
+                '                .Append("<table style=""border: 7px solid blue;margin-left:auto;margin-right:auto;background-color:Aqua;")
+                '                .Append("width:100%;border-collapse:collapse;border-spacing:0;"">")
 
-                .Append("<tr>")
-                .Append("<td style=""font-size:14px;text-align:center;color:red"">")
-                .Append("<b>")
-                .Append($"Roll Safe and update your password {user}!")
-                .Append("</b>")
-                .Append("</td>")
-                .Append("</tr>")
-                .Append("<tr>")
-                .Append("<td style=""font-size:14px;text-align:center;color:green""")
-                .Append($"It has been {DateDiff(DateInterval.Month, timeStamp, Now)} months since your last password update. Login and update your password.")
-                .Append("</td>")
-                .Append("</tr>")
-                .Append("</table>")
-#End Region
+                '                .Append("<tr>")
+                '                .Append("<td style=""font-size:14px;text-align:center;color:red"">")
+                '                .Append("<b>")
+                '                .Append($"Roll Safe and update your password {user}!")
+                '                .Append("</b>")
+                '                .Append("</td>")
+                '                .Append("</tr>")
+                '                .Append("<tr>")
+                '                .Append("<td style=""font-size:14px;text-align:center;color:green""")
+                '                .Append($"It has been {DateDiff(DateInterval.Month, timeStamp, Now)} months since your last password update. Login and update your password.")
+                '                .Append("</td>")
+                '                .Append("</tr>")
+                '                .Append("</table>")
+                '#End Region
+                .Append(emailPasswordTemp)
             End With
-            eMail.Body = bodyTable.ToString
+            eMail.Body = bodyTable.ToString.Replace("=User=", user).Replace("=monthsPast=", DateDiff(DateInterval.Month, timeStamp, Now))
             smtp.Send(eMail)
             reminderSend = True
         Catch ex As Exception
