@@ -259,6 +259,8 @@
   <ItemGroup>
     <Content Include="EmailTemps\EmailPasswordReminder.html" />
     <Content Include="EmailTemps\LogEmailTemp.html" />
+    <Content Include="EmailTemps\rollSafe.jpg" />
+    <Content Include="EmailTemps\suprisedPikachu.png" />
     <Content Include="EmailTemps\WeeklyScoreTemp.html" />
     <Content Include="LocalResults.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
