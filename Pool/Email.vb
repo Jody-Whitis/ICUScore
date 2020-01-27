@@ -170,6 +170,8 @@ Public Class Email
                 .Append(emailPasswordTemp)
             End With
             eMail.Body = bodyTable.ToString.Replace("=User=", user).Replace("=monthsPast=", DateDiff(DateInterval.Month, timeStamp, Now))
+            Dim rsAttached As New Attachment(emailTempsFolder & "\rollSafe.jpg")
+            eMail.Attachments.Add(rsAttached)
             smtp.Send(eMail)
             reminderSend = True
         Catch ex As Exception
