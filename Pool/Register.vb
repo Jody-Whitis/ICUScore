@@ -19,6 +19,7 @@ Public Class Register
         registerTheme.SetBackground(Me)
         registerTheme.SetButtons(New Button() {btnCancel, btnConfirm})
         registerTheme.SetTBox(New TextBox() {txtPassword, TxtPasswordConfirm, txtUseremail, txtDisplayName})
+        registerTheme.SetLabel(New Label() {lblDisplayName, lblEmail, lblNewDisplayName, lblPassword, lblConfirmPassword})
         Me.CenterToScreen()
         cbCurrentPlayers.BackColor = Color.Aquamarine
         cbCurrentPlayers.ForeColor = Color.RoyalBlue

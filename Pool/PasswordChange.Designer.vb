@@ -53,6 +53,7 @@ Partial Class PasswordChange
         'btnUpdatePassword
         '
         Me.btnUpdatePassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdatePassword.ForeColor = System.Drawing.Color.Green
         Me.btnUpdatePassword.Location = New System.Drawing.Point(319, 395)
         Me.btnUpdatePassword.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpdatePassword.Name = "btnUpdatePassword"
@@ -65,6 +66,7 @@ Partial Class PasswordChange
         '
         Me.lblUpdate.AutoSize = True
         Me.lblUpdate.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUpdate.ForeColor = System.Drawing.Color.Lime
         Me.lblUpdate.Location = New System.Drawing.Point(146, 53)
         Me.lblUpdate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUpdate.Name = "lblUpdate"
@@ -75,6 +77,7 @@ Partial Class PasswordChange
         'btnCancel
         '
         Me.btnCancel.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.Color.Green
         Me.btnCancel.Location = New System.Drawing.Point(33, 395)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnCancel.Name = "btnCancel"

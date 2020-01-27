@@ -31,7 +31,6 @@ Public Class Email
         End Set
     End Property
 #End Region
-
     Public Sub New()
     End Sub
 
@@ -74,52 +73,6 @@ Public Class Email
             For Each address In AddressList
                 eMail.To.Add(address)
             Next
-#Region "BETA email"
-            'Table to be filled with stats
-            '            With bodyTable
-            '#Region "Table header"
-
-            '                .Append("<table style=""border: 7px solid blue;margin-left:auto;margin-right:auto;background-color:Aqua;")
-            '                .Append("width:100%;border-collapse:collapse;border-spacing:0;"">")
-
-            '                .Append("<tr>")
-            '                .Append("<td style=""font-size:14px;text-align:center;color:green"">")
-            '                .Append("<b>")
-            '                .Append($"{Now.ToString("MM/dd/yyyy")}")
-            '                .Append("</b>")
-            '                .Append("</td>")
-            '                .Append("</tr>")
-            '                .Append("</table>")
-
-            '                .Append("<table style=""border: 2px solid blue;margin-left:auto;margin-right:auto;background-color:Aqua;")
-            '                .Append("width:100%;border-collapse:collapse;border-spacing:0;"">")
-            '                .Append("<tr style=""border:1px solid green;color:green;font-size:18px;background-color:Aqua;text-align:center;width:33%;border-collapse:collapse;border-spacing:0;"">")
-            '                .Append("<td style=""border:1px solid green;color:green;font-size:18px;background-color:Aqua;text-align:center;width:33%;border-collapse:collapse;border-spacing:0;""><b>Name</b></td>")
-            '                .Append("<td style=""border:1px solid green;color:green;font-size:18px;background-color:Aqua;text-align:center;width:33%;border-collapse:collapse;border-spacing:0;""><b>Mode</b></td>")
-            '                .Append("<td style=""border:1px solid green;color:green;font-size:18px;background-color:Aqua;text-align:center;width:33%;border-collapse:collapse;border-spacing:0;""><b>Score</b></td>")
-            '                .Append("</tr>")
-            '#End Region
-            '            For Each stat In ScoreList
-            '                    .Append("<b>")
-            '                    .Append("<tr style=""border:1px solid green;color:green;font-size:18px;background-color:Aqua;text-align:center;width:33%;border-collapse:collapse;border-spacing:0;"">")
-            '#Region "Table cells"
-            '                    .Append("<td style=""border:1px solid green;width:33%;border-collapse:collapse;border-spacing:0;"">")
-            '                    .Append(stat(0))
-            '                    .Append("</td>")
-            '                    .Append("<td style=""border:1px solid green;width:33%;border-collapse:collapse;border-spacing:0;"">")
-            '                    .Append(stat(1))
-            '                    .Append("</td>")
-            '                    .Append("<td style=""border:1px solid green;width:33%;border-collapse:collapse;border-spacing:0;"">")
-            '                    .Append(stat(2))
-            '                    .Append("</td>")
-            '#End Region
-            '                    .Append("</tr>")
-            '                    counterStats += 1
-            '                Next
-            '                .Append("</table>")
-            '                .Append("</b>")
-            '            End With
-#End Region
             With bodyTable
                 .Append(emailSplit.First.Replace("=Date=", Now.ToString("MM/dd/yyyy")))
                 For Each stat In ScoreList
@@ -132,8 +85,6 @@ Public Class Email
             eMail.Body = bodyTable.ToString
             If counterStats > 0 Then
                 smtp.Send(eMail)
-            Else
-                'MsgBox("nothing to send")
             End If
         Catch ex As Exception
             Dim exceptionLog As New Logging(Now, "Weekly Email: ", ex.ToString)
@@ -171,21 +122,7 @@ Public Class Email
             Dim imgAttachment As New Attachment(emailTempsFolder & "\suprisedPikachu.png")
             eMail.Attachments.Add(imgAttachment)
             With bodyTable
-#Region "Table header"
-
-                '.Append("<table style=""border: 7px solid blue;margin-left:auto;margin-right:auto;background-color:Aqua;")
-                '.Append("width:100%;border-collapse:collapse;border-spacing:0;"">")
-
-                '.Append("<tr>")
-                '.Append("<td style=""font-size:14px;text-align:center;color:red"">")
-                '.Append("<b>")
-                '.Append($"Log for {Now.ToString("MM/dd/yyyy")}")
-                '.Append("</b>")
-                '.Append("</td>")
-                '.Append("</tr>")
-                '.Append("</table>")
                 .Append(emailLogTemp.Replace("=Date=", Now.ToString("MM/dd/yyyy")))
-#End Region
             End With
             Dim attachmentLog As System.Net.Mail.Attachment
             attachmentLog = New System.Net.Mail.Attachment(fileName)
@@ -210,7 +147,6 @@ Public Class Email
         Dim bodyTable As New StringBuilder
         Dim counterStats As Integer = 0
         Dim emailPasswordTemp As String = File.ReadAllText(emailTempsFolder & "\EmailPasswordReminder.html").ToString
-        timeStamp = "#1/17/2019#"
         Try
             With smtp
                 .UseDefaultCredentials = My.Settings.emailDefaultCreds
@@ -231,25 +167,6 @@ Public Class Email
                 eMail.To.Add(address)
             Next
             With bodyTable
-#Region "Table header"
-
-                '                .Append("<table style=""border: 7px solid blue;margin-left:auto;margin-right:auto;background-color:Aqua;")
-                '                .Append("width:100%;border-collapse:collapse;border-spacing:0;"">")
-
-                '                .Append("<tr>")
-                '                .Append("<td style=""font-size:14px;text-align:center;color:red"">")
-                '                .Append("<b>")
-                '                .Append($"Roll Safe and update your password {user}!")
-                '                .Append("</b>")
-                '                .Append("</td>")
-                '                .Append("</tr>")
-                '                .Append("<tr>")
-                '                .Append("<td style=""font-size:14px;text-align:center;color:green""")
-                '                .Append($"It has been {DateDiff(DateInterval.Month, timeStamp, Now)} months since your last password update. Login and update your password.")
-                '                .Append("</td>")
-                '                .Append("</tr>")
-                '                .Append("</table>")
-#End Region
                 .Append(emailPasswordTemp)
             End With
             eMail.Body = bodyTable.ToString.Replace("=User=", user).Replace("=monthsPast=", DateDiff(DateInterval.Month, timeStamp, Now))
