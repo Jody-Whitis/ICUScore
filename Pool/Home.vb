@@ -83,7 +83,9 @@ Public Class Home
 
     Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles editPasswordMnu.Click
         If UserMod.IsLoggedIn.Equals(True) Then
+            UserMod.setPreviousForm(Me)
             PasswordChange.Show()
+            Me.Hide()
         End If
     End Sub
 

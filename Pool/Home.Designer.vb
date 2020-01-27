@@ -45,6 +45,7 @@ Partial Class Home
         '
         'btnPvP
         '
+        Me.btnPvP.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPvP.Location = New System.Drawing.Point(75, 380)
         Me.btnPvP.Name = "btnPvP"
         Me.btnPvP.Size = New System.Drawing.Size(196, 77)
@@ -54,6 +55,7 @@ Partial Class Home
         '
         'btnHS
         '
+        Me.btnHS.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnHS.Location = New System.Drawing.Point(490, 378)
         Me.btnHS.Name = "btnHS"
         Me.btnHS.Size = New System.Drawing.Size(196, 77)
@@ -63,7 +65,8 @@ Partial Class Home
         '
         'btnQuit
         '
-        Me.btnQuit.Location = New System.Drawing.Point(479, 544)
+        Me.btnQuit.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuit.Location = New System.Drawing.Point(490, 541)
         Me.btnQuit.Name = "btnQuit"
         Me.btnQuit.Size = New System.Drawing.Size(196, 77)
         Me.btnQuit.TabIndex = 2
@@ -73,19 +76,20 @@ Partial Class Home
         'lblHome
         '
         Me.lblHome.AutoSize = True
-        Me.lblHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHome.Location = New System.Drawing.Point(259, 108)
+        Me.lblHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHome.Location = New System.Drawing.Point(258, 107)
         Me.lblHome.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHome.Name = "lblHome"
-        Me.lblHome.Size = New System.Drawing.Size(241, 30)
+        Me.lblHome.Size = New System.Drawing.Size(274, 33)
         Me.lblHome.TabIndex = 3
-        Me.lblHome.Text = "Pick a Game Type"
+        Me.lblHome.Text = "Login or Register"
         '
         'txtUser
         '
+        Me.txtUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUser.Location = New System.Drawing.Point(264, 228)
         Me.txtUser.Name = "txtUser"
-        Me.txtUser.Size = New System.Drawing.Size(325, 31)
+        Me.txtUser.Size = New System.Drawing.Size(390, 37)
         Me.txtUser.TabIndex = 4
         '
         'txtPassword
@@ -93,12 +97,13 @@ Partial Class Home
         Me.txtPassword.Location = New System.Drawing.Point(264, 302)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtPassword.Size = New System.Drawing.Size(325, 31)
+        Me.txtPassword.Size = New System.Drawing.Size(390, 31)
         Me.txtPassword.TabIndex = 5
         '
         'btnLogin
         '
-        Me.btnLogin.Location = New System.Drawing.Point(449, 382)
+        Me.btnLogin.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLogin.Location = New System.Drawing.Point(449, 377)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(140, 75)
         Me.btnLogin.TabIndex = 6
@@ -107,6 +112,7 @@ Partial Class Home
         '
         'btnLogout
         '
+        Me.btnLogout.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogout.Location = New System.Drawing.Point(75, 546)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(196, 75)
@@ -151,46 +157,52 @@ Partial Class Home
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
-        Me.MenuStrip1.Size = New System.Drawing.Size(795, 42)
+        Me.MenuStrip1.Size = New System.Drawing.Size(795, 44)
         Me.MenuStrip1.TabIndex = 11
         Me.MenuStrip1.Text = "MenuStrip1"
         '
         'mnuHome
         '
         Me.mnuHome.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.editPasswordMnu, Me.logOutMnu, Me.quitMnu})
+        Me.mnuHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mnuHome.ForeColor = System.Drawing.Color.Lime
         Me.mnuHome.Name = "mnuHome"
-        Me.mnuHome.Size = New System.Drawing.Size(98, 36)
+        Me.mnuHome.Size = New System.Drawing.Size(115, 38)
         Me.mnuHome.Text = "Menu"
         '
         'editPasswordMnu
         '
         Me.editPasswordMnu.BackColor = System.Drawing.Color.DodgerBlue
+        Me.editPasswordMnu.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.editPasswordMnu.ForeColor = System.Drawing.Color.Lime
         Me.editPasswordMnu.Name = "editPasswordMnu"
-        Me.editPasswordMnu.Size = New System.Drawing.Size(293, 44)
+        Me.editPasswordMnu.Size = New System.Drawing.Size(360, 44)
         Me.editPasswordMnu.Text = "Edit Password"
         Me.editPasswordMnu.Visible = False
         '
         'logOutMnu
         '
         Me.logOutMnu.BackColor = System.Drawing.Color.DodgerBlue
+        Me.logOutMnu.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.logOutMnu.ForeColor = System.Drawing.Color.Lime
         Me.logOutMnu.Name = "logOutMnu"
-        Me.logOutMnu.Size = New System.Drawing.Size(293, 44)
+        Me.logOutMnu.Size = New System.Drawing.Size(360, 44)
         Me.logOutMnu.Text = "Log Out"
         Me.logOutMnu.Visible = False
         '
         'quitMnu
         '
         Me.quitMnu.BackColor = System.Drawing.Color.DodgerBlue
+        Me.quitMnu.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.quitMnu.ForeColor = System.Drawing.Color.Lime
         Me.quitMnu.Name = "quitMnu"
-        Me.quitMnu.Size = New System.Drawing.Size(293, 44)
+        Me.quitMnu.Size = New System.Drawing.Size(360, 44)
         Me.quitMnu.Text = "Quit"
         '
         'btnNewUser
         '
-        Me.btnNewUser.Location = New System.Drawing.Point(218, 383)
+        Me.btnNewUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNewUser.Location = New System.Drawing.Point(205, 378)
         Me.btnNewUser.Name = "btnNewUser"
         Me.btnNewUser.Size = New System.Drawing.Size(142, 74)
         Me.btnNewUser.TabIndex = 12
@@ -216,7 +228,7 @@ Partial Class Home
         Me.Controls.Add(Me.btnPvP)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "Home"
-        Me.Text = "Form1"
+        Me.Text = "Login"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)

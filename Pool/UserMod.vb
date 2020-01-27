@@ -5,6 +5,8 @@
     Private _isLoggedIn As Boolean = False
     Private _password As String
     Private _iD As Integer
+    Public PreviousForm As Form = Nothing
+    Public CurrentForm As Form = Nothing
 
     Public Property UserEmail As String
         Get
@@ -59,4 +61,12 @@
             _iD = value
         End Set
     End Property
+
+    Public Sub setPreviousForm(ByRef prevForm As Form)
+        PreviousForm = prevForm
+    End Sub
+
+    Public Sub setCurerntForm(ByRef crtForm As Form)
+        CurrentForm = crtForm
+    End Sub
 End Module

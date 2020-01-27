@@ -161,4 +161,13 @@ Public Class ScoreTheme
             Return Nothing
         End Try
     End Function
+
+    Public Sub LogOutUser()
+        UserMod.DisplayName = String.Empty
+        UserMod.UserEmail = String.Empty
+        UserMod.Password = String.Empty
+        UserMod.ID = -1
+        UserMod.IsLoggedIn = False
+        Application.Restart()
+    End Sub
 End Class
