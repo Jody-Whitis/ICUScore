@@ -98,8 +98,8 @@ Public Class ScoreTheme
     Public Sub SetLabel(ByRef lbl As Label())
         For Each label In lbl
             With label
-                .ForeColor = Color.Aquamarine
-                .Font = New Font("Gill Sans Ultra", 9, FontStyle.Bold)
+                .ForeColor = Color.Lime
+                .Font = New Font("Gill Sans Ultra", 10, FontStyle.Bold)
             End With
         Next
     End Sub
@@ -161,4 +161,13 @@ Public Class ScoreTheme
             Return Nothing
         End Try
     End Function
+
+    Public Sub LogOutUser()
+        UserMod.DisplayName = String.Empty
+        UserMod.UserEmail = String.Empty
+        UserMod.Password = String.Empty
+        UserMod.ID = -1
+        UserMod.IsLoggedIn = False
+        Application.Restart()
+    End Sub
 End Class

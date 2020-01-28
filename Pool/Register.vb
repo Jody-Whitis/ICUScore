@@ -19,6 +19,8 @@ Public Class Register
         registerTheme.SetBackground(Me)
         registerTheme.SetButtons(New Button() {btnCancel, btnConfirm})
         registerTheme.SetTBox(New TextBox() {txtPassword, TxtPasswordConfirm, txtUseremail, txtDisplayName})
+        registerTheme.SetLabel(New Label() {lblDisplayName, lblEmail, lblNewDisplayName, lblPassword, lblConfirmPassword})
+        Me.CenterToScreen()
         cbCurrentPlayers.BackColor = Color.Aquamarine
         cbCurrentPlayers.ForeColor = Color.RoyalBlue
         cbCurrentPlayers.Font = New Font("Gill Sans Ultra", 9,
@@ -120,6 +122,7 @@ Public Class Register
         Try
             If cbCurrentPlayers.SelectedItem.Equals("Not Me!") Then
                 txtDisplayName.Visible = True
+                lblNewDisplayName.Visible = True
                 user.displayName = String.Empty
                 user.pID = -1
             Else
@@ -135,5 +138,18 @@ Public Class Register
             Debug.WriteLine(ex.ToString)
             Dim selectIndexError As New Logging(Now, "Index selected error:", ex.ToString)
         End Try
+    End Sub
+
+    Private Sub QuitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click
+        Application.Exit()
+    End Sub
+
+    Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
+        registerTheme.LogOutUser()
+    End Sub
+
+    Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
+        UserMod.setPreviousForm(Me)
+        PasswordChange.Activate()
     End Sub
 End Class

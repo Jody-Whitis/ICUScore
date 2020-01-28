@@ -25,5 +25,8 @@
     <Setting Name="emailDefaultCreds" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="senderEmail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">projtestcred@gmail.com</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -791,4 +791,20 @@ Public Class PvP
             pvpTheme.Screen = ScoreTheme.AppState.edit
         End If
     End Sub
+
+    Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
+        If UserMod.IsLoggedIn.Equals(True) Then
+            UserMod.setPreviousForm(Me)
+            PasswordChange.Show()
+            Me.Hide()
+        End If
+    End Sub
+
+    Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
+        pvpTheme.LogOutUser()
+    End Sub
+
+    Private Sub QuitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click
+        Application.Exit()
+    End Sub
 End Class

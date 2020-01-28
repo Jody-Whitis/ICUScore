@@ -51,12 +51,18 @@ Partial Class PvP
         Me.txtWinsAgainst2 = New System.Windows.Forms.TextBox()
         Me.txtTotalAgainst = New System.Windows.Forms.TextBox()
         Me.btnEdit = New System.Windows.Forms.Button()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.MenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditPasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PlayersBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PlayerNames, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LocalResultsDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LocalResultsDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PlayersBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LocalResultsDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbEdit
@@ -334,12 +340,58 @@ Partial Class PvP
         Me.btnEdit.UseVisualStyleBackColor = False
         Me.btnEdit.Visible = False
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.MenuStrip1.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1078, 42)
+        Me.MenuStrip1.TabIndex = 26
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'MenuToolStripMenuItem
+        '
+        Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditPasswordToolStripMenuItem, Me.LogOutToolStripMenuItem, Me.QuitToolStripMenuItem})
+        Me.MenuToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
+        Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
+        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 38)
+        Me.MenuToolStripMenuItem.Text = "Menu"
+        '
+        'EditPasswordToolStripMenuItem
+        '
+        Me.EditPasswordToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.EditPasswordToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
+        Me.EditPasswordToolStripMenuItem.Name = "EditPasswordToolStripMenuItem"
+        Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
+        Me.EditPasswordToolStripMenuItem.Text = "Edit Password"
+        '
+        'LogOutToolStripMenuItem
+        '
+        Me.LogOutToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
+        Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
+        Me.LogOutToolStripMenuItem.Text = "Log out"
+        '
+        'QuitToolStripMenuItem
+        '
+        Me.QuitToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
+        Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
+        Me.QuitToolStripMenuItem.Text = "Quit"
+        '
         'PvP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
         Me.ClientSize = New System.Drawing.Size(1078, 752)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.txtTotalAgainst)
         Me.Controls.Add(Me.txtWinsAgainst2)
@@ -359,6 +411,7 @@ Partial Class PvP
         Me.Controls.Add(Me.txtWins2)
         Me.Controls.Add(Me.txtWins)
         Me.Controls.Add(Me.tbEdit)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Margin = New System.Windows.Forms.Padding(6)
         Me.Name = "PvP"
         Me.Text = "PvP"
@@ -368,6 +421,8 @@ Partial Class PvP
         CType(Me.LocalResultsDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PlayersBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LocalResultsDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -401,4 +456,9 @@ Partial Class PvP
     Friend WithEvents txtWinsAgainst2 As TextBox
     Friend WithEvents txtTotalAgainst As TextBox
     Friend WithEvents btnEdit As Button
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents MenuToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EditPasswordToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LogOutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents QuitToolStripMenuItem As ToolStripMenuItem
 End Class
