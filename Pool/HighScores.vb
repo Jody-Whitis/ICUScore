@@ -37,6 +37,7 @@ Public Class HighScores
         If Not String.IsNullOrEmpty(UserMod.UserEmail) Then
             lblError.Text = $"Hello {UserMod.UserEmail}"
             lblError.Visible = True
+            cbPlayers.SelectedItem = UserMod.DisplayName
         End If
         If highScoreTheme.Screen = -1 Then
             lblError.Visible = True

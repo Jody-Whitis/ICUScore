@@ -310,6 +310,25 @@ Public Class PlayerStats
         Return allPlayers
     End Function
 
+    Public Function GetAllPlayersRegistered(registeredBit As Boolean) As Hashtable
+        Dim ds As New DataSet
+        Dim allplayers As New Hashtable
+        Dim registered As Int16 = Convert.ToInt16(registeredBit)
+        Dim sqlString = String.Empty
+        sqlString = $"exec selAllPlayers @wins = 0"
+        ds = scoresDB.DBSQL(sqlString)
+        Try
+            Dim filteredByRegistered As List(Of DataRow) = (From rows In ds.Tables(0).AsEnumerable Where
+                                           rows.Item("Registered") = registered Select rows).ToList
+            For i =0 To filteredByRegistered.Count -1
+                allplayers.Add(filteredByRegistered.Item(i).ItemArray.First, filteredByRegistered.Item(i).ItemArray(1))
+            Next
+        Catch ex As Exception
+            allplayers.Add(0, "Error")
+        End Try
+        Return allplayers
+    End Function
+
     Public Function GetAllResults(sqlString As String) As Data.DataSet Implements IDBConnect.GetAllResults
         Dim ds As New DataSet
         ds = scoresDB.DBSQL(sqlString)

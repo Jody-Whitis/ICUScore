@@ -5,6 +5,7 @@
     Private _isLoggedIn As Boolean = False
     Private _password As String
     Private _iD As Integer
+    Private _userStatus As Integer
     Public PreviousForm As Form = Nothing
     Public CurrentForm As Form = Nothing
 
@@ -59,6 +60,15 @@
         End Get
         Set(value As Integer)
             _iD = value
+        End Set
+    End Property
+
+    Public Property UserStatus As Integer
+        Get
+            Return _userStatus
+        End Get
+        Set(value As Integer)
+            _userStatus = value
         End Set
     End Property
 

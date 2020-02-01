@@ -10,6 +10,7 @@ Public Class PvP
     'Dim screen As New Test.AppState
     Dim isRiv As Boolean = False
     Dim allplayers As New Hashtable
+    Dim nonRegisterdPlayers As New Hashtable
     Dim allWins As New DataSet
     Dim deletedPlayer As New PlayerStats
     Dim editPlayer As New PlayerStats
@@ -53,10 +54,11 @@ Public Class PvP
 #End Region
         allWins = player1.GetAllResults("exec selAllWins @output=0")
         allplayers = player1.IDBConnect_GetAllPlayers()
+        nonRegisterdPlayers = player1.GetAllPlayersRegistered(False)
         GetHighScores()
         pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
         pvpTheme.FillBoxfromHT(cbPlayer2, allplayers)
-        pvpTheme.FillBoxfromHT(cbDelete, allplayers)
+        pvpTheme.FillBoxfromHT(cbDelete, nonRegisterdPlayers)
 #End Region
         Me.CenterToScreen()
         Dim background = Me.BackColor.ToString
@@ -69,6 +71,7 @@ Public Class PvP
         If Not String.IsNullOrEmpty(UserMod.UserEmail) Then
             lblError.Text = $"Hello {UserMod.UserEmail}"
             lblError.Visible = True
+            cbPlayer1.SelectedItem = UserMod.DisplayName
         End If
         If pvpTheme.Screen = -1 Then
             lblError.Visible = True
