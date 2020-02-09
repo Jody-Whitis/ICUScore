@@ -14,6 +14,7 @@ Public Class HighScores
     Dim saveLoc As New Point
     Dim saveDim As New Drawing.Size
     Dim addDim As New Drawing.Size
+    Dim userPermissions As New Permissions
 #End Region
 
     ''' <summary>
@@ -28,7 +29,11 @@ Public Class HighScores
         btnSubmit.Visible = False
         lstScores.Visible = False
         highScoreTheme.Screen = ScoreTheme.AppState.Start
-        allPlayers = player.IDBConnect_GetAllPlayers()
+        If userPermissions.IsAdmin.Equals(True) Then
+            allPlayers = player.IDBConnect_GetAllPlayers()
+        Else
+            allPlayers = player.GetAllPlayersRegistered(False)
+        End If
         highScoreTheme.FillCBoxAll(allPlayers, cbPlayers, lblError)
         allGames = games.GetAllPlayers()
         highScoreTheme.FillCBoxAll(allGames, cbGames, lblError)

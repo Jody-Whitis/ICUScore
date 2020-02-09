@@ -49,8 +49,6 @@ Public Class Home
             loggedIn = False
         End If
         If loggedIn.Equals(True) Then
-            UserMod.UserEmail = userAuthenticate.User
-            UserMod.IsLoggedIn = userAuthenticate.isLoggedIn
             homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
             homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser}, False)
             homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, False)
@@ -71,6 +69,7 @@ Public Class Home
         UserMod.IsLoggedIn = False
         UserMod.ID = -1
         UserMod.DisplayName = String.Empty
+        UserMod.Permissions = 0
         homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout}, False)
         homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser}, True)
         homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, True)

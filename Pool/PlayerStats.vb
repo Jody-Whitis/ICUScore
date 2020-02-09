@@ -319,7 +319,7 @@ Public Class PlayerStats
         ds = scoresDB.DBSQL(sqlString)
         Try
             Dim filteredByRegistered As List(Of DataRow) = (From rows In ds.Tables(0).AsEnumerable Where
-                                           rows.Item("Registered") = registered Select rows).ToList
+                                           rows.Item("Registered") = registered Or rows.Item("id").Equals(UserMod.ID) Select rows).ToList
             For i =0 To filteredByRegistered.Count -1
                 allplayers.Add(filteredByRegistered.Item(i).ItemArray.First, filteredByRegistered.Item(i).ItemArray(1))
             Next

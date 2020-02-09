@@ -19,6 +19,7 @@ Public Class PvP
     Dim pvpID2 As Integer = -1
     Dim pvpSet1 As New DataSet
     Dim pvpSet2 As New DataSet
+    Dim userPermissions As New Permissions()
 #End Region
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'LocalResultsDataSet1.Players' table. You can move, or remove it, as needed.
@@ -58,7 +59,11 @@ Public Class PvP
         GetHighScores()
         pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
         pvpTheme.FillBoxfromHT(cbPlayer2, allplayers)
-        pvpTheme.FillBoxfromHT(cbDelete, nonRegisterdPlayers)
+        If userPermissions.IsAdmin Then
+            pvpTheme.FillBoxfromHT(cbDelete, allplayers)
+        ElseIf userPermissions.IsUser Then
+            pvpTheme.FillBoxfromHT(cbDelete, nonRegisterdPlayers)
+        End If
 #End Region
         Me.CenterToScreen()
         Dim background = Me.BackColor.ToString
@@ -224,7 +229,9 @@ Public Class PvP
             player1.PlayerName1 = tbEdit.Text
 
             Try
-                lblError.Text = player1.InsertPlayer()
+                If userPermissions.IsUser Then
+                    lblError.Text = player1.InsertPlayer()
+                End If
             Catch ex As Exception
                 Dim exceptionLog As New Logging(Now, "Add Players: ", ex.ToString)
                 exceptionLog.LogAction()
@@ -317,7 +324,11 @@ Public Class PvP
                 cbPlayer1.Visible = False
                 cbPlayer2.Visible = False
                 cbDelete.Visible = False
-                pvpTheme.SetVisibiltyButton(New Button() {btnDelete, btnEdit}, True)
+                If userPermissions.IsAdmin() Then
+                    pvpTheme.SetVisibiltyButton(New Button() {btnDelete, btnEdit}, True)
+                ElseIf userPermissions.IsUser() Then
+                    pvpTheme.SetVisibiltyButton(New Button() {btnDelete, btnEdit}, True)                
+                End If
                 btnSave.Visible = False
                 btnBack.Visible = False
                 tbEdit.ResetText()
