@@ -7,7 +7,7 @@ Public Class Home
         Me.CenterToScreen()
         homeTheme.Screen = AppState.Start
         homeTheme.SetBackground(Me)
-        homeTheme.SetButtons(New Button() {btnPvP, btnHS, btnQuit, btnLogin, btnLogout, btnNewUser})
+        homeTheme.SetButtons(New Button() {btnPvP, btnHS, btnQuit, btnLogin, btnLogout, btnNewUser, btnGuest})
         homeTheme.SetVisibiltyButton(New Button() {btnPvP, btnHS, btnLogout}, False)
         homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnQuit}, True)
         homeTheme.SetTBox(New TextBox() {txtUser, txtPassword})
@@ -50,7 +50,7 @@ Public Class Home
         End If
         If loggedIn.Equals(True) Then
             homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
-            homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser}, False)
+            homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser, btnGuest}, False)
             homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, False)
             lblUser.Visible = False
             lblPassword.Visible = False
@@ -92,5 +92,24 @@ Public Class Home
         Register.Activate()
         Register.Show()
         Me.Hide()
+    End Sub
+
+    Private Sub btnGuest_Click(sender As Object, e As EventArgs) Handles btnGuest.Click
+        Dim guestDialog As DialogResult = MessageBox.Show($"Do you want to continue as a Guest? This will give you read-only access to view stats.",
+    "Erase Player", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If guestDialog.Equals(DialogResult.Yes) Then
+            UserMod.DisplayName = String.Empty
+            UserMod.ID = -1
+            UserMod.IsLoggedIn = False
+            UserMod.Permissions = Permissions.UserStatus.Guest
+            homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
+            homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser, btnGuest}, False)
+            homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, False)
+            lblUser.Visible = False
+            lblPassword.Visible = False
+            lblHome.Visible = True
+            editPasswordMnu.Visible = True
+            logOutMnu.Visible = True
+        End If
     End Sub
 End Class

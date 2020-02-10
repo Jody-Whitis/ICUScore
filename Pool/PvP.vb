@@ -84,6 +84,9 @@ Public Class PvP
         Else
             pvpTheme.Screen = ScoreTheme.AppState.Start
         End If
+        If Not userPermissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
+            pvpTheme.GuestDisplay(New Control() {btnDelete, btnEdit, btnSave, btnReg, cbPlayer1, cbPlayer2}, False)
+        End If
     End Sub
     ''' <summary>
     ''' Get the columns and set the board

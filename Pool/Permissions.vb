@@ -17,7 +17,7 @@
     End Function
 
     Public Function IsUser() As Boolean
-        If UserMod.Permissions > UserStatus.Debug OrElse UserMod.Permissions < UserStatus.Guest Then
+        If UserMod.Permissions > UserStatus.Debug AndAlso UserMod.Permissions < UserStatus.Guest Then
             Return True
         Else
             Return False

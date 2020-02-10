@@ -56,6 +56,9 @@ Public Class HighScores
         saveDim = btnSubmit.Size
         addDim = btnAdd.Size
 #End Region
+        If Not userPermissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
+            highScoreTheme.GuestDisplay(New Control() {btnAdd, btnSubmit, cbPlayers, txtScore, txtNewGM}, False)
+        End If
     End Sub
 
     ''' <summary>

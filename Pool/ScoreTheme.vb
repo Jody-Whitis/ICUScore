@@ -162,6 +162,13 @@ Public Class ScoreTheme
         End Try
     End Function
 
+    Public Sub GuestDisplay(ByRef controls As Control(), toggle As Boolean)
+        For Each controlElement In controls
+            controlElement.Enabled = toggle
+            controlElement.Visible = toggle
+        Next
+    End Sub
+
     Public Sub LogOutUser()
         UserMod.DisplayName = String.Empty
         UserMod.UserEmail = String.Empty
