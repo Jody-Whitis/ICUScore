@@ -58,6 +58,7 @@ Public Class HighScores
 #End Region
         If Not userPermissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
             highScoreTheme.GuestDisplay(New Control() {btnAdd, btnSubmit, cbPlayers, txtScore, txtNewGM}, False)
+            EditPasswordToolStripMenuItem.Visible = False
         End If
     End Sub
 

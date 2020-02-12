@@ -170,8 +170,8 @@ Public Class PlayerStats
         Return ds
     End Function
 
-    Public Function InsertPvPStats(ByVal opponentID As Integer, ByVal pvpID As Integer) As String
-        Dim sqlstring As String = $"exec [inPvPStats] @pvpID = {pvpID},@pID={PID},@p2ID={opponentID},@win={WinsAgainst1},@winner={PlayerName1}, @gID={2},@timeStamp='{Now.ToString()}'"
+    Public Function InsertPvPStats(ByVal opponentID As Integer, ByVal pvpID As Integer, ByVal gID As Integer) As String
+        Dim sqlstring As String = $"exec [inPvPStats] @pvpID = {pvpID},@pID={PID},@p2ID={opponentID},@win={WinsAgainst1},@winner={PlayerName1}, @gID={gID},@timeStamp='{Now.ToString()}'"
         Dim ds As New DataSet
         ds = scoresDB.DBSQL(sqlstring)
         If ds.Equals(Nothing) Then

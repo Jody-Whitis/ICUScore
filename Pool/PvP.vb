@@ -7,11 +7,14 @@ Public Class PvP
 #Region "Global to form"
     Dim player1 As New PlayerStats
     Dim player2 As New PlayerStats
+    Dim game As Integer = 2
     'Dim screen As New Test.AppState
     Dim isRiv As Boolean = False
     Dim allplayers As New Hashtable
     Dim nonRegisterdPlayers As New Hashtable
     Dim allWins As New DataSet
+    Dim gamesHT As New Hashtable
+    Dim games As New Games
     Dim deletedPlayer As New PlayerStats
     Dim editPlayer As New PlayerStats
     Dim totalGamesPvP As Integer = 0
@@ -53,12 +56,16 @@ Public Class PvP
         '    sqlConnection.Close()
         'End Try
 #End Region
-        allWins = player1.GetAllResults("exec selAllWins @output=0")
+        allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
         allplayers = player1.IDBConnect_GetAllPlayers()
+        gamesHT = games.GetAllPlayers()
+        cbGames.Visible = True
+        cbGames.Enabled = True
         nonRegisterdPlayers = player1.GetAllPlayersRegistered(False)
         GetHighScores()
         pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
         pvpTheme.FillBoxfromHT(cbPlayer2, allplayers)
+        pvpTheme.FillBoxfromHT(cbGames, gamesHT)
         If userPermissions.IsAdmin Then
             pvpTheme.FillBoxfromHT(cbDelete, allplayers)
         ElseIf userPermissions.IsUser Then
@@ -86,6 +93,7 @@ Public Class PvP
         End If
         If Not userPermissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
             pvpTheme.GuestDisplay(New Control() {btnDelete, btnEdit, btnSave, btnReg, cbPlayer1, cbPlayer2}, False)
+            EditPasswordToolStripMenuItem.Visible = False
         End If
     End Sub
     ''' <summary>
@@ -95,7 +103,7 @@ Public Class PvP
         If allWins.Tables(0).Rows.Count > 0 Then
             lstAllWins.Items.Clear()
             Try
-                Dim scores = (From r In allWins.Tables(0).AsEnumerable Select r)
+                Dim scores = (From r In allWins.Tables(0).AsEnumerable Where r.Item("gID") = game Select r)
                 For Each score In scores
                     Dim playerNameScore As String = score.Item("playerName")
                     Dim playerScore As String = score.Item("wins")
@@ -582,7 +590,7 @@ Public Class PvP
         End If
         player1.WinsAgainst1 += 1
         txtWinsagainst.Text = player1.WinsAgainst1
-        lblError.Text = player1.InsertPvPStats(player2.PID, pvpID)
+        lblError.Text = player1.InsertPvPStats(player2.PID, pvpID, game)
         totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
         txtTotalAgainst.Text = totalGamesPvP.ToString
         pvpTheme.SetErrorLabel(lblError)
@@ -648,7 +656,7 @@ Public Class PvP
         End If
         player2.WinsAgainst1 += 1
         txtWinsAgainst2.Text = player2.WinsAgainst1
-        lblError.Text = player2.InsertPvPStats(player1.PID, pvpID2)
+        lblError.Text = player2.InsertPvPStats(player1.PID, pvpID2, game)
         totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
         txtTotalAgainst.Text = totalGamesPvP.ToString
         pvpTheme.SetErrorLabel(lblError)
@@ -824,4 +832,15 @@ Public Class PvP
     Private Sub QuitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click
         Application.Exit()
     End Sub
+
+    Private Sub cbGames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGames.SelectedIndexChanged
+        For Each gameEntry As DictionaryEntry In gamesHT
+            If gameEntry.Value.Equals(cbGames.SelectedItem) Then
+                game = gameEntry.Key
+                Exit For
+            End If
+        Next
+        GetHighScores()
+    End Sub
+
 End Class

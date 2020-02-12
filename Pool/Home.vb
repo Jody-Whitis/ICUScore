@@ -71,7 +71,7 @@ Public Class Home
         UserMod.DisplayName = String.Empty
         UserMod.Permissions = 0
         homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout}, False)
-        homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser}, True)
+        homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser, btnGuest}, True)
         homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, True)
         lblUser.Visible = True
         lblPassword.Visible = True
@@ -105,6 +105,7 @@ Public Class Home
             homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
             homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser, btnGuest}, False)
             homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, False)
+            editPasswordMnu.Visible = True
             lblUser.Visible = False
             lblPassword.Visible = False
             lblHome.Visible = True
