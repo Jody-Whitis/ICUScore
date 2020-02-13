@@ -101,14 +101,18 @@ Public Class PvP
     ''' </summary>
     Private Sub GetHighScores()
         If allWins.Tables(0).Rows.Count > 0 Then
-            lstAllWins.Items.Clear()
             Try
                 Dim scores = (From r In allWins.Tables(0).AsEnumerable Where r.Item("gID") = game Select r)
-                For Each score In scores
-                    Dim playerNameScore As String = score.Item("playerName")
-                    Dim playerScore As String = score.Item("wins")
-                    lstAllWins.Items.Add(playerNameScore & "".PadRight(10) & ":" & "".PadRight(5) & playerScore)
-                Next
+                If scores.Count > 0 Then
+                    lstAllWins.Items.Clear()
+                    For Each score In scores
+                        Dim playerNameScore As String = score.Item("playerName")
+                        Dim playerScore As String = score.Item("winAgainst")
+                        Dim opponentID As Integer = score.Item("opponentID")
+                        Dim lastGame As Date = score.Item("lastMatch")
+                        lstAllWins.Items.Add($"{playerNameScore} has beaten {allplayers.Item(opponentID)} {playerScore} time(s) since {lastGame.ToString("MM/dd/yyyy")}")
+                    Next
+                End If
             Catch ex As Exception
                 Dim exceptionLog As New Logging(Now, "GetHighScores : ", ex.ToString)
                 exceptionLog.LogAction()
@@ -276,7 +280,7 @@ Public Class PvP
             cbPlayer2.EndUpdate()
             'allplayers = New Hashtable
             allplayers = player1.IDBConnect_GetAllPlayers()
-            allWins = player1.GetAllResults("exec selAllWins @output=0")
+            allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
             GetHighScores()
             allplayers = player1.IDBConnect_GetAllPlayers()
             pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
@@ -490,12 +494,12 @@ Public Class PvP
     ''' Try to parse from those, or if none then return -1
     ''' </summary>
     Public Sub SetPVPSets()
-        pvpSet1 = player1.SearchPvPStats(player2.PID)
+        pvpSet1 = player1.SearchPvPStats(player2.PID, game)
         pvpID = GetPvPID(pvpSet1)
         If pvpID > -1 Then
             Integer.TryParse(pvpSet1.Tables(0).Rows(0).Item("Wins"), player1.WinsAgainst1)
         End If
-        pvpSet2 = player2.SearchPvPStats(player1.PID)
+        pvpSet2 = player2.SearchPvPStats(player1.PID, game)
         pvpID2 = GetPvPID(pvpSet2)
         If pvpID2 > -1 Then
             Integer.TryParse(pvpSet2.Tables(0).Rows(0).Item("Wins"), player2.WinsAgainst1)
@@ -576,7 +580,7 @@ Public Class PvP
         Else
             txtWins.Text = gameResults
         End If
-        allWins = player1.GetAllResults("exec selAllWins @output=0")
+        allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
         GetHighScores()
         SetPVPSets()
         If pvpSet1.Tables(0).Rows.Count > 0 Then
@@ -642,7 +646,7 @@ Public Class PvP
         Else
             txtWins2.Text = gameResults
         End If
-        allWins = player1.GetAllResults("exec selAllWins @output=0")
+        allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
         GetHighScores()
         SetPVPSets()
         If pvpSet2.Tables(0).Rows.Count > 0 Then
@@ -840,6 +844,7 @@ Public Class PvP
                 Exit For
             End If
         Next
+        allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
         GetHighScores()
     End Sub
 

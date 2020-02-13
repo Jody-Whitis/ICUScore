@@ -161,10 +161,10 @@ Public Class PlayerStats
         End Try
     End Function
 
-    Public Function SearchPvPStats(ByVal opponentID As Integer) As DataSet
+    Public Function SearchPvPStats(ByVal opponentID As Integer, ByVal gameId As Integer) As DataSet
         Dim ds As New DataSet
         Dim sqlString = String.Empty
-        sqlString = $"exec [selPvPStats] @pID ={PID},@p2Id = {opponentID},@gID = {2},@pvpID = {-1}"
+        sqlString = $"exec [selPvPStats] @pID ={PID},@p2Id = {opponentID},@gID = {gameId},@pvpID = {-1}"
         ds = scoresDB.DBSQL(sqlString)
 
         Return ds

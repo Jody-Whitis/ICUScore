@@ -259,13 +259,13 @@ Partial Class PvP
         'lstAllWins
         '
         Me.lstAllWins.BackColor = System.Drawing.Color.Aquamarine
-        Me.lstAllWins.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lstAllWins.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.0!)
         Me.lstAllWins.ForeColor = System.Drawing.Color.Green
         Me.lstAllWins.FormattingEnabled = True
-        Me.lstAllWins.ItemHeight = 44
-        Me.lstAllWins.Location = New System.Drawing.Point(234, 293)
+        Me.lstAllWins.ItemHeight = 39
+        Me.lstAllWins.Location = New System.Drawing.Point(167, 293)
         Me.lstAllWins.Name = "lstAllWins"
-        Me.lstAllWins.Size = New System.Drawing.Size(587, 136)
+        Me.lstAllWins.Size = New System.Drawing.Size(747, 121)
         Me.lstAllWins.TabIndex = 19
         '
         'btnDelete
@@ -349,7 +349,7 @@ Partial Class PvP
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1078, 41)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1078, 48)
         Me.MenuStrip1.TabIndex = 26
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -359,7 +359,7 @@ Partial Class PvP
         Me.MenuToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
-        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 37)
+        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 44)
         Me.MenuToolStripMenuItem.Text = "Menu"
         '
         'EditPasswordToolStripMenuItem
