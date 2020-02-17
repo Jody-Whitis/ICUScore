@@ -57,7 +57,19 @@ Public Class ScoreTheme
 
     Public Sub SetVisibiltyButton(ByRef btn As Button(), ByVal toggle As Boolean)
         For Each button In btn
-            button.Visible = toggle
+            With button
+                .Visible = toggle
+                .Enabled = toggle
+            End With
+        Next
+    End Sub
+
+    Public Sub SetControl(ByRef controls As Control(), ByVal toggle As Boolean)
+        For Each control In controls
+            With control
+                .Visible = toggle
+                .Enabled = toggle
+            End With
         Next
     End Sub
 

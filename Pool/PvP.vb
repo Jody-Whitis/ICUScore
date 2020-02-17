@@ -8,12 +8,12 @@ Public Class PvP
     Dim player1 As New PlayerStats
     Dim player2 As New PlayerStats
     Dim game As Integer = 2
-    'Dim screen As New Test.AppState
     Dim isRiv As Boolean = False
     Dim allplayers As New Hashtable
     Dim nonRegisterdPlayers As New Hashtable
     Dim allWins As New DataSet
     Dim gamesHT As New Hashtable
+    Dim gamePvP As New DataSet
     Dim games As New Games
     Dim deletedPlayer As New PlayerStats
     Dim editPlayer As New PlayerStats
@@ -58,6 +58,7 @@ Public Class PvP
 #End Region
         allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
         allplayers = player1.IDBConnect_GetAllPlayers()
+        gamePvP = player1.GetAllResults($"[dbo].[selGamesPvP]")
         gamesHT = games.GetAllPlayers()
         cbGames.Visible = True
         cbGames.Enabled = True
@@ -110,7 +111,10 @@ Public Class PvP
                         Dim playerScore As String = score.Item("winAgainst")
                         Dim opponentID As Integer = score.Item("opponentID")
                         Dim lastGame As Date = score.Item("lastMatch")
-                        lstAllWins.Items.Add($"{playerNameScore} has beaten {allplayers.Item(opponentID)} {playerScore} time(s) since {lastGame.ToString("MM/dd/yyyy")}")
+                        If Not String.IsNullOrEmpty(allplayers.Item(opponentID)) Then
+                            lstAllWins.Items.Add($"{playerNameScore} has beaten {allplayers.Item(opponentID)} {playerScore} time(s) since {lastGame.ToString("MM/dd/yyyy")}")
+
+                        End If
                     Next
                 End If
             Catch ex As Exception
@@ -177,8 +181,8 @@ Public Class PvP
                     pvpTheme.SetVisibiltyButton(New Button() {btnReg, btnSave, btnEdit, btnDelete}, False)
                     btnPlayer1win.Visible = True
                     btnPlayer2Wins.Visible = True
-                    'btnReg.Visible = False
-                    'btnSave.Visible = False
+                    btnPlayer1win.Enabled = True
+                    btnPlayer2Wins.Enabled = True
                     btnBack.Text = "Back"
                     pvpTheme.Screen = ScoreTheme.AppState.Switch
                 Else 'we'll open current wins
@@ -278,7 +282,6 @@ Public Class PvP
 
             cbPlayer1.EndUpdate()
             cbPlayer2.EndUpdate()
-            'allplayers = New Hashtable
             allplayers = player1.IDBConnect_GetAllPlayers()
             allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
             GetHighScores()
@@ -330,6 +333,7 @@ Public Class PvP
                 'btnDelete.Visible = False
                 cbDelete.Visible = False
                 btnBack.Visible = True
+                cbGames.Visible = True
                 cbPlayer1.SelectedItem = Nothing
                 cbPlayer2.SelectedItem = Nothing
                 pvpTheme.Screen = ScoreTheme.AppState.Start
@@ -339,10 +343,12 @@ Public Class PvP
                 cbPlayer1.Visible = False
                 cbPlayer2.Visible = False
                 cbDelete.Visible = False
+                cbGames.Visible = False
                 If userPermissions.IsAdmin() Then
                     pvpTheme.SetVisibiltyButton(New Button() {btnDelete, btnEdit}, True)
                 ElseIf userPermissions.IsUser() Then
-                    pvpTheme.SetVisibiltyButton(New Button() {btnDelete, btnEdit}, True)                
+                    'Delete only for Admins
+                    pvpTheme.SetVisibiltyButton(New Button() {btnEdit}, True)
                 End If
                 btnSave.Visible = False
                 btnBack.Visible = False
@@ -506,16 +512,6 @@ Public Class PvP
         End If
     End Sub
 
-    'Private Sub FillByToolStripButton_Click_1(sender As Object, e As EventArgs)
-    '    Try
-    '        Me.PlayersTableAdapter1.FillBy(Me.LocalResultsDataSet1.Players)
-    '    Catch ex As System.Exception
-    '        Dim exceptionLog As New Logging(Now, ex.InnerException.ToString, ex.ToString)
-    '        System.Windows.Forms.MessageBox.Show(ex.Message)
-    '    End Try
-
-    'End Sub
-
     ''' <summary>
     ''' Go through the dataset for the ID
     ''' if we don't find one then return -1 to add a new one
@@ -598,6 +594,8 @@ Public Class PvP
         totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
         txtTotalAgainst.Text = totalGamesPvP.ToString
         pvpTheme.SetErrorLabel(lblError)
+        allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
+        GetHighScores()
         pvpTheme.SetVisibiltyButton(New Button() {btnReg, btnSave}, True)
         pvpTheme.SetVisibiltyButton(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
         pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
@@ -664,6 +662,8 @@ Public Class PvP
         totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
         txtTotalAgainst.Text = totalGamesPvP.ToString
         pvpTheme.SetErrorLabel(lblError)
+        allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
+        GetHighScores()
         pvpTheme.SetVisibiltyButton(New Button() {btnReg, btnSave}, True)
         pvpTheme.SetVisibiltyButton(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
         pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst}, True)
@@ -845,7 +845,12 @@ Public Class PvP
             End If
         Next
         allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
-        GetHighScores()
+        If allWins IsNot Nothing AndAlso allWins.Tables(0).Rows.Count > 0 Then
+            GetHighScores()
+        Else
+            lstAllWins.Items.Clear()
+            lstAllWins.Items.Add("No games yet played")
+        End If
     End Sub
 
 End Class
