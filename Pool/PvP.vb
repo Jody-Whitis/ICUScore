@@ -67,6 +67,9 @@ Public Class PvP
         pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
         pvpTheme.FillBoxfromHT(cbPlayer2, allplayers)
         pvpTheme.FillBoxfromHT(cbGames, gamesHT)
+        If gamesHT.Count > 0 Then
+            cbGames.SelectedIndex = cbGames.FindStringExact(gamesHT.Item(2))
+        End If
         If userPermissions.IsAdmin Then
             pvpTheme.FillBoxfromHT(cbDelete, allplayers)
         ElseIf userPermissions.IsUser Then
