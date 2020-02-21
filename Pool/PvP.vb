@@ -715,7 +715,7 @@ Public Class PvP
                 'are you sure??????????
                 If deletionAlert.Equals(DialogResult.Yes) Then
                     player1.GetAllResults(deleteSQL)
-                    allWins = player1.GetAllResults("exec selAllWins @output=0")
+                    allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
                     GetHighScores()
                     allplayers = deletedPlayer.IDBConnect_GetAllPlayers()
                     pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
@@ -793,7 +793,7 @@ Public Class PvP
                 'are you sure??????????
                 If editAlert.Equals(DialogResult.Yes) Then
                     player1.GetAllResults(editSQL)
-                    allWins = player1.GetAllResults("exec selAllWins @output=0")
+                    allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
                     GetHighScores()
                     allplayers = editPlayer.IDBConnect_GetAllPlayers()
                     pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
