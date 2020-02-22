@@ -111,6 +111,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Permissions.vb" />
+    <Compile Include="PlayerEditing.Designer.vb">
+      <DependentUpon>PlayerEditing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerEditing.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PvP.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PasswordChange.resx">
       <DependentUpon>PasswordChange.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlayerEditing.resx">
+      <DependentUpon>PlayerEditing.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PvP.resx">
       <DependentUpon>PvP.vb</DependentUpon>

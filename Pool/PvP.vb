@@ -856,4 +856,11 @@ Public Class PvP
         End If
     End Sub
 
+    Private Sub btnRegisterTest_Click(sender As Object, e As EventArgs) Handles btnRegisterTest.Click
+        With PlayerEditing
+            .Activate()
+            .Show()
+        End With
+        Me.Close()
+    End Sub
 End Class
