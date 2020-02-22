@@ -7,7 +7,7 @@ Public Class Home
         Me.CenterToScreen()
         homeTheme.Screen = AppState.Start
         homeTheme.SetBackground(Me)
-        homeTheme.SetButtons(New Button() {btnPvP, btnHS, btnQuit, btnLogin, btnLogout, btnNewUser})
+        homeTheme.SetButtons(New Button() {btnPvP, btnHS, btnQuit, btnLogin, btnLogout, btnNewUser, btnGuest})
         homeTheme.SetVisibiltyButton(New Button() {btnPvP, btnHS, btnLogout}, False)
         homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnQuit}, True)
         homeTheme.SetTBox(New TextBox() {txtUser, txtPassword})
@@ -37,7 +37,7 @@ Public Class Home
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Dim userAuthenticate As New Authenticate
         Dim loggedIn As Boolean
-        'Password123
+
         With userAuthenticate
             .User = txtUser.Text.ToString
             .Password = txtPassword.Text.ToString
@@ -49,10 +49,8 @@ Public Class Home
             loggedIn = False
         End If
         If loggedIn.Equals(True) Then
-            UserMod.UserEmail = userAuthenticate.User
-            UserMod.IsLoggedIn = userAuthenticate.isLoggedIn
             homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
-            homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser}, False)
+            homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser, btnGuest}, False)
             homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, False)
             lblUser.Visible = False
             lblPassword.Visible = False
@@ -67,18 +65,7 @@ Public Class Home
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click, logOutMnu.Click
-        UserMod.UserEmail = String.Empty
-        UserMod.IsLoggedIn = False
-        UserMod.ID = -1
-        UserMod.DisplayName = String.Empty
-        homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout}, False)
-        homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser}, True)
-        homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, True)
-        lblUser.Visible = True
-        lblPassword.Visible = True
-        lblHome.Visible = False
-        editPasswordMnu.Visible = False
-        logOutMnu.Visible = False
+        homeTheme.LogOutUser()
     End Sub
 
     Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles editPasswordMnu.Click
@@ -93,5 +80,25 @@ Public Class Home
         Register.Activate()
         Register.Show()
         Me.Hide()
+    End Sub
+
+    Private Sub btnGuest_Click(sender As Object, e As EventArgs) Handles btnGuest.Click
+        Dim guestDialog As DialogResult = MessageBox.Show($"Do you want to continue as a Guest? This will give you read-only access to view stats.",
+    "Guest", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If guestDialog.Equals(DialogResult.Yes) Then
+            UserMod.DisplayName = String.Empty
+            UserMod.ID = -1
+            UserMod.IsLoggedIn = False
+            UserMod.Permissions = Permissions.UserStatus.Guest
+            homeTheme.SetVisibiltyButton(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
+            homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnNewUser, btnGuest}, False)
+            homeTheme.SetVisiblityTxtBox(New TextBox() {txtUser, txtPassword}, False)
+            editPasswordMnu.Visible = False
+            lblUser.Visible = False
+            lblPassword.Visible = False
+            lblHome.Visible = True
+            editPasswordMnu.Visible = False
+            logOutMnu.Visible = True
+        End If
     End Sub
 End Class

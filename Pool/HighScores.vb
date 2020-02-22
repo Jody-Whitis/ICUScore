@@ -14,6 +14,7 @@ Public Class HighScores
     Dim saveLoc As New Point
     Dim saveDim As New Drawing.Size
     Dim addDim As New Drawing.Size
+    Dim userPermissions As New Permissions
 #End Region
 
     ''' <summary>
@@ -28,7 +29,11 @@ Public Class HighScores
         btnSubmit.Visible = False
         lstScores.Visible = False
         highScoreTheme.Screen = ScoreTheme.AppState.Start
-        allPlayers = player.IDBConnect_GetAllPlayers()
+        If userPermissions.IsAdmin.Equals(True) Then
+            allPlayers = player.IDBConnect_GetAllPlayers()
+        Else
+            allPlayers = player.GetAllPlayersRegistered(False)
+        End If
         highScoreTheme.FillCBoxAll(allPlayers, cbPlayers, lblError)
         allGames = games.GetAllPlayers()
         highScoreTheme.FillCBoxAll(allGames, cbGames, lblError)
@@ -37,6 +42,7 @@ Public Class HighScores
         If Not String.IsNullOrEmpty(UserMod.UserEmail) Then
             lblError.Text = $"Hello {UserMod.UserEmail}"
             lblError.Visible = True
+            cbPlayers.SelectedItem = UserMod.DisplayName
         End If
         If highScoreTheme.Screen = -1 Then
             lblError.Visible = True
@@ -50,6 +56,10 @@ Public Class HighScores
         saveDim = btnSubmit.Size
         addDim = btnAdd.Size
 #End Region
+        If Not userPermissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
+            highScoreTheme.GuestDisplay(New Control() {btnAdd, btnSubmit, cbPlayers, txtScore, txtNewGM}, False)
+            EditPasswordToolStripMenuItem.Visible = False
+        End If
     End Sub
 
     ''' <summary>

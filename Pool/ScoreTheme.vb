@@ -57,7 +57,19 @@ Public Class ScoreTheme
 
     Public Sub SetVisibiltyButton(ByRef btn As Button(), ByVal toggle As Boolean)
         For Each button In btn
-            button.Visible = toggle
+            With button
+                .Visible = toggle
+                .Enabled = toggle
+            End With
+        Next
+    End Sub
+
+    Public Sub SetControl(ByRef controls As Control(), ByVal toggle As Boolean)
+        For Each control In controls
+            With control
+                .Visible = toggle
+                .Enabled = toggle
+            End With
         Next
     End Sub
 
@@ -161,6 +173,13 @@ Public Class ScoreTheme
             Return Nothing
         End Try
     End Function
+
+    Public Sub GuestDisplay(ByRef controls As Control(), toggle As Boolean)
+        For Each controlElement In controls
+            controlElement.Enabled = toggle
+            controlElement.Visible = toggle
+        Next
+    End Sub
 
     Public Sub LogOutUser()
         UserMod.DisplayName = String.Empty

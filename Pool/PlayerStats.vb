@@ -161,17 +161,17 @@ Public Class PlayerStats
         End Try
     End Function
 
-    Public Function SearchPvPStats(ByVal opponentID As Integer) As DataSet
+    Public Function SearchPvPStats(ByVal opponentID As Integer, ByVal gameId As Integer) As DataSet
         Dim ds As New DataSet
         Dim sqlString = String.Empty
-        sqlString = $"exec [selPvPStats] @pID ={PID},@p2Id = {opponentID},@gID = {2},@pvpID = {-1}"
+        sqlString = $"exec [selPvPStats] @pID ={PID},@p2Id = {opponentID},@gID = {gameId},@pvpID = {-1}"
         ds = scoresDB.DBSQL(sqlString)
 
         Return ds
     End Function
 
-    Public Function InsertPvPStats(ByVal opponentID As Integer, ByVal pvpID As Integer) As String
-        Dim sqlstring As String = $"exec [inPvPStats] @pvpID = {pvpID},@pID={PID},@p2ID={opponentID},@win={WinsAgainst1},@winner={PlayerName1}, @gID={2},@timeStamp='{Now.ToString()}'"
+    Public Function InsertPvPStats(ByVal opponentID As Integer, ByVal pvpID As Integer, ByVal gID As Integer) As String
+        Dim sqlstring As String = $"exec [inPvPStats] @pvpID = {pvpID},@pID={PID},@p2ID={opponentID},@win={WinsAgainst1},@winner={PlayerName1}, @gID={gID},@timeStamp='{Now.ToString()}'"
         Dim ds As New DataSet
         ds = scoresDB.DBSQL(sqlstring)
         If ds.Equals(Nothing) Then
@@ -308,6 +308,25 @@ Public Class PlayerStats
             Return allPlayers
         End Try
         Return allPlayers
+    End Function
+
+    Public Function GetAllPlayersRegistered(registeredBit As Boolean) As Hashtable
+        Dim ds As New DataSet
+        Dim allplayers As New Hashtable
+        Dim registered As Int16 = Convert.ToInt16(registeredBit)
+        Dim sqlString = String.Empty
+        sqlString = $"exec selAllPlayers @wins = 0"
+        ds = scoresDB.DBSQL(sqlString)
+        Try
+            Dim filteredByRegistered As List(Of DataRow) = (From rows In ds.Tables(0).AsEnumerable Where
+                                           rows.Item("Registered") = registered Or rows.Item("id").Equals(UserMod.ID) Select rows).ToList
+            For i =0 To filteredByRegistered.Count -1
+                allplayers.Add(filteredByRegistered.Item(i).ItemArray.First, filteredByRegistered.Item(i).ItemArray(1))
+            Next
+        Catch ex As Exception
+            allplayers.Add(0, "Error")
+        End Try
+        Return allplayers
     End Function
 
     Public Function GetAllResults(sqlString As String) As Data.DataSet Implements IDBConnect.GetAllResults

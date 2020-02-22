@@ -11,13 +11,6 @@ Public Class Authenticate : Implements ILogin
         Public hash As Byte()
     End Structure
 
-    Public Enum PermissioninApp
-        Debug = -1
-        Admin = 0
-        User = 1
-        Unregister = 2
-    End Enum
-
     Public Property User As String
     Public Property Password As String
     Public Property isLoggedIn As Boolean
@@ -129,6 +122,7 @@ Public Class Authenticate : Implements ILogin
             UserMod.ID = userDS.Tables(0).Rows(0).Item("iD")
             UserMod.IsLoggedIn = True
             UserMod.DisplayName = userDS.Tables(0).Rows(0).Item("PlayerName")
+            UserMod.Permissions = userDS.Tables(0).Rows(0).Item("permissionLevel")
         Catch ex As Exception
             Debug.WriteLine(ex.ToString)
             Dim setUser As New Logging(Now, "User Log set error: ", ex.ToString)
@@ -266,10 +260,6 @@ Public Class Authenticate : Implements ILogin
             Dim hashError As New Logging(Now, "Hashing error: ", ex.ToString)
         End Try
         Return hashedPassword
-    End Function
-
-    Public Function GetPermissions(userType As Integer, isLogin As Boolean) As Boolean Implements ILogin.GetPermissions
-        Throw New NotImplementedException()
     End Function
 
 End Class

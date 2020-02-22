@@ -40,6 +40,7 @@ Partial Class Home
         Me.logOutMnu = New System.Windows.Forms.ToolStripMenuItem()
         Me.quitMnu = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnNewUser = New System.Windows.Forms.Button()
+        Me.btnGuest = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -81,7 +82,7 @@ Partial Class Home
         Me.lblHome.AutoSize = True
         Me.lblHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHome.ForeColor = System.Drawing.Color.Lime
-        Me.lblHome.Location = New System.Drawing.Point(258, 107)
+        Me.lblHome.Location = New System.Drawing.Point(258, 106)
         Me.lblHome.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHome.Name = "lblHome"
         Me.lblHome.Size = New System.Drawing.Size(274, 33)
@@ -108,7 +109,7 @@ Partial Class Home
         '
         Me.btnLogin.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.ForeColor = System.Drawing.Color.Green
-        Me.btnLogin.Location = New System.Drawing.Point(449, 377)
+        Me.btnLogin.Location = New System.Drawing.Point(448, 377)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(140, 75)
         Me.btnLogin.TabIndex = 6
@@ -119,7 +120,7 @@ Partial Class Home
         '
         Me.btnLogout.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogout.ForeColor = System.Drawing.Color.Green
-        Me.btnLogout.Location = New System.Drawing.Point(75, 546)
+        Me.btnLogout.Location = New System.Drawing.Point(75, 541)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(196, 75)
         Me.btnLogout.TabIndex = 7
@@ -211,18 +212,30 @@ Partial Class Home
         '
         Me.btnNewUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNewUser.ForeColor = System.Drawing.Color.Green
-        Me.btnNewUser.Location = New System.Drawing.Point(205, 378)
+        Me.btnNewUser.Location = New System.Drawing.Point(206, 378)
         Me.btnNewUser.Name = "btnNewUser"
-        Me.btnNewUser.Size = New System.Drawing.Size(142, 74)
+        Me.btnNewUser.Size = New System.Drawing.Size(142, 73)
         Me.btnNewUser.TabIndex = 12
         Me.btnNewUser.Text = "New User"
         Me.btnNewUser.UseVisualStyleBackColor = True
+        '
+        'btnGuest
+        '
+        Me.btnGuest.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGuest.ForeColor = System.Drawing.Color.Green
+        Me.btnGuest.Location = New System.Drawing.Point(277, 541)
+        Me.btnGuest.Name = "btnGuest"
+        Me.btnGuest.Size = New System.Drawing.Size(196, 75)
+        Me.btnGuest.TabIndex = 13
+        Me.btnGuest.Text = "Guest"
+        Me.btnGuest.UseVisualStyleBackColor = True
         '
         'Home
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(795, 664)
+        Me.Controls.Add(Me.btnGuest)
         Me.Controls.Add(Me.btnNewUser)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.lblPassword)
@@ -262,4 +275,5 @@ Partial Class Home
     Friend WithEvents logOutMnu As ToolStripMenuItem
     Friend WithEvents quitMnu As ToolStripMenuItem
     Friend WithEvents btnNewUser As Button
+    Friend WithEvents btnGuest As Button
 End Class
