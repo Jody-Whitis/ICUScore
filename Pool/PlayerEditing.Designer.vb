@@ -26,6 +26,8 @@ Partial Class PlayerEditing
         Me.cbPlayerNames = New System.Windows.Forms.ComboBox()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnEdit = New System.Windows.Forms.Button()
+        Me.tbEdit = New System.Windows.Forms.TextBox()
+        Me.lblError = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'btnBack
@@ -39,6 +41,7 @@ Partial Class PlayerEditing
         '
         'cbPlayerNames
         '
+        Me.cbPlayerNames.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cbPlayerNames.BackColor = System.Drawing.Color.Aquamarine
         Me.cbPlayerNames.FormattingEnabled = True
         Me.cbPlayerNames.Location = New System.Drawing.Point(98, 82)
@@ -64,11 +67,28 @@ Partial Class PlayerEditing
         Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = True
         '
+        'tbEdit
+        '
+        Me.tbEdit.Location = New System.Drawing.Point(98, 124)
+        Me.tbEdit.Name = "tbEdit"
+        Me.tbEdit.Size = New System.Drawing.Size(202, 22)
+        Me.tbEdit.TabIndex = 4
+        '
+        'lblError
+        '
+        Me.lblError.AutoSize = True
+        Me.lblError.Location = New System.Drawing.Point(137, 28)
+        Me.lblError.Name = "lblError"
+        Me.lblError.Size = New System.Drawing.Size(0, 17)
+        Me.lblError.TabIndex = 5
+        '
         'PlayerEditing
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(404, 309)
+        Me.Controls.Add(Me.lblError)
+        Me.Controls.Add(Me.tbEdit)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.cbPlayerNames)
@@ -76,6 +96,7 @@ Partial Class PlayerEditing
         Me.Name = "PlayerEditing"
         Me.Text = "PlayerEditing"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -83,4 +104,6 @@ Partial Class PlayerEditing
     Friend WithEvents cbPlayerNames As ComboBox
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnEdit As Button
+    Friend WithEvents tbEdit As TextBox
+    Friend WithEvents lblError As Label
 End Class
