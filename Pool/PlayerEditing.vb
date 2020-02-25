@@ -80,7 +80,48 @@
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If playerEditTheme.Screen.Equals(ScoreTheme.AppState.Delete) Then
+            'grab player obj from cbox
+            Try
+                selectedPlayer.PlayerName1 = cbPlayerNames.SelectedItem.ToString
+                Integer.TryParse((From row As DictionaryEntry In allplayers
+                                  Where row.Value Like selectedPlayer.PlayerName1 Select row.Key).ToArray.First, selectedPlayer.PID)
+            Catch ex As Exception
+                Dim exceptionLog As New Logging(Now, "Delete Player: ", ex.ToString)
+                exceptionLog.LogAction()
+                lblError.Text = "Error: Select a player to Delete!!!!!!"
+                playerEditTheme.SetErrorLabel(lblError)
+                Exit Sub
+            End Try
 
+            Dim deleteSQL As String = $"exec [delPlayer] @playerID = {selectedPlayer.PID}, @result=0"
+
+            If Not String.IsNullOrEmpty(selectedPlayer.PID) Then
+                Dim deletionAlert As DialogResult = MessageBox.Show($"Are you sure you want to erase {selectedPlayer.PlayerName1}?",
+    "Erase Player", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+                'are you sure??????????
+                If deletionAlert.Equals(DialogResult.Yes) Then
+                    selectedPlayer.GetAllResults(deleteSQL)
+                    allplayers = selectedPlayer.IDBConnect_GetAllPlayers()
+                    tbEdit.Text = String.Empty
+                    lblError.Text = $"{selectedPlayer.PlayerName1} is gone"
+                    lblError.Visible = True
+                    btnDelete.Visible = True
+                    cbPlayerNames.SelectedItem = Nothing
+                    tbEdit.Visible = False
+                    cbPlayerNames.Enabled = True
+
+                Else
+                    playerEditTheme.Screen = ScoreTheme.AppState.Delete
+                    btnEdit.Visible = False
+                End If
+            End If
+            playerEditTheme.Screen = ScoreTheme.AppState.SelectPlayer
+
+        Else
+            playerEditTheme.Screen = ScoreTheme.AppState.Delete
+            cbPlayerNames.Enabled = False
+        End If
     End Sub
 
     Private Sub cbPlayerNames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPlayerNames.SelectedIndexChanged
