@@ -15,8 +15,8 @@ Public Class PvP
     Dim gamesHT As New Hashtable
     Dim gamePvP As New DataSet
     Dim games As New Games
-    Dim deletedPlayer As New PlayerStats
-    Dim editPlayer As New PlayerStats
+    'Dim deletedPlayer As New PlayerStats
+    'Dim editPlayer As New PlayerStats
     Dim totalGamesPvP As Integer = 0
     Dim pvpID As Integer = -1
     Dim pvpID2 As Integer = -1
@@ -30,39 +30,13 @@ Public Class PvP
         'TODO: This line of code loads data into the 'PlayerNames.Players' table. You can move, or remove it, as needed.
         'Me.PlayersTableAdapter.Fill(Me.PlayerNames.Players)
 #Region "Load all current Players into cbox"
-#Region "Beta select all SQL"
-        'Dim adapter As New SqlDataAdapter
-        'Dim ds As New DataSet
-        'Dim dbCommand As New SqlCommand
-        'Dim sqlConnection As New SqlConnection
-        'With sqlConnection
-        '    .ConnectionString = connectionString
-        '    .Open()
-        'End With
-
-        'adapter = New SqlDataAdapter("Select Playername from Players", sqlConnection)
-        'adapter.Fill(ds)
-
-        'Try
-        '    For i = 0 To ds.Tables(0).Rows.Count - 1
-        '        cbPlayer1.Items.Add(ds.Tables(0).Rows(i).Item(0))
-        '        cbPlayer2.Items.Add(ds.Tables(0).Rows(i).Item(0))
-        '    Next
-        'Catch ex As Exception
-        '    sqlConnection.Close()
-        '    lblError.Text = "can't fetch data source Player Names"
-        '    lblError.Visible = True
-        'Finally
-        '    sqlConnection.Close()
-        'End Try
-#End Region
         allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
         allplayers = player1.IDBConnect_GetAllPlayers()
         gamePvP = player1.GetAllResults($"[dbo].[selGamesPvP]")
         gamesHT = games.GetAllPlayers()
         cbGames.Visible = True
         cbGames.Enabled = True
-        nonRegisterdPlayers = player1.GetAllPlayersRegistered(False)
+        'nonRegisterdPlayers = player1.GetAllPlayersRegistered(False)
         GetHighScores()
         pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
         pvpTheme.FillBoxfromHT(cbPlayer2, allplayers)
@@ -70,11 +44,11 @@ Public Class PvP
         If gamesHT.Count > 0 Then
             cbGames.SelectedIndex = cbGames.FindStringExact(gamesHT.Item(2))
         End If
-        If userPermissions.IsAdmin Then
-            pvpTheme.FillBoxfromHT(cbDelete, allplayers)
-        ElseIf userPermissions.IsUser Then
-            pvpTheme.FillBoxfromHT(cbDelete, nonRegisterdPlayers)
-        End If
+        'If userPermissions.IsAdmin Then
+        '    pvpTheme.FillBoxfromHT(cbDelete, allplayers)
+        'ElseIf userPermissions.IsUser Then
+        '    pvpTheme.FillBoxfromHT(cbDelete, nonRegisterdPlayers)
+        'End If
 #End Region
         Me.CenterToScreen()
         Dim background = Me.BackColor.ToString
@@ -99,6 +73,7 @@ Public Class PvP
             pvpTheme.GuestDisplay(New Control() {btnDelete, btnEdit, btnSave, btnReg, cbPlayer1, cbPlayer2}, False)
             EditPasswordToolStripMenuItem.Visible = False
         End If
+        pvpTheme.SetVisibiltyButton(New Button() {btnEdit, btnDelete, btnReg}, False)
     End Sub
     ''' <summary>
     ''' Get the columns and set the board
@@ -189,28 +164,6 @@ Public Class PvP
                     btnBack.Text = "Back"
                     pvpTheme.Screen = ScoreTheme.AppState.Switch
                 Else 'we'll open current wins
-#Region "beta games SQL"
-                    'With sqlConnection
-                    '    .ConnectionString = connectionString
-                    '    .Open()
-                    'End With
-
-                    'adapter = New SqlDataAdapter("Select wins from Players where playerName In ('" & cbPlayer1.SelectedItem.ToString & "','" & cbPlayer2.SelectedItem.ToString & "')", sqlConnection)
-                    'adapter.Fill(ds)
-
-                    ''save new wins if null txtbox wins, else then insert new game results.
-                    'Try
-                    '    txtWins.Text = ds.Tables(0).Rows(0).Item(0).ToString
-                    '    txtWins2.Text = ds.Tables(0).Rows(1).Item(0).ToString
-                    'Catch ex As Exception
-                    '    sqlConnection.Close()
-                    '    lblError.Text = "Name not found"
-                    '    lblError.Visible = True
-                    'Finally
-                    '    sqlConnection.Close()
-
-                    'End Try
-#End Region
                     pvpTheme.Screen = ScoreTheme.AppState.SelectPlayer
                     Dim currentWins As String() = Nothing
                     Dim winResult = Me.player1.GetAllResults($"exec [selPlayers_v1.1] @playerId={Me.player1.PID}")
@@ -232,135 +185,6 @@ Public Class PvP
             pvpTheme.SetErrorLabel(lblError)
             pvpTheme.Screen = -1
         End If
-    End Sub
-
-    Private Sub btnReg_Click(sender As Object, e As EventArgs) Handles btnReg.Click
-        pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2, txtTotalAgainst, txtWinsAgainst2, txtWinsagainst}, False)
-        btnReg.Text = "Register"
-        lblError.Visible = False
-        cbDelete.SelectedItem = String.Empty
-        Dim retVal As String = String.Empty
-        pvpTheme.SetVisibiltyButton(New Button() {btnSave, btnDelete, btnEdit}, False)
-        'If players have names, then update cbox and add them to db
-        If pvpTheme.Screen = ScoreTheme.AppState.Register AndAlso Not String.IsNullOrEmpty(tbEdit.Text) Then
-            pvpTheme.Screen = ScoreTheme.AppState.Register
-            cbPlayer1.BeginUpdate()
-            cbPlayer2.BeginUpdate()
-
-            player1 = New PlayerStats
-            player1.PlayerName1 = tbEdit.Text
-
-            Try
-                If userPermissions.IsUser Then
-                    lblError.Text = player1.InsertPlayer()
-                End If
-            Catch ex As Exception
-                Dim exceptionLog As New Logging(Now, "Add Players: ", ex.ToString)
-                exceptionLog.LogAction()
-                lblError.Text = ex.ToString
-            End Try
-            pvpTheme.SetErrorLabel(lblError)
-
-#Region "Beta add player sql"
-            'With sqlConnection
-            '    .ConnectionString = connectionString
-            '    .Open()
-            'End With
-
-            'Try
-            '    With dbCommand
-            '        .Connection = sqlConnection
-            '        .CommandText = command
-            '        .ExecuteNonQuery()
-
-            '    End With
-            'Catch ex As Exception
-            '    sqlConnection.Close()
-            '    lblError.Text = "Name not found"
-            '    lblError.Visible = True
-            'Finally
-            '    sqlConnection.Close()
-            'End Try
-#End Region
-
-            cbPlayer1.EndUpdate()
-            cbPlayer2.EndUpdate()
-            allplayers = player1.IDBConnect_GetAllPlayers()
-            allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
-            GetHighScores()
-            allplayers = player1.IDBConnect_GetAllPlayers()
-            pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
-            pvpTheme.FillBoxfromHT(cbPlayer2, allplayers)
-            pvpTheme.FillBoxfromHT(cbDelete, allplayers)
-#Region "Controls"
-
-            'With cbPlayer1.Items
-            '    .Add(tbEdit.Text)
-            'End With
-
-            'With cbPlayer2.Items
-            '    .Add(tbEdit.Text)
-            'End With
-            btnReg.Text = "Register"
-            lblError.Text = "New Players Added"
-            lblError.Visible = True
-            tbEdit.ResetText()
-            tbEdit.Visible = False
-            cbPlayer1.Visible = True
-            cbPlayer2.Visible = True
-            cbDelete.Visible = False
-            'btnSave.Visible = True
-            pvpTheme.SetVisibiltyButton(New Button() {btnDelete, btnEdit, btnSave}, False)
-            'btnDelete.Visible = False
-            btnBack.Visible = True
-            cbPlayer1.SelectedItem = Nothing
-            cbPlayer2.SelectedItem = Nothing
-            pvpTheme.Screen = ScoreTheme.AppState.Start
-#End Region
-        Else
-            If pvpTheme.Screen = ScoreTheme.AppState.Register Then
-#Region "Controls"
-                lblError.Text = "Back"
-                lblError.Visible = True
-                tbEdit.ResetText()
-                tbEdit.Visible = False
-                cbPlayer1.Visible = True
-                cbPlayer2.Visible = True
-                pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
-                'txtWins.Visible = True
-                'txtWins2.Visible = True
-                'btnSave.Visible = True
-                cbPlayer1.Refresh()
-                cbPlayer2.Refresh()
-                pvpTheme.SetVisibiltyButton(New Button() {btnDelete, btnEdit, btnSave}, False)
-                'btnDelete.Visible = False
-                cbDelete.Visible = False
-                btnBack.Visible = True
-                cbGames.Visible = True
-                cbPlayer1.SelectedItem = Nothing
-                cbPlayer2.SelectedItem = Nothing
-                pvpTheme.Screen = ScoreTheme.AppState.Start
-#End Region
-            Else
-                tbEdit.Visible = True
-                cbPlayer1.Visible = False
-                cbPlayer2.Visible = False
-                cbDelete.Visible = False
-                cbGames.Visible = False
-                If userPermissions.IsAdmin() Then
-                    pvpTheme.SetVisibiltyButton(New Button() {btnDelete, btnEdit}, True)
-                ElseIf userPermissions.IsUser() Then
-                    'Delete only for Admins
-                    pvpTheme.SetVisibiltyButton(New Button() {btnEdit}, True)
-                End If
-                btnSave.Visible = False
-                btnBack.Visible = False
-                tbEdit.ResetText()
-                pvpTheme.Screen = ScoreTheme.AppState.Register
-            End If
-
-        End If
-        Refresh()
     End Sub
 
     ''' <summary>
@@ -386,36 +210,7 @@ Public Class PvP
                               Where row.Value Like player1.PlayerName1 Select row.Key).ToArray.First, player1.PID)
             lblError.Text = player1.GetPlayers()
             pvpTheme.SetErrorLabel(lblError)
-#Region "beta sql"
-            'With sqlConnection
-            '    .ConnectionString = connectionString
-            '    .Open()
-            'End With
 
-            ''save new wins if null txtbox wins, else then insert new game results.
-            'Try
-            '    adapter = New SqlDataAdapter("Select wins from Players where playerName In ('" & cbPlayer1.SelectedItem & "')", sqlConnection)
-            '    adapter.Fill(ds)
-            '    txtWins.Text = ds.Tables(0).Rows(0).Item(0).ToString
-            '    playerStats1.Wins1 = txtWins.Text
-            '    If (Not String.IsNullOrEmpty(txtWins.Text) AndAlso Not String.IsNullOrEmpty(txtWins2.Text)) Then
-            '        If playerStats1.getRivarly(txtWins2.Text) Then
-            '            lblError.Text = "Rivarly Game"
-            '            lblError.Text = Visible
-            '            lblError.ForeColor = Color.Black
-            '        End If
-            '    End If
-
-
-            'Catch ex As Exception
-            '    sqlConnection.Close()
-            '    lblError.Text = "Name not found"
-            '    lblError.Visible = True
-            'Finally
-            '    sqlConnection.Close()
-
-            'End Try
-#End Region
             txtWins.Text = player1.Wins1
 
             If cbPlayer2.SelectedItem IsNot Nothing Then
@@ -548,30 +343,7 @@ Public Class PvP
         pvpTheme.Screen = ScoreTheme.AppState.Winner
         Dim gameResults As String = String.Empty
 #Region "Beta sql"
-        'With SqlConnection
-        '    .ConnectionString = connectionString
-        '    .Open()
-        'End With
-
-        'playerStats1.Wins1 += 1
         'adapter = New SqlDataAdapter("exec dbo.[insWins_v1.1] @newPlayer = '" & playerStats1.PlayerName1 & "',@wins = " & playerStats1.Wins1, sqlConnection)
-        'adapter.Fill(ds)
-
-        'Try
-        '    adapter = New SqlDataAdapter("select wins from Players where playerName in ('" & cbPlayer1.SelectedItem & "')", sqlConnection)
-        '    adapter.Fill(ds)
-        '    txtWins.Text = ds.Tables(0).Rows(0).Item(0).ToString
-        'Catch ex As Exception
-        '    SqlConnection.Close()
-        '    lblError.Text = "Game not saved"
-        '    lblError.Visible = True
-        'Finally
-        '    btnPlayer1win.Visible = False
-        '    btnPlayer2Wins.Visible = False
-        '    btnReg.Visible = True
-        '    btnSave.Visible = True
-        '    sqlConnection.Close()
-        'End Try
 #End Region
         gameResults = player1.InsertGame("")
         If (gameResults).Contains("Error") Then
@@ -615,30 +387,8 @@ Public Class PvP
         pvpTheme.Screen = ScoreTheme.AppState.Winner
         Dim gameResults As String = String.Empty
 #Region "beta sql"
-        'With sqlConnection
-        '    .ConnectionString = connectionString
-        '    .Open()
-        'End With
-
         'playerStats2.Wins1 += 1
         'adapter = New SqlDataAdapter("exec dbo.[insWins_v1.1] @newPlayer = '" & playerStats2.PlayerName1 & "',@wins = " & playerStats2.Wins1, sqlConnection)
-        'adapter.Fill(ds)
-
-        'Try
-        '    adapter = New SqlDataAdapter("select wins from Players where playerName in ('" & cbPlayer2.SelectedItem.ToString & "')", sqlConnection)
-        '    adapter.Fill(ds)
-
-        '    txtWins2.Text = ds.Tables(0).Rows(0).Item(0).ToString
-        'Catch ex As Exception
-        '    sqlConnection.Close()
-        '    lblError.Text = "Game not saved"
-        '    lblError.Visible = True
-        'Finally
-        '    btnPlayer1win.Visible = False
-        '    btnPlayer2Wins.Visible = False
-        '    btnReg.Visible = True
-        '    btnSave.Visible = True
-        '    sqlConnection.Close()
         'End Try
 #End Region
         gameResults = player2.InsertGame("")
@@ -693,75 +443,164 @@ Public Class PvP
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        If pvpTheme.Screen.Equals(ScoreTheme.AppState.Delete) Then
-            'grab player obj from cbox
-            Try
-                deletedPlayer.PlayerName1 = cbDelete.SelectedItem.ToString
-                Integer.TryParse((From row As DictionaryEntry In allplayers
-                                  Where row.Value Like deletedPlayer.PlayerName1 Select row.Key).ToArray.First, deletedPlayer.PID)
-            Catch ex As Exception
-                Dim exceptionLog As New Logging(Now, "Delete Player: ", ex.ToString)
-                exceptionLog.LogAction()
-                lblError.Text = "Error: Select a player to Delete!!!!!!"
-                pvpTheme.SetErrorLabel(lblError)
-                Exit Sub
-            End Try
+        '    If pvpTheme.Screen.Equals(ScoreTheme.AppState.Delete) Then
+        '        'grab player obj from cbox
+        '        Try
+        '            deletedPlayer.PlayerName1 = cbDelete.SelectedItem.ToString
+        '            Integer.TryParse((From row As DictionaryEntry In allplayers
+        '                              Where row.Value Like deletedPlayer.PlayerName1 Select row.Key).ToArray.First, deletedPlayer.PID)
+        '        Catch ex As Exception
+        '            Dim exceptionLog As New Logging(Now, "Delete Player: ", ex.ToString)
+        '            exceptionLog.LogAction()
+        '            lblError.Text = "Error: Select a player to Delete!!!!!!"
+        '            pvpTheme.SetErrorLabel(lblError)
+        '            Exit Sub
+        '        End Try
 
-            Dim deleteSQL As String = $"exec [delPlayer] @playerID = {deletedPlayer.PID}, @result=0"
+        '        Dim deleteSQL As String = $"exec [delPlayer] @playerID = {deletedPlayer.PID}, @result=0"
 
-            If Not String.IsNullOrEmpty(deletedPlayer.PID) Then
-                Dim deletionAlert As DialogResult = MessageBox.Show($"Are you sure you want to erase {editPlayer.PlayerName1}?",
-    "Erase Player", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
-                'are you sure??????????
-                If deletionAlert.Equals(DialogResult.Yes) Then
-                    player1.GetAllResults(deleteSQL)
-                    allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
-                    GetHighScores()
-                    allplayers = deletedPlayer.IDBConnect_GetAllPlayers()
-                    pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
-                    pvpTheme.FillBoxfromHT(cbPlayer2, allplayers)
-                    pvpTheme.FillBoxfromHT(cbDelete, allplayers)
-                    cbDelete.Visible = False
-                    cbDelete.SelectedItem = Nothing
-                    pvpTheme.Screen = ScoreTheme.AppState.Register
-                    lblError.Text = $"{deletedPlayer.PlayerName1} is gone"
-                    lblError.Visible = True
-                    cbDelete.SelectedItem = Nothing
-                    btnEdit.Visible = True
-                    btnReg.Text = "Register"
-                    cbDelete.Visible = False
-                Else
-                    pvpTheme.Screen = ScoreTheme.AppState.Delete
-                    btnEdit.Visible = False
-                End If
-            End If
-        Else
-            btnReg.Text = "Back"
-            btnEdit.Visible = False
-            cbDelete.Visible = True
-            cbDelete.SelectedText = String.Empty
-            pvpTheme.Screen = ScoreTheme.AppState.Delete
-            cbDelete.Visible = True
-        End If
+        '        If Not String.IsNullOrEmpty(deletedPlayer.PID) Then
+        '            Dim deletionAlert As DialogResult = MessageBox.Show($"Are you sure you want to erase {editPlayer.PlayerName1}?",
+        '"Erase Player", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+        '            'are you sure??????????
+        '            If deletionAlert.Equals(DialogResult.Yes) Then
+        '                player1.GetAllResults(deleteSQL)
+        '                allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
+        '                GetHighScores()
+        '                allplayers = deletedPlayer.IDBConnect_GetAllPlayers()
+        '                pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
+        '                pvpTheme.FillBoxfromHT(cbPlayer2, allplayers)
+        '                pvpTheme.FillBoxfromHT(cbDelete, allplayers)
+        '                cbDelete.Visible = False
+        '                cbDelete.SelectedItem = Nothing
+        '                pvpTheme.Screen = ScoreTheme.AppState.Register
+        '                lblError.Text = $"{deletedPlayer.PlayerName1} is gone"
+        '                lblError.Visible = True
+        '                cbDelete.SelectedItem = Nothing
+        '                btnEdit.Visible = True
+        '                btnReg.Text = "Register"
+        '                cbDelete.Visible = False
+        '            Else
+        '                pvpTheme.Screen = ScoreTheme.AppState.Delete
+        '                btnEdit.Visible = False
+        '            End If
+        '        End If
+        '    Else
+        '        btnReg.Text = "Back"
+        '        btnEdit.Visible = False
+        '        cbDelete.Visible = True
+        '        cbDelete.SelectedText = String.Empty
+        '        pvpTheme.Screen = ScoreTheme.AppState.Delete
+        '        cbDelete.Visible = True
+        '    End If
     End Sub
 
-    ''' <summary>
-    ''' Set object from selected item and enable controls
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub cbDelete_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDelete.SelectedIndexChanged
-        editPlayer = New PlayerStats
-        If pvpTheme.ValidateCBox(cbDelete).Equals(True) Then
-            editPlayer.PlayerName1 = cbDelete.SelectedItem.ToString
-        End If
-        If pvpTheme.Screen = ScoreTheme.AppState.Delete Then
-            btnDelete.Visible = True
-            btnEdit.Visible = False
-        ElseIf pvpTheme.Screen = ScoreTheme.AppState.edit Then
-            btnDelete.Visible = False
-            btnEdit.Visible = True
-        End If
+    Private Sub btnReg_Click(sender As Object, e As EventArgs) Handles btnReg.Click
+        '        pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2, txtTotalAgainst, txtWinsAgainst2, txtWinsagainst}, False)
+        '        btnReg.Text = "Register"
+        '        lblError.Visible = False
+        '        cbDelete.SelectedItem = String.Empty
+        '        Dim retVal As String = String.Empty
+        '        pvpTheme.SetVisibiltyButton(New Button() {btnSave, btnDelete, btnEdit}, False)
+        '        'If players have names, then update cbox and add them to db
+        '        If pvpTheme.Screen = ScoreTheme.AppState.Register AndAlso Not String.IsNullOrEmpty(tbEdit.Text) Then
+        '            pvpTheme.Screen = ScoreTheme.AppState.Register
+        '            cbPlayer1.BeginUpdate()
+        '            cbPlayer2.BeginUpdate()
+
+        '            player1 = New PlayerStats
+        '            player1.PlayerName1 = tbEdit.Text
+
+        '            Try
+        '                If userPermissions.IsUser Then
+        '                    lblError.Text = player1.InsertPlayer()
+        '                End If
+        '            Catch ex As Exception
+        '                Dim exceptionLog As New Logging(Now, "Add Players: ", ex.ToString)
+        '                exceptionLog.LogAction()
+        '                lblError.Text = ex.ToString
+        '            End Try
+        '            pvpTheme.SetErrorLabel(lblError)
+
+
+        '            cbPlayer1.EndUpdate()
+        '            cbPlayer2.EndUpdate()
+        '            allplayers = player1.IDBConnect_GetAllPlayers()
+        '            allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
+        '            GetHighScores()
+        '            allplayers = player1.IDBConnect_GetAllPlayers()
+        '            pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
+        '            pvpTheme.FillBoxfromHT(cbPlayer2, allplayers)
+        '            pvpTheme.FillBoxfromHT(cbDelete, allplayers)
+        '#Region "Controls"
+
+        '            'With cbPlayer1.Items
+        '            '    .Add(tbEdit.Text)
+        '            'End With
+
+        '            'With cbPlayer2.Items
+        '            '    .Add(tbEdit.Text)
+        '            'End With
+        '            btnReg.Text = "Register"
+        '            lblError.Text = "New Players Added"
+        '            lblError.Visible = True
+        '            tbEdit.ResetText()
+        '            tbEdit.Visible = False
+        '            cbPlayer1.Visible = True
+        '            cbPlayer2.Visible = True
+        '            cbDelete.Visible = False
+        '            'btnSave.Visible = True
+        '            pvpTheme.SetVisibiltyButton(New Button() {btnDelete, btnEdit, btnSave}, False)
+        '            'btnDelete.Visible = False
+        '            btnBack.Visible = True
+        '            cbPlayer1.SelectedItem = Nothing
+        '            cbPlayer2.SelectedItem = Nothing
+        '            pvpTheme.Screen = ScoreTheme.AppState.Start
+        '#End Region
+        '        Else
+        '            If pvpTheme.Screen = ScoreTheme.AppState.Register Then
+        '#Region "Controls"
+        '                lblError.Text = "Back"
+        '                lblError.Visible = True
+        '                tbEdit.ResetText()
+        '                tbEdit.Visible = False
+        '                cbPlayer1.Visible = True
+        '                cbPlayer2.Visible = True
+        '                pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
+        '                'txtWins.Visible = True
+        '                'txtWins2.Visible = True
+        '                'btnSave.Visible = True
+        '                cbPlayer1.Refresh()
+        '                cbPlayer2.Refresh()
+        '                pvpTheme.SetVisibiltyButton(New Button() {btnDelete, btnEdit, btnSave}, False)
+        '                'btnDelete.Visible = False
+        '                cbDelete.Visible = False
+        '                btnBack.Visible = True
+        '                cbGames.Visible = True
+        '                cbPlayer1.SelectedItem = Nothing
+        '                cbPlayer2.SelectedItem = Nothing
+        '                pvpTheme.Screen = ScoreTheme.AppState.Start
+        '#End Region
+        '            Else
+        '                tbEdit.Visible = True
+        '                cbPlayer1.Visible = False
+        '                cbPlayer2.Visible = False
+        '                cbDelete.Visible = False
+        '                cbGames.Visible = False
+        '                If userPermissions.IsAdmin() Then
+        '                    pvpTheme.SetVisibiltyButton(New Button() {btnDelete, btnEdit}, True)
+        '                ElseIf userPermissions.IsUser() Then
+        '                    'Delete only for Admins
+        '                    pvpTheme.SetVisibiltyButton(New Button() {btnEdit}, True)
+        '                End If
+        '                btnSave.Visible = False
+        '                btnBack.Visible = False
+        '                tbEdit.ResetText()
+        '                pvpTheme.Screen = ScoreTheme.AppState.Register
+        '            End If
+
+        '        End If
+        '        Refresh()
     End Sub
 
     ''' <summary>
@@ -772,58 +611,76 @@ Public Class PvP
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        If pvpTheme.Screen = ScoreTheme.AppState.edit Then
-            Dim newName As String = tbEdit.Text
-            'grab player obj from cbox
-            Try
-                Integer.TryParse((From row As DictionaryEntry In allplayers
-                                  Where row.Value Like editPlayer.PlayerName1 Select row.Key).ToArray.First, editPlayer.PID)
-            Catch ex As Exception
-                Dim exceptionLog As New Logging(Now, "Edit Players: ", ex.ToString)
-                exceptionLog.LogAction()
-                lblError.Text = "Error: Select a player to Change"
-                pvpTheme.SetErrorLabel(lblError)
-                Exit Sub
-            End Try
+        '    If pvpTheme.Screen = ScoreTheme.AppState.edit Then
+        '        Dim newName As String = tbEdit.Text
+        '        'grab player obj from cbox
+        '        Try
+        '            Integer.TryParse((From row As DictionaryEntry In allplayers
+        '                              Where row.Value Like editPlayer.PlayerName1 Select row.Key).ToArray.First, editPlayer.PID)
+        '        Catch ex As Exception
+        '            Dim exceptionLog As New Logging(Now, "Edit Players: ", ex.ToString)
+        '            exceptionLog.LogAction()
+        '            lblError.Text = "Error: Select a player to Change"
+        '            pvpTheme.SetErrorLabel(lblError)
+        '            Exit Sub
+        '        End Try
 
-            Dim editSQL As String = $"exec [insNewPlayer_v1.2] @pID = {editPlayer.PID}, @newPlayer='{newName}',@result=0"
-            If Not String.IsNullOrEmpty(editPlayer.PID) AndAlso Not String.IsNullOrEmpty(newName) Then
-                Dim editAlert As DialogResult = MessageBox.Show($"Are you sure you want to change {editPlayer.PlayerName1} to {newName}?",
-    "Erase Player", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
-                'are you sure??????????
-                If editAlert.Equals(DialogResult.Yes) Then
-                    player1.GetAllResults(editSQL)
-                    allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
-                    GetHighScores()
-                    allplayers = editPlayer.IDBConnect_GetAllPlayers()
-                    pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
-                    pvpTheme.FillBoxfromHT(cbPlayer2, allplayers)
-                    pvpTheme.FillBoxfromHT(cbDelete, allplayers)
-                    tbEdit.ResetText()
-                    cbDelete.Visible = False
-                    cbDelete.SelectedItem = Nothing
-                    pvpTheme.Screen = ScoreTheme.AppState.Register
-                    lblError.Text = $"{editPlayer.PlayerName1} is now {newName}"
-                    lblError.Visible = True
-                    btnReg.Text = "Register"
-                    btnDelete.Visible = True
-                    cbDelete.SelectedItem = Nothing
-                    cbDelete.Visible = False
-                Else
-                    btnDelete.Visible = False
-                    pvpTheme.Screen = ScoreTheme.AppState.edit
-                End If
-            End If
-        Else
-            btnReg.Text = "Back"
-            cbDelete.SelectedText = String.Empty
-            cbDelete.Visible = True
-            tbEdit.Visible = True
-            btnDelete.Visible = False
-            pvpTheme.Screen = ScoreTheme.AppState.edit
-        End If
+        '        Dim editSQL As String = $"exec [insNewPlayer_v1.2] @pID = {editPlayer.PID}, @newPlayer='{newName}',@result=0"
+        '        If Not String.IsNullOrEmpty(editPlayer.PID) AndAlso Not String.IsNullOrEmpty(newName) Then
+        '            Dim editAlert As DialogResult = MessageBox.Show($"Are you sure you want to change {editPlayer.PlayerName1} to {newName}?",
+        '"Erase Player", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+        '            'are you sure??????????
+        '            If editAlert.Equals(DialogResult.Yes) Then
+        '                player1.GetAllResults(editSQL)
+        '                allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
+        '                GetHighScores()
+        '                allplayers = editPlayer.IDBConnect_GetAllPlayers()
+        '                pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
+        '                pvpTheme.FillBoxfromHT(cbPlayer2, allplayers)
+        '                pvpTheme.FillBoxfromHT(cbDelete, allplayers)
+        '                tbEdit.ResetText()
+        '                cbDelete.Visible = False
+        '                cbDelete.SelectedItem = Nothing
+        '                pvpTheme.Screen = ScoreTheme.AppState.Register
+        '                lblError.Text = $"{editPlayer.PlayerName1} is now {newName}"
+        '                lblError.Visible = True
+        '                btnReg.Text = "Register"
+        '                btnDelete.Visible = True
+        '                cbDelete.SelectedItem = Nothing
+        '                cbDelete.Visible = False
+        '            Else
+        '                btnDelete.Visible = False
+        '                pvpTheme.Screen = ScoreTheme.AppState.edit
+        '            End If
+        '        End If
+        '    Else
+        '        btnReg.Text = "Back"
+        '        cbDelete.SelectedText = String.Empty
+        '        cbDelete.Visible = True
+        '        tbEdit.Visible = True
+        '        btnDelete.Visible = False
+        '        pvpTheme.Screen = ScoreTheme.AppState.edit
+        '    End If
     End Sub
 
+    '''' <summary>
+    '''' Set object from selected item and enable controls
+    '''' </summary>
+    '''' <param name="sender"></param>
+    '''' <param name="e"></param>
+    'Private Sub cbDelete_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDelete.SelectedIndexChanged
+    '    editPlayer = New PlayerStats
+    '    If pvpTheme.ValidateCBox(cbDelete).Equals(True) Then
+    '        editPlayer.PlayerName1 = cbDelete.SelectedItem.ToString
+    '    End If
+    '    If pvpTheme.Screen = ScoreTheme.AppState.Delete Then
+    '        btnDelete.Visible = True
+    '        btnEdit.Visible = False
+    '    ElseIf pvpTheme.Screen = ScoreTheme.AppState.edit Then
+    '        btnDelete.Visible = False
+    '        btnEdit.Visible = True
+    '    End If
+    'End Sub
     Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
         If UserMod.IsLoggedIn.Equals(True) Then
             UserMod.setPreviousForm(Me)

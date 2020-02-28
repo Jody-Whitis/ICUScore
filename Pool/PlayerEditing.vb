@@ -11,7 +11,7 @@
             .SetBackground(Me)
             .SetButtons(New Button() {btnBack, btnDelete, btnEdit})
             .SetCBox(New ComboBox() {cbPlayerNames})
-            .SetControl(New Control() {btnBack, btnDelete, btnEdit, cbPlayerNames}, True)
+            .SetControl(New Control() {btnBack, btnEdit, btnDelete}, True)
             .SetTBox(New TextBox() {tbEdit})
             tbEdit.Visible = False
         End With
@@ -24,15 +24,27 @@
             nonRegisterdPlayers = selectedPlayer.GetAllPlayersRegistered(False)
             playerEditTheme.FillBoxfromHT(cbPlayerNames, nonRegisterdPlayers)
         End If
-
+        playerEditTheme.Screen = ScoreTheme.AppState.Start
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        With PvP
-            .Activate()
-            .Show()
-        End With
-        Me.Close()
+        playerEditTheme.SetControl(New Control() {cbPlayerNames, tbEdit}, False)
+        cbPlayerNames.SelectedValue = String.Empty
+        'move out
+        Select Case playerEditTheme.Screen
+            Case ScoreTheme.AppState.edit
+                playerEditTheme.SetControl(New Control() {btnDelete, cbPlayerNames}, True)
+                playerEditTheme.Screen = ScoreTheme.AppState.SelectPlayer
+            Case ScoreTheme.AppState.Delete
+                playerEditTheme.Screen = ScoreTheme.AppState.SelectPlayer
+                playerEditTheme.SetControl(New Control() {btnEdit, cbPlayerNames}, True)
+            Case Else
+                With PvP
+                    .Activate()
+                    .Show()
+                End With
+                Me.Close()
+        End Select
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
@@ -65,18 +77,20 @@
                     cbPlayerNames.SelectedItem = Nothing
                     tbEdit.Visible = False
                     cbPlayerNames.Enabled = True
-                Else
-                    btnDelete.Visible = False
+                    playerEditTheme.Screen = ScoreTheme.AppState.SelectPlayer
+                    btnBack_Click(Nothing, Nothing)
                 End If
             End If
-            playerEditTheme.Screen = ScoreTheme.AppState.SelectPlayer
+
         Else
             playerEditTheme.Screen = ScoreTheme.AppState.edit
             tbEdit.Visible = True
             cbPlayerNames.Enabled = False
+            With btnDelete
+                .Visible = False
+                .Enabled = False
+            End With
         End If
-
-
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -110,15 +124,14 @@
                     cbPlayerNames.SelectedItem = Nothing
                     tbEdit.Visible = False
                     cbPlayerNames.Enabled = True
-
-                Else
-                    playerEditTheme.Screen = ScoreTheme.AppState.Delete
-                    btnEdit.Visible = False
+                    btnBack_Click(Nothing, Nothing)
                 End If
             End If
-            playerEditTheme.Screen = ScoreTheme.AppState.SelectPlayer
-
         Else
+            With btnEdit
+                .Visible = False
+                .Enabled = False
+            End With
             playerEditTheme.Screen = ScoreTheme.AppState.Delete
             cbPlayerNames.Enabled = False
         End If
@@ -126,11 +139,30 @@
 
     Private Sub cbPlayerNames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPlayerNames.SelectedIndexChanged
         If cbPlayerNames.SelectedItem IsNot Nothing Then
+            playerEditTheme.SetControl(New Control() {btnEdit, btnDelete}, True)
             With selectedPlayer
                 .PlayerName1 = cbPlayerNames.SelectedItem
             End With
         Else
+            playerEditTheme.SetControl(New Control() {btnEdit, btnDelete}, False)
             selectedPlayer.PlayerName1 = String.Empty
         End If
+    End Sub
+
+    Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
+        With PasswordChange
+            .Activate()
+            .Show()
+        End With
+        UserMod.PreviousForm = Me
+        Me.Close()
+    End Sub
+
+    Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
+        playerEditTheme.LogOutUser()
+    End Sub
+
+    Private Sub QuitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click
+        Application.Exit()
     End Sub
 End Class
