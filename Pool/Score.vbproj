@@ -175,7 +175,7 @@
     </Compile>
     <Compile Include="ScoreTheme.vb" />
     <Compile Include="Authenticate.vb" />
-    <Compile Include="UserMod.vb" />
+    <Compile Include="CurrentSession.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Home.resx">

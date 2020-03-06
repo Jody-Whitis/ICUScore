@@ -1,7 +1,6 @@
 ﻿Imports System.IO
 Imports Pool.Logging
 Public Class PvP
-    Dim pvpTheme As New ScoreTheme(Me)
     'Dim connectionString As String = ("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & Path.GetDirectoryName(Application.StartupPath) & "\LocalResults.mdf;Integrated Security=True").Replace("\bin", "")
     'Dim connectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\jwhitis\source\repos\Pool\Pool\LocalResults.mdf;Integrated Security=True"
 #Region "Global to form"
@@ -15,8 +14,6 @@ Public Class PvP
     Dim gamesHT As New Hashtable
     Dim gamePvP As New DataSet
     Dim games As New Games
-    'Dim deletedPlayer As New PlayerStats
-    'Dim editPlayer As New PlayerStats
     Dim totalGamesPvP As Integer = 0
     Dim pvpID As Integer = -1
     Dim pvpID2 As Integer = -1
@@ -37,33 +34,31 @@ Public Class PvP
         cbGames.Visible = True
         cbGames.Enabled = True
         GetHighScores()
-        pvpTheme.FillBoxfromHT(cbPlayer1, allplayers)
-        pvpTheme.FillBoxfromHT(cbPlayer2, allplayers)
-        pvpTheme.FillBoxfromHT(cbGames, gamesHT)
+        ScoreTheme.FillBoxfromHT(cbPlayer1, allplayers)
+        ScoreTheme.FillBoxfromHT(cbPlayer2, allplayers)
+        ScoreTheme.FillBoxfromHT(cbGames, gamesHT)
         If gamesHT.Count > 0 Then
             cbGames.SelectedIndex = cbGames.FindStringExact(gamesHT.Item(2))
         End If
 #End Region
         Me.CenterToScreen()
         Dim background = Me.BackColor.ToString
-        pvpTheme.SetControl(New Control() {lblWinsAgainst1, lblWinsAgainst2}, False)
-        pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWinsagainst, txtTotalAgainst, txtWinsAgainst2}, False)
-        pvpTheme.SetVisibiltyButton(New Button() {btnSave}, False)
+        ScoreTheme.SetControl(New Control() {lblWinsAgainst1, lblWinsAgainst2, txtWinsagainst, txtTotalAgainst, txtWinsAgainst2, btnSave}, False)
         Dim results As String = String.Empty
         lblError.Visible = False
-        If Not String.IsNullOrEmpty(UserMod.UserEmail) Then
-            lblError.Text = $"Hello {UserMod.UserEmail}"
+        If Not String.IsNullOrEmpty(CurrentSession.UserEmail) Then
+            lblError.Text = $"Hello {CurrentSession.UserEmail}"
             lblError.Visible = True
-            cbPlayer1.SelectedItem = UserMod.DisplayName
+            cbPlayer1.SelectedItem = CurrentSession.DisplayName
         End If
-        If pvpTheme.Screen = -1 Then
+        If CurrentScreen = AppState.NoPlayerEx Then
             lblError.Visible = True
             lstAllWins.Visible = True
         Else
-            pvpTheme.Screen = ScoreTheme.AppState.Start
+            CurrentScreen = AppState.Start
         End If
         If Not userPermissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
-            pvpTheme.GuestDisplay(New Control() {btnSave, cbPlayer1, cbPlayer2, lblPlayer1, lblPlayer2, lblTotalAgainst,
+            ScoreTheme.GuestDisplay(New Control() {btnSave, cbPlayer1, cbPlayer2, lblPlayer1, lblPlayer2, lblTotalAgainst,
                                   lblWinsAgainst1, lblWinsAgainst2, lblTotalWins1, lblTotalWins2, btnRegisterTest}, False)
             EditPasswordToolStripMenuItem.Visible = False
         End If
@@ -93,7 +88,7 @@ Public Class PvP
                 exceptionLog.LogAction()
                 Debug.WriteLine(ex.ToString)
                 lblError.Text = ex.Message.ToString
-                pvpTheme.SetErrorLabel(lblError)
+                ScoreTheme.SetErrorLabel(lblError)
             End Try
         End If
     End Sub
@@ -109,14 +104,14 @@ Public Class PvP
         Dim wins As Integer = 0
         Dim isRivarly As Boolean = False
         'pvpTheme.SetVisiblityTxtBox(New TextBox() {tbEdit}, False)
-        pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
+        ScoreTheme.SetControl(New TextBox() {txtWins, txtWins2}, True)
         lblError.Visible = False
 
-        If pvpTheme.Screen > ScoreTheme.AppState.Start Then
-            If pvpTheme.ValidateCBox(cbPlayer1).Equals(True) And pvpTheme.ValidateCBox(cbPlayer2).Equals(True) Then
+        If CurrentScreen > AppState.Start Then
+            If ScoreTheme.ValidateCBox(cbPlayer1).Equals(True) And ScoreTheme.ValidateCBox(cbPlayer2).Equals(True) Then
 #Region "if wins are not empty then add new game, else display wins"
                 If Not String.IsNullOrEmpty(txtWins.Text) AndAlso Not String.IsNullOrEmpty(txtWins2.Text) Then
-                    pvpTheme.Screen = ScoreTheme.AppState.Winner
+                    CurrentScreen = AppState.Winner
                     With player1
                         .PlayerName1 = cbPlayer1.SelectedItem.ToString
                         .Wins1 = txtWins.Text
@@ -127,15 +122,15 @@ Public Class PvP
                     End With
                     btnPlayer1win.Text = Me.player1.PlayerName1 & "  WINS! "
                     btnPlayer2Wins.Text = player2.PlayerName1 & "  WINS!"
-                    pvpTheme.SetVisibiltyButton(New Button() {btnSave}, False)
+                    ScoreTheme.SetControl(New Button() {btnSave}, False)
                     btnPlayer1win.Visible = True
                     btnPlayer2Wins.Visible = True
                     btnPlayer1win.Enabled = True
                     btnPlayer2Wins.Enabled = True
                     btnBack.Text = "Back"
-                    pvpTheme.Screen = ScoreTheme.AppState.Switch
+                    CurrentScreen = AppState.Switch
                 Else 'we'll open current wins
-                    pvpTheme.Screen = ScoreTheme.AppState.SelectPlayer
+                    CurrentScreen = AppState.SelectPlayer
                     Dim currentWins As String() = Nothing
                     Dim winResult = Me.player1.GetAllResults($"exec [selPlayers_v1.1] @playerId={Me.player1.PID}")
                     Dim winResult2 = Me.player1.GetAllResults($"exec [selPlayers_v1.1] @playerId={Me.player2.PID}")
@@ -147,14 +142,14 @@ Public Class PvP
                         exceptionLog.LogAction()
                         lblError.Text = "Error"
                     End Try
-                    pvpTheme.SetErrorLabel(lblError)
+                    ScoreTheme.SetErrorLabel(lblError)
                 End If
 #End Region
             End If
         Else
             lblError.Text = "Error: Select Both Players"
-            pvpTheme.SetErrorLabel(lblError)
-            pvpTheme.Screen = -1
+            ScoreTheme.SetErrorLabel(lblError)
+            CurrentScreen = AppState.NoPlayerEx
         End If
     End Sub
 
@@ -174,28 +169,28 @@ Public Class PvP
         player2.WinsAgainst1 = 0
         txtWinsagainst.Text = player1.WinsAgainst1
         txtWinsAgainst2.Text = player2.WinsAgainst1
-        If pvpTheme.Screen <> ScoreTheme.AppState.Register Then
+        If CurrentScreen <> AppState.Register Then
             If cbPlayer1.SelectedItem.Equals("Choose Something") Then Exit Sub
             player1 = New PlayerStats
             If cbPlayer1.SelectedItem.Equals("Choose Something") Then Exit Sub
-            pvpTheme.SetControl(New Control() {txtWins, txtWins2, lblPlayer1, lblPlayer2,
+            ScoreTheme.SetControl(New Control() {txtWins, txtWins2, lblPlayer1, lblPlayer2,
                             lblTotalAgainst, lblTotalWins1, lblTotalWins2}, True)
             player1.PlayerName1 = cbPlayer1.SelectedItem
             Integer.TryParse((From row As DictionaryEntry In allplayers
                               Where row.Value Like player1.PlayerName1 Select row.Key).ToArray.First, player1.PID)
             lblError.Text = player1.GetPlayers()
-            pvpTheme.SetErrorLabel(lblError)
+            ScoreTheme.SetErrorLabel(lblError)
 
             txtWins.Text = player1.Wins1
 
             If cbPlayer2.SelectedItem IsNot Nothing Then
-                pvpTheme.Screen = ScoreTheme.AppState.Switch
-                pvpTheme.SetVisibiltyButton(New Button() {btnSave}, True)
+                CurrentScreen = AppState.Switch
+                ScoreTheme.SetControl(New Button() {btnSave}, True)
                 If player2.PID > 0 Then
                     SetPVPSets()
                 End If
             Else
-                pvpTheme.Screen = ScoreTheme.AppState.Start
+                CurrentScreen = AppState.Start
             End If
             If player1.PID > 0 AndAlso player2.PID > 0 AndAlso pvpSet2.Tables(0).Rows.Count > 0 Then
                 'Integer.TryParse(pvpSet1.Tables(0).Rows(0).Item("Wins"), player1.WinsAgainst1)
@@ -204,13 +199,13 @@ Public Class PvP
                 txtWinsAgainst2.Text = player2.WinsAgainst1.ToString
                 txtTotalAgainst.Text = totalGamesPvP.ToString
                 isRiv = player1.getRivarly(player2.WinsAgainst1)
-                pvpTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst, lblTotalWins1, lblTotalWins2}, True)
+                ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst, lblTotalWins1, lblTotalWins2}, True)
             Else
-                pvpTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, False)
+                ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, False)
             End If
             If isRiv Then
                 lblError.Text = "Rivarly"
-                pvpTheme.SetErrorLabel(lblError)
+                ScoreTheme.SetErrorLabel(lblError)
             End If
         End If
 
@@ -227,28 +222,28 @@ Public Class PvP
         Dim isRivarly As Boolean = False
         'tbEdit.Visible = False
         lblError.Visible = False
-        pvpTheme.SetVisiblityTxtBox(New TextBox() {txtWins, txtWins2}, True)
+        ScoreTheme.SetControl(New TextBox() {txtWins, txtWins2}, True)
         player1.WinsAgainst1 = 0
         player2.WinsAgainst1 = 0
         txtWinsagainst.Text = player1.WinsAgainst1
         txtWinsAgainst2.Text = player2.WinsAgainst1
-        If pvpTheme.Screen <> ScoreTheme.AppState.Register Then
+        If CurrentScreen <> AppState.Register Then
             player2 = New PlayerStats
             player2.PlayerName1 = cbPlayer2.SelectedItem
             If cbPlayer2.SelectedItem.Equals("Choose Something") Then Exit Sub
             Integer.TryParse((From row As DictionaryEntry In allplayers
                               Where row.Value Like player2.PlayerName1 Select row.Key).ToArray.First, player2.PID)
             lblError.Text = player2.GetPlayers()
-            pvpTheme.SetErrorLabel(lblError)
+            ScoreTheme.SetErrorLabel(lblError)
             txtWins2.Text = player2.Wins1
-            If pvpTheme.ValidateCBox(cbPlayer1).Equals(True) Then
-                pvpTheme.Screen = ScoreTheme.AppState.Switch
-                pvpTheme.SetVisibiltyButton(New Button() {btnSave}, True)
+            If ScoreTheme.ValidateCBox(cbPlayer1).Equals(True) Then
+                CurrentScreen = AppState.Switch
+                ScoreTheme.SetControl(New Button() {btnSave}, True)
                 If player1.PID > 0 Then
                     SetPVPSets()
                 End If
             Else
-                pvpTheme.Screen = ScoreTheme.AppState.Start
+                CurrentScreen = AppState.Start
             End If
             If player2.PID > 0 AndAlso player1.PID > 0 AndAlso pvpSet1.Tables(0).Rows.Count > 0 Then
                 'Integer.TryParse(pvpSet1.Tables(0).Rows(0).Item("Wins"), player1.WinsAgainst1)
@@ -257,13 +252,13 @@ Public Class PvP
                 txtWinsAgainst2.Text = player2.WinsAgainst1.ToString
                 txtTotalAgainst.Text = totalGamesPvP.ToString
                 isRiv = player2.getRivarly(player1.WinsAgainst1)
-                pvpTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst, lblTotalWins1, lblTotalWins2}, True)
+                ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst, lblTotalWins1, lblTotalWins2}, True)
             Else
-                pvpTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, False)
+                ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, False)
             End If
             If isRiv Then
                 lblError.Text = "Rivarly"
-                pvpTheme.SetErrorLabel(lblError)
+                ScoreTheme.SetErrorLabel(lblError)
             End If
         End If
     End Sub
@@ -316,7 +311,7 @@ Public Class PvP
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnPlayer1win_Click(sender As Object, e As EventArgs) Handles btnPlayer1win.Click
-        pvpTheme.Screen = ScoreTheme.AppState.Winner
+        CurrentScreen = AppState.Winner
         Dim gameResults As String = String.Empty
 #Region "Beta sql"
         'adapter = New SqlDataAdapter("exec dbo.[insWins_v1.1] @newPlayer = '" & playerStats1.PlayerName1 & "',@wins = " & playerStats1.Wins1, sqlConnection)
@@ -337,18 +332,18 @@ Public Class PvP
             txtWinsAgainst2.Text = player2.WinsAgainst1.ToString
             txtTotalAgainst.Text = totalGamesPvP.ToString
             isRiv = player1.getRivarly(player2.WinsAgainst1)
-            pvpTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, True)
+            ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, True)
         End If
         player1.WinsAgainst1 += 1
         txtWinsagainst.Text = player1.WinsAgainst1
         lblError.Text = player1.InsertPvPStats(player2.PID, pvpID, game)
         totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
         txtTotalAgainst.Text = totalGamesPvP.ToString
-        pvpTheme.SetErrorLabel(lblError)
+        ScoreTheme.SetErrorLabel(lblError)
         allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
         GetHighScores()
-        pvpTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, btnSave}, True)
-        pvpTheme.SetVisibiltyButton(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
+        ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, btnSave}, True)
+        ScoreTheme.SetControl(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
     End Sub
 
     ''' <summary>
@@ -359,7 +354,7 @@ Public Class PvP
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnPlayer2Wins_Click(sender As Object, e As EventArgs) Handles btnPlayer2Wins.Click
-        pvpTheme.Screen = ScoreTheme.AppState.Winner
+        CurrentScreen = AppState.Winner
         Dim gameResults As String = String.Empty
 #Region "beta sql"
         'playerStats2.Wins1 += 1
@@ -382,18 +377,18 @@ Public Class PvP
             txtWinsAgainst2.Text = player2.WinsAgainst1.ToString
             txtTotalAgainst.Text = totalGamesPvP.ToString
             isRiv = player2.getRivarly(player1.WinsAgainst1)
-            pvpTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, True)
+            ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, True)
         End If
         player2.WinsAgainst1 += 1
         txtWinsAgainst2.Text = player2.WinsAgainst1
         lblError.Text = player2.InsertPvPStats(player1.PID, pvpID2, game)
         totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
         txtTotalAgainst.Text = totalGamesPvP.ToString
-        pvpTheme.SetErrorLabel(lblError)
+        ScoreTheme.SetErrorLabel(lblError)
         allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
         GetHighScores()
-        pvpTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, btnSave, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, True)
-        pvpTheme.SetVisibiltyButton(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
+        ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, btnSave, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, True)
+        ScoreTheme.SetControl(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
         btnBack.Text = "Back"
     End Sub
 
@@ -408,6 +403,47 @@ Public Class PvP
         HighScores.Close()
         Me.Close()
     End Sub
+
+    Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
+        If CurrentSession.IsLoggedIn.Equals(True) Then
+            CurrentSession.setPreviousForm(Me)
+            PasswordChange.Show()
+            Me.Hide()
+        End If
+    End Sub
+
+    Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
+        ScoreTheme.LogOutUser()
+    End Sub
+
+    Private Sub QuitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click
+        Application.Exit()
+    End Sub
+
+    Private Sub cbGames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGames.SelectedIndexChanged
+        For Each gameEntry As DictionaryEntry In gamesHT
+            If gameEntry.Value.Equals(cbGames.SelectedItem) Then
+                game = gameEntry.Key
+                Exit For
+            End If
+        Next
+        allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
+        If allWins IsNot Nothing AndAlso allWins.Tables(0).Rows.Count > 0 Then
+            GetHighScores()
+        Else
+            lstAllWins.Items.Clear()
+            lstAllWins.Items.Add("No games yet played")
+        End If
+    End Sub
+
+    Private Sub btnRegisterTest_Click(sender As Object, e As EventArgs) Handles btnRegisterTest.Click
+        With PlayerEditing
+            .Activate()
+            .Show()
+        End With
+        Me.Close()
+    End Sub
+
 #Region "Editing logic moved to PlayerEditing.vb - ver 1.8.2"
     '''' <summary>
     '''' If we're in this state, try to parse key from hashtable to object
@@ -656,43 +692,5 @@ Public Class PvP
     ''    End If
     ''End Sub
 #End Region
-    Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
-        If UserMod.IsLoggedIn.Equals(True) Then
-            UserMod.setPreviousForm(Me)
-            PasswordChange.Show()
-            Me.Hide()
-        End If
-    End Sub
 
-    Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
-        pvpTheme.LogOutUser()
-    End Sub
-
-    Private Sub QuitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click
-        Application.Exit()
-    End Sub
-
-    Private Sub cbGames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGames.SelectedIndexChanged
-        For Each gameEntry As DictionaryEntry In gamesHT
-            If gameEntry.Value.Equals(cbGames.SelectedItem) Then
-                game = gameEntry.Key
-                Exit For
-            End If
-        Next
-        allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
-        If allWins IsNot Nothing AndAlso allWins.Tables(0).Rows.Count > 0 Then
-            GetHighScores()
-        Else
-            lstAllWins.Items.Clear()
-            lstAllWins.Items.Add("No games yet played")
-        End If
-    End Sub
-
-    Private Sub btnRegisterTest_Click(sender As Object, e As EventArgs) Handles btnRegisterTest.Click
-        With PlayerEditing
-            .Activate()
-            .Show()
-        End With
-        Me.Close()
-    End Sub
 End Class

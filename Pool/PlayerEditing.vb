@@ -1,43 +1,35 @@
 ﻿Public Class PlayerEditing
-    Dim playerEditTheme As New ScoreTheme(Me)
     Dim selectedPlayer As New PlayerStats
     Dim allplayers As New Hashtable
     Dim nonRegisterdPlayers As New Hashtable
     Dim userPermissions As New Permissions()
 
     Private Sub PlayerEditing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        With playerEditTheme
-            .SetBackground(Me)
-            .SetButtons(New Button() {btnBack, btnDelete, btnEdit})
-            .SetCBox(New ComboBox() {cbPlayerNames})
-            .SetControl(New Control() {btnBack, btnEdit, btnDelete}, True)
-            .SetTBox(New TextBox() {tbEdit})
-            tbEdit.Visible = False
-        End With
+        ScoreTheme.SetControl(New Control() {btnBack, btnEdit, btnDelete}, True)
+        tbEdit.Visible = False
         Me.CenterToScreen()
 
-        If userPermissions.IsAdmin Then
+        If Permissions.IsAdmin Then
             allplayers = selectedPlayer.IDBConnect_GetAllPlayers()
-            playerEditTheme.FillBoxfromHT(cbPlayerNames, allplayers)
-        ElseIf userPermissions.IsUser Then
+            ScoreTheme.FillBoxfromHT(cbPlayerNames, allplayers)
+        ElseIf Permissions.IsUser Then
             nonRegisterdPlayers = selectedPlayer.GetAllPlayersRegistered(False)
-            playerEditTheme.FillBoxfromHT(cbPlayerNames, nonRegisterdPlayers)
+            ScoreTheme.FillBoxfromHT(cbPlayerNames, nonRegisterdPlayers)
         End If
-        playerEditTheme.Screen = ScoreTheme.AppState.Start
+        CurrentScreen = AppState.Start
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        playerEditTheme.SetControl(New Control() {cbPlayerNames, tbEdit}, False)
+        ScoreTheme.SetControl(New Control() {cbPlayerNames, tbEdit}, False)
         cbPlayerNames.SelectedValue = String.Empty
         'move out
-        Select Case playerEditTheme.Screen
-            Case ScoreTheme.AppState.edit
-                playerEditTheme.SetControl(New Control() {btnDelete, cbPlayerNames}, True)
-                playerEditTheme.Screen = ScoreTheme.AppState.SelectPlayer
-            Case ScoreTheme.AppState.Delete
-                playerEditTheme.Screen = ScoreTheme.AppState.SelectPlayer
-                playerEditTheme.SetControl(New Control() {btnEdit, cbPlayerNames}, True)
+        Select Case CurrentScreen
+            Case AppState.Edit
+                ScoreTheme.SetControl(New Control() {btnDelete, cbPlayerNames}, True)
+                CurrentScreen = AppState.SelectPlayer
+            Case AppState.Delete
+                CurrentScreen = AppState.SelectPlayer
+                ScoreTheme.SetControl(New Control() {btnEdit, cbPlayerNames}, True)
             Case Else
                 With PvP
                     .Activate()
@@ -48,7 +40,7 @@
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        If playerEditTheme.Screen = ScoreTheme.AppState.edit Then
+        If CurrentScreen = AppState.Edit Then
             Dim newName As String = tbEdit.Text
             'grab player obj from cbox
             Try
@@ -58,7 +50,7 @@
                 Dim exceptionLog As New Logging(Now, "Edit Players: ", ex.ToString)
                 exceptionLog.LogAction()
                 lblError.Text = "Error: Select a player to Change"
-                playerEditTheme.SetErrorLabel(lblError)
+                ScoreTheme.SetErrorLabel(lblError)
                 lblNewName.Visible = False
                 Exit Sub
             End Try
@@ -78,14 +70,14 @@
                     cbPlayerNames.SelectedItem = Nothing
                     tbEdit.Visible = False
                     cbPlayerNames.Enabled = True
-                    playerEditTheme.Screen = ScoreTheme.AppState.SelectPlayer
+                    CurrentScreen = AppState.SelectPlayer
                     lblNewName.Visible = False
                     btnBack_Click(Nothing, Nothing)
                 End If
             End If
 
         Else
-            playerEditTheme.Screen = ScoreTheme.AppState.edit
+            CurrentScreen = AppState.Edit
             tbEdit.Visible = True
             lblNewName.Visible = True
             cbPlayerNames.Enabled = False
@@ -97,7 +89,7 @@
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        If playerEditTheme.Screen.Equals(ScoreTheme.AppState.Delete) Then
+        If CurrentScreen.Equals(AppState.Delete) Then
             'grab player obj from cbox
             Try
                 selectedPlayer.PlayerName1 = cbPlayerNames.SelectedItem.ToString
@@ -107,7 +99,7 @@
                 Dim exceptionLog As New Logging(Now, "Delete Player: ", ex.ToString)
                 exceptionLog.LogAction()
                 lblError.Text = "Error: Select a player to Delete!!!!!!"
-                playerEditTheme.SetErrorLabel(lblError)
+                ScoreTheme.SetErrorLabel(lblError)
                 Exit Sub
             End Try
 
@@ -135,19 +127,19 @@
                 .Visible = False
                 .Enabled = False
             End With
-            playerEditTheme.Screen = ScoreTheme.AppState.Delete
+            CurrentScreen = AppState.Delete
             cbPlayerNames.Enabled = False
         End If
     End Sub
 
     Private Sub cbPlayerNames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPlayerNames.SelectedIndexChanged
         If cbPlayerNames.SelectedItem IsNot Nothing Then
-            playerEditTheme.SetControl(New Control() {btnEdit, btnDelete}, True)
+            ScoreTheme.SetControl(New Control() {btnEdit, btnDelete}, True)
             With selectedPlayer
                 .PlayerName1 = cbPlayerNames.SelectedItem
             End With
         Else
-            playerEditTheme.SetControl(New Control() {btnEdit, btnDelete}, False)
+            ScoreTheme.SetControl(New Control() {btnEdit, btnDelete}, False)
             selectedPlayer.PlayerName1 = String.Empty
         End If
     End Sub
@@ -157,12 +149,12 @@
             .Activate()
             .Show()
         End With
-        UserMod.PreviousForm = Me
+        CurrentSession.PreviousForm = Me
         Me.Close()
     End Sub
 
     Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
-        playerEditTheme.LogOutUser()
+        ScoreTheme.LogOutUser()
     End Sub
 
     Private Sub QuitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click

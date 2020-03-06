@@ -40,6 +40,7 @@ Partial Class PlayerEditing
         '
         'btnBack
         '
+        Me.btnBack.BackColor = System.Drawing.Color.Lime
         Me.btnBack.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBack.Location = New System.Drawing.Point(13, 595)
         Me.btnBack.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -47,22 +48,23 @@ Partial Class PlayerEditing
         Me.btnBack.Size = New System.Drawing.Size(183, 70)
         Me.btnBack.TabIndex = 0
         Me.btnBack.Text = "Back"
-        Me.btnBack.UseVisualStyleBackColor = True
+        Me.btnBack.UseVisualStyleBackColor = False
         '
         'cbPlayerNames
         '
         Me.cbPlayerNames.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cbPlayerNames.BackColor = System.Drawing.Color.Lime
-        Me.cbPlayerNames.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbPlayerNames.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbPlayerNames.FormattingEnabled = True
         Me.cbPlayerNames.Location = New System.Drawing.Point(108, 200)
         Me.cbPlayerNames.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cbPlayerNames.Name = "cbPlayerNames"
-        Me.cbPlayerNames.Size = New System.Drawing.Size(428, 39)
+        Me.cbPlayerNames.Size = New System.Drawing.Size(428, 47)
         Me.cbPlayerNames.TabIndex = 1
         '
         'btnDelete
         '
+        Me.btnDelete.BackColor = System.Drawing.Color.Lime
         Me.btnDelete.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.Location = New System.Drawing.Point(353, 460)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -70,18 +72,20 @@ Partial Class PlayerEditing
         Me.btnDelete.Size = New System.Drawing.Size(183, 70)
         Me.btnDelete.TabIndex = 2
         Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = True
+        Me.btnDelete.UseVisualStyleBackColor = False
         '
         'btnEdit
         '
+        Me.btnEdit.BackColor = System.Drawing.Color.Lime
         Me.btnEdit.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEdit.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.btnEdit.Location = New System.Drawing.Point(108, 460)
         Me.btnEdit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(183, 70)
         Me.btnEdit.TabIndex = 3
         Me.btnEdit.Text = "Edit"
-        Me.btnEdit.UseVisualStyleBackColor = True
+        Me.btnEdit.UseVisualStyleBackColor = False
         '
         'tbEdit
         '
@@ -120,7 +124,7 @@ Partial Class PlayerEditing
         Me.MenuToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
-        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 37)
+        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 44)
         Me.MenuToolStripMenuItem.Text = "Menu"
         '
         'EditPasswordToolStripMenuItem

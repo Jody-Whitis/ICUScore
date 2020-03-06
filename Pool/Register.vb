@@ -1,7 +1,6 @@
 ﻿Imports System.Text
 
 Public Class Register
-    Dim registerTheme As New ScoreTheme(Me)
     Dim allCurrentPlayers As New DataSet
     Dim getAllCurrent As New PlayerStats
     Dim currentPlayersHT As New Hashtable
@@ -16,15 +15,7 @@ Public Class Register
     End Structure
 
     Private Sub Register_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        registerTheme.SetBackground(Me)
-        registerTheme.SetButtons(New Button() {btnCancel, btnConfirm})
-        registerTheme.SetTBox(New TextBox() {txtPassword, TxtPasswordConfirm, txtUseremail, txtDisplayName})
-        registerTheme.SetLabel(New Label() {lblDisplayName, lblEmail, lblNewDisplayName, lblPassword, lblConfirmPassword})
         Me.CenterToScreen()
-        cbCurrentPlayers.BackColor = Color.Lime
-        cbCurrentPlayers.ForeColor = Color.RoyalBlue
-        cbCurrentPlayers.Font = New Font("Gill Sans Ultra", 9,
-                FontStyle.Bold)
         allCurrentPlayers = getAllCurrent.GetAllResults("exec selAllPlayers @wins=0")
         FillCBox()
     End Sub
@@ -149,11 +140,11 @@ Public Class Register
     End Sub
 
     Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
-        registerTheme.LogOutUser()
+        ScoreTheme.LogOutUser()
     End Sub
 
     Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
-        UserMod.setPreviousForm(Me)
+        CurrentSession.setPreviousForm(Me)
         PasswordChange.Activate()
     End Sub
 End Class

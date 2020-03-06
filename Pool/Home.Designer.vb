@@ -46,6 +46,7 @@ Partial Class Home
         '
         'btnPvP
         '
+        Me.btnPvP.BackColor = System.Drawing.Color.Lime
         Me.btnPvP.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPvP.ForeColor = System.Drawing.Color.Black
         Me.btnPvP.Location = New System.Drawing.Point(134, 410)
@@ -53,10 +54,11 @@ Partial Class Home
         Me.btnPvP.Size = New System.Drawing.Size(196, 71)
         Me.btnPvP.TabIndex = 0
         Me.btnPvP.Text = "PVP"
-        Me.btnPvP.UseVisualStyleBackColor = True
+        Me.btnPvP.UseVisualStyleBackColor = False
         '
         'btnHS
         '
+        Me.btnHS.BackColor = System.Drawing.Color.Lime
         Me.btnHS.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnHS.ForeColor = System.Drawing.Color.Black
         Me.btnHS.Location = New System.Drawing.Point(458, 410)
@@ -64,10 +66,11 @@ Partial Class Home
         Me.btnHS.Size = New System.Drawing.Size(196, 71)
         Me.btnHS.TabIndex = 1
         Me.btnHS.Text = "HS"
-        Me.btnHS.UseVisualStyleBackColor = True
+        Me.btnHS.UseVisualStyleBackColor = False
         '
         'btnQuit
         '
+        Me.btnQuit.BackColor = System.Drawing.Color.Lime
         Me.btnQuit.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnQuit.ForeColor = System.Drawing.Color.Black
         Me.btnQuit.Location = New System.Drawing.Point(586, 581)
@@ -75,7 +78,7 @@ Partial Class Home
         Me.btnQuit.Size = New System.Drawing.Size(196, 73)
         Me.btnQuit.TabIndex = 2
         Me.btnQuit.Text = "Quit"
-        Me.btnQuit.UseVisualStyleBackColor = True
+        Me.btnQuit.UseVisualStyleBackColor = False
         '
         'lblHome
         '
@@ -91,7 +94,8 @@ Partial Class Home
         '
         'txtUser
         '
-        Me.txtUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUser.BackColor = System.Drawing.Color.Lime
+        Me.txtUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUser.Location = New System.Drawing.Point(264, 170)
         Me.txtUser.Name = "txtUser"
         Me.txtUser.Size = New System.Drawing.Size(390, 37)
@@ -99,14 +103,17 @@ Partial Class Home
         '
         'txtPassword
         '
+        Me.txtPassword.BackColor = System.Drawing.Color.Lime
+        Me.txtPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassword.Location = New System.Drawing.Point(264, 271)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtPassword.Size = New System.Drawing.Size(390, 31)
+        Me.txtPassword.Size = New System.Drawing.Size(390, 37)
         Me.txtPassword.TabIndex = 5
         '
         'btnLogin
         '
+        Me.btnLogin.BackColor = System.Drawing.Color.Lime
         Me.btnLogin.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.ForeColor = System.Drawing.Color.Black
         Me.btnLogin.Location = New System.Drawing.Point(458, 333)
@@ -114,10 +121,11 @@ Partial Class Home
         Me.btnLogin.Size = New System.Drawing.Size(196, 71)
         Me.btnLogin.TabIndex = 6
         Me.btnLogin.Text = "Login"
-        Me.btnLogin.UseVisualStyleBackColor = True
+        Me.btnLogin.UseVisualStyleBackColor = False
         '
         'btnLogout
         '
+        Me.btnLogout.BackColor = System.Drawing.Color.Lime
         Me.btnLogout.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogout.ForeColor = System.Drawing.Color.Black
         Me.btnLogout.Location = New System.Drawing.Point(12, 580)
@@ -125,7 +133,7 @@ Partial Class Home
         Me.btnLogout.Size = New System.Drawing.Size(196, 75)
         Me.btnLogout.TabIndex = 7
         Me.btnLogout.Text = "Log Out"
-        Me.btnLogout.UseVisualStyleBackColor = True
+        Me.btnLogout.UseVisualStyleBackColor = False
         '
         'ContextMenuStrip1
         '
@@ -166,7 +174,7 @@ Partial Class Home
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
-        Me.MenuStrip1.Size = New System.Drawing.Size(794, 43)
+        Me.MenuStrip1.Size = New System.Drawing.Size(794, 48)
         Me.MenuStrip1.TabIndex = 11
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -176,7 +184,7 @@ Partial Class Home
         Me.mnuHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mnuHome.ForeColor = System.Drawing.Color.Lime
         Me.mnuHome.Name = "mnuHome"
-        Me.mnuHome.Size = New System.Drawing.Size(115, 37)
+        Me.mnuHome.Size = New System.Drawing.Size(115, 42)
         Me.mnuHome.Text = "Menu"
         '
         'editPasswordMnu
@@ -210,6 +218,7 @@ Partial Class Home
         '
         'btnNewUser
         '
+        Me.btnNewUser.BackColor = System.Drawing.Color.Lime
         Me.btnNewUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNewUser.ForeColor = System.Drawing.Color.Black
         Me.btnNewUser.Location = New System.Drawing.Point(291, 580)
@@ -217,10 +226,11 @@ Partial Class Home
         Me.btnNewUser.Size = New System.Drawing.Size(196, 75)
         Me.btnNewUser.TabIndex = 12
         Me.btnNewUser.Text = "New User"
-        Me.btnNewUser.UseVisualStyleBackColor = True
+        Me.btnNewUser.UseVisualStyleBackColor = False
         '
         'btnGuest
         '
+        Me.btnGuest.BackColor = System.Drawing.Color.Lime
         Me.btnGuest.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGuest.ForeColor = System.Drawing.Color.Black
         Me.btnGuest.Location = New System.Drawing.Point(134, 333)
@@ -228,7 +238,7 @@ Partial Class Home
         Me.btnGuest.Size = New System.Drawing.Size(196, 71)
         Me.btnGuest.TabIndex = 13
         Me.btnGuest.Text = "Guest"
-        Me.btnGuest.UseVisualStyleBackColor = True
+        Me.btnGuest.UseVisualStyleBackColor = False
         '
         'Home
         '

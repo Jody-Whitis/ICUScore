@@ -45,6 +45,7 @@ Partial Class Register
         '
         'txtUseremail
         '
+        Me.txtUseremail.BackColor = System.Drawing.Color.Lime
         Me.txtUseremail.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUseremail.Location = New System.Drawing.Point(292, 159)
         Me.txtUseremail.Name = "txtUseremail"
@@ -53,6 +54,7 @@ Partial Class Register
         '
         'txtPassword
         '
+        Me.txtPassword.BackColor = System.Drawing.Color.Lime
         Me.txtPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassword.Location = New System.Drawing.Point(292, 365)
         Me.txtPassword.Name = "txtPassword"
@@ -62,6 +64,7 @@ Partial Class Register
         '
         'TxtPasswordConfirm
         '
+        Me.TxtPasswordConfirm.BackColor = System.Drawing.Color.Lime
         Me.TxtPasswordConfirm.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtPasswordConfirm.Location = New System.Drawing.Point(292, 444)
         Me.TxtPasswordConfirm.Name = "TxtPasswordConfirm"
@@ -71,26 +74,29 @@ Partial Class Register
         '
         'btnCancel
         '
+        Me.btnCancel.BackColor = System.Drawing.Color.Lime
         Me.btnCancel.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.Location = New System.Drawing.Point(32, 590)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(170, 76)
         Me.btnCancel.TabIndex = 3
         Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
+        Me.btnCancel.UseVisualStyleBackColor = False
         '
         'btnConfirm
         '
+        Me.btnConfirm.BackColor = System.Drawing.Color.Lime
         Me.btnConfirm.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnConfirm.Location = New System.Drawing.Point(479, 590)
         Me.btnConfirm.Name = "btnConfirm"
         Me.btnConfirm.Size = New System.Drawing.Size(170, 76)
         Me.btnConfirm.TabIndex = 4
         Me.btnConfirm.Text = "Confirm"
-        Me.btnConfirm.UseVisualStyleBackColor = True
+        Me.btnConfirm.UseVisualStyleBackColor = False
         '
         'cbCurrentPlayers
         '
+        Me.cbCurrentPlayers.BackColor = System.Drawing.Color.Lime
         Me.cbCurrentPlayers.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbCurrentPlayers.FormattingEnabled = True
         Me.cbCurrentPlayers.Location = New System.Drawing.Point(292, 228)
@@ -100,6 +106,7 @@ Partial Class Register
         '
         'txtDisplayName
         '
+        Me.txtDisplayName.BackColor = System.Drawing.Color.Lime
         Me.txtDisplayName.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDisplayName.Location = New System.Drawing.Point(292, 294)
         Me.txtDisplayName.Name = "txtDisplayName"
@@ -122,6 +129,7 @@ Partial Class Register
         '
         Me.lblEmail.AutoSize = True
         Me.lblEmail.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEmail.ForeColor = System.Drawing.Color.Lime
         Me.lblEmail.Location = New System.Drawing.Point(12, 160)
         Me.lblEmail.Name = "lblEmail"
         Me.lblEmail.Size = New System.Drawing.Size(190, 33)
@@ -132,6 +140,7 @@ Partial Class Register
         '
         Me.lblDisplayName.AutoSize = True
         Me.lblDisplayName.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDisplayName.ForeColor = System.Drawing.Color.Lime
         Me.lblDisplayName.Location = New System.Drawing.Point(12, 228)
         Me.lblDisplayName.Name = "lblDisplayName"
         Me.lblDisplayName.Size = New System.Drawing.Size(217, 33)
@@ -142,6 +151,7 @@ Partial Class Register
         '
         Me.lblNewDisplayName.AutoSize = True
         Me.lblNewDisplayName.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewDisplayName.ForeColor = System.Drawing.Color.Lime
         Me.lblNewDisplayName.Location = New System.Drawing.Point(12, 297)
         Me.lblNewDisplayName.Name = "lblNewDisplayName"
         Me.lblNewDisplayName.Size = New System.Drawing.Size(252, 30)
@@ -153,6 +163,7 @@ Partial Class Register
         '
         Me.lblPassword.AutoSize = True
         Me.lblPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPassword.ForeColor = System.Drawing.Color.Lime
         Me.lblPassword.Location = New System.Drawing.Point(12, 366)
         Me.lblPassword.Name = "lblPassword"
         Me.lblPassword.Size = New System.Drawing.Size(158, 33)
@@ -163,6 +174,7 @@ Partial Class Register
         '
         Me.lblConfirmPassword.AutoSize = True
         Me.lblConfirmPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblConfirmPassword.ForeColor = System.Drawing.Color.Lime
         Me.lblConfirmPassword.Location = New System.Drawing.Point(12, 445)
         Me.lblConfirmPassword.Name = "lblConfirmPassword"
         Me.lblConfirmPassword.Size = New System.Drawing.Size(253, 30)
@@ -177,7 +189,7 @@ Partial Class Register
         Me.mnuRegister.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem})
         Me.mnuRegister.Location = New System.Drawing.Point(0, 0)
         Me.mnuRegister.Name = "mnuRegister"
-        Me.mnuRegister.Size = New System.Drawing.Size(704, 41)
+        Me.mnuRegister.Size = New System.Drawing.Size(704, 48)
         Me.mnuRegister.TabIndex = 13
         Me.mnuRegister.Text = "mnuRegister"
         '

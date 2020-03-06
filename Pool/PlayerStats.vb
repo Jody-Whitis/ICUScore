@@ -119,7 +119,6 @@ Public Class PlayerStats
         Wins1 += 1
         ds = scoresDB.DBSQL($"exec dbo.[insWins_v1.1] @newPlayer = '{PlayerName}',@wins = {Wins1}")
         ds = scoresDB.DBSQL($"exec [selPlayers_v1.1] @playerId={PID},@wins={Wins1}") 'test sp
-        'ds = scoresDB.DBSQL($"select wins from Players where playerName like '{PlayerName1}'")
         Try
             Return ds.Tables(0).Rows(0).Item("Wins").ToString
         Catch
@@ -254,7 +253,6 @@ Public Class PlayerStats
         Dim sqlString = String.Empty
 
         sqlString = $"exec [selPlayers_v1.1] @playerId={PID},@wins={Wins1}"
-        'sqlString = "Select wins from Players where playerName In ('" & PlayerName1 & "')"
 
         ds = scoresDB.DBSQL(sqlString)
         Try
@@ -319,7 +317,7 @@ Public Class PlayerStats
         ds = scoresDB.DBSQL(sqlString)
         Try
             Dim filteredByRegistered As List(Of DataRow) = (From rows In ds.Tables(0).AsEnumerable Where
-                                           rows.Item("Registered") = registered Or rows.Item("id").Equals(UserMod.ID) Select rows).ToList
+                                           rows.Item("Registered") = registered Or rows.Item("id").Equals(CurrentSession.ID) Select rows).ToList
             For i =0 To filteredByRegistered.Count -1
                 allplayers.Add(filteredByRegistered.Item(i).ItemArray.First, filteredByRegistered.Item(i).ItemArray(1))
             Next

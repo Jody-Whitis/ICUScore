@@ -35,6 +35,7 @@ Partial Class PasswordChange
         '
         'txtNewPassword
         '
+        Me.txtNewPassword.BackColor = System.Drawing.Color.Lime
         Me.txtNewPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNewPassword.Location = New System.Drawing.Point(87, 320)
         Me.txtNewPassword.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -45,6 +46,7 @@ Partial Class PasswordChange
         '
         'txtNewPasswordConfirm
         '
+        Me.txtNewPasswordConfirm.BackColor = System.Drawing.Color.Lime
         Me.txtNewPasswordConfirm.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNewPasswordConfirm.Location = New System.Drawing.Point(87, 432)
         Me.txtNewPasswordConfirm.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -55,6 +57,7 @@ Partial Class PasswordChange
         '
         'btnUpdatePassword
         '
+        Me.btnUpdatePassword.BackColor = System.Drawing.Color.Lime
         Me.btnUpdatePassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdatePassword.ForeColor = System.Drawing.Color.Black
         Me.btnUpdatePassword.Location = New System.Drawing.Point(377, 529)
@@ -63,7 +66,7 @@ Partial Class PasswordChange
         Me.btnUpdatePassword.Size = New System.Drawing.Size(164, 86)
         Me.btnUpdatePassword.TabIndex = 2
         Me.btnUpdatePassword.Text = "Update Password"
-        Me.btnUpdatePassword.UseVisualStyleBackColor = True
+        Me.btnUpdatePassword.UseVisualStyleBackColor = False
         '
         'lblUpdate
         '
@@ -79,6 +82,7 @@ Partial Class PasswordChange
         '
         'btnCancel
         '
+        Me.btnCancel.BackColor = System.Drawing.Color.Lime
         Me.btnCancel.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.ForeColor = System.Drawing.Color.Black
         Me.btnCancel.Location = New System.Drawing.Point(13, 529)
@@ -87,10 +91,11 @@ Partial Class PasswordChange
         Me.btnCancel.Size = New System.Drawing.Size(164, 86)
         Me.btnCancel.TabIndex = 4
         Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
+        Me.btnCancel.UseVisualStyleBackColor = False
         '
         'txtCurrentPassword
         '
+        Me.txtCurrentPassword.BackColor = System.Drawing.Color.Lime
         Me.txtCurrentPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCurrentPassword.Location = New System.Drawing.Point(87, 210)
         Me.txtCurrentPassword.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)

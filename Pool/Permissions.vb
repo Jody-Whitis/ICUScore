@@ -8,16 +8,16 @@
         Guest = 3
     End Enum
 
-    Public Function IsAdmin() As Boolean
-        If UserMod.Permissions.Equals(UserStatus.Admin) Then
+    Public Shared Function IsAdmin() As Boolean
+        If CurrentSession.Permissions.Equals(UserStatus.Admin) Then
             Return True
         Else
             Return False
         End If
     End Function
 
-    Public Function IsUser() As Boolean
-        If UserMod.Permissions > UserStatus.Debug AndAlso UserMod.Permissions < UserStatus.Guest Then
+    Public Shared Function IsUser() As Boolean
+        If CurrentSession.Permissions > UserStatus.Debug AndAlso CurrentSession.Permissions < UserStatus.Guest Then
             Return True
         Else
             Return False

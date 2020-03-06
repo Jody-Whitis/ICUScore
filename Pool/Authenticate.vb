@@ -79,7 +79,7 @@ Public Class Authenticate : Implements ILogin
 
         'If their login, then put a timestamp
         If isLoginCreds.Equals(True) Then
-            UserMod.Password = hashpwdfromDB
+            CurrentSession.Password = hashpwdfromDB
             Dim insertLoginSQl As New StringBuilder
             With insertLoginSQl
                 .Append("exec [insLoginUser] ")
@@ -118,11 +118,11 @@ Public Class Authenticate : Implements ILogin
         Dim userDS As New DataSet
         userDS = userLogged.GetAllResults(getUserSQL.ToString)
         Try
-            UserMod.UserEmail = userDS.Tables(0).Rows(0).Item("emailAddress")
-            UserMod.ID = userDS.Tables(0).Rows(0).Item("iD")
-            UserMod.IsLoggedIn = True
-            UserMod.DisplayName = userDS.Tables(0).Rows(0).Item("PlayerName")
-            UserMod.Permissions = userDS.Tables(0).Rows(0).Item("permissionLevel")
+            CurrentSession.UserEmail = userDS.Tables(0).Rows(0).Item("emailAddress")
+            CurrentSession.ID = userDS.Tables(0).Rows(0).Item("iD")
+            CurrentSession.IsLoggedIn = True
+            CurrentSession.DisplayName = userDS.Tables(0).Rows(0).Item("PlayerName")
+            CurrentSession.Permissions = userDS.Tables(0).Rows(0).Item("permissionLevel")
         Catch ex As Exception
             Debug.WriteLine(ex.ToString)
             Dim setUser As New Logging(Now, "User Log set error: ", ex.ToString)
@@ -152,7 +152,7 @@ Public Class Authenticate : Implements ILogin
         Dim hashedPasswordfromForm As String = $"1500:{Convert.ToBase64String(saltyByteFromForm)}:{Convert.ToBase64String(hashBytefromForm)}"
         'Dim compareHashesDS As DataSet = hashedPasswordDS.GetAllResults($"exec [selUserPwdHashed] @user='{User}'")
         'Dim compareHashString As String = compareHashesDS.Tables(0).Rows(0).Item("password")
-        Dim compareHashString As String = UserMod.Password
+        Dim compareHashString As String = CurrentSession.Password
         Dim compareHashFormatSplit = New String() {}
 
 

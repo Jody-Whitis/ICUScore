@@ -179,7 +179,7 @@ Partial Class HighScores
         Me.mnuHighScore.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem})
         Me.mnuHighScore.Location = New System.Drawing.Point(0, 0)
         Me.mnuHighScore.Name = "mnuHighScore"
-        Me.mnuHighScore.Size = New System.Drawing.Size(774, 48)
+        Me.mnuHighScore.Size = New System.Drawing.Size(774, 38)
         Me.mnuHighScore.TabIndex = 10
         Me.mnuHighScore.Text = "MenuStrip1"
         '

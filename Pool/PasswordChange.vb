@@ -1,13 +1,8 @@
 ﻿Public Class PasswordChange
-    Dim passwordTheme As New ScoreTheme(Me)
-    Dim passwordUpdate As New Authenticate(UserMod.UserEmail, UserMod.Password, UserMod.IsLoggedIn)
+    Dim passwordUpdate As New Authenticate(CurrentSession.UserEmail, CurrentSession.Password, CurrentSession.IsLoggedIn)
     Private Sub PasswordChange_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToScreen()
-        passwordTheme.Screen = ScoreTheme.AppState.edit
-        passwordTheme.SetBackground(Me)
-        passwordTheme.SetTBox(New TextBox() {txtNewPassword, txtNewPasswordConfirm, txtCurrentPassword})
-        passwordTheme.SetButtons(New Button() {btnUpdatePassword, btnCancel})
-        lblUpdate.ForeColor = Color.Lime
+        CurrentScreen = AppState.Edit
     End Sub
 
     Private Sub btnUpdatePassword_Click(sender As Object, e As EventArgs) Handles btnUpdatePassword.Click
@@ -17,7 +12,7 @@
             isUpdated = passwordUpdate.ILogin_UpdatePassword(txtNewPassword.Text, txtCurrentPassword.Text)
         End If
         If isUpdated.Equals(True) Then
-            UserMod.PreviousForm.Show()
+            CurrentSession.PreviousForm.Show()
             Me.Close()
         Else
             lblUpdate.ForeColor = Color.Red
@@ -26,8 +21,8 @@
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        If UserMod.PreviousForm IsNot Nothing Then
-            UserMod.PreviousForm.Show()
+        If CurrentSession.PreviousForm IsNot Nothing Then
+            CurrentSession.PreviousForm.Show()
         Else
             Home.Activate()
             Home.Show()
