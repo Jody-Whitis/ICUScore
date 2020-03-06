@@ -7,12 +7,12 @@
         passwordTheme.SetBackground(Me)
         passwordTheme.SetTBox(New TextBox() {txtNewPassword, txtNewPasswordConfirm, txtCurrentPassword})
         passwordTheme.SetButtons(New Button() {btnUpdatePassword, btnCancel})
-        lblUpdate.ForeColor = Color.Aquamarine
+        lblUpdate.ForeColor = Color.Lime
     End Sub
 
     Private Sub btnUpdatePassword_Click(sender As Object, e As EventArgs) Handles btnUpdatePassword.Click
         Dim isUpdated As Boolean = False
-        lblUpdate.ForeColor = Color.Green
+        lblUpdate.ForeColor = Color.Lime
         If txtNewPassword.Text.Equals(txtNewPasswordConfirm.Text) Then
             isUpdated = passwordUpdate.ILogin_UpdatePassword(txtNewPassword.Text, txtCurrentPassword.Text)
         End If
@@ -26,7 +26,12 @@
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        UserMod.PreviousForm.Show()
+        If UserMod.PreviousForm IsNot Nothing Then
+            UserMod.PreviousForm.Show()
+        Else
+            Home.Activate()
+            Home.Show()
+        End If
         Me.Close()
     End Sub
 End Class

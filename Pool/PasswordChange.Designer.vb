@@ -28,12 +28,15 @@ Partial Class PasswordChange
         Me.lblUpdate = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.txtCurrentPassword = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'txtNewPassword
         '
         Me.txtNewPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNewPassword.Location = New System.Drawing.Point(87, 222)
+        Me.txtNewPassword.Location = New System.Drawing.Point(87, 320)
         Me.txtNewPassword.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtNewPassword.Name = "txtNewPassword"
         Me.txtNewPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -43,7 +46,7 @@ Partial Class PasswordChange
         'txtNewPasswordConfirm
         '
         Me.txtNewPasswordConfirm.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNewPasswordConfirm.Location = New System.Drawing.Point(87, 302)
+        Me.txtNewPasswordConfirm.Location = New System.Drawing.Point(87, 432)
         Me.txtNewPasswordConfirm.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtNewPasswordConfirm.Name = "txtNewPasswordConfirm"
         Me.txtNewPasswordConfirm.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -53,8 +56,8 @@ Partial Class PasswordChange
         'btnUpdatePassword
         '
         Me.btnUpdatePassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdatePassword.ForeColor = System.Drawing.Color.Green
-        Me.btnUpdatePassword.Location = New System.Drawing.Point(319, 395)
+        Me.btnUpdatePassword.ForeColor = System.Drawing.Color.Black
+        Me.btnUpdatePassword.Location = New System.Drawing.Point(377, 529)
         Me.btnUpdatePassword.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpdatePassword.Name = "btnUpdatePassword"
         Me.btnUpdatePassword.Size = New System.Drawing.Size(164, 86)
@@ -65,42 +68,82 @@ Partial Class PasswordChange
         'lblUpdate
         '
         Me.lblUpdate.AutoSize = True
-        Me.lblUpdate.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUpdate.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblUpdate.ForeColor = System.Drawing.Color.Lime
-        Me.lblUpdate.Location = New System.Drawing.Point(146, 53)
+        Me.lblUpdate.Location = New System.Drawing.Point(79, 54)
         Me.lblUpdate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUpdate.Name = "lblUpdate"
-        Me.lblUpdate.Size = New System.Drawing.Size(240, 30)
+        Me.lblUpdate.Size = New System.Drawing.Size(366, 44)
         Me.lblUpdate.TabIndex = 3
         Me.lblUpdate.Text = "Password Update"
         '
         'btnCancel
         '
         Me.btnCancel.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.Color.Green
-        Me.btnCancel.Location = New System.Drawing.Point(33, 395)
+        Me.btnCancel.ForeColor = System.Drawing.Color.Black
+        Me.btnCancel.Location = New System.Drawing.Point(13, 529)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(164, 86)
         Me.btnCancel.TabIndex = 4
-        Me.btnCancel.Text = "Cancel Password"
+        Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'txtCurrentPassword
         '
         Me.txtCurrentPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCurrentPassword.Location = New System.Drawing.Point(87, 144)
+        Me.txtCurrentPassword.Location = New System.Drawing.Point(87, 210)
         Me.txtCurrentPassword.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtCurrentPassword.Name = "txtCurrentPassword"
         Me.txtCurrentPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtCurrentPassword.Size = New System.Drawing.Size(356, 34)
         Me.txtCurrentPassword.TabIndex = 5
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Lime
+        Me.Label1.Location = New System.Drawing.Point(146, 175)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(251, 30)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "Current Password"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Lime
+        Me.Label2.Location = New System.Drawing.Point(159, 285)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(201, 30)
+        Me.Label2.TabIndex = 7
+        Me.Label2.Text = "New Password"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.Lime
+        Me.Label3.Location = New System.Drawing.Point(133, 397)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(253, 30)
+        Me.Label3.TabIndex = 8
+        Me.Label3.Text = "Confirm Password"
+        '
         'PasswordChange
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(550, 528)
+        Me.BackColor = System.Drawing.Color.RoyalBlue
+        Me.ClientSize = New System.Drawing.Size(554, 629)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtCurrentPassword)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.lblUpdate)
@@ -121,4 +164,7 @@ Partial Class PasswordChange
     Friend WithEvents lblUpdate As Label
     Friend WithEvents btnCancel As Button
     Friend WithEvents txtCurrentPassword As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
 End Class

@@ -46,7 +46,7 @@ Public Class ScoreTheme
             errorText.Visible = True
         Else
             errorText.Visible = False
-            errorText.ForeColor = Color.Green
+            errorText.ForeColor = Color.Lime
         End If
     End Sub
     Public Sub SetVisiblityTxtBox(ByRef txtBox As TextBox(), ByVal toggle As Boolean)
@@ -82,7 +82,7 @@ Public Class ScoreTheme
     Public Sub SetButtons(ByRef buttons As Button())
         For Each btn In buttons
             With btn
-                .BackColor = Color.Aquamarine
+                .BackColor = Color.Lime
                 .Font = New Font("Gill Sans Ultra", 9,
                 FontStyle.Bold)
             End With
@@ -92,7 +92,7 @@ Public Class ScoreTheme
     Public Sub SetTBox(ByRef tBoxes As TextBox())
         For Each tbox In tBoxes
             With tbox
-                .BackColor = Color.Aquamarine
+                .BackColor = Color.Lime
                 .Font = New Font("Gill Sans Ultra", 9,
                FontStyle.Bold)
             End With
@@ -102,7 +102,7 @@ Public Class ScoreTheme
     Public Sub SetCBox(ByRef cBoxes As ComboBox())
         For Each cBox In cBoxes
             With cBox
-                .BackColor = Color.Aqua
+                .BackColor = Color.Lime
             End With
         Next
     End Sub
@@ -117,6 +117,8 @@ Public Class ScoreTheme
     End Sub
 
 #End Region
+
+    'convert to shared and take out instanices = 1.8.2
     Public Function GetKey(ByVal values As String, ByVal col As Hashtable) As Integer
         For Each items As DictionaryEntry In col
             If items.Value.Equals(values) Then

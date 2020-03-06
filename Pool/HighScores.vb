@@ -12,8 +12,10 @@ Public Class HighScores
     Dim highScores As New DataSet
     Dim addLoc As New Point
     Dim saveLoc As New Point
+    Dim pvpLoc As New Point
     Dim saveDim As New Drawing.Size
     Dim addDim As New Drawing.Size
+    Dim pvpDim As New Drawing.Size
     Dim userPermissions As New Permissions
 #End Region
 
@@ -55,9 +57,12 @@ Public Class HighScores
         saveLoc = btnSubmit.Location
         saveDim = btnSubmit.Size
         addDim = btnAdd.Size
+        pvpLoc = btnPvP.Location
+        pvpDim = btnPvP.Size
 #End Region
         If Not userPermissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
-            highScoreTheme.GuestDisplay(New Control() {btnAdd, btnSubmit, cbPlayers, txtScore, txtNewGM}, False)
+            highScoreTheme.GuestDisplay(New Control() {btnAdd, btnSubmit, cbPlayers, txtScore, txtNewGM,
+                                        lblSelectedPlayer, lblScore, lblNewGameMode}, False)
             EditPasswordToolStripMenuItem.Visible = False
         End If
     End Sub
@@ -202,8 +207,27 @@ Public Class HighScores
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Home.Show()
-        Me.Close()
+        If highScoreTheme.Screen = ScoreTheme.AppState.Add Then
+            'Go back to prev
+            txtNewGM.ResetText()
+            txtNewGM.Visible = False
+            lstScores.Visible = True
+            cbGames.Visible = True
+            cbPlayers.Visible = True
+            txtScore.Visible = True
+            highScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode}, True)
+            highScoreTheme.SetVisibiltyButton(New Button() {btnSubmit}, True)
+            btnAdd.Location = addLoc
+            btnAdd.Size = addDim
+            highScoreTheme.Screen = ScoreTheme.AppState.SelectPlayer
+            lblError.Text = "Back"
+            lblError.Visible = True
+            highScoreTheme.SetErrorLabel(lblError)
+        Else
+            Home.Show()
+            Me.Close()
+        End If
+
     End Sub
 
     ''' <summary>
@@ -239,8 +263,9 @@ Public Class HighScores
                     Dim playerScore As String = score.Item("highScore")
                     lstScores.Items.Add(playerNameScore & "".PadRight(10) & ":" & " ".PadRight(5) & playerScore)
                 Next
-                lstScores.BackColor = Color.Aquamarine
+                lstScores.BackColor = Color.Lime
                 lstScores.Visible = True
+                lblScoreBoard.Visible = True
                 lstScores.Refresh()
             Catch ex As Exception
                 Dim exceptionLog As New Logging(Now, "Get High Score", ex.ToString)
@@ -260,13 +285,17 @@ Public Class HighScores
     ''' <param name="e"></param>
     Private Sub cbGames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGames.SelectedIndexChanged
         games.GameMode = cbGames.SelectedItem
-        GetHighScores(games.GameMode)
-        highScoreTheme.SetErrorLabel(lblError)
+        If highScoreTheme.ValidateCBox(cbPlayers).Equals(True) AndAlso Not cbGames.SelectedItem.Equals("Choose Something") Then
+            GetHighScores(games.GameMode)
+            highScoreTheme.SetErrorLabel(lblError)
+        End If
+
         If highScoreTheme.ValidateCBox(cbPlayers).Equals(True) Then
             btnSubmit.Visible = True
         Else
             btnSubmit.Visible = False
         End If
+
     End Sub
 
     ''' <summary>
@@ -284,10 +313,11 @@ Public Class HighScores
             cbPlayers.Visible = False
             txtScore.Visible = False
             lstScores.Visible = False
+            highScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode}, False)
             txtNewGM.Visible = True
-            highScoreTheme.SetVisibiltyButton(New Button() {btnSubmit, btnBack}, False)
-            btnAdd.Location = saveLoc
-            btnAdd.Size = saveDim
+            highScoreTheme.SetVisibiltyButton(New Button() {btnSubmit}, False)
+            btnAdd.Location = pvpLoc
+            btnAdd.Size = pvpDim
         ElseIf highScoreTheme.Screen = ScoreTheme.AppState.Add Then
             If Not String.IsNullOrEmpty(txtNewGM.Text) Then
                 'try to insert if not blank
@@ -302,25 +332,11 @@ Public Class HighScores
                 cbGames.Visible = True
                 cbPlayers.Visible = True
                 txtScore.Visible = True
-                highScoreTheme.SetVisibiltyButton(New Button() {btnSubmit, btnBack}, True)
+                highScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode}, True)
+                highScoreTheme.SetVisibiltyButton(New Button() {btnSubmit}, True)
                 btnAdd.Location = addLoc
                 btnAdd.Size = addDim
                 highScoreTheme.Screen = ScoreTheme.AppState.SelectPlayer
-            Else
-                'Go back to prev
-                txtNewGM.ResetText()
-                txtNewGM.Visible = False
-                lstScores.Visible = True
-                cbGames.Visible = True
-                cbPlayers.Visible = True
-                txtScore.Visible = True
-                highScoreTheme.SetVisibiltyButton(New Button() {btnSubmit, btnBack}, True)
-                btnAdd.Location = addLoc
-                btnAdd.Size = addDim
-                highScoreTheme.Screen = ScoreTheme.AppState.SelectPlayer
-                lblError.Text = "Back"
-                lblError.Visible = True
-                highScoreTheme.SetErrorLabel(lblError)
             End If
         End If
     End Sub

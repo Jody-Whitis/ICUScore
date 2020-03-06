@@ -21,7 +21,7 @@ Public Class Register
         registerTheme.SetTBox(New TextBox() {txtPassword, TxtPasswordConfirm, txtUseremail, txtDisplayName})
         registerTheme.SetLabel(New Label() {lblDisplayName, lblEmail, lblNewDisplayName, lblPassword, lblConfirmPassword})
         Me.CenterToScreen()
-        cbCurrentPlayers.BackColor = Color.Aquamarine
+        cbCurrentPlayers.BackColor = Color.Lime
         cbCurrentPlayers.ForeColor = Color.RoyalBlue
         cbCurrentPlayers.Font = New Font("Gill Sans Ultra", 9,
                 FontStyle.Bold)
@@ -31,6 +31,7 @@ Public Class Register
 
     Private Sub FillCBox()
         cbCurrentPlayers.Items.Clear()
+        cbCurrentPlayers.Items.Add("Choose your Name")
         Try
             If allCurrentPlayers.Tables(0).Rows.Count > 0 Then
                 Dim unRegistered = (From names In allCurrentPlayers.Tables(0) Where names.Item("Registered").Equals(0)
@@ -46,6 +47,7 @@ Public Class Register
             Dim fillLog As New Logging(Now, "Fill error: ", ex.ToString)
         End Try
         cbCurrentPlayers.Items.Add("Not Me!")
+        cbCurrentPlayers.SelectedIndex = cbCurrentPlayers.Items.IndexOf("Choose your Name")
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -127,6 +129,8 @@ Public Class Register
                 user.pID = -1
             Else
                 user.displayName = cbCurrentPlayers.SelectedItem.ToString
+                txtDisplayName.Visible = False
+                lblNewDisplayName.Visible = False
                 For Each existingName As DictionaryEntry In currentPlayersHT
                     If existingName.Value.Equals(cbCurrentPlayers.SelectedItem.ToString) Then
                         user.pID = existingName.Key

@@ -12,7 +12,7 @@ Public Class Home
         homeTheme.SetVisibiltyButton(New Button() {btnLogin, btnQuit}, True)
         homeTheme.SetTBox(New TextBox() {txtUser, txtPassword})
         homeTheme.SetLabel(New Label() {lblHome})
-        mnuHome.ForeColor = Color.Aquamarine
+        mnuHome.ForeColor = Color.Lime
         lblHome.Font = New Font("Gill Sans Ultra", 15, FontStyle.Bold)
         lblHome.Visible = False
         Me.ShowIcon = True

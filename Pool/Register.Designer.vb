@@ -72,7 +72,7 @@ Partial Class Register
         'btnCancel
         '
         Me.btnCancel.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(55, 552)
+        Me.btnCancel.Location = New System.Drawing.Point(32, 590)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(170, 76)
         Me.btnCancel.TabIndex = 3
@@ -82,7 +82,7 @@ Partial Class Register
         'btnConfirm
         '
         Me.btnConfirm.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnConfirm.Location = New System.Drawing.Point(479, 552)
+        Me.btnConfirm.Location = New System.Drawing.Point(479, 590)
         Me.btnConfirm.Name = "btnConfirm"
         Me.btnConfirm.Size = New System.Drawing.Size(170, 76)
         Me.btnConfirm.TabIndex = 4
@@ -110,10 +110,11 @@ Partial Class Register
         'lblNewUser
         '
         Me.lblNewUser.AutoSize = True
-        Me.lblNewUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNewUser.Location = New System.Drawing.Point(243, 67)
+        Me.lblNewUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 13.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewUser.ForeColor = System.Drawing.Color.Lime
+        Me.lblNewUser.Location = New System.Drawing.Point(223, 41)
         Me.lblNewUser.Name = "lblNewUser"
-        Me.lblNewUser.Size = New System.Drawing.Size(173, 39)
+        Me.lblNewUser.Size = New System.Drawing.Size(236, 51)
         Me.lblNewUser.TabIndex = 7
         Me.lblNewUser.Text = "New User"
         '
@@ -176,49 +177,51 @@ Partial Class Register
         Me.mnuRegister.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem})
         Me.mnuRegister.Location = New System.Drawing.Point(0, 0)
         Me.mnuRegister.Name = "mnuRegister"
-        Me.mnuRegister.Size = New System.Drawing.Size(707, 42)
+        Me.mnuRegister.Size = New System.Drawing.Size(704, 41)
         Me.mnuRegister.TabIndex = 13
         Me.mnuRegister.Text = "mnuRegister"
         '
         'MenuToolStripMenuItem
         '
         Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditPasswordToolStripMenuItem, Me.LogOutToolStripMenuItem, Me.QuitToolStripMenuItem})
-        Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.MenuToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
-        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(98, 38)
+        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 37)
         Me.MenuToolStripMenuItem.Text = "Menu"
         '
         'EditPasswordToolStripMenuItem
         '
         Me.EditPasswordToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
-        Me.EditPasswordToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.EditPasswordToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
         Me.EditPasswordToolStripMenuItem.Name = "EditPasswordToolStripMenuItem"
-        Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
+        Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
         Me.EditPasswordToolStripMenuItem.Text = "Edit Password"
         Me.EditPasswordToolStripMenuItem.Visible = False
         '
         'LogOutToolStripMenuItem
         '
         Me.LogOutToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
-        Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
         Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
-        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
         Me.LogOutToolStripMenuItem.Text = "Log Out"
         Me.LogOutToolStripMenuItem.Visible = False
         '
         'QuitToolStripMenuItem
         '
         Me.QuitToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
-        Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
         Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
-        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
         Me.QuitToolStripMenuItem.Text = "Quit"
         '
         'Register
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(707, 684)
+        Me.BackColor = System.Drawing.Color.RoyalBlue
+        Me.ClientSize = New System.Drawing.Size(704, 689)
         Me.Controls.Add(Me.lblConfirmPassword)
         Me.Controls.Add(Me.lblPassword)
         Me.Controls.Add(Me.lblNewDisplayName)

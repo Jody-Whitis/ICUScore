@@ -41,6 +41,11 @@ Partial Class HighScores
         Me.EditPasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblSelectedPlayer = New System.Windows.Forms.Label()
+        Me.lblScore = New System.Windows.Forms.Label()
+        Me.lblNewGameMode = New System.Windows.Forms.Label()
+        Me.lblScoreBoard = New System.Windows.Forms.Label()
+        Me.lblSelectedMode = New System.Windows.Forms.Label()
         CType(Me.SelAllScoresBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LocalResultsDataSet2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuHighScore.SuspendLayout()
@@ -48,51 +53,51 @@ Partial Class HighScores
         '
         'cbGames
         '
-        Me.cbGames.BackColor = System.Drawing.Color.Aquamarine
+        Me.cbGames.BackColor = System.Drawing.Color.Lime
         Me.cbGames.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbGames.FormattingEnabled = True
-        Me.cbGames.Location = New System.Drawing.Point(136, 116)
+        Me.cbGames.Location = New System.Drawing.Point(151, 147)
         Me.cbGames.Name = "cbGames"
         Me.cbGames.Size = New System.Drawing.Size(474, 38)
         Me.cbGames.TabIndex = 0
         '
         'cbPlayers
         '
-        Me.cbPlayers.BackColor = System.Drawing.Color.Aquamarine
+        Me.cbPlayers.BackColor = System.Drawing.Color.Lime
         Me.cbPlayers.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbPlayers.FormattingEnabled = True
-        Me.cbPlayers.Location = New System.Drawing.Point(208, 173)
+        Me.cbPlayers.Location = New System.Drawing.Point(151, 237)
         Me.cbPlayers.Name = "cbPlayers"
-        Me.cbPlayers.Size = New System.Drawing.Size(320, 38)
+        Me.cbPlayers.Size = New System.Drawing.Size(474, 38)
         Me.cbPlayers.TabIndex = 1
         '
         'txtScore
         '
-        Me.txtScore.BackColor = System.Drawing.Color.Aquamarine
+        Me.txtScore.BackColor = System.Drawing.Color.Lime
         Me.txtScore.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtScore.Location = New System.Drawing.Point(254, 223)
+        Me.txtScore.Location = New System.Drawing.Point(151, 342)
         Me.txtScore.Name = "txtScore"
-        Me.txtScore.Size = New System.Drawing.Size(217, 34)
+        Me.txtScore.Size = New System.Drawing.Size(474, 34)
         Me.txtScore.TabIndex = 2
         '
         'btnSubmit
         '
-        Me.btnSubmit.BackColor = System.Drawing.Color.MediumSpringGreen
+        Me.btnSubmit.BackColor = System.Drawing.Color.Lime
         Me.btnSubmit.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubmit.Location = New System.Drawing.Point(220, 455)
+        Me.btnSubmit.Location = New System.Drawing.Point(265, 796)
         Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(298, 69)
+        Me.btnSubmit.Size = New System.Drawing.Size(206, 81)
         Me.btnSubmit.TabIndex = 3
         Me.btnSubmit.Text = "Submit"
         Me.btnSubmit.UseVisualStyleBackColor = False
         '
         'btnBack
         '
-        Me.btnBack.BackColor = System.Drawing.Color.MediumSpringGreen
+        Me.btnBack.BackColor = System.Drawing.Color.Lime
         Me.btnBack.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBack.Location = New System.Drawing.Point(620, 570)
+        Me.btnBack.Location = New System.Drawing.Point(12, 930)
         Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(128, 94)
+        Me.btnBack.Size = New System.Drawing.Size(200, 84)
         Me.btnBack.TabIndex = 4
         Me.btnBack.Text = "Back"
         Me.btnBack.UseVisualStyleBackColor = False
@@ -100,10 +105,11 @@ Partial Class HighScores
         'lblError
         '
         Me.lblError.AutoSize = True
-        Me.lblError.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblError.Location = New System.Drawing.Point(320, 47)
+        Me.lblError.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblError.ForeColor = System.Drawing.Color.Lime
+        Me.lblError.Location = New System.Drawing.Point(319, 25)
         Me.lblError.Name = "lblError"
-        Me.lblError.Size = New System.Drawing.Size(101, 30)
+        Me.lblError.Size = New System.Drawing.Size(129, 39)
         Me.lblError.TabIndex = 5
         Me.lblError.Text = "Label1"
         '
@@ -123,42 +129,43 @@ Partial Class HighScores
         '
         'lstScores
         '
+        Me.lstScores.BackColor = System.Drawing.Color.Lime
         Me.lstScores.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstScores.FormattingEnabled = True
         Me.lstScores.ItemHeight = 33
-        Me.lstScores.Location = New System.Drawing.Point(92, 295)
+        Me.lstScores.Location = New System.Drawing.Point(118, 570)
         Me.lstScores.Name = "lstScores"
-        Me.lstScores.Size = New System.Drawing.Size(553, 103)
+        Me.lstScores.Size = New System.Drawing.Size(533, 202)
         Me.lstScores.TabIndex = 6
         '
         'btnAdd
         '
-        Me.btnAdd.BackColor = System.Drawing.Color.MediumSpringGreen
+        Me.btnAdd.BackColor = System.Drawing.Color.Lime
         Me.btnAdd.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.Location = New System.Drawing.Point(12, 578)
+        Me.btnAdd.Location = New System.Drawing.Point(562, 930)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(128, 81)
+        Me.btnAdd.Size = New System.Drawing.Size(200, 84)
         Me.btnAdd.TabIndex = 7
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
         '
         'txtNewGM
         '
-        Me.txtNewGM.BackColor = System.Drawing.Color.Aquamarine
+        Me.txtNewGM.BackColor = System.Drawing.Color.Lime
         Me.txtNewGM.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNewGM.Location = New System.Drawing.Point(254, 339)
+        Me.txtNewGM.Location = New System.Drawing.Point(151, 463)
         Me.txtNewGM.Name = "txtNewGM"
-        Me.txtNewGM.Size = New System.Drawing.Size(217, 34)
+        Me.txtNewGM.Size = New System.Drawing.Size(474, 34)
         Me.txtNewGM.TabIndex = 8
         Me.txtNewGM.Visible = False
         '
         'btnPvP
         '
-        Me.btnPvP.BackColor = System.Drawing.Color.MediumSpringGreen
+        Me.btnPvP.BackColor = System.Drawing.Color.Lime
         Me.btnPvP.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPvP.Location = New System.Drawing.Point(306, 566)
+        Me.btnPvP.Location = New System.Drawing.Point(271, 930)
         Me.btnPvP.Name = "btnPvP"
-        Me.btnPvP.Size = New System.Drawing.Size(128, 94)
+        Me.btnPvP.Size = New System.Drawing.Size(200, 81)
         Me.btnPvP.TabIndex = 9
         Me.btnPvP.Text = "PvP"
         Me.btnPvP.UseVisualStyleBackColor = False
@@ -172,7 +179,7 @@ Partial Class HighScores
         Me.mnuHighScore.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem})
         Me.mnuHighScore.Location = New System.Drawing.Point(0, 0)
         Me.mnuHighScore.Name = "mnuHighScore"
-        Me.mnuHighScore.Size = New System.Drawing.Size(760, 42)
+        Me.mnuHighScore.Size = New System.Drawing.Size(774, 48)
         Me.mnuHighScore.TabIndex = 10
         Me.mnuHighScore.Text = "MenuStrip1"
         '
@@ -180,9 +187,10 @@ Partial Class HighScores
         '
         Me.MenuToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditPasswordToolStripMenuItem, Me.LogOutToolStripMenuItem, Me.QuitToolStripMenuItem})
+        Me.MenuToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
-        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 38)
+        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(104, 34)
         Me.MenuToolStripMenuItem.Text = "Menu"
         '
         'EditPasswordToolStripMenuItem
@@ -190,7 +198,7 @@ Partial Class HighScores
         Me.EditPasswordToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.EditPasswordToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
         Me.EditPasswordToolStripMenuItem.Name = "EditPasswordToolStripMenuItem"
-        Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
+        Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(330, 44)
         Me.EditPasswordToolStripMenuItem.Text = "Edit Password"
         '
         'LogOutToolStripMenuItem
@@ -198,7 +206,7 @@ Partial Class HighScores
         Me.LogOutToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
         Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
-        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(330, 44)
         Me.LogOutToolStripMenuItem.Text = "Log Out"
         '
         'QuitToolStripMenuItem
@@ -206,15 +214,76 @@ Partial Class HighScores
         Me.QuitToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
         Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
-        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(330, 44)
         Me.QuitToolStripMenuItem.Text = "Quit"
+        '
+        'lblSelectedPlayer
+        '
+        Me.lblSelectedPlayer.AutoSize = True
+        Me.lblSelectedPlayer.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSelectedPlayer.ForeColor = System.Drawing.Color.Lime
+        Me.lblSelectedPlayer.Location = New System.Drawing.Point(259, 201)
+        Me.lblSelectedPlayer.Name = "lblSelectedPlayer"
+        Me.lblSelectedPlayer.Size = New System.Drawing.Size(249, 33)
+        Me.lblSelectedPlayer.TabIndex = 11
+        Me.lblSelectedPlayer.Text = "Selected Player"
+        '
+        'lblScore
+        '
+        Me.lblScore.AutoSize = True
+        Me.lblScore.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblScore.ForeColor = System.Drawing.Color.Lime
+        Me.lblScore.Location = New System.Drawing.Point(320, 309)
+        Me.lblScore.Name = "lblScore"
+        Me.lblScore.Size = New System.Drawing.Size(99, 33)
+        Me.lblScore.TabIndex = 12
+        Me.lblScore.Text = "Score"
+        '
+        'lblNewGameMode
+        '
+        Me.lblNewGameMode.AutoSize = True
+        Me.lblNewGameMode.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewGameMode.ForeColor = System.Drawing.Color.Lime
+        Me.lblNewGameMode.Location = New System.Drawing.Point(294, 427)
+        Me.lblNewGameMode.Name = "lblNewGameMode"
+        Me.lblNewGameMode.Size = New System.Drawing.Size(163, 33)
+        Me.lblNewGameMode.TabIndex = 13
+        Me.lblNewGameMode.Text = "New Mode"
+        '
+        'lblScoreBoard
+        '
+        Me.lblScoreBoard.AutoSize = True
+        Me.lblScoreBoard.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblScoreBoard.ForeColor = System.Drawing.Color.Lime
+        Me.lblScoreBoard.Location = New System.Drawing.Point(277, 534)
+        Me.lblScoreBoard.Name = "lblScoreBoard"
+        Me.lblScoreBoard.Size = New System.Drawing.Size(189, 33)
+        Me.lblScoreBoard.TabIndex = 14
+        Me.lblScoreBoard.Text = "ScoreBoard"
+        Me.lblScoreBoard.Visible = False
+        '
+        'lblSelectedMode
+        '
+        Me.lblSelectedMode.AutoSize = True
+        Me.lblSelectedMode.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSelectedMode.ForeColor = System.Drawing.Color.Lime
+        Me.lblSelectedMode.Location = New System.Drawing.Point(265, 111)
+        Me.lblSelectedMode.Name = "lblSelectedMode"
+        Me.lblSelectedMode.Size = New System.Drawing.Size(229, 33)
+        Me.lblSelectedMode.TabIndex = 15
+        Me.lblSelectedMode.Text = "Selected Mode"
         '
         'HighScores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
-        Me.ClientSize = New System.Drawing.Size(760, 677)
+        Me.ClientSize = New System.Drawing.Size(774, 1029)
+        Me.Controls.Add(Me.lblSelectedMode)
+        Me.Controls.Add(Me.lblScoreBoard)
+        Me.Controls.Add(Me.lblNewGameMode)
+        Me.Controls.Add(Me.lblScore)
+        Me.Controls.Add(Me.lblSelectedPlayer)
         Me.Controls.Add(Me.btnPvP)
         Me.Controls.Add(Me.txtNewGM)
         Me.Controls.Add(Me.btnAdd)
@@ -256,4 +325,9 @@ Partial Class HighScores
     Friend WithEvents EditPasswordToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LogOutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QuitToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lblSelectedPlayer As Label
+    Friend WithEvents lblScore As Label
+    Friend WithEvents lblNewGameMode As Label
+    Friend WithEvents lblScoreBoard As Label
+    Friend WithEvents lblSelectedMode As Label
 End Class

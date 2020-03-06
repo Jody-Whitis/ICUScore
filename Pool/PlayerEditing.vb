@@ -59,6 +59,7 @@
                 exceptionLog.LogAction()
                 lblError.Text = "Error: Select a player to Change"
                 playerEditTheme.SetErrorLabel(lblError)
+                lblNewName.Visible = False
                 Exit Sub
             End Try
 
@@ -78,6 +79,7 @@
                     tbEdit.Visible = False
                     cbPlayerNames.Enabled = True
                     playerEditTheme.Screen = ScoreTheme.AppState.SelectPlayer
+                    lblNewName.Visible = False
                     btnBack_Click(Nothing, Nothing)
                 End If
             End If
@@ -85,6 +87,7 @@
         Else
             playerEditTheme.Screen = ScoreTheme.AppState.edit
             tbEdit.Visible = True
+            lblNewName.Visible = True
             cbPlayerNames.Enabled = False
             With btnDelete
                 .Visible = False
