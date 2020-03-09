@@ -1,5 +1,4 @@
 ﻿Imports Pool.ScoreTheme
-
 Public Class Home
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -29,23 +28,21 @@ Public Class Home
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Dim userAuthenticate As New Authenticate
-        Dim loggedIn As Boolean
 
         With userAuthenticate
             .User = txtUser.Text.ToString
             .Password = txtPassword.Text.ToString
         End With
         If Not String.IsNullOrEmpty(userAuthenticate.User) AndAlso Not String.IsNullOrWhiteSpace(userAuthenticate.Password) Then
-            loggedIn = userAuthenticate.GetLogin()
-            userAuthenticate.isLoggedIn = loggedIn
+            userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
         Else
-            loggedIn = False
+            userAuthenticate.isLoggedIn = False
             With mnuPlayerEditing
                 .Enabled = False
                 .Visible = False
             End With
         End If
-        If loggedIn.Equals(True) Then
+        If userAuthenticate.isLoggedIn.Equals(True) Then
             ScoreTheme.SetControl(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
             ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword}, False)
             lblUser.Visible = False
@@ -56,6 +53,7 @@ Public Class Home
             mnuPlayerEditing.Visible = True
             mnuPlayerEditing.Enabled = True
             lblHome.Text = $"Welcome {CurrentSession.DisplayName}!"
+            btnLogout.Location = btnGuest.Location
         Else
             Dim incorrectAlert As DialogResult = MessageBox.Show($"Incorrect Email and/or/also/maybe Password",
     "Incorrect Creditials", MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -97,6 +95,8 @@ Public Class Home
             lblHome.Visible = True
             editPasswordMnu.Visible = False
             logOutMnu.Visible = True
+            lblHome.Text = $"Welcome Guest!"
+            btnLogout.Location = btnGuest.Location
         End If
     End Sub
 

@@ -39,9 +39,7 @@ Public Class HighScores
         ScoreTheme.FillBoxfromHT(cbGames, allGames)
         highScores = games.GetAllResults("exec selAllScores @output=0")
         lblError.Visible = False
-        If Not String.IsNullOrEmpty(CurrentSession.UserEmail) Then
-            'lblError.Text = $"Hello {CurrentSession.UserEmail}"
-            'lblError.Visible = True
+        If Permissions.IsUser.Equals(True) Then
             cbPlayers.SelectedItem = CurrentSession.DisplayName
         End If
         If CurrentScreen = AppState.NoPlayerEx Then
@@ -60,8 +58,10 @@ Public Class HighScores
 #End Region
         If Not Permissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
             ScoreTheme.GuestDisplay(New Control() {btnAdd, btnSubmit, cbPlayers, txtScore, txtNewGM,
-                                        lblSelectedPlayer, lblScore, lblNewGameMode}, False)
+                                        lblSelectedPlayer, lblScore, lblNewGameMode, btnPlayerEditing}, False)
             EditPasswordToolStripMenuItem.Visible = False
+            mnuPlayerEditing.Visible = False
+            btnPvP.Location = btnAdd.Location
         End If
     End Sub
 
@@ -282,7 +282,7 @@ Public Class HighScores
     ''' <param name="e"></param>
     Private Sub cbGames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGames.SelectedIndexChanged
         games.GameMode = cbGames.SelectedItem
-        If ScoreTheme.ValidateCBox(cbPlayers).Equals(True) AndAlso Not cbGames.SelectedItem.Equals("Choose Something") Then
+        If Not cbGames.SelectedItem.Equals("Choose Something") Then
             GetHighScores(games.GameMode)
             ScoreTheme.SetErrorLabel(lblError)
         End If
@@ -322,7 +322,6 @@ Public Class HighScores
                 games.InsertGame(newGM)
                 allGames = games.GetAllPlayers()
                 ScoreTheme.FillBoxfromHT(cbGames, allGames)
-                'highScoreTheme.FillCBoxAll(allGames, cbGames, lblError)
                 highScores = games.GetAllResults("exec selAllScores @output=0")
                 txtNewGM.ResetText()
                 txtNewGM.Visible = False
@@ -367,7 +366,7 @@ Public Class HighScores
         ScoreTheme.LogOutUser()
     End Sub
 
-    Private Sub PlayerEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlayerEditingToolStripMenuItem.Click, btnPlayerEditing.Click
+    Private Sub PlayerEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPlayerEditing.Click, btnPlayerEditing.Click
         If Permissions.IsUser.Equals(True) Then
             CurrentSession.PreviousForm = Me
             PlayerEditing.Activate()

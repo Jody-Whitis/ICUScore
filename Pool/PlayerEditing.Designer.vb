@@ -22,6 +22,7 @@ Partial Class PlayerEditing
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PlayerEditing))
         Me.btnBack = New System.Windows.Forms.Button()
         Me.cbPlayerNames = New System.Windows.Forms.ComboBox()
         Me.btnDelete = New System.Windows.Forms.Button()
@@ -35,25 +36,30 @@ Partial Class PlayerEditing
         Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblSelectedName = New System.Windows.Forms.Label()
         Me.lblNewName = New System.Windows.Forms.Label()
+        Me.lblEditing = New System.Windows.Forms.Label()
         Me.mnuPlayerEditing.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnBack
         '
         Me.btnBack.BackColor = System.Drawing.Color.Lime
+        Me.btnBack.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnBack.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnBack.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBack.Location = New System.Drawing.Point(13, 595)
         Me.btnBack.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(183, 70)
-        Me.btnBack.TabIndex = 0
+        Me.btnBack.TabIndex = 5
         Me.btnBack.Text = "Back"
         Me.btnBack.UseVisualStyleBackColor = False
         '
         'cbPlayerNames
         '
-        Me.cbPlayerNames.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cbPlayerNames.BackColor = System.Drawing.Color.Lime
+        Me.cbPlayerNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbPlayerNames.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbPlayerNames.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbPlayerNames.FormattingEnabled = True
         Me.cbPlayerNames.Location = New System.Drawing.Point(108, 200)
@@ -65,18 +71,22 @@ Partial Class PlayerEditing
         'btnDelete
         '
         Me.btnDelete.BackColor = System.Drawing.Color.Lime
+        Me.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnDelete.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.Location = New System.Drawing.Point(353, 460)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(183, 70)
-        Me.btnDelete.TabIndex = 2
+        Me.btnDelete.TabIndex = 4
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
         '
         'btnEdit
         '
         Me.btnEdit.BackColor = System.Drawing.Color.Lime
+        Me.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnEdit.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEdit.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.btnEdit.Location = New System.Drawing.Point(108, 460)
@@ -95,7 +105,7 @@ Partial Class PlayerEditing
         Me.tbEdit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbEdit.Name = "tbEdit"
         Me.tbEdit.Size = New System.Drawing.Size(428, 41)
-        Me.tbEdit.TabIndex = 4
+        Me.tbEdit.TabIndex = 2
         '
         'lblError
         '
@@ -114,7 +124,7 @@ Partial Class PlayerEditing
         Me.mnuPlayerEditing.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem})
         Me.mnuPlayerEditing.Location = New System.Drawing.Point(0, 0)
         Me.mnuPlayerEditing.Name = "mnuPlayerEditing"
-        Me.mnuPlayerEditing.Size = New System.Drawing.Size(674, 48)
+        Me.mnuPlayerEditing.Size = New System.Drawing.Size(674, 41)
         Me.mnuPlayerEditing.TabIndex = 6
         Me.mnuPlayerEditing.Text = "MenuStrip1"
         '
@@ -124,7 +134,7 @@ Partial Class PlayerEditing
         Me.MenuToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
-        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 44)
+        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 37)
         Me.MenuToolStripMenuItem.Text = "Menu"
         '
         'EditPasswordToolStripMenuItem
@@ -174,12 +184,25 @@ Partial Class PlayerEditing
         Me.lblNewName.Text = "New Name"
         Me.lblNewName.Visible = False
         '
+        'lblEditing
+        '
+        Me.lblEditing.AutoSize = True
+        Me.lblEditing.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEditing.ForeColor = System.Drawing.Color.Lime
+        Me.lblEditing.Location = New System.Drawing.Point(255, 48)
+        Me.lblEditing.Name = "lblEditing"
+        Me.lblEditing.Size = New System.Drawing.Size(138, 39)
+        Me.lblEditing.TabIndex = 9
+        Me.lblEditing.Text = "Editing"
+        '
         'PlayerEditing
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
+        Me.CancelButton = Me.btnBack
         Me.ClientSize = New System.Drawing.Size(674, 679)
+        Me.Controls.Add(Me.lblEditing)
         Me.Controls.Add(Me.lblNewName)
         Me.Controls.Add(Me.lblSelectedName)
         Me.Controls.Add(Me.lblError)
@@ -189,6 +212,7 @@ Partial Class PlayerEditing
         Me.Controls.Add(Me.cbPlayerNames)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.mnuPlayerEditing)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.mnuPlayerEditing
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "PlayerEditing"
@@ -213,4 +237,5 @@ Partial Class PlayerEditing
     Friend WithEvents QuitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblSelectedName As Label
     Friend WithEvents lblNewName As Label
+    Friend WithEvents lblEditing As Label
 End Class

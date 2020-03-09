@@ -2,7 +2,6 @@
     Dim selectedPlayer As New PlayerStats
     Dim allplayers As New Hashtable
     Dim nonRegisterdPlayers As New Hashtable
-    Dim userPermissions As New Permissions()
 
     Private Sub PlayerEditing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ScoreTheme.SetControl(New Control() {btnBack, btnEdit, btnDelete}, True)

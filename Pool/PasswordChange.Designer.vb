@@ -22,6 +22,7 @@ Partial Class PasswordChange
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PasswordChange))
         Me.txtNewPassword = New System.Windows.Forms.TextBox()
         Me.txtNewPasswordConfirm = New System.Windows.Forms.TextBox()
         Me.btnUpdatePassword = New System.Windows.Forms.Button()
@@ -42,7 +43,7 @@ Partial Class PasswordChange
         Me.txtNewPassword.Name = "txtNewPassword"
         Me.txtNewPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtNewPassword.Size = New System.Drawing.Size(356, 34)
-        Me.txtNewPassword.TabIndex = 0
+        Me.txtNewPassword.TabIndex = 2
         '
         'txtNewPasswordConfirm
         '
@@ -53,18 +54,20 @@ Partial Class PasswordChange
         Me.txtNewPasswordConfirm.Name = "txtNewPasswordConfirm"
         Me.txtNewPasswordConfirm.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtNewPasswordConfirm.Size = New System.Drawing.Size(356, 34)
-        Me.txtNewPasswordConfirm.TabIndex = 1
+        Me.txtNewPasswordConfirm.TabIndex = 3
         '
         'btnUpdatePassword
         '
         Me.btnUpdatePassword.BackColor = System.Drawing.Color.Lime
+        Me.btnUpdatePassword.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnUpdatePassword.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnUpdatePassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdatePassword.ForeColor = System.Drawing.Color.Black
         Me.btnUpdatePassword.Location = New System.Drawing.Point(377, 529)
         Me.btnUpdatePassword.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpdatePassword.Name = "btnUpdatePassword"
         Me.btnUpdatePassword.Size = New System.Drawing.Size(164, 86)
-        Me.btnUpdatePassword.TabIndex = 2
+        Me.btnUpdatePassword.TabIndex = 5
         Me.btnUpdatePassword.Text = "Update Password"
         Me.btnUpdatePassword.UseVisualStyleBackColor = False
         '
@@ -83,6 +86,9 @@ Partial Class PasswordChange
         'btnCancel
         '
         Me.btnCancel.BackColor = System.Drawing.Color.Lime
+        Me.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCancel.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.ForeColor = System.Drawing.Color.Black
         Me.btnCancel.Location = New System.Drawing.Point(13, 529)
@@ -102,7 +108,7 @@ Partial Class PasswordChange
         Me.txtCurrentPassword.Name = "txtCurrentPassword"
         Me.txtCurrentPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtCurrentPassword.Size = New System.Drawing.Size(356, 34)
-        Me.txtCurrentPassword.TabIndex = 5
+        Me.txtCurrentPassword.TabIndex = 1
         '
         'Label1
         '
@@ -142,9 +148,11 @@ Partial Class PasswordChange
         '
         'PasswordChange
         '
+        Me.AcceptButton = Me.btnUpdatePassword
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
+        Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(554, 629)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
@@ -155,8 +163,10 @@ Partial Class PasswordChange
         Me.Controls.Add(Me.btnUpdatePassword)
         Me.Controls.Add(Me.txtNewPasswordConfirm)
         Me.Controls.Add(Me.txtNewPassword)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "PasswordChange"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "PasswordChange"
         Me.ResumeLayout(False)
         Me.PerformLayout()
