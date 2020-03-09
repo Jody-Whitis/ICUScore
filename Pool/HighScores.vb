@@ -40,8 +40,8 @@ Public Class HighScores
         highScores = games.GetAllResults("exec selAllScores @output=0")
         lblError.Visible = False
         If Not String.IsNullOrEmpty(CurrentSession.UserEmail) Then
-            lblError.Text = $"Hello {CurrentSession.UserEmail}"
-            lblError.Visible = True
+            'lblError.Text = $"Hello {CurrentSession.UserEmail}"
+            'lblError.Visible = True
             cbPlayers.SelectedItem = CurrentSession.DisplayName
         End If
         If CurrentScreen = AppState.NoPlayerEx Then
@@ -335,6 +335,9 @@ Public Class HighScores
                 'btnAdd.Size = addDim
                 CurrentScreen = AppState.SelectPlayer
             End If
+        Else
+            lblError.Text = "This new game mode needs a name"
+            lblError.Visible = True
         End If
     End Sub
 
@@ -363,4 +366,15 @@ Public Class HighScores
     Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
         ScoreTheme.LogOutUser()
     End Sub
+
+    Private Sub PlayerEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlayerEditingToolStripMenuItem.Click, btnPlayerEditing.Click
+        If Permissions.IsUser.Equals(True) Then
+            CurrentSession.PreviousForm = Me
+            PlayerEditing.Activate()
+            PlayerEditing.Show()
+            Me.Hide()
+        End If
+    End Sub
+
+
 End Class

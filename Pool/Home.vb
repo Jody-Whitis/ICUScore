@@ -40,6 +40,10 @@ Public Class Home
             userAuthenticate.isLoggedIn = loggedIn
         Else
             loggedIn = False
+            With mnuPlayerEditing
+                .Enabled = False
+                .Visible = False
+            End With
         End If
         If loggedIn.Equals(True) Then
             ScoreTheme.SetControl(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
@@ -49,6 +53,9 @@ Public Class Home
             lblHome.Visible = True
             editPasswordMnu.Visible = True
             logOutMnu.Visible = True
+            mnuPlayerEditing.Visible = True
+            mnuPlayerEditing.Enabled = True
+            lblHome.Text = $"Welcome {CurrentSession.DisplayName}!"
         Else
             Dim incorrectAlert As DialogResult = MessageBox.Show($"Incorrect Email and/or/also/maybe Password",
     "Incorrect Creditials", MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -90,6 +97,15 @@ Public Class Home
             lblHome.Visible = True
             editPasswordMnu.Visible = False
             logOutMnu.Visible = True
+        End If
+    End Sub
+
+    Private Sub PlayerEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPlayerEditing.Click
+        If Permissions.IsUser.Equals(True) Then
+            PlayerEditing.Activate()
+            PlayerEditing.Show()
+            CurrentSession.PreviousForm = Me
+            Me.Hide()
         End If
     End Sub
 End Class

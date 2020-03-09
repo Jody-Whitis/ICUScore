@@ -31,10 +31,17 @@
                 CurrentScreen = AppState.SelectPlayer
                 ScoreTheme.SetControl(New Control() {btnEdit, cbPlayerNames}, True)
             Case Else
-                With PvP
-                    .Activate()
-                    .Show()
-                End With
+                If PreviousForm IsNot Nothing Then
+                    With PreviousForm
+                        .Activate()
+                        .Show()
+                    End With
+                Else
+                    With Home
+                        .Activate()
+                        .Show()
+                    End With
+                End If
                 Me.Close()
         End Select
     End Sub
@@ -150,7 +157,7 @@
             .Show()
         End With
         CurrentSession.PreviousForm = Me
-        Me.Close()
+        Me.Hide()
     End Sub
 
     Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click

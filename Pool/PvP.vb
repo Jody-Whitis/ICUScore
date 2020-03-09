@@ -57,7 +57,7 @@ Public Class PvP
         Else
             CurrentScreen = AppState.Start
         End If
-        If Not userPermissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
+        If Not Permissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
             ScoreTheme.GuestDisplay(New Control() {btnSave, cbPlayer1, cbPlayer2, lblPlayer1, lblPlayer2, lblTotalAgainst,
                                   lblWinsAgainst1, lblWinsAgainst2, lblTotalWins1, lblTotalWins2, btnRegisterTest}, False)
             EditPasswordToolStripMenuItem.Visible = False
@@ -437,11 +437,14 @@ Public Class PvP
     End Sub
 
     Private Sub btnRegisterTest_Click(sender As Object, e As EventArgs) Handles btnRegisterTest.Click
-        With PlayerEditing
-            .Activate()
-            .Show()
-        End With
-        Me.Close()
+        If Permissions.IsUser.Equals(True) Then
+            With PlayerEditing
+                .Activate()
+                .Show()
+            End With
+            CurrentSession.PreviousForm = Me
+        End If
+        Me.Hide()
     End Sub
 
 #Region "Editing logic moved to PlayerEditing.vb - ver 1.8.2"

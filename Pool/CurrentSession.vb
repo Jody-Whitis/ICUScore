@@ -96,7 +96,8 @@ Module CurrentSession
             _CurrentScreen = value
         End Set
     End Property
-
+    'Never use this if you are disposing of the form
+    'Always when only hiding for navigation
     Public Sub setPreviousForm(ByRef prevForm As Form)
         PreviousForm = prevForm
     End Sub
