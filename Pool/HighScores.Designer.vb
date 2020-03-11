@@ -277,7 +277,6 @@ Partial Class HighScores
         Me.lblNewGameMode.Size = New System.Drawing.Size(163, 33)
         Me.lblNewGameMode.TabIndex = 13
         Me.lblNewGameMode.Text = "New Mode"
-        Me.lblNewGameMode.Visible = False
         '
         'lblScoreBoard
         '

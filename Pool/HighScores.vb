@@ -213,6 +213,7 @@ Public Class HighScores
             cbGames.Visible = True
             cbPlayers.Visible = True
             txtScore.Visible = True
+            lblNewGameMode.Visible = False
             ScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit}, True)
             btnAdd.Location = addLoc
             btnAdd.Size = addDim
@@ -312,9 +313,8 @@ Public Class HighScores
             lstScores.Visible = False
             ScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode}, False)
             txtNewGM.Visible = True
-            ScoreTheme.SetControl(New Button() {btnSubmit}, False)
-            'btnAdd.Location = pvpLoc
-            'btnAdd.Size = pvpDim
+            ScoreTheme.SetControl(New Control() {btnSubmit, lblNewGameMode}, False)
+
         ElseIf CurrentScreen = AppState.Add Then
             If Not String.IsNullOrEmpty(txtNewGM.Text) Then
                 'try to insert if not blank
@@ -329,13 +329,17 @@ Public Class HighScores
                 cbGames.Visible = True
                 cbPlayers.Visible = True
                 txtScore.Visible = True
-                ScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit}, True)
+                ScoreTheme.SetControl(New Control() {lblScore, lblNewGameMode, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit}, True)
                 'btnAdd.Location = addLoc
                 'btnAdd.Size = addDim
                 CurrentScreen = AppState.SelectPlayer
+            Else
+                Dim incorrectAlert As DialogResult = MessageBox.Show($"You got to name it first",
+  "No Name", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             End If
         Else
-            lblError.Text = "This new game mode needs a name"
+            lblError.Text = "Error: This new game mode needs a name"
+            ScoreTheme.SetErrorLabel(lblError)
             lblError.Visible = True
         End If
     End Sub

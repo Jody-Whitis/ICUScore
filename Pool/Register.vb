@@ -42,9 +42,7 @@ Public Class Register
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Home.Activate()
-        Home.Show()
-        Me.Close()
+        ScoreTheme.LoadNextFormClose(Me, Home)
     End Sub
 
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
@@ -78,7 +76,9 @@ Public Class Register
                 'Confirm your password
             End If
         Else
-            'Enter all required fields.
+            Dim missingRequirements As String = ScoreTheme.GetMissingFieldNames(New Control() {txtUseremail, txtPassword, TxtPasswordConfirm, TxtPasswordConfirm})
+            Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields {missingRequirements}",
+        "Missing Requirement", MessageBoxButtons.OK, MessageBoxIcon.Hand)
         End If
 
     End Sub

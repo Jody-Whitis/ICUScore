@@ -21,17 +21,21 @@
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         ScoreTheme.SetControl(New Control() {cbPlayerNames, tbEdit}, False)
         cbPlayerNames.SelectedValue = String.Empty
-        'move out
+        lblNewName.Visible = False
         Select Case CurrentScreen
             Case AppState.Edit
-                ScoreTheme.SetControl(New Control() {btnDelete, cbPlayerNames}, True)
+                ScoreTheme.SetControl(New Control() {btnDelete, btnAdd, cbPlayerNames, lblSelectedName}, True)
                 CurrentScreen = AppState.SelectPlayer
             Case AppState.Delete
                 CurrentScreen = AppState.SelectPlayer
-                ScoreTheme.SetControl(New Control() {btnEdit, cbPlayerNames}, True)
+                ScoreTheme.SetControl(New Control() {btnEdit, btnAdd, cbPlayerNames, lblSelectedName}, True)
+            Case AppState.Add
+                CurrentScreen = AppState.SelectPlayer
+                ScoreTheme.SetControl(New Control() {btnEdit, btnDelete, cbPlayerNames, lblSelectedName}, True)
             Case Else
                 If PreviousForm IsNot Nothing Then
                     With PreviousForm
+                        .Refresh()
                         .Activate()
                         .Show()
                     End With
@@ -71,13 +75,8 @@
                     allplayers = selectedPlayer.IDBConnect_GetAllPlayers()
                     tbEdit.ResetText()
                     lblError.Text = $"{selectedPlayer.PlayerName1} is now {newName}"
-                    lblError.Visible = True
-                    btnDelete.Visible = True
                     cbPlayerNames.SelectedItem = Nothing
-                    tbEdit.Visible = False
-                    cbPlayerNames.Enabled = True
                     CurrentScreen = AppState.SelectPlayer
-                    lblNewName.Visible = False
                     btnBack_Click(Nothing, Nothing)
                 End If
             End If
@@ -87,10 +86,7 @@
             tbEdit.Visible = True
             lblNewName.Visible = True
             cbPlayerNames.Enabled = False
-            With btnDelete
-                .Visible = False
-                .Enabled = False
-            End With
+            ScoreTheme.SetControl(New Control() {btnDelete, btnAdd}, False)
         End If
     End Sub
 
@@ -120,19 +116,13 @@
                     allplayers = selectedPlayer.IDBConnect_GetAllPlayers()
                     tbEdit.Text = String.Empty
                     lblError.Text = $"{selectedPlayer.PlayerName1} is gone"
-                    lblError.Visible = True
-                    btnDelete.Visible = True
                     cbPlayerNames.SelectedItem = Nothing
-                    tbEdit.Visible = False
                     cbPlayerNames.Enabled = True
                     btnBack_Click(Nothing, Nothing)
                 End If
             End If
         Else
-            With btnEdit
-                .Visible = False
-                .Enabled = False
-            End With
+            ScoreTheme.SetControl(New Control() {btnEdit, btnAdd}, False)
             CurrentScreen = AppState.Delete
             cbPlayerNames.Enabled = False
         End If
@@ -165,5 +155,37 @@
 
     Private Sub QuitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click
         Application.Exit()
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        'If players have names, then update cbox and add them to db
+        If CurrentScreen = AppState.Add Then
+            If Not String.IsNullOrEmpty(tbEdit.Text) Then
+                selectedPlayer.PlayerName1 = tbEdit.Text.ToString
+                If Not String.IsNullOrEmpty(selectedPlayer.PlayerName1) Then
+                    Dim addAlert As DialogResult = MessageBox.Show($"Are you sure you want to add {selectedPlayer.PlayerName1}?",
+        "Add Player", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+                    'are you sure??????????
+                    If addAlert.Equals(DialogResult.Yes) Then
+                        selectedPlayer.InsertPlayer()
+                        tbEdit.ResetText()
+                        lblError.Text = $"{selectedPlayer.PlayerName1} has joined!"
+                        lblError.Visible = True
+                        cbPlayerNames.SelectedItem = Nothing
+                        CurrentScreen = AppState.SelectPlayer
+                        lblNewName.Visible = False
+                        btnBack_Click(Nothing, Nothing)
+                    End If
+                End If
+            Else
+                Dim missingFields As String = ScoreTheme.GetMissingFieldNames(New Control() {tbEdit})
+                Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields {missingFields}",
+       "Missing Requirement", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            End If
+        Else
+            CurrentScreen = AppState.Add
+            ScoreTheme.SetControl(New Control() {tbEdit, lblNewName}, True)
+            ScoreTheme.SetControl(New Control() {cbPlayerNames, btnEdit, btnDelete, lblEditing, lblSelectedName}, False)
+        End If
     End Sub
 End Class

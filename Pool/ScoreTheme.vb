@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Text
+Imports System.Windows.Forms
 Imports Pool.Logging
 Public Class ScoreTheme
 
@@ -15,6 +16,22 @@ Public Class ScoreTheme
             errorText.Visible = False
             errorText.ForeColor = Color.Lime
         End If
+    End Sub
+
+    Public Shared Sub LoadNextFormHide(ByRef currentForm As Form, ByRef nextForm As Form)
+        currentForm.Cursor = Cursors.WaitCursor
+        nextForm.Activate()
+        nextForm.Show()
+        currentForm.Cursor = Cursors.Default
+        currentForm.Hide()
+    End Sub
+
+    Public Shared Sub LoadNextFormClose(ByRef currentForm As Form, ByRef nextForm As Form)
+        currentForm.Cursor = Cursors.WaitCursor
+        nextForm.Activate()
+        nextForm.Show()
+        currentForm.Cursor = Cursors.Default
+        currentForm.Close()
     End Sub
 
     ''' <summary>
@@ -34,7 +51,6 @@ Public Class ScoreTheme
 
 #End Region
 
-    'convert to shared and take out instanices = 1.8.2
     ''' <summary>
     ''' Retrieve key ID for this value
     ''' </summary>
@@ -57,6 +73,7 @@ Public Class ScoreTheme
     ''' <param name="allDT"></param>
     Public Shared Sub FillBoxfromHT(ByRef cBox As ComboBox, ByVal allDT As Hashtable)
         cBox.Items.Clear()
+        cBox.Items.Add("Choose")
         For Each entry As DictionaryEntry In allDT
             If Not entry.Value.Equals("Error") Then
                 cBox.Items.Add(entry.Value)
@@ -84,11 +101,26 @@ Public Class ScoreTheme
     ''' <param name="cBox"></param>
     ''' <returns></returns>
     Public Shared Function ValidateCBox(ByRef cBox As ComboBox) As Boolean
-        If cBox.SelectedItem IsNot Nothing AndAlso Not String.IsNullOrEmpty(cBox.SelectedItem.ToString) Then
+        If cBox.SelectedItem IsNot Nothing AndAlso Not String.IsNullOrEmpty(cBox.SelectedItem.ToString) AndAlso Not cBox.SelectedItem.ToString.Contains("Choose") Then
             Return True
         Else
             Return False
         End If
+    End Function
+
+    ''' <summary>
+    ''' Get missing required fields to display
+    ''' </summary>
+    ''' <param name="controls"></param>
+    ''' <returns></returns>
+    Public Shared Function GetMissingFieldNames(ByRef controls As Control()) As String
+        Dim missingFields As New StringBuilder
+        For Each field In controls
+            If String.IsNullOrEmpty(field.Text) Then
+                missingFields.Append(field.Name.Substring(3) & ",")
+            End If
+        Next
+        Return missingFields.ToString.Trim(",")
     End Function
 
     ''' <summary>

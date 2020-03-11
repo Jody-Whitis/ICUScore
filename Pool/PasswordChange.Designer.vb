@@ -103,6 +103,7 @@ Partial Class PasswordChange
         '
         Me.txtCurrentPassword.BackColor = System.Drawing.Color.Lime
         Me.txtCurrentPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCurrentPassword.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.txtCurrentPassword.Location = New System.Drawing.Point(87, 210)
         Me.txtCurrentPassword.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtCurrentPassword.Name = "txtCurrentPassword"

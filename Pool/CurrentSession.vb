@@ -20,7 +20,7 @@ Module CurrentSession
     Private _password As String
     Private _iD As Integer
     Private _userStatus As Integer
-    Public PreviousForm As Form = Nothing
+    Public PreviousForm As Form = Home
     Public CurrentForm As Form = Nothing
     Private _CurrentScreen As AppState
 #End Region

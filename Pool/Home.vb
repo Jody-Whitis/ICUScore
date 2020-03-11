@@ -11,15 +11,11 @@ Public Class Home
     End Sub
 
     Private Sub btnPvP_Click(sender As Object, e As EventArgs) Handles btnPvP.Click
-        PvP.Activate()
-        PvP.Show()
-        Me.Hide()
+        LoadNextFormHide(Me, PvP)
     End Sub
 
     Private Sub btnHS_Click(sender As Object, e As EventArgs) Handles btnHS.Click
-        HighScores.Activate()
-        HighScores.Show()
-        Me.Hide()
+        LoadNextFormHide(Me, HighScores)
     End Sub
 
     Private Sub btnQuit_Click(sender As Object, e As EventArgs) Handles btnQuit.Click, quitMnu.Click
@@ -67,16 +63,14 @@ Public Class Home
 
     Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles editPasswordMnu.Click
         If CurrentSession.IsLoggedIn.Equals(True) Then
-            CurrentSession.setPreviousForm(Me)
-            PasswordChange.Show()
-            Me.Hide()
+            CurrentSession.PreviousForm = Me
+            LoadNextFormHide(Me, PasswordChange)
         End If
     End Sub
 
     Private Sub btnNewUser_Click(sender As Object, e As EventArgs) Handles btnNewUser.Click
-        Register.Activate()
-        Register.Show()
-        Me.Hide()
+        CurrentSession.PreviousForm = Me
+        LoadNextFormHide(Me, Register)
     End Sub
 
     Private Sub btnGuest_Click(sender As Object, e As EventArgs) Handles btnGuest.Click
@@ -102,10 +96,8 @@ Public Class Home
 
     Private Sub PlayerEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPlayerEditing.Click
         If Permissions.IsUser.Equals(True) Then
-            PlayerEditing.Activate()
-            PlayerEditing.Show()
             CurrentSession.PreviousForm = Me
-            Me.Hide()
+            LoadNextFormHide(Me, PlayerEditing)
         End If
     End Sub
 End Class

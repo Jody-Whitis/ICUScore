@@ -152,11 +152,11 @@ Public Class PlayerStats
         Dim ds As New DataSet
         Dim sqlString = String.Empty
         sqlString = $"exec insNewPlayer @newPlayer='{PlayerName1.Trim}'"
-        ds = scoresDB.DBSQL(sqlString)
         Try
-            Return ds.Tables(0).Rows(0).Item(0).ToString
-        Catch ex As DataException
+            ds = scoresDB.DBSQL(sqlString)
             Return String.Empty
+        Catch ex As DataException
+            Return "Error"
         End Try
     End Function
 
@@ -206,16 +206,8 @@ Public Class PlayerStats
 #End Region
         Dim sqlString = String.Empty
         sqlString = $"exec [selPlayers_v1.1] @playerId={PID},@wins={Wins1}"
-        'sqlString = "Select wins from Players where playerName In ('" & PlayerName1 & "','" & playerName2 & "')"
         ds = scoresDB.DBSQL(sqlString)
         Return ds
-        'Try
-        '    retVal(0) = ds.Tables(0).Rows(0).Item(0).ToString
-        '    retVal(1) = ds.Tables(0).Rows(1).Item(0).ToString
-        'Catch ex As Exception
-        '    retVal(0) = "Error"
-        'End Try
-        'Return retVal
     End Function
 
     Public Function InsertResult() As String Implements IDBConnect.InsertScore
