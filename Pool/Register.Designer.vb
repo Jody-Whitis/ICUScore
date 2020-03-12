@@ -42,6 +42,8 @@ Partial Class Register
         Me.PlayerEditingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRegister.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -195,7 +197,7 @@ Partial Class Register
         Me.mnuRegister.BackColor = System.Drawing.Color.RoyalBlue
         Me.mnuRegister.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
         Me.mnuRegister.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.mnuRegister.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem})
+        Me.mnuRegister.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.mnuRegister.Location = New System.Drawing.Point(0, 0)
         Me.mnuRegister.Name = "mnuRegister"
         Me.mnuRegister.Size = New System.Drawing.Size(704, 48)
@@ -244,6 +246,23 @@ Partial Class Register
         Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
         Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(362, 44)
         Me.QuitToolStripMenuItem.Text = "Quit"
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem1})
+        Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 44)
+        Me.AboutToolStripMenuItem.Text = "About"
+        '
+        'AboutToolStripMenuItem1
+        '
+        Me.AboutToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.AboutToolStripMenuItem1.ForeColor = System.Drawing.Color.Lime
+        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(359, 44)
+        Me.AboutToolStripMenuItem1.Text = "About"
         '
         'Register
         '
@@ -297,4 +316,6 @@ Partial Class Register
     Friend WithEvents LogOutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QuitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PlayerEditingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
 End Class

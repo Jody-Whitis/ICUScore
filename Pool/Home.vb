@@ -100,4 +100,10 @@ Public Class Home
             LoadNextFormHide(Me, PlayerEditing)
         End If
     End Sub
+
+    Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
+        CurrentSession.PreviousForm = Me
+        AboutThis.Activate()
+        AboutThis.Show()
+    End Sub
 End Class

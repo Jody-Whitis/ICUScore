@@ -121,6 +121,39 @@ Public Class HighScores
         Return updateSent.ToString.TrimEnd(",")
     End Function
 
+
+    ''' <summary>
+    ''' Using the selected item, run a Linq for that one.
+    ''' Then add to display
+    ''' </summary>
+    ''' <param name="gameMode"></param>
+    Private Sub GetHighScores(ByVal gameMode As String)
+        If highScores.Tables(0).Rows.Count > 0 Then
+            lstScores.Items.Clear()
+            Try
+                Dim scores = (From r In highScores.Tables(0).AsEnumerable Where r.Item("gameMode").Equals(gameMode)
+                              Select r)
+                For Each score In scores
+                    Dim playerNameScore As String = score.Item("playerName")
+                    Dim playerScore As String = score.Item("highScore")
+                    lstScores.Items.Add(playerNameScore & "".PadRight(10) & ":" & " ".PadRight(5) & playerScore)
+                Next
+                lstScores.BackColor = Color.Lime
+                lstScores.Visible = True
+                lblScoreBoard.Visible = True
+                lstScores.Refresh()
+            Catch ex As Exception
+                Dim exceptionLog As New Logging(Now, "Get High Score", ex.ToString)
+                exceptionLog.LogAction()
+                Debug.WriteLine(ex.ToString)
+                lblError.Text = ex.Message.ToString
+                ScoreTheme.SetErrorLabel(lblError)
+            End Try
+        End If
+    End Sub
+
+#Region "Event Handlers"
+
     ''' <summary>
     ''' To submit new entry. If we're are not in start state,
     ''' check if selected item is not nothing, then if entry is numberic and set both object's prop
@@ -246,36 +279,6 @@ Public Class HighScores
     End Sub
 
     ''' <summary>
-    ''' Using the selected item, run a Linq for that one.
-    ''' Then add to display
-    ''' </summary>
-    ''' <param name="gameMode"></param>
-    Private Sub GetHighScores(ByVal gameMode As String)
-        If highScores.Tables(0).Rows.Count > 0 Then
-            lstScores.Items.Clear()
-            Try
-                Dim scores = (From r In highScores.Tables(0).AsEnumerable Where r.Item("gameMode").Equals(gameMode)
-                              Select r)
-                For Each score In scores
-                    Dim playerNameScore As String = score.Item("playerName")
-                    Dim playerScore As String = score.Item("highScore")
-                    lstScores.Items.Add(playerNameScore & "".PadRight(10) & ":" & " ".PadRight(5) & playerScore)
-                Next
-                lstScores.BackColor = Color.Lime
-                lstScores.Visible = True
-                lblScoreBoard.Visible = True
-                lstScores.Refresh()
-            Catch ex As Exception
-                Dim exceptionLog As New Logging(Now, "Get High Score", ex.ToString)
-                exceptionLog.LogAction()
-                Debug.WriteLine(ex.ToString)
-                lblError.Text = ex.Message.ToString
-                ScoreTheme.SetErrorLabel(lblError)
-            End Try
-        End If
-    End Sub
-
-    ''' <summary>
     ''' Set the mode on this item, them get all and display them
     ''' set error label if any
     ''' </summary>
@@ -313,7 +316,8 @@ Public Class HighScores
             lstScores.Visible = False
             ScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode}, False)
             txtNewGM.Visible = True
-            ScoreTheme.SetControl(New Control() {btnSubmit, lblNewGameMode}, False)
+            lblNewGameMode.Visible = True
+            ScoreTheme.SetControl(New Control() {btnSubmit}, False)
 
         ElseIf CurrentScreen = AppState.Add Then
             If Not String.IsNullOrEmpty(txtNewGM.Text) Then
@@ -329,6 +333,7 @@ Public Class HighScores
                 cbGames.Visible = True
                 cbPlayers.Visible = True
                 txtScore.Visible = True
+                lblNewGameMode.Visible = False
                 ScoreTheme.SetControl(New Control() {lblScore, lblNewGameMode, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit}, True)
                 'btnAdd.Location = addLoc
                 'btnAdd.Size = addDim
@@ -379,5 +384,7 @@ Public Class HighScores
         End If
     End Sub
 
+
+#End Region
 
 End Class

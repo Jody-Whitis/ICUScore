@@ -34,5 +34,11 @@ Namespace My
         Protected Overrides Sub OnCreateMainForm()
             Me.MainForm = Global.Pool.Home
         End Sub
+        
+        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
+        Protected Overrides Sub OnCreateSplashScreen()
+            Me.SplashScreen = Global.Pool.SplashScreen
+            Me.MinimumSplashScreenDisplayTime = 3000
+        End Sub
     End Class
 End Namespace

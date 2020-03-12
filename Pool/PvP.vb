@@ -21,6 +21,7 @@ Public Class PvP
     Dim pvpSet2 As New DataSet
     Dim userPermissions As New Permissions()
 #End Region
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'LocalResultsDataSet1.Players' table. You can move, or remove it, as needed.
         'Me.PlayersTableAdapter1.Fill(Me.LocalResultsDataSet1.Players)
@@ -63,6 +64,7 @@ Public Class PvP
             EditPasswordToolStripMenuItem.Visible = False
         End If
     End Sub
+
     ''' <summary>
     ''' Get the columns and set the board
     ''' </summary>
@@ -92,6 +94,145 @@ Public Class PvP
             End Try
         End If
     End Sub
+
+    ''' <summary>
+    ''' Set Controls when selecting
+    ''' </summary>
+    ''' <param name="selectedPlayer"></param>
+    ''' <param name="selectedCBox"></param>
+    ''' <param name="opposingCbox"></param>
+    Private Sub SetSelectedDisplay(selectedPlayer As Integer, selectedCBox As ComboBox, opposingCbox As ComboBox)
+        Dim isRivarly As Boolean = False
+        lblError.Visible = False
+        ScoreTheme.SetControl(New TextBox() {txtWins, txtWins2}, True)
+        player1.WinsAgainst1 = 0
+        player2.WinsAgainst1 = 0
+        txtWinsagainst.Text = player1.WinsAgainst1
+        txtWinsAgainst2.Text = player2.WinsAgainst1
+
+        If CurrentScreen <> AppState.Register Then
+
+            Select Case selectedPlayer
+                Case 1
+                    player1 = New PlayerStats
+                    player1.PlayerName1 = cbPlayer1.SelectedItem
+                    If player1.PlayerName1 Is Nothing OrElse player1.PlayerName1.Contains("Choose") Then
+                        player1.PID = -1
+                    Else
+                        Integer.TryParse((From row As DictionaryEntry In allplayers
+                                          Where row.Value Like player1.PlayerName1 Select row.Key).ToArray.First, player1.PID)
+                        lblError.Text = player1.GetPlayers()
+                    End If
+
+                    ScoreTheme.SetErrorLabel(lblError)
+                    txtWins.Text = player1.Wins1
+
+                    If cbPlayer2.SelectedItem IsNot Nothing Then
+                        CurrentScreen = AppState.Switch
+                        ScoreTheme.SetControl(New Button() {btnSave}, True)
+                        If player2.PID > 0 Then
+                            SetPVPSets()
+                        End If
+                    Else
+                        CurrentScreen = AppState.Start
+                    End If
+                    If player1.PID > 0 AndAlso player2.PID > 0 AndAlso pvpSet2.Tables(0).Rows.Count > 0 Then
+                        SetWinsAgainst()
+                        ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst, lblTotalWins1, lblTotalWins2}, True)
+                        isRiv = player1.getRivarly(player2.WinsAgainst1)
+                    Else
+                        ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, False)
+                    End If
+                Case 2
+                    player2 = New PlayerStats
+                    player2.PlayerName1 = cbPlayer2.SelectedItem
+                    If player2.PlayerName1 Is Nothing OrElse player2.PlayerName1.Contains("Choose") Then
+                        player2.PID = -1
+                    Else
+                        Integer.TryParse((From row As DictionaryEntry In allplayers
+                                          Where row.Value Like player2.PlayerName1 Select row.Key).ToArray.First, player2.PID)
+                        lblError.Text = player2.GetPlayers()
+                    End If
+                    ScoreTheme.SetErrorLabel(lblError)
+                    txtWins2.Text = player2.Wins1
+                    If ScoreTheme.ValidateCBox(cbPlayer1).Equals(True) Then
+                        CurrentScreen = AppState.Switch
+                        ScoreTheme.SetControl(New Button() {btnSave}, True)
+                        If player1.PID > 0 Then
+                            SetPVPSets()
+                        End If
+                    Else
+                        CurrentScreen = AppState.Start
+                    End If
+                    If player2.PID > 0 AndAlso player1.PID > 0 AndAlso pvpSet1.Tables(0).Rows.Count > 0 Then
+                        SetWinsAgainst()
+                        ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst, lblTotalWins1, lblTotalWins2}, True)
+                        isRiv = player2.getRivarly(player1.WinsAgainst1)
+                    Else
+                        ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, False)
+                    End If
+            End Select
+
+            If isRiv Then
+                lblError.Text = "Rivarly"
+                ScoreTheme.SetErrorLabel(lblError)
+            End If
+        End If
+
+    End Sub
+
+    ''' <summary>
+    ''' Sets tBoxes and controls after we find pvp stats
+    ''' </summary>
+    Private Sub SetWinsAgainst()
+        totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
+        txtWinsagainst.Text = player1.WinsAgainst1.ToString
+        txtWinsAgainst2.Text = player2.WinsAgainst1.ToString
+        txtTotalAgainst.Text = totalGamesPvP.ToString
+    End Sub
+
+    ''' <summary>
+    ''' Search for a record for ID1 and ID2, get those datasets
+    ''' Try to get the ID from those sets
+    ''' Try to parse from those, or if none then return -1
+    ''' </summary>
+    Public Sub SetPVPSets()
+        pvpSet1 = player1.SearchPvPStats(player2.PID, game)
+        pvpID = GetPvPID(pvpSet1)
+        If pvpID > -1 Then
+            Integer.TryParse(pvpSet1.Tables(0).Rows(0).Item("Wins"), player1.WinsAgainst1)
+        End If
+        pvpSet2 = player2.SearchPvPStats(player1.PID, game)
+        pvpID2 = GetPvPID(pvpSet2)
+        If pvpID2 > -1 Then
+            Integer.TryParse(pvpSet2.Tables(0).Rows(0).Item("Wins"), player2.WinsAgainst1)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Go through the dataset for the ID
+    ''' if we don't find one then return -1 to add a new one
+    ''' </summary>
+    ''' <param name="pvpStats"></param>
+    ''' <returns></returns>
+    Private Function GetPvPID(ByVal pvpStats As DataSet) As Integer
+        Dim pvpID As Integer = -1
+        Try
+            For i = 0 To pvpStats.Tables(0).Rows.Count - 1
+                If Integer.TryParse(pvpStats.Tables(0).Rows(i).Item("PvPID"), pvpID) > -1 Then
+                    Return pvpID
+                End If
+            Next
+        Catch ex As Exception
+            Dim exceptionLog As New Logging(Now, "Get PvP ID : ", ex.ToString)
+            exceptionLog.LogAction()
+            Return pvpID
+        End Try
+        Return pvpID
+    End Function
+
+
+#Region "Event Handlers"
 
     ''' <summary>
     ''' If we are not in start state and both names are there, then if wins are theres, set objs and add
@@ -269,144 +410,7 @@ Public Class PvP
         '    End If
         'End If
 #End Region
-
     End Sub
-
-    ''' <summary>
-    ''' Set Controls when selecting
-    ''' </summary>
-    ''' <param name="selectedPlayer"></param>
-    ''' <param name="selectedCBox"></param>
-    ''' <param name="opposingCbox"></param>
-    Private Sub SetSelectedDisplay(selectedPlayer As Integer, selectedCBox As ComboBox, opposingCbox As ComboBox)
-        Dim isRivarly As Boolean = False
-        lblError.Visible = False
-        ScoreTheme.SetControl(New TextBox() {txtWins, txtWins2}, True)
-        player1.WinsAgainst1 = 0
-        player2.WinsAgainst1 = 0
-        txtWinsagainst.Text = player1.WinsAgainst1
-        txtWinsAgainst2.Text = player2.WinsAgainst1
-
-        If CurrentScreen <> AppState.Register Then
-
-            Select Case selectedPlayer
-                Case 1
-                    player1 = New PlayerStats
-                    player1.PlayerName1 = cbPlayer1.SelectedItem
-                    If player1.PlayerName1 Is Nothing OrElse player1.PlayerName1.Contains("Choose") Then
-                        player1.PID = -1
-                    Else
-                        Integer.TryParse((From row As DictionaryEntry In allplayers
-                                          Where row.Value Like player1.PlayerName1 Select row.Key).ToArray.First, player1.PID)
-                        lblError.Text = player1.GetPlayers()
-                    End If
-
-                    ScoreTheme.SetErrorLabel(lblError)
-                    txtWins.Text = player1.Wins1
-
-                    If cbPlayer2.SelectedItem IsNot Nothing Then
-                        CurrentScreen = AppState.Switch
-                        ScoreTheme.SetControl(New Button() {btnSave}, True)
-                        If player2.PID > 0 Then
-                            SetPVPSets()
-                        End If
-                    Else
-                        CurrentScreen = AppState.Start
-                    End If
-                    If player1.PID > 0 AndAlso player2.PID > 0 AndAlso pvpSet2.Tables(0).Rows.Count > 0 Then
-                        SetWinsAgainst()
-                        ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst, lblTotalWins1, lblTotalWins2}, True)
-                        isRiv = player1.getRivarly(player2.WinsAgainst1)
-                    Else
-                        ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, False)
-                    End If
-                Case 2
-                    player2 = New PlayerStats
-                    player2.PlayerName1 = cbPlayer2.SelectedItem
-                    If player2.PlayerName1 Is Nothing OrElse player2.PlayerName1.Contains("Choose") Then
-                        player2.PID = -1
-                    Else
-                        Integer.TryParse((From row As DictionaryEntry In allplayers
-                                          Where row.Value Like player2.PlayerName1 Select row.Key).ToArray.First, player2.PID)
-                        lblError.Text = player2.GetPlayers()
-                    End If
-                    ScoreTheme.SetErrorLabel(lblError)
-                    txtWins2.Text = player2.Wins1
-                    If ScoreTheme.ValidateCBox(cbPlayer1).Equals(True) Then
-                        CurrentScreen = AppState.Switch
-                        ScoreTheme.SetControl(New Button() {btnSave}, True)
-                        If player1.PID > 0 Then
-                            SetPVPSets()
-                        End If
-                    Else
-                        CurrentScreen = AppState.Start
-                    End If
-                    If player2.PID > 0 AndAlso player1.PID > 0 AndAlso pvpSet1.Tables(0).Rows.Count > 0 Then
-                        SetWinsAgainst()
-                        ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst, lblTotalWins1, lblTotalWins2}, True)
-                        isRiv = player2.getRivarly(player1.WinsAgainst1)
-                    Else
-                        ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, False)
-                    End If
-            End Select
-
-            If isRiv Then
-                lblError.Text = "Rivarly"
-                ScoreTheme.SetErrorLabel(lblError)
-            End If
-        End If
-
-    End Sub
-
-    ''' <summary>
-    ''' Sets tBoxes and controls after we find pvp stats
-    ''' </summary>
-    Private Sub SetWinsAgainst()
-        totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
-        txtWinsagainst.Text = player1.WinsAgainst1.ToString
-        txtWinsAgainst2.Text = player2.WinsAgainst1.ToString
-        txtTotalAgainst.Text = totalGamesPvP.ToString
-    End Sub
-
-    ''' <summary>
-    ''' Search for a record for ID1 and ID2, get those datasets
-    ''' Try to get the ID from those sets
-    ''' Try to parse from those, or if none then return -1
-    ''' </summary>
-    Public Sub SetPVPSets()
-        pvpSet1 = player1.SearchPvPStats(player2.PID, game)
-        pvpID = GetPvPID(pvpSet1)
-        If pvpID > -1 Then
-            Integer.TryParse(pvpSet1.Tables(0).Rows(0).Item("Wins"), player1.WinsAgainst1)
-        End If
-        pvpSet2 = player2.SearchPvPStats(player1.PID, game)
-        pvpID2 = GetPvPID(pvpSet2)
-        If pvpID2 > -1 Then
-            Integer.TryParse(pvpSet2.Tables(0).Rows(0).Item("Wins"), player2.WinsAgainst1)
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' Go through the dataset for the ID
-    ''' if we don't find one then return -1 to add a new one
-    ''' </summary>
-    ''' <param name="pvpStats"></param>
-    ''' <returns></returns>
-    Private Function GetPvPID(ByVal pvpStats As DataSet) As Integer
-        Dim pvpID As Integer = -1
-        Try
-            For i = 0 To pvpStats.Tables(0).Rows.Count - 1
-                If Integer.TryParse(pvpStats.Tables(0).Rows(i).Item("PvPID"), pvpID) > -1 Then
-                    Return pvpID
-                End If
-            Next
-        Catch ex As Exception
-            Dim exceptionLog As New Logging(Now, "Get PvP ID : ", ex.ToString)
-            exceptionLog.LogAction()
-            Return pvpID
-        End Try
-        Return pvpID
-    End Function
 
     ''' <summary>
     ''' Go to state, and increment from the obj to add new value
@@ -545,6 +549,9 @@ Public Class PvP
         End If
         Me.Hide()
     End Sub
+
+#End Region
+
 
 #Region "Editing logic moved to PlayerEditing.vb - ver 1.8.2"
     '''' <summary>
