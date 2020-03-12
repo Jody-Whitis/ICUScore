@@ -110,6 +110,7 @@ Public Class PvP
         txtWinsagainst.Text = player1.WinsAgainst1
         txtWinsAgainst2.Text = player2.WinsAgainst1
 
+#Region "Case for which cBox is selected"
         If CurrentScreen <> AppState.Register Then
 
             Select Case selectedPlayer
@@ -177,6 +178,27 @@ Public Class PvP
                 lblError.Text = "Rivarly"
                 ScoreTheme.SetErrorLabel(lblError)
             End If
+        End If
+#End Region
+
+        'Choose a valid 1 and 2
+        If selectedCBox.SelectedItem IsNot Nothing AndAlso opposingCbox.SelectedItem IsNot Nothing Then
+            If selectedCBox.SelectedItem.Equals("Choose") Or opposingCbox.SelectedItem.Equals("Choose") Or selectedCBox.SelectedItem.Equals(opposingCbox.SelectedItem) Then
+                With btnSave
+                    .Enabled = False
+                    .Visible = False
+                End With
+            Else
+                With btnSave
+                    .Enabled = True
+                    .Visible = True
+                End With
+            End If
+        Else
+            With btnSave
+                .Enabled = False
+                .Visible = False
+            End With
         End If
 
     End Sub
