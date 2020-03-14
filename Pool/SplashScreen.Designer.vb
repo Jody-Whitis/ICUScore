@@ -23,18 +23,11 @@ Partial Class SplashScreen
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SplashScreen))
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.txtTitle = New System.Windows.Forms.TextBox()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.txtLoad = New System.Windows.Forms.TextBox()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Location = New System.Drawing.Point(107, 40)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(575, 249)
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
         '
         'txtTitle
         '
@@ -44,32 +37,60 @@ Partial Class SplashScreen
         Me.txtTitle.Enabled = False
         Me.txtTitle.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTitle.ForeColor = System.Drawing.Color.Lime
-        Me.txtTitle.Location = New System.Drawing.Point(12, 307)
+        Me.txtTitle.Location = New System.Drawing.Point(8, 196)
+        Me.txtTitle.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtTitle.Multiline = True
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.ReadOnly = True
-        Me.txtTitle.Size = New System.Drawing.Size(248, 78)
+        Me.txtTitle.Size = New System.Drawing.Size(165, 50)
         Me.txtTitle.TabIndex = 1
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(6, 12)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(238, 232)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 2
+        Me.PictureBox2.TabStop = False
+        '
+        'txtLoad
+        '
+        Me.txtLoad.BackColor = System.Drawing.Color.RoyalBlue
+        Me.txtLoad.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtLoad.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLoad.ForeColor = System.Drawing.Color.Lime
+        Me.txtLoad.Location = New System.Drawing.Point(302, 105)
+        Me.txtLoad.Multiline = True
+        Me.txtLoad.Name = "txtLoad"
+        Me.txtLoad.ReadOnly = True
+        Me.txtLoad.Size = New System.Drawing.Size(219, 171)
+        Me.txtLoad.TabIndex = 3
+        Me.txtLoad.Text = "ICU ScoreBoard"
+        Me.txtLoad.UseWaitCursor = True
         '
         'SplashScreen
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(533, 288)
+        Me.Controls.Add(Me.txtLoad)
+        Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.txtTitle)
-        Me.Controls.Add(Me.PictureBox1)
         Me.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "SplashScreen"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "SplashScreen"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Text = "ICUScore"
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents txtTitle As TextBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents txtLoad As TextBox
 End Class

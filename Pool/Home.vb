@@ -50,6 +50,7 @@ Public Class Home
             mnuPlayerEditing.Enabled = True
             lblHome.Text = $"Welcome {CurrentSession.DisplayName}!"
             btnLogout.Location = btnGuest.Location
+            Me.Text = "Home"
         Else
             Dim incorrectAlert As DialogResult = MessageBox.Show($"Incorrect Email and/or/also/maybe Password",
     "Incorrect Creditials", MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -59,6 +60,7 @@ Public Class Home
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click, logOutMnu.Click
         ScoreTheme.LogOutUser()
+        Me.Text = "Login"
     End Sub
 
     Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles editPasswordMnu.Click
@@ -91,6 +93,7 @@ Public Class Home
             logOutMnu.Visible = True
             lblHome.Text = $"Welcome Guest!"
             btnLogout.Location = btnGuest.Location
+            Me.Text = "Home"
         End If
     End Sub
 

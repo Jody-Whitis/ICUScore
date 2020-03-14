@@ -9,12 +9,12 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Score")>
-<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyTitle("ICUScore")>
+<Assembly: AssemblyDescription("Record your PVP wins and Highscores")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("Score")>
 <Assembly: AssemblyCopyright("Copyright ©  2019")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyTrademark("JW")>
 
 <Assembly: ComVisible(False)>
 
