@@ -188,12 +188,6 @@ Public Class HighScores
                         Dim searchGames = $"exec [dbo].[selScores_v1.1] @playerId={player.PID},@gameID = {games.GameID},@results=0"
                         Dim foundScoreResult = games.GetGames(searchGames)
                         'Update a score or add a new one
-
-                        'If foundScoreResult.Count > 0 AndAlso Not foundScoreResult.First Is Nothing Then
-                        '    player.IsFound = 1
-                        'Else
-                        '    player.IsFound = 0
-                        'End If
                         Try
                             If foundScoreResult.Tables(0).Rows.Count > 0 Then
                                 player.IsFound = 1
@@ -335,8 +329,6 @@ Public Class HighScores
                 txtScore.Visible = True
                 lblNewGameMode.Visible = False
                 ScoreTheme.SetControl(New Control() {lblScore, lblNewGameMode, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit}, True)
-                'btnAdd.Location = addLoc
-                'btnAdd.Size = addDim
                 CurrentScreen = AppState.SelectPlayer
             Else
                 Dim incorrectAlert As DialogResult = MessageBox.Show($"You got to name it first",

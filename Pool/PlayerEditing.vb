@@ -1,37 +1,45 @@
 ﻿Public Class PlayerEditing
     Dim selectedPlayer As New PlayerStats
-    Dim allplayers As New Hashtable
+    Dim playerTable As New Hashtable
     Dim nonRegisterdPlayers As New Hashtable
 
     Private Sub PlayerEditing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ScoreTheme.SetControl(New Control() {btnBack, btnEdit, btnDelete}, True)
         tbEdit.Visible = False
         Me.CenterToScreen()
-
-        If Permissions.IsAdmin Then
-            allplayers = selectedPlayer.IDBConnect_GetAllPlayers()
-            ScoreTheme.FillBoxfromHT(cbPlayerNames, allplayers)
-        ElseIf Permissions.IsUser Then
-            nonRegisterdPlayers = selectedPlayer.GetAllPlayersRegistered(False)
-            ScoreTheme.FillBoxfromHT(cbPlayerNames, nonRegisterdPlayers)
-        End If
+        GetPlayers()
         CurrentScreen = AppState.Start
     End Sub
 
+    Private Sub GetPlayers()
+        If Permissions.IsAdmin Then
+            playerTable = selectedPlayer.IDBConnect_GetAllPlayers()
+            ScoreTheme.FillBoxfromHT(cbPlayerNames, playerTable)
+        ElseIf Permissions.IsUser Then
+            playerTable = selectedPlayer.GetAllPlayersRegistered(False)
+            ScoreTheme.FillBoxfromHT(cbPlayerNames, playerTable)
+        End If
+    End Sub
+
+#Region "Event Handler"
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        ScoreTheme.SetControl(New Control() {cbPlayerNames, tbEdit}, False)
+        ScoreTheme.SetControl(New Control() {cbPlayerNames}, False)
+        tbEdit.Visible = True
         cbPlayerNames.SelectedValue = String.Empty
         lblNewName.Visible = False
         Select Case CurrentScreen
             Case AppState.Edit
-                ScoreTheme.SetControl(New Control() {btnDelete, btnAdd, cbPlayerNames, lblSelectedName}, True)
+                ScoreTheme.SetControl(New Control() {btnDelete, btnAdd, btnEdit, cbPlayerNames, lblSelectedName}, True)
                 CurrentScreen = AppState.SelectPlayer
+                GetPlayers()
             Case AppState.Delete
                 CurrentScreen = AppState.SelectPlayer
-                ScoreTheme.SetControl(New Control() {btnEdit, btnAdd, cbPlayerNames, lblSelectedName}, True)
+                ScoreTheme.SetControl(New Control() {btnEdit, btnAdd, btnDelete, cbPlayerNames, lblSelectedName}, True)
+                GetPlayers()
             Case AppState.Add
                 CurrentScreen = AppState.SelectPlayer
-                ScoreTheme.SetControl(New Control() {btnEdit, btnDelete, cbPlayerNames, lblSelectedName}, True)
+                ScoreTheme.SetControl(New Control() {btnEdit, btnDelete, btnAdd, cbPlayerNames, lblSelectedName}, True)
+                GetPlayers()
             Case Else
                 If PreviousForm IsNot Nothing Then
                     With PreviousForm
@@ -54,7 +62,7 @@
             Dim newName As String = tbEdit.Text
             'grab player obj from cbox
             Try
-                Integer.TryParse((From row As DictionaryEntry In allplayers
+                Integer.TryParse((From row As DictionaryEntry In playerTable
                                   Where row.Value Like selectedPlayer.PlayerName1 Select row.Key).ToArray.First, selectedPlayer.PID)
             Catch ex As Exception
                 Dim exceptionLog As New Logging(Now, "Edit Players: ", ex.ToString)
@@ -68,15 +76,14 @@
             Dim editSQL As String = $"exec [insNewPlayer_v1.2] @pID = {selectedPlayer.PID}, @newPlayer='{newName}',@result=0"
             If Not String.IsNullOrEmpty(selectedPlayer.PID) AndAlso Not String.IsNullOrEmpty(newName) Then
                 Dim editAlert As DialogResult = MessageBox.Show($"Are you sure you want to change {selectedPlayer.PlayerName1} to {newName}?",
-        "Erase Player", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+        "Change Name", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
                 'are you sure??????????
                 If editAlert.Equals(DialogResult.Yes) Then
                     selectedPlayer.GetAllResults(editSQL)
-                    allplayers = selectedPlayer.IDBConnect_GetAllPlayers()
+                    playerTable = selectedPlayer.IDBConnect_GetAllPlayers()
                     tbEdit.ResetText()
-                    lblError.Text = $"{selectedPlayer.PlayerName1} is now {newName}"
+                    'lblError.Text = $"{selectedPlayer.PlayerName1} is now {newName}"
                     cbPlayerNames.SelectedItem = Nothing
-                    CurrentScreen = AppState.SelectPlayer
                     btnBack_Click(Nothing, Nothing)
                 End If
             End If
@@ -95,7 +102,7 @@
             'grab player obj from cbox
             Try
                 selectedPlayer.PlayerName1 = cbPlayerNames.SelectedItem.ToString
-                Integer.TryParse((From row As DictionaryEntry In allplayers
+                Integer.TryParse((From row As DictionaryEntry In playerTable
                                   Where row.Value Like selectedPlayer.PlayerName1 Select row.Key).ToArray.First, selectedPlayer.PID)
             Catch ex As Exception
                 Dim exceptionLog As New Logging(Now, "Delete Player: ", ex.ToString)
@@ -113,7 +120,7 @@
                 'are you sure??????????
                 If deletionAlert.Equals(DialogResult.Yes) Then
                     selectedPlayer.GetAllResults(deleteSQL)
-                    allplayers = selectedPlayer.IDBConnect_GetAllPlayers()
+                    playerTable = selectedPlayer.IDBConnect_GetAllPlayers()
                     tbEdit.Text = String.Empty
                     lblError.Text = $"{selectedPlayer.PlayerName1} is gone"
                     cbPlayerNames.SelectedItem = Nothing
@@ -169,10 +176,9 @@
                     If addAlert.Equals(DialogResult.Yes) Then
                         selectedPlayer.InsertPlayer()
                         tbEdit.ResetText()
-                        lblError.Text = $"{selectedPlayer.PlayerName1} has joined!"
+                        'lblError.Text = $"{selectedPlayer.PlayerName1} has joined!"
                         lblError.Visible = True
                         cbPlayerNames.SelectedItem = Nothing
-                        CurrentScreen = AppState.SelectPlayer
                         lblNewName.Visible = False
                         btnBack_Click(Nothing, Nothing)
                     End If
@@ -188,4 +194,6 @@
             ScoreTheme.SetControl(New Control() {cbPlayerNames, btnEdit, btnDelete, lblEditing, lblSelectedName}, False)
         End If
     End Sub
+#End Region
+
 End Class

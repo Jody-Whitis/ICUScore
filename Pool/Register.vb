@@ -20,6 +20,7 @@ Public Class Register
         FillCBox()
     End Sub
 
+#Region "Fills"
     Private Sub FillCBox()
         cbCurrentPlayers.Items.Clear()
         cbCurrentPlayers.Items.Add("Choose your Name")
@@ -40,49 +41,9 @@ Public Class Register
         cbCurrentPlayers.Items.Add("Not Me!")
         cbCurrentPlayers.SelectedIndex = cbCurrentPlayers.Items.IndexOf("Choose your Name")
     End Sub
+#End Region
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        ScoreTheme.LoadNextFormClose(Me, Home)
-    End Sub
-
-    Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
-        Dim registerSQL As New StringBuilder
-        If ValidateRegister(New TextBox() {txtUseremail, txtPassword, TxtPasswordConfirm, TxtPasswordConfirm}).Equals(True) Then
-            user.userEmail = txtUseremail.Text
-            user.passWord = TxtPasswordConfirm.Text
-            user.displayName = GetDisplayName()
-            If txtPassword.Text.Equals(TxtPasswordConfirm.Text) Then
-                Dim hashPassword As New Authenticate(txtUseremail.Text, txtPassword.Text)
-                Dim insertPlayer As New PlayerStats
-                user.passwordEncripted = hashPassword.GetEncriptedString()
-
-                With registerSQL
-                    .Append("exec [insNewUser] ")
-                    .Append($"@userEmail='{user.userEmail}', @password='{user.passwordEncripted}',@displayName='{user.displayName}',")
-                    .Append($"@timeStamp='{Now.ToString("MM/dd/yyyy")}',")
-                    If (user.pID > -1) Then
-                        .Append($"@pId = '{user.pID}'")
-                    End If
-                End With
-                'register an existing or create a new one in players and login
-                'We don't want to delete Player for wins records, just delete login
-                'and set Player register bit
-                insertPlayer.GetAllResults(registerSQL.ToString.TrimEnd(","))
-
-                Home.Activate()
-                Home.Show()
-                Me.Close()
-            Else
-                'Confirm your password
-            End If
-        Else
-            Dim missingRequirements As String = ScoreTheme.GetMissingFieldNames(New Control() {txtUseremail, txtPassword, TxtPasswordConfirm, TxtPasswordConfirm})
-            Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields {missingRequirements}",
-        "Missing Requirement", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-        End If
-
-    End Sub
-
+#Region "Functions"
     Private Function ValidateRegister(ByRef tBoxes As TextBox()) As Boolean
         Dim validEntry As Boolean = False
         For Each field In tBoxes
@@ -110,7 +71,9 @@ Public Class Register
         End Try
         Return String.Empty
     End Function
+#End Region
 
+#Region "Event Handlers"
     Private Sub cbCurrentPlayers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCurrentPlayers.SelectedIndexChanged
         Try
             If cbCurrentPlayers.SelectedItem.Equals("Not Me!") Then
@@ -162,4 +125,48 @@ Public Class Register
         AboutThis.Activate()
         AboutThis.Show()
     End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        ScoreTheme.LoadNextFormClose(Me, Home)
+    End Sub
+
+    Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
+        Dim registerSQL As New StringBuilder
+        If ValidateRegister(New TextBox() {txtUseremail, txtPassword, TxtPasswordConfirm, TxtPasswordConfirm}).Equals(True) Then
+            user.userEmail = txtUseremail.Text
+            user.passWord = TxtPasswordConfirm.Text
+            user.displayName = GetDisplayName()
+            If txtPassword.Text.Equals(TxtPasswordConfirm.Text) Then
+                Dim hashPassword As New Authenticate(txtUseremail.Text, txtPassword.Text)
+                Dim insertPlayer As New PlayerStats
+                user.passwordEncripted = hashPassword.GetEncriptedString()
+
+                With registerSQL
+                    .Append("exec [insNewUser] ")
+                    .Append($"@userEmail='{user.userEmail}', @password='{user.passwordEncripted}',@displayName='{user.displayName}',")
+                    .Append($"@timeStamp='{Now.ToString("MM/dd/yyyy")}',")
+                    If (user.pID > -1) Then
+                        .Append($"@pId = '{user.pID}'")
+                    End If
+                End With
+                'register an existing or create a new one in players and login
+                'We don't want to delete Player for wins records, just delete login
+                'and set Player register bit
+                insertPlayer.GetAllResults(registerSQL.ToString.TrimEnd(","))
+
+                Home.Activate()
+                Home.Show()
+                Me.Close()
+            Else
+                'Confirm your password
+            End If
+        Else
+            Dim missingRequirements As String = ScoreTheme.GetMissingFieldNames(New Control() {txtUseremail, txtPassword, TxtPasswordConfirm, TxtPasswordConfirm})
+            Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields {missingRequirements}",
+        "Missing Requirement", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+        End If
+
+    End Sub
+#End Region
+
 End Class

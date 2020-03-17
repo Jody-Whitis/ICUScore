@@ -5,6 +5,18 @@
         CurrentScreen = AppState.Edit
     End Sub
 
+#Region "Functions/Subs"
+    Private Function isValidatedEntry(ByRef fields As Control()) As Boolean
+        For Each field In fields
+            If String.IsNullOrEmpty(field.Text) Then
+                Return False
+            End If
+        Next
+        Return True
+    End Function
+#End Region
+
+#Region "Event Handlers"
     Private Sub btnUpdatePassword_Click(sender As Object, e As EventArgs) Handles btnUpdatePassword.Click
         Dim isUpdated As Boolean = False
         lblUpdate.ForeColor = Color.Lime
@@ -26,15 +38,6 @@
         End If
     End Sub
 
-    Private Function isValidatedEntry(ByRef fields As Control()) As Boolean
-        For Each field In fields
-            If String.IsNullOrEmpty(field.Text) Then
-                Return False
-            End If
-        Next
-        Return True
-    End Function
-
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         If CurrentSession.PreviousForm IsNot Nothing Then
             CurrentSession.PreviousForm.Show()
@@ -45,4 +48,6 @@
         End If
         Me.Close()
     End Sub
+#End Region
+
 End Class

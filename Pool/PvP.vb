@@ -65,36 +65,7 @@ Public Class PvP
         End If
     End Sub
 
-    ''' <summary>
-    ''' Get the columns and set the board
-    ''' </summary>
-    Private Sub GetHighScores()
-        If allWins.Tables(0).Rows.Count > 0 Then
-            Try
-                Dim scores = (From r In allWins.Tables(0).AsEnumerable Where r.Item("gID") = game Select r)
-                If scores.Count > 0 Then
-                    lstAllWins.Items.Clear()
-                    For Each score In scores
-                        Dim playerNameScore As String = score.Item("playerName")
-                        Dim playerScore As String = score.Item("winAgainst")
-                        Dim opponentID As Integer = score.Item("opponentID")
-                        Dim lastGame As Date = score.Item("lastMatch")
-                        If Not String.IsNullOrEmpty(allplayers.Item(opponentID)) Then
-                            lstAllWins.Items.Add($"{playerNameScore} has beaten {allplayers.Item(opponentID)} {playerScore} time(s) since {lastGame.ToString("MM/dd/yyyy")}")
-
-                        End If
-                    Next
-                End If
-            Catch ex As Exception
-                Dim exceptionLog As New Logging(Now, "GetHighScores : ", ex.ToString)
-                exceptionLog.LogAction()
-                Debug.WriteLine(ex.ToString)
-                lblError.Text = ex.Message.ToString
-                ScoreTheme.SetErrorLabel(lblError)
-            End Try
-        End If
-    End Sub
-
+#Region "SETS"
     ''' <summary>
     ''' Set Controls when selecting
     ''' </summary>
@@ -231,6 +202,9 @@ Public Class PvP
         End If
     End Sub
 
+#End Region
+#Region "GETS"
+
     ''' <summary>
     ''' Go through the dataset for the ID
     ''' if we don't find one then return -1 to add a new one
@@ -253,7 +227,38 @@ Public Class PvP
         Return pvpID
     End Function
 
+    ''' <summary>
+    ''' Get the columns and set the board
+    ''' </summary>
+    Private Sub GetHighScores()
+        If allWins.Tables(0).Rows.Count > 0 Then
+            Try
+                Dim scores = (From r In allWins.Tables(0).AsEnumerable Where r.Item("gID") = game Select r)
+                If scores.Count > 0 Then
+                    lstAllWins.Items.Clear()
+                    For Each score In scores
+                        Dim playerNameScore As String = score.Item("playerName")
+                        Dim playerScore As String = score.Item("winAgainst")
+                        Dim opponentID As Integer = score.Item("opponentID")
+                        Dim lastGame As Date = score.Item("lastMatch")
+                        If Not String.IsNullOrEmpty(allplayers.Item(opponentID)) Then
+                            lstAllWins.Items.Add($"{playerNameScore} has beaten {allplayers.Item(opponentID)} {playerScore} time(s) since {lastGame.ToString("MM/dd/yyyy")}")
 
+                        End If
+                    Next
+                End If
+            Catch ex As Exception
+                Dim exceptionLog As New Logging(Now, "GetHighScores : ", ex.ToString)
+                exceptionLog.LogAction()
+                Debug.WriteLine(ex.ToString)
+                lblError.Text = ex.Message.ToString
+                ScoreTheme.SetErrorLabel(lblError)
+            End Try
+        End If
+    End Sub
+
+
+#End Region
 #Region "Event Handlers"
 
     ''' <summary>
