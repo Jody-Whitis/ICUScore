@@ -6,7 +6,7 @@ Public Class PvP
 #Region "Global to form"
     Dim player1 As New PlayerStats
     Dim player2 As New PlayerStats
-    Dim game As Integer = 2
+    Dim game As Integer = -1
     Dim isRiv As Boolean = False
     Dim allplayers As New Hashtable
     Dim nonRegisterdPlayers As New Hashtable
@@ -39,7 +39,7 @@ Public Class PvP
         ScoreTheme.FillBoxfromHT(cbPlayer2, allplayers)
         ScoreTheme.FillBoxfromHT(cbGames, gamesHT)
         If gamesHT.Count > 0 Then
-            cbGames.SelectedIndex = cbGames.FindStringExact(gamesHT.Item(2))
+            cbGames.SelectedItem = "Choose"
         End If
 #End Region
         Me.CenterToScreen()
@@ -154,7 +154,7 @@ Public Class PvP
 
         'Choose a valid 1 and 2
         If selectedCBox.SelectedItem IsNot Nothing AndAlso opposingCbox.SelectedItem IsNot Nothing Then
-            If selectedCBox.SelectedItem.Equals("Choose") Or opposingCbox.SelectedItem.Equals("Choose") Or selectedCBox.SelectedItem.Equals(opposingCbox.SelectedItem) Then
+            If selectedCBox.SelectedItem.Equals("Choose") Or opposingCbox.SelectedItem.Equals("Choose") Or cbGames.SelectedItem.Equals("Choose") Or selectedCBox.SelectedItem.Equals(opposingCbox.SelectedItem) Then
                 With btnSave
                     .Enabled = False
                     .Visible = False
@@ -560,6 +560,12 @@ Public Class PvP
         allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
         If allWins IsNot Nothing AndAlso allWins.Tables(0).Rows.Count > 0 Then
             GetHighScores()
+            lstAllWins.Visible = True
+            lblScoreBoard.Visible = True
+        ElseIf cbGames.SelectedItem.Equals("Choose") Then
+            lstAllWins.Items.Clear()
+            lstAllWins.Visible = False
+            lblScoreBoard.Visible = False
         Else
             lstAllWins.Items.Clear()
             lstAllWins.Items.Add("No games yet played")

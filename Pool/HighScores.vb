@@ -39,6 +39,7 @@ Public Class HighScores
         ScoreTheme.FillBoxfromHT(cbGames, allGames)
         highScores = games.GetAllResults("exec selAllScores @output=0")
         lblError.Visible = False
+        cbGames.SelectedItem = "Choose"
         If Permissions.IsUser.Equals(True) Then
             cbPlayers.SelectedItem = CurrentSession.DisplayName
         End If
@@ -64,6 +65,8 @@ Public Class HighScores
             btnPvP.Location = btnAdd.Location
         End If
     End Sub
+
+#Region "Gets and Email"
 
     ''' <summary>
     ''' Gets a list of recipents from db
@@ -151,6 +154,8 @@ Public Class HighScores
             End Try
         End If
     End Sub
+
+#End Region
 
 #Region "Event Handlers"
 
@@ -280,7 +285,7 @@ Public Class HighScores
     ''' <param name="e"></param>
     Private Sub cbGames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGames.SelectedIndexChanged
         games.GameMode = cbGames.SelectedItem
-        If Not cbGames.SelectedItem.Equals("Choose Something") Then
+        If Not cbGames.SelectedItem.contains("Choose") Then
             GetHighScores(games.GameMode)
             ScoreTheme.SetErrorLabel(lblError)
         End If
