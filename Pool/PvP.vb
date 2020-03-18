@@ -562,11 +562,14 @@ Public Class PvP
             GetHighScores()
             lstAllWins.Visible = True
             lblScoreBoard.Visible = True
+            btnSave.Visible = True
         ElseIf cbGames.SelectedItem.Equals("Choose") Then
             lstAllWins.Items.Clear()
             lstAllWins.Visible = False
             lblScoreBoard.Visible = False
+            btnSave.Visible = False
         Else
+            btnSave.Visible = False
             lstAllWins.Items.Clear()
             lstAllWins.Items.Add("No games yet played")
         End If

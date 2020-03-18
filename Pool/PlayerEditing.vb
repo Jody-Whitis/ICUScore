@@ -9,6 +9,7 @@
         Me.CenterToScreen()
         GetPlayers()
         CurrentScreen = AppState.Start
+        cbPlayerNames.SelectedItem = "Choose"
     End Sub
 
     Private Sub GetPlayers()
@@ -23,23 +24,26 @@
 
 #Region "Event Handler"
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        ScoreTheme.SetControl(New Control() {cbPlayerNames}, False)
-        tbEdit.Visible = True
-        cbPlayerNames.SelectedValue = String.Empty
-        lblNewName.Visible = False
         Select Case CurrentScreen
             Case AppState.Edit
                 ScoreTheme.SetControl(New Control() {btnDelete, btnAdd, btnEdit, cbPlayerNames, lblSelectedName}, True)
+                tbEdit.Visible = False
+                lblNewName.Visible = False
                 CurrentScreen = AppState.SelectPlayer
                 GetPlayers()
+                cbPlayerNames.SelectedItem = "Choose"
             Case AppState.Delete
                 CurrentScreen = AppState.SelectPlayer
                 ScoreTheme.SetControl(New Control() {btnEdit, btnAdd, btnDelete, cbPlayerNames, lblSelectedName}, True)
                 GetPlayers()
+                cbPlayerNames.SelectedItem = "Choose"
             Case AppState.Add
                 CurrentScreen = AppState.SelectPlayer
                 ScoreTheme.SetControl(New Control() {btnEdit, btnDelete, btnAdd, cbPlayerNames, lblSelectedName}, True)
+                tbEdit.Visible = False
+                lblNewName.Visible = False
                 GetPlayers()
+                cbPlayerNames.SelectedItem = "Choose"
             Case Else
                 If PreviousForm IsNot Nothing Then
                     With PreviousForm
@@ -83,9 +87,11 @@
                     playerTable = selectedPlayer.IDBConnect_GetAllPlayers()
                     tbEdit.ResetText()
                     'lblError.Text = $"{selectedPlayer.PlayerName1} is now {newName}"
-                    cbPlayerNames.SelectedItem = Nothing
                     btnBack_Click(Nothing, Nothing)
                 End If
+            Else
+                Dim editEmptyAlert As DialogResult = MessageBox.Show($"{selectedPlayer.PlayerName1} needs a new name!",
+   "Change Name", MessageBoxButtons.OK, MessageBoxIcon.Stop)
             End If
 
         Else
@@ -136,8 +142,8 @@
     End Sub
 
     Private Sub cbPlayerNames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPlayerNames.SelectedIndexChanged
-        If cbPlayerNames.SelectedItem IsNot Nothing Then
-            ScoreTheme.SetControl(New Control() {btnEdit, btnDelete}, True)
+        If cbPlayerNames.SelectedItem IsNot Nothing AndAlso Not cbPlayerNames.SelectedItem.Equals("Choose") Then
+            ScoreTheme.SetControl(New Control() {btnEdit, btnDelete, btnAdd}, True)
             With selectedPlayer
                 .PlayerName1 = cbPlayerNames.SelectedItem
             End With
@@ -184,8 +190,7 @@
                     End If
                 End If
             Else
-                Dim missingFields As String = ScoreTheme.GetMissingFieldNames(New Control() {tbEdit})
-                Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields {missingFields}",
+                Dim RequiredField As DialogResult = MessageBox.Show($"You gotta give it a name!",
        "Missing Requirement", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             End If
         Else

@@ -22,7 +22,6 @@ Partial Class HighScores
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(HighScores))
         Me.cbGames = New System.Windows.Forms.ComboBox()
         Me.cbPlayers = New System.Windows.Forms.ComboBox()
@@ -30,9 +29,6 @@ Partial Class HighScores
         Me.btnSubmit = New System.Windows.Forms.Button()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.lblError = New System.Windows.Forms.Label()
-        Me.SelAllScoresBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.LocalResultsDataSet2 = New Pool.LocalResultsDataSet2()
-        Me.SelAllScoresTableAdapter = New Pool.LocalResultsDataSet2TableAdapters.selAllScoresTableAdapter()
         Me.lstScores = New System.Windows.Forms.ListBox()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.txtNewGM = New System.Windows.Forms.TextBox()
@@ -49,8 +45,6 @@ Partial Class HighScores
         Me.lblScoreBoard = New System.Windows.Forms.Label()
         Me.lblSelectedMode = New System.Windows.Forms.Label()
         Me.btnPlayerEditing = New System.Windows.Forms.Button()
-        CType(Me.SelAllScoresBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LocalResultsDataSet2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuHighScore.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -125,20 +119,6 @@ Partial Class HighScores
         Me.lblError.TabIndex = 5
         Me.lblError.Text = "Stats Board"
         Me.lblError.Visible = False
-        '
-        'SelAllScoresBindingSource
-        '
-        Me.SelAllScoresBindingSource.DataMember = "selAllScores"
-        Me.SelAllScoresBindingSource.DataSource = Me.LocalResultsDataSet2
-        '
-        'LocalResultsDataSet2
-        '
-        Me.LocalResultsDataSet2.DataSetName = "LocalResultsDataSet2"
-        Me.LocalResultsDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'SelAllScoresTableAdapter
-        '
-        Me.SelAllScoresTableAdapter.ClearBeforeFill = True
         '
         'lstScores
         '
@@ -343,8 +323,6 @@ Partial Class HighScores
         Me.MainMenuStrip = Me.mnuHighScore
         Me.Name = "HighScores"
         Me.Text = "HighScores"
-        CType(Me.SelAllScoresBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LocalResultsDataSet2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.mnuHighScore.ResumeLayout(False)
         Me.mnuHighScore.PerformLayout()
         Me.ResumeLayout(False)
@@ -358,9 +336,6 @@ Partial Class HighScores
     Friend WithEvents btnSubmit As Button
     Friend WithEvents btnBack As Button
     Friend WithEvents lblError As Label
-    Friend WithEvents SelAllScoresBindingSource As BindingSource
-    Friend WithEvents LocalResultsDataSet2 As LocalResultsDataSet2
-    Friend WithEvents SelAllScoresTableAdapter As LocalResultsDataSet2TableAdapters.selAllScoresTableAdapter
     Friend WithEvents lstScores As ListBox
     Friend WithEvents btnAdd As Button
     Friend WithEvents txtNewGM As TextBox

@@ -269,7 +269,7 @@ Public Class HighScores
         If CurrentScreen = AppState.SelectPlayer Then
             player.PlayerName1 = cbPlayers.SelectedItem
             ScoreTheme.SetErrorLabel(lblError)
-            If ScoreTheme.ValidateCBox(cbGames).Equals(True) Then
+            If ScoreTheme.ValidateCBox(cbGames).Equals(True) AndAlso ScoreTheme.ValidateCBox(cbPlayers).Equals(True) Then
                 btnSubmit.Visible = True
             Else
                 btnSubmit.Visible = False
@@ -285,14 +285,15 @@ Public Class HighScores
     ''' <param name="e"></param>
     Private Sub cbGames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGames.SelectedIndexChanged
         games.GameMode = cbGames.SelectedItem
-        If Not cbGames.SelectedItem.contains("Choose") Then
+        If ScoreTheme.ValidateCBox(cbGames).Equals(True) AndAlso ScoreTheme.ValidateCBox(cbPlayers).Equals(True) Then
             GetHighScores(games.GameMode)
             ScoreTheme.SetErrorLabel(lblError)
-        End If
-
-        If ScoreTheme.ValidateCBox(cbPlayers).Equals(True) Then
+            lstScores.Visible = True
+            lblScoreBoard.Visible = True
             btnSubmit.Visible = True
         Else
+            lstScores.Visible = False
+            lblScoreBoard.Visible = False
             btnSubmit.Visible = False
         End If
 

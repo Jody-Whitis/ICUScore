@@ -29,16 +29,8 @@ Partial Class PvP
         Me.txtWins2 = New System.Windows.Forms.TextBox()
         Me.lblError = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.PlayersBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.PlayerNames = New Pool.PlayerNames()
-        Me.LocalResultsDataSet = New Pool.LocalResultsDataSet()
-        Me.LocalResultsDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.PlayersTableAdapter = New Pool.PlayerNamesTableAdapters.PlayersTableAdapter()
         Me.cbPlayer1 = New System.Windows.Forms.ComboBox()
         Me.cbPlayer2 = New System.Windows.Forms.ComboBox()
-        Me.PlayersBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.LocalResultsDataSet1 = New Pool.LocalResultsDataSet1()
-        Me.PlayersTableAdapter1 = New Pool.LocalResultsDataSet1TableAdapters.PlayersTableAdapter()
         Me.btnPlayer1win = New System.Windows.Forms.Button()
         Me.btnPlayer2Wins = New System.Windows.Forms.Button()
         Me.btnHighScore = New System.Windows.Forms.Button()
@@ -63,12 +55,6 @@ Partial Class PvP
         Me.lblWinsAgainst1 = New System.Windows.Forms.Label()
         Me.lblWinsAgainst2 = New System.Windows.Forms.Label()
         Me.lblScoreBoard = New System.Windows.Forms.Label()
-        CType(Me.PlayersBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PlayerNames, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LocalResultsDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LocalResultsDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PlayersBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.LocalResultsDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -131,30 +117,6 @@ Partial Class PvP
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = False
         '
-        'PlayersBindingSource
-        '
-        Me.PlayersBindingSource.DataMember = "Players"
-        Me.PlayersBindingSource.DataSource = Me.PlayerNames
-        '
-        'PlayerNames
-        '
-        Me.PlayerNames.DataSetName = "PlayerNames"
-        Me.PlayerNames.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'LocalResultsDataSet
-        '
-        Me.LocalResultsDataSet.DataSetName = "LocalResultsDataSet"
-        Me.LocalResultsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'LocalResultsDataSetBindingSource
-        '
-        Me.LocalResultsDataSetBindingSource.DataSource = Me.LocalResultsDataSet
-        Me.LocalResultsDataSetBindingSource.Position = 0
-        '
-        'PlayersTableAdapter
-        '
-        Me.PlayersTableAdapter.ClearBeforeFill = True
-        '
         'cbPlayer1
         '
         Me.cbPlayer1.BackColor = System.Drawing.Color.Lime
@@ -185,20 +147,6 @@ Partial Class PvP
         Me.cbPlayer2.Size = New System.Drawing.Size(319, 38)
         Me.cbPlayer2.TabIndex = 2
         Me.cbPlayer2.ValueMember = "PlayerName"
-        '
-        'PlayersBindingSource1
-        '
-        Me.PlayersBindingSource1.DataMember = "Players"
-        Me.PlayersBindingSource1.DataSource = Me.LocalResultsDataSet1
-        '
-        'LocalResultsDataSet1
-        '
-        Me.LocalResultsDataSet1.DataSetName = "LocalResultsDataSet1"
-        Me.LocalResultsDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'PlayersTableAdapter1
-        '
-        Me.PlayersTableAdapter1.ClearBeforeFill = True
         '
         'btnPlayer1win
         '
@@ -528,12 +476,6 @@ Partial Class PvP
         Me.Margin = New System.Windows.Forms.Padding(6)
         Me.Name = "PvP"
         Me.Text = "PvP"
-        CType(Me.PlayersBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PlayerNames, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LocalResultsDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LocalResultsDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PlayersBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.LocalResultsDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
@@ -545,16 +487,8 @@ Partial Class PvP
     Friend WithEvents txtWins2 As TextBox
     Friend WithEvents lblError As Label
     Friend WithEvents btnSave As Button
-    Friend WithEvents LocalResultsDataSetBindingSource As BindingSource
-    Friend WithEvents LocalResultsDataSet As LocalResultsDataSet
-    Friend WithEvents PlayerNames As PlayerNames
-    Friend WithEvents PlayersBindingSource As BindingSource
-    Friend WithEvents PlayersTableAdapter As PlayerNamesTableAdapters.PlayersTableAdapter
     Friend WithEvents cbPlayer1 As ComboBox
     Friend WithEvents cbPlayer2 As ComboBox
-    Friend WithEvents LocalResultsDataSet1 As LocalResultsDataSet1
-    Friend WithEvents PlayersBindingSource1 As BindingSource
-    Friend WithEvents PlayersTableAdapter1 As LocalResultsDataSet1TableAdapters.PlayersTableAdapter
     Friend WithEvents btnPlayer1win As Button
     Friend WithEvents btnPlayer2Wins As Button
     Friend WithEvents btnHighScore As Button
