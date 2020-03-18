@@ -152,6 +152,7 @@ Public Class PvP
         End If
 #End Region
 
+        If Permissions.IsUser.Equals(False) Then Exit Sub
         'Choose a valid 1 and 2
         If selectedCBox.SelectedItem IsNot Nothing AndAlso opposingCbox.SelectedItem IsNot Nothing Then
             If selectedCBox.SelectedItem.Equals("Choose") Or opposingCbox.SelectedItem.Equals("Choose") Or cbGames.SelectedItem.Equals("Choose") Or selectedCBox.SelectedItem.Equals(opposingCbox.SelectedItem) Then
@@ -558,11 +559,12 @@ Public Class PvP
             End If
         Next
         allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
-        If allWins IsNot Nothing AndAlso allWins.Tables(0).Rows.Count > 0 Then
+        If allWins IsNot Nothing AndAlso allWins.Tables(0).Rows.Count > 0 AndAlso Not cbGames.SelectedItem.Equals("Choose") Then
             GetHighScores()
             lstAllWins.Visible = True
             lblScoreBoard.Visible = True
-            btnSave.Visible = True
+            btnSave.Enabled = True
+            If Permissions.IsUser.Equals(True) Then btnSave.Visible = True
         ElseIf cbGames.SelectedItem.Equals("Choose") Then
             lstAllWins.Items.Clear()
             lstAllWins.Visible = False

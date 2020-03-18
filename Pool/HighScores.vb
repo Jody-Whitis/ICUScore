@@ -266,15 +266,18 @@ Public Class HighScores
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub cbPlayers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPlayers.SelectedIndexChanged
-        If CurrentScreen = AppState.SelectPlayer Then
-            player.PlayerName1 = cbPlayers.SelectedItem
-            ScoreTheme.SetErrorLabel(lblError)
-            If ScoreTheme.ValidateCBox(cbGames).Equals(True) AndAlso ScoreTheme.ValidateCBox(cbPlayers).Equals(True) Then
-                btnSubmit.Visible = True
-            Else
-                btnSubmit.Visible = False
+        If Permissions.IsUser.Equals(True) Then
+            If CurrentScreen = AppState.SelectPlayer Then
+                player.PlayerName1 = cbPlayers.SelectedItem
+                ScoreTheme.SetErrorLabel(lblError)
+                If ScoreTheme.ValidateCBox(cbGames).Equals(True) AndAlso ScoreTheme.ValidateCBox(cbPlayers).Equals(True) Then
+                    btnSubmit.Visible = True
+                Else
+                    btnSubmit.Visible = False
+                End If
             End If
         End If
+
     End Sub
 
     ''' <summary>
@@ -285,18 +288,16 @@ Public Class HighScores
     ''' <param name="e"></param>
     Private Sub cbGames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGames.SelectedIndexChanged
         games.GameMode = cbGames.SelectedItem
-        If ScoreTheme.ValidateCBox(cbGames).Equals(True) AndAlso ScoreTheme.ValidateCBox(cbPlayers).Equals(True) Then
+        If ScoreTheme.ValidateCBox(cbGames).Equals(True) Then
             GetHighScores(games.GameMode)
             ScoreTheme.SetErrorLabel(lblError)
             lstScores.Visible = True
             lblScoreBoard.Visible = True
-            btnSubmit.Visible = True
         Else
             lstScores.Visible = False
             lblScoreBoard.Visible = False
-            btnSubmit.Visible = False
         End If
-
+        cbPlayers_SelectedIndexChanged(Nothing, Nothing)
     End Sub
 
     ''' <summary>
