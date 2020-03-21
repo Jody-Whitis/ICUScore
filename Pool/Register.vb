@@ -106,20 +106,6 @@ Public Class Register
         ScoreTheme.LogOutUser()
     End Sub
 
-    Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
-        CurrentSession.setPreviousForm(Me)
-        PasswordChange.Activate()
-    End Sub
-
-    Private Sub PlayerEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlayerEditingToolStripMenuItem.Click
-        If Permissions.IsUser.Equals(True) Then
-            CurrentSession.PreviousForm = Me
-            PlayerEditing.Activate()
-            PlayerEditing.Show()
-            Me.Hide()
-        End If
-    End Sub
-
     Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
         CurrentSession.PreviousForm = Me
         AboutThis.Activate()

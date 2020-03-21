@@ -34,6 +34,9 @@ Partial Class PlayerEditing
         Me.EditPasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblSelectedName = New System.Windows.Forms.Label()
         Me.lblNewName = New System.Windows.Forms.Label()
         Me.lblEditing = New System.Windows.Forms.Label()
@@ -43,7 +46,7 @@ Partial Class PlayerEditing
         '
         'btnBack
         '
-        Me.btnBack.BackColor = System.Drawing.Color.Lime
+        Me.btnBack.BackColor = System.Drawing.Color.Aquamarine
         Me.btnBack.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnBack.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup
@@ -58,7 +61,7 @@ Partial Class PlayerEditing
         '
         'cbPlayerNames
         '
-        Me.cbPlayerNames.BackColor = System.Drawing.Color.Lime
+        Me.cbPlayerNames.BackColor = System.Drawing.Color.Aquamarine
         Me.cbPlayerNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPlayerNames.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbPlayerNames.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -71,7 +74,7 @@ Partial Class PlayerEditing
         '
         'btnDelete
         '
-        Me.btnDelete.BackColor = System.Drawing.Color.Lime
+        Me.btnDelete.BackColor = System.Drawing.Color.Aquamarine
         Me.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnDelete.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -85,7 +88,7 @@ Partial Class PlayerEditing
         '
         'btnEdit
         '
-        Me.btnEdit.BackColor = System.Drawing.Color.Lime
+        Me.btnEdit.BackColor = System.Drawing.Color.Aquamarine
         Me.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnEdit.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -100,7 +103,7 @@ Partial Class PlayerEditing
         '
         'tbEdit
         '
-        Me.tbEdit.BackColor = System.Drawing.Color.Lime
+        Me.tbEdit.BackColor = System.Drawing.Color.Aquamarine
         Me.tbEdit.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbEdit.Location = New System.Drawing.Point(108, 336)
         Me.tbEdit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -120,12 +123,13 @@ Partial Class PlayerEditing
         'mnuPlayerEditing
         '
         Me.mnuPlayerEditing.BackColor = System.Drawing.Color.RoyalBlue
+        Me.mnuPlayerEditing.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mnuPlayerEditing.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
         Me.mnuPlayerEditing.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.mnuPlayerEditing.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem})
+        Me.mnuPlayerEditing.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem, Me.EditToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.mnuPlayerEditing.Location = New System.Drawing.Point(0, 0)
         Me.mnuPlayerEditing.Name = "mnuPlayerEditing"
-        Me.mnuPlayerEditing.Size = New System.Drawing.Size(674, 41)
+        Me.mnuPlayerEditing.Size = New System.Drawing.Size(674, 42)
         Me.mnuPlayerEditing.TabIndex = 6
         Me.mnuPlayerEditing.Text = "MenuStrip1"
         '
@@ -133,15 +137,15 @@ Partial Class PlayerEditing
         '
         Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditPasswordToolStripMenuItem, Me.LogOutToolStripMenuItem, Me.QuitToolStripMenuItem})
         Me.MenuToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
+        Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
-        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 37)
+        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 38)
         Me.MenuToolStripMenuItem.Text = "Menu"
         '
         'EditPasswordToolStripMenuItem
         '
         Me.EditPasswordToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
-        Me.EditPasswordToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
+        Me.EditPasswordToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.EditPasswordToolStripMenuItem.Name = "EditPasswordToolStripMenuItem"
         Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
         Me.EditPasswordToolStripMenuItem.Text = "Edit Password"
@@ -149,7 +153,7 @@ Partial Class PlayerEditing
         'LogOutToolStripMenuItem
         '
         Me.LogOutToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
-        Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
+        Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
         Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
         Me.LogOutToolStripMenuItem.Text = "Log Out"
@@ -157,16 +161,40 @@ Partial Class PlayerEditing
         'QuitToolStripMenuItem
         '
         Me.QuitToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
-        Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
+        Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
         Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
         Me.QuitToolStripMenuItem.Text = "Quit"
+        '
+        'EditToolStripMenuItem
+        '
+        Me.EditToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(95, 38)
+        Me.EditToolStripMenuItem.Text = "Edit"
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem1})
+        Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 38)
+        Me.AboutToolStripMenuItem.Text = "About"
+        '
+        'AboutToolStripMenuItem1
+        '
+        Me.AboutToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.AboutToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
+        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(242, 44)
+        Me.AboutToolStripMenuItem1.Text = "About"
         '
         'lblSelectedName
         '
         Me.lblSelectedName.AutoSize = True
         Me.lblSelectedName.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSelectedName.ForeColor = System.Drawing.Color.Lime
+        Me.lblSelectedName.ForeColor = System.Drawing.Color.Aquamarine
         Me.lblSelectedName.Location = New System.Drawing.Point(204, 156)
         Me.lblSelectedName.Name = "lblSelectedName"
         Me.lblSelectedName.Size = New System.Drawing.Size(263, 39)
@@ -177,7 +205,7 @@ Partial Class PlayerEditing
         '
         Me.lblNewName.AutoSize = True
         Me.lblNewName.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNewName.ForeColor = System.Drawing.Color.Lime
+        Me.lblNewName.ForeColor = System.Drawing.Color.Aquamarine
         Me.lblNewName.Location = New System.Drawing.Point(231, 292)
         Me.lblNewName.Name = "lblNewName"
         Me.lblNewName.Size = New System.Drawing.Size(190, 39)
@@ -189,7 +217,7 @@ Partial Class PlayerEditing
         '
         Me.lblEditing.AutoSize = True
         Me.lblEditing.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEditing.ForeColor = System.Drawing.Color.Lime
+        Me.lblEditing.ForeColor = System.Drawing.Color.Aquamarine
         Me.lblEditing.Location = New System.Drawing.Point(255, 48)
         Me.lblEditing.Name = "lblEditing"
         Me.lblEditing.Size = New System.Drawing.Size(138, 39)
@@ -198,7 +226,7 @@ Partial Class PlayerEditing
         '
         'btnAdd
         '
-        Me.btnAdd.BackColor = System.Drawing.Color.Lime
+        Me.btnAdd.BackColor = System.Drawing.Color.Aquamarine
         Me.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnAdd.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -229,9 +257,11 @@ Partial Class PlayerEditing
         Me.Controls.Add(Me.cbPlayerNames)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.mnuPlayerEditing)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.mnuPlayerEditing
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.MaximizeBox = False
         Me.Name = "PlayerEditing"
         Me.Text = "PlayerEditing"
         Me.mnuPlayerEditing.ResumeLayout(False)
@@ -256,4 +286,7 @@ Partial Class PlayerEditing
     Friend WithEvents lblNewName As Label
     Friend WithEvents lblEditing As Label
     Friend WithEvents btnAdd As Button
+    Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
 End Class

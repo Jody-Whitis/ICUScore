@@ -37,20 +37,20 @@ Partial Class SplashScreen
         Me.txtTitle.Enabled = False
         Me.txtTitle.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTitle.ForeColor = System.Drawing.Color.Lime
-        Me.txtTitle.Location = New System.Drawing.Point(8, 196)
-        Me.txtTitle.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtTitle.Location = New System.Drawing.Point(12, 306)
         Me.txtTitle.Multiline = True
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.ReadOnly = True
-        Me.txtTitle.Size = New System.Drawing.Size(165, 50)
+        Me.txtTitle.Size = New System.Drawing.Size(248, 78)
         Me.txtTitle.TabIndex = 1
         '
         'PictureBox2
         '
         Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(6, 12)
+        Me.PictureBox2.Location = New System.Drawing.Point(9, 19)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(238, 232)
+        Me.PictureBox2.Size = New System.Drawing.Size(357, 362)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox2.TabIndex = 2
         Me.PictureBox2.TabStop = False
@@ -60,28 +60,30 @@ Partial Class SplashScreen
         Me.txtLoad.BackColor = System.Drawing.Color.RoyalBlue
         Me.txtLoad.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtLoad.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLoad.ForeColor = System.Drawing.Color.Lime
-        Me.txtLoad.Location = New System.Drawing.Point(302, 105)
+        Me.txtLoad.ForeColor = System.Drawing.Color.Aquamarine
+        Me.txtLoad.Location = New System.Drawing.Point(453, 164)
+        Me.txtLoad.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtLoad.Multiline = True
         Me.txtLoad.Name = "txtLoad"
         Me.txtLoad.ReadOnly = True
-        Me.txtLoad.Size = New System.Drawing.Size(219, 171)
+        Me.txtLoad.Size = New System.Drawing.Size(328, 267)
         Me.txtLoad.TabIndex = 3
         Me.txtLoad.Text = "ICU ScoreBoard"
         Me.txtLoad.UseWaitCursor = True
         '
         'SplashScreen
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
-        Me.ClientSize = New System.Drawing.Size(533, 288)
+        Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.txtLoad)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.txtTitle)
         Me.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.MaximizeBox = False
         Me.Name = "SplashScreen"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ICUScore"

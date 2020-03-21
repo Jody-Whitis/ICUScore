@@ -141,7 +141,6 @@ Public Class HighScores
                     Dim playerScore As String = score.Item("highScore")
                     lstScores.Items.Add(playerNameScore & "".PadRight(10) & ":" & " ".PadRight(5) & playerScore)
                 Next
-                lstScores.BackColor = Color.Lime
                 lstScores.Visible = True
                 lblScoreBoard.Visible = True
                 lstScores.Refresh()
@@ -381,6 +380,12 @@ Public Class HighScores
             PlayerEditing.Show()
             Me.Hide()
         End If
+    End Sub
+
+    Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
+        CurrentSession.PreviousForm = Me
+        AboutThis.Activate()
+        AboutThis.Show()
     End Sub
 
 

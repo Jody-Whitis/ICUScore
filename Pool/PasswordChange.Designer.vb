@@ -36,7 +36,7 @@ Partial Class PasswordChange
         '
         'txtNewPassword
         '
-        Me.txtNewPassword.BackColor = System.Drawing.Color.Lime
+        Me.txtNewPassword.BackColor = System.Drawing.Color.Aquamarine
         Me.txtNewPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNewPassword.Location = New System.Drawing.Point(87, 320)
         Me.txtNewPassword.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -47,7 +47,7 @@ Partial Class PasswordChange
         '
         'txtNewPasswordConfirm
         '
-        Me.txtNewPasswordConfirm.BackColor = System.Drawing.Color.Lime
+        Me.txtNewPasswordConfirm.BackColor = System.Drawing.Color.Aquamarine
         Me.txtNewPasswordConfirm.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNewPasswordConfirm.Location = New System.Drawing.Point(87, 432)
         Me.txtNewPasswordConfirm.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -58,7 +58,7 @@ Partial Class PasswordChange
         '
         'btnUpdatePassword
         '
-        Me.btnUpdatePassword.BackColor = System.Drawing.Color.Lime
+        Me.btnUpdatePassword.BackColor = System.Drawing.Color.Aquamarine
         Me.btnUpdatePassword.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnUpdatePassword.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnUpdatePassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -75,7 +75,7 @@ Partial Class PasswordChange
         '
         Me.lblUpdate.AutoSize = True
         Me.lblUpdate.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUpdate.ForeColor = System.Drawing.Color.Lime
+        Me.lblUpdate.ForeColor = System.Drawing.Color.Aquamarine
         Me.lblUpdate.Location = New System.Drawing.Point(79, 54)
         Me.lblUpdate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUpdate.Name = "lblUpdate"
@@ -85,7 +85,7 @@ Partial Class PasswordChange
         '
         'btnCancel
         '
-        Me.btnCancel.BackColor = System.Drawing.Color.Lime
+        Me.btnCancel.BackColor = System.Drawing.Color.Aquamarine
         Me.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup
@@ -101,7 +101,7 @@ Partial Class PasswordChange
         '
         'txtCurrentPassword
         '
-        Me.txtCurrentPassword.BackColor = System.Drawing.Color.Lime
+        Me.txtCurrentPassword.BackColor = System.Drawing.Color.Aquamarine
         Me.txtCurrentPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCurrentPassword.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.txtCurrentPassword.Location = New System.Drawing.Point(87, 210)
@@ -115,7 +115,7 @@ Partial Class PasswordChange
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Lime
+        Me.Label1.ForeColor = System.Drawing.Color.Aquamarine
         Me.Label1.Location = New System.Drawing.Point(146, 175)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
@@ -127,7 +127,7 @@ Partial Class PasswordChange
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Lime
+        Me.Label2.ForeColor = System.Drawing.Color.Aquamarine
         Me.Label2.Location = New System.Drawing.Point(159, 285)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
@@ -139,7 +139,7 @@ Partial Class PasswordChange
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.Lime
+        Me.Label3.ForeColor = System.Drawing.Color.Aquamarine
         Me.Label3.Location = New System.Drawing.Point(133, 397)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
@@ -164,8 +164,10 @@ Partial Class PasswordChange
         Me.Controls.Add(Me.btnUpdatePassword)
         Me.Controls.Add(Me.txtNewPasswordConfirm)
         Me.Controls.Add(Me.txtNewPassword)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.MaximizeBox = False
         Me.Name = "PasswordChange"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "PasswordChange"

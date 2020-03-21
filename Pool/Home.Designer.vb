@@ -41,16 +41,16 @@ Partial Class Home
         Me.mnuPlayerEditing = New System.Windows.Forms.ToolStripMenuItem()
         Me.logOutMnu = New System.Windows.Forms.ToolStripMenuItem()
         Me.quitMnu = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnNewUser = New System.Windows.Forms.Button()
-        Me.btnGuest = New System.Windows.Forms.Button()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnNewUser = New System.Windows.Forms.Button()
+        Me.btnGuest = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnPvP
         '
-        Me.btnPvP.BackColor = System.Drawing.Color.Lime
+        Me.btnPvP.BackColor = System.Drawing.Color.Aquamarine
         Me.btnPvP.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnPvP.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue
         Me.btnPvP.FlatStyle = System.Windows.Forms.FlatStyle.Popup
@@ -65,7 +65,7 @@ Partial Class Home
         '
         'btnHS
         '
-        Me.btnHS.BackColor = System.Drawing.Color.Lime
+        Me.btnHS.BackColor = System.Drawing.Color.Aquamarine
         Me.btnHS.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnHS.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnHS.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -79,7 +79,7 @@ Partial Class Home
         '
         'btnQuit
         '
-        Me.btnQuit.BackColor = System.Drawing.Color.Lime
+        Me.btnQuit.BackColor = System.Drawing.Color.Aquamarine
         Me.btnQuit.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnQuit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
@@ -96,7 +96,7 @@ Partial Class Home
         '
         Me.lblHome.AutoSize = True
         Me.lblHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHome.ForeColor = System.Drawing.Color.Lime
+        Me.lblHome.ForeColor = System.Drawing.Color.Aquamarine
         Me.lblHome.Location = New System.Drawing.Point(238, 70)
         Me.lblHome.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHome.Name = "lblHome"
@@ -107,7 +107,7 @@ Partial Class Home
         'txtUser
         '
         Me.txtUser.AcceptsTab = True
-        Me.txtUser.BackColor = System.Drawing.Color.Lime
+        Me.txtUser.BackColor = System.Drawing.Color.Aquamarine
         Me.txtUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUser.Location = New System.Drawing.Point(264, 170)
         Me.txtUser.Name = "txtUser"
@@ -117,7 +117,7 @@ Partial Class Home
         '
         'txtPassword
         '
-        Me.txtPassword.BackColor = System.Drawing.Color.Lime
+        Me.txtPassword.BackColor = System.Drawing.Color.Aquamarine
         Me.txtPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassword.Location = New System.Drawing.Point(264, 270)
         Me.txtPassword.Name = "txtPassword"
@@ -127,7 +127,7 @@ Partial Class Home
         '
         'btnLogin
         '
-        Me.btnLogin.BackColor = System.Drawing.Color.Lime
+        Me.btnLogin.BackColor = System.Drawing.Color.Aquamarine
         Me.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLogin.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -141,7 +141,7 @@ Partial Class Home
         '
         'btnLogout
         '
-        Me.btnLogout.BackColor = System.Drawing.Color.Lime
+        Me.btnLogout.BackColor = System.Drawing.Color.Aquamarine
         Me.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLogout.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -166,7 +166,7 @@ Partial Class Home
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblUser.AutoSize = True
         Me.lblUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUser.ForeColor = System.Drawing.Color.Lime
+        Me.lblUser.ForeColor = System.Drawing.Color.Aquamarine
         Me.lblUser.Location = New System.Drawing.Point(128, 170)
         Me.lblUser.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUser.Name = "lblUser"
@@ -178,7 +178,7 @@ Partial Class Home
         '
         Me.lblPassword.AutoSize = True
         Me.lblPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPassword.ForeColor = System.Drawing.Color.Lime
+        Me.lblPassword.ForeColor = System.Drawing.Color.Aquamarine
         Me.lblPassword.Location = New System.Drawing.Point(50, 270)
         Me.lblPassword.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPassword.Name = "lblPassword"
@@ -203,7 +203,7 @@ Partial Class Home
         '
         Me.mnuHome.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.editPasswordMnu, Me.mnuPlayerEditing, Me.logOutMnu, Me.quitMnu})
         Me.mnuHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mnuHome.ForeColor = System.Drawing.Color.Lime
+        Me.mnuHome.ForeColor = System.Drawing.Color.Aquamarine
         Me.mnuHome.Name = "mnuHome"
         Me.mnuHome.Size = New System.Drawing.Size(115, 38)
         Me.mnuHome.Text = "Menu"
@@ -212,7 +212,7 @@ Partial Class Home
         '
         Me.editPasswordMnu.BackColor = System.Drawing.Color.RoyalBlue
         Me.editPasswordMnu.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.editPasswordMnu.ForeColor = System.Drawing.Color.Lime
+        Me.editPasswordMnu.ForeColor = System.Drawing.Color.Aquamarine
         Me.editPasswordMnu.Name = "editPasswordMnu"
         Me.editPasswordMnu.Size = New System.Drawing.Size(362, 44)
         Me.editPasswordMnu.Text = "Edit Password"
@@ -221,7 +221,7 @@ Partial Class Home
         'mnuPlayerEditing
         '
         Me.mnuPlayerEditing.BackColor = System.Drawing.Color.RoyalBlue
-        Me.mnuPlayerEditing.ForeColor = System.Drawing.Color.Lime
+        Me.mnuPlayerEditing.ForeColor = System.Drawing.Color.Aquamarine
         Me.mnuPlayerEditing.Name = "mnuPlayerEditing"
         Me.mnuPlayerEditing.Size = New System.Drawing.Size(362, 44)
         Me.mnuPlayerEditing.Text = "Player Editing"
@@ -231,7 +231,7 @@ Partial Class Home
         '
         Me.logOutMnu.BackColor = System.Drawing.Color.RoyalBlue
         Me.logOutMnu.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.logOutMnu.ForeColor = System.Drawing.Color.Lime
+        Me.logOutMnu.ForeColor = System.Drawing.Color.Aquamarine
         Me.logOutMnu.Name = "logOutMnu"
         Me.logOutMnu.Size = New System.Drawing.Size(362, 44)
         Me.logOutMnu.Text = "Log Out"
@@ -241,14 +241,31 @@ Partial Class Home
         '
         Me.quitMnu.BackColor = System.Drawing.Color.RoyalBlue
         Me.quitMnu.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.quitMnu.ForeColor = System.Drawing.Color.Lime
+        Me.quitMnu.ForeColor = System.Drawing.Color.Aquamarine
         Me.quitMnu.Name = "quitMnu"
         Me.quitMnu.Size = New System.Drawing.Size(362, 44)
         Me.quitMnu.Text = "Quit"
         '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem1})
+        Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 38)
+        Me.AboutToolStripMenuItem.Text = "About"
+        '
+        'AboutToolStripMenuItem1
+        '
+        Me.AboutToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.AboutToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
+        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(359, 44)
+        Me.AboutToolStripMenuItem1.Text = "About"
+        '
         'btnNewUser
         '
-        Me.btnNewUser.BackColor = System.Drawing.Color.Lime
+        Me.btnNewUser.BackColor = System.Drawing.Color.Aquamarine
         Me.btnNewUser.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnNewUser.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnNewUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -262,7 +279,7 @@ Partial Class Home
         '
         'btnGuest
         '
-        Me.btnGuest.BackColor = System.Drawing.Color.Lime
+        Me.btnGuest.BackColor = System.Drawing.Color.Aquamarine
         Me.btnGuest.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnGuest.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnGuest.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -273,23 +290,6 @@ Partial Class Home
         Me.btnGuest.TabIndex = 4
         Me.btnGuest.Text = "Guest"
         Me.btnGuest.UseVisualStyleBackColor = False
-        '
-        'AboutToolStripMenuItem
-        '
-        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem1})
-        Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Lime
-        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 38)
-        Me.AboutToolStripMenuItem.Text = "About"
-        '
-        'AboutToolStripMenuItem1
-        '
-        Me.AboutToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
-        Me.AboutToolStripMenuItem1.ForeColor = System.Drawing.Color.Lime
-        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
-        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(359, 44)
-        Me.AboutToolStripMenuItem1.Text = "About"
         '
         'Home
         '
@@ -311,8 +311,10 @@ Partial Class Home
         Me.Controls.Add(Me.btnQuit)
         Me.Controls.Add(Me.btnHS)
         Me.Controls.Add(Me.btnPvP)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
+        Me.MaximizeBox = False
         Me.Name = "Home"
         Me.Text = "Login"
         Me.MenuStrip1.ResumeLayout(False)

@@ -478,6 +478,7 @@ Public Class PvP
         GetHighScores()
         ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, btnSave}, True)
         ScoreTheme.SetControl(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
+        CurrentScreen = AppState.Switch
     End Sub
 
     ''' <summary>
@@ -521,6 +522,7 @@ Public Class PvP
         ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, btnSave, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, True)
         ScoreTheme.SetControl(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
         btnBack.Text = "Back"
+        CurrentScreen = AppState.Switch
     End Sub
 
     Private Sub btnHighScore_Click(sender As Object, e As EventArgs) Handles btnHighScore.Click
@@ -586,6 +588,12 @@ Public Class PvP
             CurrentSession.PreviousForm = Me
         End If
         Me.Hide()
+    End Sub
+
+    Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
+        CurrentSession.PreviousForm = Me
+        AboutThis.Activate()
+        AboutThis.Show()
     End Sub
 
 #End Region
