@@ -60,8 +60,9 @@ Public Class HighScores
         If Not Permissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
             ScoreTheme.GuestDisplay(New Control() {btnAdd, btnSubmit, cbPlayers, txtScore, txtNewGM,
                                         lblSelectedPlayer, lblScore, lblNewGameMode, btnPlayerEditing}, False)
-            EditPasswordToolStripMenuItem.Visible = False
-            mnuPlayerEditing.Visible = False
+            EditPasswordToolStripMenuItem1.Visible = False
+            PlayerEditingToolStripMenuItem.Visible = False
+            EditToolStripMenuItem.Visible = False
             btnPvP.Location = btnAdd.Location
         End If
     End Sub
@@ -357,14 +358,6 @@ Public Class HighScores
         Me.Close()
     End Sub
 
-    Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
-        If CurrentSession.IsLoggedIn.Equals(True) Then
-            CurrentSession.setPreviousForm(Me)
-            PasswordChange.Show()
-            Me.Hide()
-        End If
-    End Sub
-
     Private Sub QuitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click
         Application.Exit()
     End Sub
@@ -373,19 +366,27 @@ Public Class HighScores
         ScoreTheme.LogOutUser()
     End Sub
 
-    Private Sub PlayerEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPlayerEditing.Click, btnPlayerEditing.Click
+    Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
+        CurrentSession.PreviousForm = Me
+        AboutThis.Activate()
+        AboutThis.Show()
+    End Sub
+
+    Private Sub EditPasswordToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem1.Click
+        If CurrentSession.IsLoggedIn.Equals(True) Then
+            CurrentSession.setPreviousForm(Me)
+            PasswordChange.Show()
+            Me.Hide()
+        End If
+    End Sub
+
+    Private Sub PlayerEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlayerEditingToolStripMenuItem.Click
         If Permissions.IsUser.Equals(True) Then
             CurrentSession.PreviousForm = Me
             PlayerEditing.Activate()
             PlayerEditing.Show()
             Me.Hide()
         End If
-    End Sub
-
-    Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
-        CurrentSession.PreviousForm = Me
-        AboutThis.Activate()
-        AboutThis.Show()
     End Sub
 
 

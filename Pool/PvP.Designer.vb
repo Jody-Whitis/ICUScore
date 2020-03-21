@@ -41,10 +41,13 @@ Partial Class PvP
         Me.txtTotalAgainst = New System.Windows.Forms.TextBox()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EditPasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PlayerEditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditPasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PlayerEditToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.cbGames = New System.Windows.Forms.ComboBox()
         Me.btnRegisterTest = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -56,9 +59,6 @@ Partial Class PvP
         Me.lblWinsAgainst1 = New System.Windows.Forms.Label()
         Me.lblWinsAgainst2 = New System.Windows.Forms.Label()
         Me.lblScoreBoard = New System.Windows.Forms.Label()
-        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -267,18 +267,43 @@ Partial Class PvP
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem, Me.EditToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(974, 42)
+        Me.MenuStrip1.Size = New System.Drawing.Size(974, 41)
         Me.MenuStrip1.TabIndex = 26
         Me.MenuStrip1.Text = "MenuStrip1"
         '
         'MenuToolStripMenuItem
         '
-        Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditPasswordToolStripMenuItem, Me.PlayerEditToolStripMenuItem, Me.LogOutToolStripMenuItem, Me.QuitToolStripMenuItem})
+        Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LogOutToolStripMenuItem, Me.QuitToolStripMenuItem})
         Me.MenuToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
-        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 38)
+        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 37)
         Me.MenuToolStripMenuItem.Text = "Menu"
+        '
+        'LogOutToolStripMenuItem
+        '
+        Me.LogOutToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
+        Me.LogOutToolStripMenuItem.Text = "Log out"
+        '
+        'QuitToolStripMenuItem
+        '
+        Me.QuitToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
+        Me.QuitToolStripMenuItem.Text = "Quit"
+        '
+        'EditToolStripMenuItem
+        '
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditPasswordToolStripMenuItem, Me.PlayerEditToolStripMenuItem1})
+        Me.EditToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EditToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(95, 37)
+        Me.EditToolStripMenuItem.Text = "Edit"
         '
         'EditPasswordToolStripMenuItem
         '
@@ -288,29 +313,30 @@ Partial Class PvP
         Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
         Me.EditPasswordToolStripMenuItem.Text = "Edit Password"
         '
-        'PlayerEditToolStripMenuItem
+        'PlayerEditToolStripMenuItem1
         '
-        Me.PlayerEditToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
-        Me.PlayerEditToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
-        Me.PlayerEditToolStripMenuItem.Name = "PlayerEditToolStripMenuItem"
-        Me.PlayerEditToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
-        Me.PlayerEditToolStripMenuItem.Text = "Player Edit"
+        Me.PlayerEditToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.PlayerEditToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
+        Me.PlayerEditToolStripMenuItem1.Name = "PlayerEditToolStripMenuItem1"
+        Me.PlayerEditToolStripMenuItem1.Size = New System.Drawing.Size(360, 44)
+        Me.PlayerEditToolStripMenuItem1.Text = "Player Edit"
         '
-        'LogOutToolStripMenuItem
+        'AboutToolStripMenuItem
         '
-        Me.LogOutToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
-        Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
-        Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
-        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
-        Me.LogOutToolStripMenuItem.Text = "Log out"
+        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem1})
+        Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 37)
+        Me.AboutToolStripMenuItem.Text = "About"
         '
-        'QuitToolStripMenuItem
+        'AboutToolStripMenuItem1
         '
-        Me.QuitToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
-        Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
-        Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
-        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
-        Me.QuitToolStripMenuItem.Text = "Quit"
+        Me.AboutToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.AboutToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
+        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(242, 44)
+        Me.AboutToolStripMenuItem1.Text = "About"
         '
         'cbGames
         '
@@ -450,31 +476,6 @@ Partial Class PvP
         Me.lblScoreBoard.TabIndex = 37
         Me.lblScoreBoard.Text = "Current ScoreBoard"
         '
-        'EditToolStripMenuItem
-        '
-        Me.EditToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.EditToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
-        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(95, 38)
-        Me.EditToolStripMenuItem.Text = "Edit"
-        '
-        'AboutToolStripMenuItem
-        '
-        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem1})
-        Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
-        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 38)
-        Me.AboutToolStripMenuItem.Text = "About"
-        '
-        'AboutToolStripMenuItem1
-        '
-        Me.AboutToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
-        Me.AboutToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
-        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
-        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(359, 44)
-        Me.AboutToolStripMenuItem1.Text = "About"
-        '
         'PvP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
@@ -538,7 +539,6 @@ Partial Class PvP
     Friend WithEvents txtTotalAgainst As TextBox
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents MenuToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents EditPasswordToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LogOutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QuitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents cbGames As ComboBox
@@ -552,8 +552,9 @@ Partial Class PvP
     Friend WithEvents lblWinsAgainst1 As Label
     Friend WithEvents lblWinsAgainst2 As Label
     Friend WithEvents lblScoreBoard As Label
-    Friend WithEvents PlayerEditToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents EditPasswordToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PlayerEditToolStripMenuItem1 As ToolStripMenuItem
 End Class

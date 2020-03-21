@@ -61,7 +61,9 @@ Public Class PvP
         If Not Permissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
             ScoreTheme.GuestDisplay(New Control() {btnSave, cbPlayer1, cbPlayer2, lblPlayer1, lblPlayer2, lblTotalAgainst,
                                   lblWinsAgainst1, lblWinsAgainst2, lblTotalWins1, lblTotalWins2, btnRegisterTest}, False)
+            PlayerEditToolStripMenuItem1.Visible = False
             EditPasswordToolStripMenuItem.Visible = False
+            EditToolStripMenuItem.Visible = False
         End If
     End Sub
 
@@ -537,14 +539,6 @@ Public Class PvP
         Me.Close()
     End Sub
 
-    Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
-        If CurrentSession.IsLoggedIn.Equals(True) Then
-            CurrentSession.setPreviousForm(Me)
-            PasswordChange.Show()
-            Me.Hide()
-        End If
-    End Sub
-
     Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
         ScoreTheme.LogOutUser()
     End Sub
@@ -595,6 +589,24 @@ Public Class PvP
         AboutThis.Activate()
         AboutThis.Show()
     End Sub
+
+    Private Sub PlayerEditToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PlayerEditToolStripMenuItem1.Click
+        If Permissions.IsUser.Equals(True) Then
+            CurrentSession.PreviousForm = Me
+            PlayerEditing.Activate()
+            PlayerEditing.Show()
+            Me.Hide()
+        End If
+    End Sub
+
+    Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
+        If CurrentSession.IsLoggedIn.Equals(True) Then
+            CurrentSession.setPreviousForm(Me)
+            PasswordChange.Show()
+            Me.Hide()
+        End If
+    End Sub
+
 
 #End Region
 

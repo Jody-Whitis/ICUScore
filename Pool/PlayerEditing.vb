@@ -153,15 +153,6 @@
         End If
     End Sub
 
-    Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
-        With PasswordChange
-            .Activate()
-            .Show()
-        End With
-        CurrentSession.PreviousForm = Me
-        Me.Hide()
-    End Sub
-
     Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
         ScoreTheme.LogOutUser()
     End Sub
@@ -204,6 +195,15 @@
         CurrentSession.PreviousForm = Me
         AboutThis.Activate()
         AboutThis.Show()
+    End Sub
+
+    Private Sub EditPasswordToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem1.Click
+        With PasswordChange
+            .Activate()
+            .Show()
+        End With
+        CurrentSession.PreviousForm = Me
+        Me.Hide()
     End Sub
 
 

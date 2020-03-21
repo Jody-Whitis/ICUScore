@@ -31,10 +31,10 @@ Partial Class PlayerEditing
         Me.lblError = New System.Windows.Forms.Label()
         Me.mnuPlayerEditing = New System.Windows.Forms.MenuStrip()
         Me.MenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EditPasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditPasswordToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblSelectedName = New System.Windows.Forms.Label()
@@ -135,27 +135,19 @@ Partial Class PlayerEditing
         '
         'MenuToolStripMenuItem
         '
-        Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditPasswordToolStripMenuItem, Me.LogOutToolStripMenuItem, Me.QuitToolStripMenuItem})
+        Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LogOutToolStripMenuItem, Me.QuitToolStripMenuItem})
         Me.MenuToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
         Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 38)
         Me.MenuToolStripMenuItem.Text = "Menu"
         '
-        'EditPasswordToolStripMenuItem
-        '
-        Me.EditPasswordToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
-        Me.EditPasswordToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
-        Me.EditPasswordToolStripMenuItem.Name = "EditPasswordToolStripMenuItem"
-        Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
-        Me.EditPasswordToolStripMenuItem.Text = "Edit Password"
-        '
         'LogOutToolStripMenuItem
         '
         Me.LogOutToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
-        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(263, 44)
         Me.LogOutToolStripMenuItem.Text = "Log Out"
         '
         'QuitToolStripMenuItem
@@ -163,15 +155,25 @@ Partial Class PlayerEditing
         Me.QuitToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
-        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(360, 44)
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(263, 44)
         Me.QuitToolStripMenuItem.Text = "Quit"
         '
         'EditToolStripMenuItem
         '
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditPasswordToolStripMenuItem1})
         Me.EditToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(95, 38)
         Me.EditToolStripMenuItem.Text = "Edit"
+        Me.EditToolStripMenuItem.Visible = False
+        '
+        'EditPasswordToolStripMenuItem1
+        '
+        Me.EditPasswordToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.EditPasswordToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
+        Me.EditPasswordToolStripMenuItem1.Name = "EditPasswordToolStripMenuItem1"
+        Me.EditPasswordToolStripMenuItem1.Size = New System.Drawing.Size(360, 44)
+        Me.EditPasswordToolStripMenuItem1.Text = "Edit Password"
         '
         'AboutToolStripMenuItem
         '
@@ -279,7 +281,6 @@ Partial Class PlayerEditing
     Friend WithEvents lblError As Label
     Friend WithEvents mnuPlayerEditing As MenuStrip
     Friend WithEvents MenuToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents EditPasswordToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LogOutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QuitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblSelectedName As Label
@@ -289,4 +290,5 @@ Partial Class PlayerEditing
     Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents EditPasswordToolStripMenuItem1 As ToolStripMenuItem
 End Class

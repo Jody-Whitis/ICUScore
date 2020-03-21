@@ -33,7 +33,7 @@ Public Class Home
             userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
         Else
             userAuthenticate.isLoggedIn = False
-            With mnuPlayerEditing
+            With EditPlayerToolStripMenuItem
                 .Enabled = False
                 .Visible = False
             End With
@@ -44,10 +44,11 @@ Public Class Home
             lblUser.Visible = False
             lblPassword.Visible = False
             lblHome.Visible = True
-            editPasswordMnu.Visible = True
+            EditPasswordToolStripMenuItem.Visible = True
             logOutMnu.Visible = True
-            mnuPlayerEditing.Visible = True
-            mnuPlayerEditing.Enabled = True
+            EditPlayerToolStripMenuItem.Visible = True
+            EditPlayerToolStripMenuItem.Enabled = True
+            EditToolStripMenuItem.Visible = True
             lblHome.Text = $"Welcome {CurrentSession.DisplayName}!"
             btnLogout.Location = btnGuest.Location
             Me.Text = "Home"
@@ -61,13 +62,6 @@ Public Class Home
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click, logOutMnu.Click
         ScoreTheme.LogOutUser()
         Me.Text = "Login"
-    End Sub
-
-    Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles editPasswordMnu.Click
-        If CurrentSession.IsLoggedIn.Equals(True) Then
-            CurrentSession.PreviousForm = Me
-            LoadNextFormHide(Me, PasswordChange)
-        End If
     End Sub
 
     Private Sub btnNewUser_Click(sender As Object, e As EventArgs) Handles btnNewUser.Click
@@ -85,11 +79,11 @@ Public Class Home
             CurrentSession.Permissions = Permissions.UserStatus.Guest
             ScoreTheme.SetControl(New Control() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
             ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword}, False)
-            editPasswordMnu.Visible = False
+            EditPasswordToolStripMenuItem.Visible = False
+            EditToolStripMenuItem.Visible = False
             lblUser.Visible = False
             lblPassword.Visible = False
             lblHome.Visible = True
-            editPasswordMnu.Visible = False
             logOutMnu.Visible = True
             lblHome.Text = $"Welcome Guest!"
             btnLogout.Location = btnGuest.Location
@@ -97,16 +91,23 @@ Public Class Home
         End If
     End Sub
 
-    Private Sub PlayerEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPlayerEditing.Click
-        If Permissions.IsUser.Equals(True) Then
-            CurrentSession.PreviousForm = Me
-            LoadNextFormHide(Me, PlayerEditing)
-        End If
-    End Sub
-
     Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
         CurrentSession.PreviousForm = Me
         AboutThis.Activate()
         AboutThis.Show()
+    End Sub
+
+    Private Sub EditPasswordToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
+        If CurrentSession.IsLoggedIn.Equals(True) Then
+            CurrentSession.PreviousForm = Me
+            LoadNextFormHide(Me, PasswordChange)
+        End If
+    End Sub
+
+    Private Sub EditPlayerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPlayerToolStripMenuItem.Click
+        If Permissions.IsUser.Equals(True) Then
+            CurrentSession.PreviousForm = Me
+            LoadNextFormHide(Me, PlayerEditing)
+        End If
     End Sub
 End Class

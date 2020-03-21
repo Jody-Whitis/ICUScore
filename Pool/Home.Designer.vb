@@ -37,10 +37,11 @@ Partial Class Home
         Me.lblPassword = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.mnuHome = New System.Windows.Forms.ToolStripMenuItem()
-        Me.editPasswordMnu = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPlayerEditing = New System.Windows.Forms.ToolStripMenuItem()
         Me.logOutMnu = New System.Windows.Forms.ToolStripMenuItem()
         Me.quitMnu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditPasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditPlayerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnNewUser = New System.Windows.Forms.Button()
@@ -191,41 +192,22 @@ Partial Class Home
         Me.MenuStrip1.BackColor = System.Drawing.Color.RoyalBlue
         Me.MenuStrip1.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHome, Me.AboutToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHome, Me.EditToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
-        Me.MenuStrip1.Size = New System.Drawing.Size(794, 44)
+        Me.MenuStrip1.Size = New System.Drawing.Size(804, 44)
         Me.MenuStrip1.TabIndex = 11
         Me.MenuStrip1.Text = "MenuStrip1"
         '
         'mnuHome
         '
-        Me.mnuHome.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.editPasswordMnu, Me.mnuPlayerEditing, Me.logOutMnu, Me.quitMnu})
+        Me.mnuHome.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.logOutMnu, Me.quitMnu})
         Me.mnuHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mnuHome.ForeColor = System.Drawing.Color.Aquamarine
         Me.mnuHome.Name = "mnuHome"
         Me.mnuHome.Size = New System.Drawing.Size(115, 38)
         Me.mnuHome.Text = "Menu"
-        '
-        'editPasswordMnu
-        '
-        Me.editPasswordMnu.BackColor = System.Drawing.Color.RoyalBlue
-        Me.editPasswordMnu.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.editPasswordMnu.ForeColor = System.Drawing.Color.Aquamarine
-        Me.editPasswordMnu.Name = "editPasswordMnu"
-        Me.editPasswordMnu.Size = New System.Drawing.Size(362, 44)
-        Me.editPasswordMnu.Text = "Edit Password"
-        Me.editPasswordMnu.Visible = False
-        '
-        'mnuPlayerEditing
-        '
-        Me.mnuPlayerEditing.BackColor = System.Drawing.Color.RoyalBlue
-        Me.mnuPlayerEditing.ForeColor = System.Drawing.Color.Aquamarine
-        Me.mnuPlayerEditing.Name = "mnuPlayerEditing"
-        Me.mnuPlayerEditing.Size = New System.Drawing.Size(362, 44)
-        Me.mnuPlayerEditing.Text = "Player Editing"
-        Me.mnuPlayerEditing.Visible = False
         '
         'logOutMnu
         '
@@ -233,7 +215,7 @@ Partial Class Home
         Me.logOutMnu.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.logOutMnu.ForeColor = System.Drawing.Color.Aquamarine
         Me.logOutMnu.Name = "logOutMnu"
-        Me.logOutMnu.Size = New System.Drawing.Size(362, 44)
+        Me.logOutMnu.Size = New System.Drawing.Size(263, 44)
         Me.logOutMnu.Text = "Log Out"
         Me.logOutMnu.Visible = False
         '
@@ -243,8 +225,34 @@ Partial Class Home
         Me.quitMnu.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.quitMnu.ForeColor = System.Drawing.Color.Aquamarine
         Me.quitMnu.Name = "quitMnu"
-        Me.quitMnu.Size = New System.Drawing.Size(362, 44)
+        Me.quitMnu.Size = New System.Drawing.Size(263, 44)
         Me.quitMnu.Text = "Quit"
+        '
+        'EditToolStripMenuItem
+        '
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditPasswordToolStripMenuItem, Me.EditPlayerToolStripMenuItem})
+        Me.EditToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EditToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(95, 38)
+        Me.EditToolStripMenuItem.Text = "Edit"
+        Me.EditToolStripMenuItem.Visible = False
+        '
+        'EditPasswordToolStripMenuItem
+        '
+        Me.EditPasswordToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.EditPasswordToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.EditPasswordToolStripMenuItem.Name = "EditPasswordToolStripMenuItem"
+        Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(362, 44)
+        Me.EditPasswordToolStripMenuItem.Text = "Edit Password"
+        '
+        'EditPlayerToolStripMenuItem
+        '
+        Me.EditPlayerToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.EditPlayerToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.EditPlayerToolStripMenuItem.Name = "EditPlayerToolStripMenuItem"
+        Me.EditPlayerToolStripMenuItem.Size = New System.Drawing.Size(362, 44)
+        Me.EditPlayerToolStripMenuItem.Text = "Player Editing"
         '
         'AboutToolStripMenuItem
         '
@@ -260,7 +268,7 @@ Partial Class Home
         Me.AboutToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
         Me.AboutToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
         Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
-        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(359, 44)
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(242, 44)
         Me.AboutToolStripMenuItem1.Text = "About"
         '
         'btnNewUser
@@ -297,7 +305,7 @@ Partial Class Home
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
         Me.CancelButton = Me.btnQuit
-        Me.ClientSize = New System.Drawing.Size(794, 669)
+        Me.ClientSize = New System.Drawing.Size(804, 709)
         Me.Controls.Add(Me.btnGuest)
         Me.Controls.Add(Me.btnNewUser)
         Me.Controls.Add(Me.MenuStrip1)
@@ -337,12 +345,13 @@ Partial Class Home
     Friend WithEvents lblPassword As Label
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents mnuHome As ToolStripMenuItem
-    Friend WithEvents editPasswordMnu As ToolStripMenuItem
     Friend WithEvents logOutMnu As ToolStripMenuItem
     Friend WithEvents quitMnu As ToolStripMenuItem
     Friend WithEvents btnNewUser As Button
     Friend WithEvents btnGuest As Button
-    Friend WithEvents mnuPlayerEditing As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EditPasswordToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EditPlayerToolStripMenuItem As ToolStripMenuItem
 End Class
