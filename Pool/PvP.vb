@@ -533,10 +533,19 @@ Public Class PvP
         myForm.Show()
     End Sub
 
-    Private Sub btnQuit_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Home.Show()
-        HighScores.Close()
-        Me.Close()
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        If CurrentScreen = AppState.Switch Then
+            ScoreTheme.SetControl(New Control() {btnPlayer1win, btnPlayer2Wins}, False)
+            With btnSave
+                .Enabled = True
+                .Visible = True
+            End With
+        Else
+            Home.Show()
+            HighScores.Close()
+            Me.Close()
+        End If
+
     End Sub
 
     Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click

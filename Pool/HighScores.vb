@@ -380,7 +380,7 @@ Public Class HighScores
         End If
     End Sub
 
-    Private Sub PlayerEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlayerEditingToolStripMenuItem.Click
+    Private Sub PlayerEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlayerEditingToolStripMenuItem.Click, btnPlayerEditing.Click
         If Permissions.IsUser.Equals(True) Then
             CurrentSession.PreviousForm = Me
             PlayerEditing.Activate()
@@ -388,7 +388,6 @@ Public Class HighScores
             Me.Hide()
         End If
     End Sub
-
 
 #End Region
 
