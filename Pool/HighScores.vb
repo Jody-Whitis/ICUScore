@@ -8,12 +8,6 @@ Public Class HighScores
     Dim allPlayers As New Hashtable
     Dim allGames As New Hashtable
     Dim highScores As New DataSet
-    Dim addLoc As New Point
-    Dim saveLoc As New Point
-    Dim pvpLoc As New Point
-    Dim saveDim As New Drawing.Size
-    Dim addDim As New Drawing.Size
-    Dim pvpDim As New Drawing.Size
     Dim userPermissions As New Permissions
 #End Region
 
@@ -49,14 +43,6 @@ Public Class HighScores
             CurrentScreen = AppState.SelectPlayer
         End If
         ProcessEmailStatbyWeek()
-#Region "control buttons loc/dimens"
-        addLoc = btnAdd.Location
-        saveLoc = btnSubmit.Location
-        saveDim = btnSubmit.Size
-        addDim = btnAdd.Size
-        pvpLoc = btnPvP.Location
-        pvpDim = btnPvP.Size
-#End Region
         If Not Permissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
             ScoreTheme.GuestDisplay(New Control() {btnAdd, btnSubmit, cbPlayers, txtScore, txtNewGM,
                                         lblSelectedPlayer, lblScore, lblNewGameMode, btnPlayerEditing}, False)
@@ -247,8 +233,6 @@ Public Class HighScores
             txtScore.Visible = True
             lblNewGameMode.Visible = False
             ScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit}, True)
-            btnAdd.Location = addLoc
-            btnAdd.Size = addDim
             CurrentScreen = AppState.SelectPlayer
             lblError.Text = "Back"
             lblError.Visible = True

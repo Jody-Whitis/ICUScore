@@ -147,8 +147,7 @@ Public Class Register
                 'Confirm your password
             End If
         Else
-            Dim missingRequirements As String = ScoreTheme.GetMissingFieldNames(New Control() {txtUseremail, txtPassword, TxtPasswordConfirm, TxtPasswordConfirm})
-            Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields {missingRequirements}",
+            Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields",
         "Missing Requirement", MessageBoxButtons.OK, MessageBoxIcon.Hand)
         End If
 

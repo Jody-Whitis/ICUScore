@@ -19,7 +19,7 @@
 #Region "Event Handlers"
     Private Sub btnUpdatePassword_Click(sender As Object, e As EventArgs) Handles btnUpdatePassword.Click
         Dim isUpdated As Boolean = False
-        lblUpdate.ForeColor = Color.Lime
+        lblUpdate.ForeColor = Color.Aquamarine
         If isValidatedEntry(New Control() {txtCurrentPassword, txtNewPassword, txtNewPasswordConfirm}).Equals(True) Then
             If txtNewPassword.Text.Equals(txtNewPasswordConfirm.Text) Then
                 isUpdated = passwordUpdate.ILogin_UpdatePassword(txtNewPassword.Text, txtCurrentPassword.Text)
@@ -32,8 +32,7 @@
                 lblUpdate.Text = "Incorrect Current/New Password"
             End If
         Else
-            Dim missingRequirements As String = ScoreTheme.GetMissingFieldNames(New Control() {txtCurrentPassword, txtNewPassword, txtNewPasswordConfirm})
-            Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields {missingRequirements}",
+            Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields",
         "Missing Requirement", MessageBoxButtons.OK, MessageBoxIcon.Hand)
         End If
     End Sub

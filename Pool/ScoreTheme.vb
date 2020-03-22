@@ -14,7 +14,6 @@ Public Class ScoreTheme
             errorText.Visible = True
         Else
             errorText.Visible = False
-            errorText.ForeColor = Color.Lime
         End If
     End Sub
 
@@ -81,20 +80,6 @@ Public Class ScoreTheme
         Next
     End Sub
 
-    'Public Sub FillCBoxAll(ByVal allList As Hashtable, ByRef cBox As ComboBox, ByRef lblError As Label)
-    '    cBox.Items.Clear()
-    '    For Each name As DictionaryEntry In allList
-    '        If Screen = 0 AndAlso name.Value.ToString.Contains("Error") Then
-    '            Screen = -1
-    '            lblError.Text = "Error getting all players"
-    '            Exit For
-    '        Else
-    '            cBox.Items.Add(name.Value)
-    '            Screen = AppState.SelectPlayer
-    '        End If
-    '    Next
-    'End Sub
-
     ''' <summary>
     ''' Use to validate selected item on cBox
     ''' </summary>
@@ -106,21 +91,6 @@ Public Class ScoreTheme
         Else
             Return False
         End If
-    End Function
-
-    ''' <summary>
-    ''' Get missing required fields to display
-    ''' </summary>
-    ''' <param name="controls"></param>
-    ''' <returns></returns>
-    Public Shared Function GetMissingFieldNames(ByRef controls As Control()) As String
-        Dim missingFields As New StringBuilder
-        For Each field In controls
-            If String.IsNullOrEmpty(field.Text) Then
-                missingFields.Append(field.Name.Substring(3) & ",")
-            End If
-        Next
-        Return missingFields.ToString.Trim(",")
     End Function
 
     ''' <summary>
