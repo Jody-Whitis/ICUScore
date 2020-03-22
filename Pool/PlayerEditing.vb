@@ -45,19 +45,19 @@
                 GetPlayers()
                 cbPlayerNames.SelectedItem = "Choose"
             Case Else
-                If PreviousForm IsNot Nothing Then
-                    With PreviousForm
+                'If PreviousForm IsNot Nothing Then
+                '    With PreviousForm
+                '        .Activate()
+                '        .Refresh()
+                '        .Show()
+                '    End With
+                'Else
+                With Home
                         .Activate()
                         .Refresh()
                         .Show()
                     End With
-                Else
-                    With Home
-                        .Activate()
-                        .Refresh()
-                        .Show()
-                    End With
-                End If
+                'End If
                 Me.Close()
         End Select
     End Sub

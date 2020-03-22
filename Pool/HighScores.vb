@@ -370,7 +370,7 @@ Public Class HighScores
             CurrentSession.PreviousForm = Me
             PlayerEditing.Activate()
             PlayerEditing.Show()
-            Me.Hide()
+            Me.Close()
         End If
     End Sub
 

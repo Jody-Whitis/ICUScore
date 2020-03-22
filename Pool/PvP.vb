@@ -582,29 +582,18 @@ Public Class PvP
         End If
     End Sub
 
-    Private Sub btnRegisterTest_Click(sender As Object, e As EventArgs) Handles btnRegisterTest.Click
-        If Permissions.IsUser.Equals(True) Then
-            With PlayerEditing
-                .Activate()
-                .Show()
-            End With
-            CurrentSession.PreviousForm = Me
-        End If
-        Me.Hide()
-    End Sub
-
     Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
         CurrentSession.PreviousForm = Me
         AboutThis.Activate()
         AboutThis.Show()
     End Sub
 
-    Private Sub PlayerEditToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PlayerEditToolStripMenuItem1.Click
+    Private Sub PlayerEditToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PlayerEditToolStripMenuItem1.Click, btnRegisterTest.Click
         If Permissions.IsUser.Equals(True) Then
             CurrentSession.PreviousForm = Me
             PlayerEditing.Activate()
             PlayerEditing.Show()
-            Me.Hide()
+            Me.Close()
         End If
     End Sub
 
