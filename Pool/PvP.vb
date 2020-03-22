@@ -245,7 +245,7 @@ Public Class PvP
                         Dim opponentID As Integer = score.Item("opponentID")
                         Dim lastGame As Date = score.Item("lastMatch")
                         If Not String.IsNullOrEmpty(allplayers.Item(opponentID)) Then
-                            lstAllWins.Items.Add($"{playerNameScore} has beaten {allplayers.Item(opponentID)} {playerScore} time(s) since {lastGame.ToString("MM/dd/yyyy")}")
+                            lstAllWins.Items.Add($"{playerNameScore} has beaten {allplayers.Item(opponentID)} [{playerScore}] time(s) since {lastGame.ToString("MM/dd/yyyy")}")
 
                         End If
                     Next

@@ -126,7 +126,8 @@ Public Class HighScores
                 For Each score In scores
                     Dim playerNameScore As String = score.Item("playerName")
                     Dim playerScore As String = score.Item("highScore")
-                    lstScores.Items.Add(playerNameScore & "".PadRight(10) & ":" & " ".PadRight(5) & playerScore)
+                    Dim lastUpdated As Date = score.Item("LastUpdated")
+                    lstScores.Items.Add($"{playerNameScore} scored [{playerScore}] on {lastUpdated.ToString("MM/dd/yyyy")}")
                 Next
                 lstScores.Visible = True
                 lblScoreBoard.Visible = True

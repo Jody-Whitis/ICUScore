@@ -59,7 +59,7 @@ Partial Class HighScores
         Me.cbGames.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbGames.FormattingEnabled = True
         Me.cbGames.Location = New System.Drawing.Point(101, 94)
-        Me.cbGames.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cbGames.Margin = New System.Windows.Forms.Padding(2)
         Me.cbGames.Name = "cbGames"
         Me.cbGames.Size = New System.Drawing.Size(317, 27)
         Me.cbGames.TabIndex = 0
@@ -72,7 +72,7 @@ Partial Class HighScores
         Me.cbPlayers.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbPlayers.FormattingEnabled = True
         Me.cbPlayers.Location = New System.Drawing.Point(101, 152)
-        Me.cbPlayers.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cbPlayers.Margin = New System.Windows.Forms.Padding(2)
         Me.cbPlayers.Name = "cbPlayers"
         Me.cbPlayers.Size = New System.Drawing.Size(317, 27)
         Me.cbPlayers.TabIndex = 1
@@ -82,7 +82,7 @@ Partial Class HighScores
         Me.txtScore.BackColor = System.Drawing.Color.Aquamarine
         Me.txtScore.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtScore.Location = New System.Drawing.Point(101, 219)
-        Me.txtScore.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtScore.Margin = New System.Windows.Forms.Padding(2)
         Me.txtScore.Name = "txtScore"
         Me.txtScore.Size = New System.Drawing.Size(317, 24)
         Me.txtScore.TabIndex = 2
@@ -94,7 +94,7 @@ Partial Class HighScores
         Me.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSubmit.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSubmit.Location = New System.Drawing.Point(177, 509)
-        Me.btnSubmit.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnSubmit.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSubmit.Name = "btnSubmit"
         Me.btnSubmit.Size = New System.Drawing.Size(137, 52)
         Me.btnSubmit.TabIndex = 4
@@ -109,7 +109,7 @@ Partial Class HighScores
         Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnBack.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBack.Location = New System.Drawing.Point(8, 595)
-        Me.btnBack.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnBack.Margin = New System.Windows.Forms.Padding(2)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(92, 54)
         Me.btnBack.TabIndex = 5
@@ -134,11 +134,12 @@ Partial Class HighScores
         Me.lstScores.BackColor = System.Drawing.Color.Aquamarine
         Me.lstScores.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstScores.FormattingEnabled = True
+        Me.lstScores.HorizontalScrollbar = True
         Me.lstScores.ItemHeight = 20
-        Me.lstScores.Location = New System.Drawing.Point(79, 365)
-        Me.lstScores.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.lstScores.Location = New System.Drawing.Point(37, 364)
+        Me.lstScores.Margin = New System.Windows.Forms.Padding(2)
         Me.lstScores.Name = "lstScores"
-        Me.lstScores.Size = New System.Drawing.Size(357, 104)
+        Me.lstScores.Size = New System.Drawing.Size(434, 104)
         Me.lstScores.TabIndex = 6
         '
         'btnAdd
@@ -148,7 +149,7 @@ Partial Class HighScores
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnAdd.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.Location = New System.Drawing.Point(413, 594)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(2)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(92, 54)
         Me.btnAdd.TabIndex = 8
@@ -160,7 +161,7 @@ Partial Class HighScores
         Me.txtNewGM.BackColor = System.Drawing.Color.Aquamarine
         Me.txtNewGM.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNewGM.Location = New System.Drawing.Point(101, 296)
-        Me.txtNewGM.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtNewGM.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNewGM.Name = "txtNewGM"
         Me.txtNewGM.Size = New System.Drawing.Size(317, 24)
         Me.txtNewGM.TabIndex = 3
@@ -173,7 +174,7 @@ Partial Class HighScores
         Me.btnPvP.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnPvP.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPvP.Location = New System.Drawing.Point(282, 594)
-        Me.btnPvP.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnPvP.Margin = New System.Windows.Forms.Padding(2)
         Me.btnPvP.Name = "btnPvP"
         Me.btnPvP.Size = New System.Drawing.Size(92, 54)
         Me.btnPvP.TabIndex = 7
@@ -331,7 +332,7 @@ Partial Class HighScores
         Me.btnPlayerEditing.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnPlayerEditing.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPlayerEditing.Location = New System.Drawing.Point(136, 594)
-        Me.btnPlayerEditing.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnPlayerEditing.Margin = New System.Windows.Forms.Padding(2)
         Me.btnPlayerEditing.Name = "btnPlayerEditing"
         Me.btnPlayerEditing.Size = New System.Drawing.Size(92, 54)
         Me.btnPlayerEditing.TabIndex = 6
@@ -365,7 +366,7 @@ Partial Class HighScores
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.mnuHighScore
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.Name = "HighScores"
         Me.Text = "HighScores"

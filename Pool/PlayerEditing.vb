@@ -47,13 +47,14 @@
             Case Else
                 If PreviousForm IsNot Nothing Then
                     With PreviousForm
-                        .Refresh()
                         .Activate()
+                        .Refresh()
                         .Show()
                     End With
                 Else
                     With Home
                         .Activate()
+                        .Refresh()
                         .Show()
                     End With
                 End If
@@ -86,7 +87,6 @@
                     selectedPlayer.GetAllResults(editSQL)
                     playerTable = selectedPlayer.IDBConnect_GetAllPlayers()
                     tbEdit.ResetText()
-                    'lblError.Text = $"{selectedPlayer.PlayerName1} is now {newName}"
                     btnBack_Click(Nothing, Nothing)
                 End If
             Else
@@ -128,7 +128,6 @@
                     selectedPlayer.GetAllResults(deleteSQL)
                     playerTable = selectedPlayer.IDBConnect_GetAllPlayers()
                     tbEdit.Text = String.Empty
-                    lblError.Text = $"{selectedPlayer.PlayerName1} is gone"
                     cbPlayerNames.SelectedItem = Nothing
                     cbPlayerNames.Enabled = True
                     btnBack_Click(Nothing, Nothing)
@@ -173,7 +172,6 @@
                     If addAlert.Equals(DialogResult.Yes) Then
                         selectedPlayer.InsertPlayer()
                         tbEdit.ResetText()
-                        'lblError.Text = $"{selectedPlayer.PlayerName1} has joined!"
                         lblError.Visible = True
                         cbPlayerNames.SelectedItem = Nothing
                         lblNewName.Visible = False
