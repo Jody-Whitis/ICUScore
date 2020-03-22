@@ -32,11 +32,13 @@
                 CurrentScreen = AppState.SelectPlayer
                 GetPlayers()
                 cbPlayerNames.SelectedItem = "Choose"
+                btnBack.Text = "Home"
             Case AppState.Delete
                 CurrentScreen = AppState.SelectPlayer
                 ScoreTheme.SetControl(New Control() {btnEdit, btnAdd, btnDelete, cbPlayerNames, lblSelectedName}, True)
                 GetPlayers()
                 cbPlayerNames.SelectedItem = "Choose"
+                btnBack.Text = "Home"
             Case AppState.Add
                 CurrentScreen = AppState.SelectPlayer
                 ScoreTheme.SetControl(New Control() {btnEdit, btnDelete, btnAdd, cbPlayerNames, lblSelectedName}, True)
@@ -44,6 +46,7 @@
                 lblNewName.Visible = False
                 GetPlayers()
                 cbPlayerNames.SelectedItem = "Choose"
+                btnBack.Text = "Home"
             Case Else
                 'If PreviousForm IsNot Nothing Then
                 '    With PreviousForm
@@ -100,6 +103,7 @@
             lblNewName.Visible = True
             cbPlayerNames.Enabled = False
             ScoreTheme.SetControl(New Control() {btnDelete, btnAdd}, False)
+            btnBack.Text = "Back"
         End If
     End Sub
 
@@ -137,6 +141,7 @@
             ScoreTheme.SetControl(New Control() {btnEdit, btnAdd}, False)
             CurrentScreen = AppState.Delete
             cbPlayerNames.Enabled = False
+            btnBack.Text = "Back"
         End If
     End Sub
 
@@ -186,6 +191,7 @@
             CurrentScreen = AppState.Add
             ScoreTheme.SetControl(New Control() {tbEdit, lblNewName}, True)
             ScoreTheme.SetControl(New Control() {cbPlayerNames, btnEdit, btnDelete, lblEditing, lblSelectedName}, False)
+            btnBack.Text = "Back"
         End If
     End Sub
 
