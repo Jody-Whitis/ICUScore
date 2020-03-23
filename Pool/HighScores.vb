@@ -235,8 +235,7 @@ Public Class HighScores
             lblNewGameMode.Visible = False
             ScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit}, True)
             CurrentScreen = AppState.SelectPlayer
-            lblError.Text = "Back"
-            lblError.Visible = True
+            btnBack.Text = "Home"
             ScoreTheme.SetErrorLabel(lblError)
         Else
             Home.Show()
@@ -303,6 +302,7 @@ Public Class HighScores
             ScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode}, False)
             txtNewGM.Visible = True
             lblNewGameMode.Visible = True
+            btnBack.Text = "Back"
             ScoreTheme.SetControl(New Control() {btnSubmit}, False)
 
         ElseIf CurrentScreen = AppState.Add Then
@@ -322,6 +322,7 @@ Public Class HighScores
                 lblNewGameMode.Visible = False
                 ScoreTheme.SetControl(New Control() {lblScore, lblNewGameMode, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit}, True)
                 CurrentScreen = AppState.SelectPlayer
+                btnBack.Text = "Home"
             Else
                 Dim incorrectAlert As DialogResult = MessageBox.Show($"You got to name it first",
   "No Name", MessageBoxButtons.OK, MessageBoxIcon.Hand)

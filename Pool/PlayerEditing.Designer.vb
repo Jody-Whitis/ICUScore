@@ -55,7 +55,7 @@ Partial Class PlayerEditing
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(122, 45)
         Me.btnBack.TabIndex = 5
-        Me.btnBack.Text = "Home"
+        Me.btnBack.Text = "Cancel"
         Me.btnBack.UseVisualStyleBackColor = False
         '
         'cbPlayerNames

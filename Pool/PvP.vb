@@ -481,6 +481,7 @@ Public Class PvP
         ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, btnSave}, True)
         ScoreTheme.SetControl(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
         CurrentScreen = AppState.Switch
+        btnBack.Text = "Home"
     End Sub
 
     ''' <summary>
@@ -523,7 +524,7 @@ Public Class PvP
         GetHighScores()
         ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, btnSave, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, True)
         ScoreTheme.SetControl(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
-        btnBack.Text = "Back"
+        btnBack.Text = "Home"
         CurrentScreen = AppState.Switch
     End Sub
 
@@ -540,6 +541,7 @@ Public Class PvP
                 .Enabled = True
                 .Visible = True
             End With
+            btnBack.Text = "Home"
         Else
             Home.Show()
             HighScores.Close()

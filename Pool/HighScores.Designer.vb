@@ -113,7 +113,7 @@ Partial Class HighScores
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(92, 54)
         Me.btnBack.TabIndex = 5
-        Me.btnBack.Text = "Back"
+        Me.btnBack.Text = "Home"
         Me.btnBack.UseVisualStyleBackColor = False
         '
         'lblError
