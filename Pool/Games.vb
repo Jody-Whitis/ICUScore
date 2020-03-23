@@ -61,11 +61,6 @@ Public Class Games
         If ds Is Nothing Then
             Return "Error"
         End If
-        'Try
-        '   retval = ds.Tables(0).Rows(0).Item(0).ToString
-        'Catch ex As Exception
-        '    retval = "Error: saving score"
-        'End Try
         Return retval
     End Function
 

@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>Pool.My.MyApplication</StartupObject>
     <RootNamespace>Pool</RootNamespace>
-    <AssemblyName>Score</AssemblyName>
+    <AssemblyName>ICScore</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -37,7 +37,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Score.xml</DocumentationFile>
+    <DocumentationFile>ICScore.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -47,7 +47,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Score.xml</DocumentationFile>
+    <DocumentationFile>ICScore.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -63,7 +63,10 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>package_games_arcade.ico</ApplicationIcon>
+    <ApplicationIcon>Icons\package_games_arcade.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -94,6 +97,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutThis.Designer.vb">
+      <DependentUpon>AboutThis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AboutThis.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Email.vb" />
     <Compile Include="Home.Designer.vb">
@@ -111,6 +120,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Permissions.vb" />
+    <Compile Include="PlayerEditing.Designer.vb">
+      <DependentUpon>PlayerEditing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerEditing.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PvP.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -124,21 +139,6 @@
     </Compile>
     <Compile Include="HighScores.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LocalResultsDataSet.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LocalResultsDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="LocalResultsDataSet1.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LocalResultsDataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="LocalResultsDataSet2.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LocalResultsDataSet2.xsd</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -155,11 +155,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="PlayerNames.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PlayerNames.xsd</DependentUpon>
-    </Compile>
     <Compile Include="PlayerStats.vb" />
     <Compile Include="Register.Designer.vb">
       <DependentUpon>Register.vb</DependentUpon>
@@ -169,14 +164,26 @@
     </Compile>
     <Compile Include="ScoreTheme.vb" />
     <Compile Include="Authenticate.vb" />
-    <Compile Include="UserMod.vb" />
+    <Compile Include="CurrentSession.vb" />
+    <Compile Include="SplashScreen.Designer.vb">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AboutThis.resx">
+      <DependentUpon>AboutThis.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PasswordChange.resx">
       <DependentUpon>PasswordChange.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlayerEditing.resx">
+      <DependentUpon>PlayerEditing.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PvP.resx">
       <DependentUpon>PvP.vb</DependentUpon>
@@ -193,41 +200,12 @@
     <EmbeddedResource Include="Register.resx">
       <DependentUpon>Register.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.resx">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="LocalResultsDataSet.xsc">
-      <DependentUpon>LocalResultsDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="LocalResultsDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>LocalResultsDataSet.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="LocalResultsDataSet.xss">
-      <DependentUpon>LocalResultsDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="LocalResultsDataSet1.xsc">
-      <DependentUpon>LocalResultsDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="LocalResultsDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>LocalResultsDataSet1.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="LocalResultsDataSet1.xss">
-      <DependentUpon>LocalResultsDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="LocalResultsDataSet2.xsc">
-      <DependentUpon>LocalResultsDataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="LocalResultsDataSet2.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>LocalResultsDataSet2.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="LocalResultsDataSet2.xss">
-      <DependentUpon>LocalResultsDataSet2.xsd</DependentUpon>
-    </None>
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -241,17 +219,6 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="PlayerNames.xsc">
-      <DependentUpon>PlayerNames.xsd</DependentUpon>
-    </None>
-    <None Include="PlayerNames.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PlayerNames.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="PlayerNames.xss">
-      <DependentUpon>PlayerNames.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -269,7 +236,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>LocalResults.mdf</DependentUpon>
     </Content>
-    <Content Include="package_games_arcade.ico" />
+    <Content Include="Icons\package_games_arcade.ico" />
+    <Content Include="Icons\splashscreen.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
