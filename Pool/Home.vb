@@ -110,4 +110,10 @@ Public Class Home
             LoadNextFormHide(Me, PlayerEditing)
         End If
     End Sub
+
+    Private Sub btnTest_Click(sender As Object, e As EventArgs) Handles btnTest.Click
+        CurrentSession.PreviousForm = Me
+        TwoFactorAuth.Activate()
+        TwoFactorAuth.Show()
+    End Sub
 End Class
