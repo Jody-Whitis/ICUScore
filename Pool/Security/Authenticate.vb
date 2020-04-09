@@ -102,14 +102,14 @@ Public Class Authenticate : Implements ILogin
     ''' Update Password
     ''' </summary>
     ''' <param name="lastimeUpdated"></param>
-    Private Sub CheckLastUpdated(ByVal lastimeUpdated)
+    Protected Sub CheckLastUpdated(ByVal lastimeUpdated)
         If DateDiff(DateInterval.Month, lastimeUpdated, Now) >= 6 Then
             Dim emailChangePassword As New Email(New String() {User}.ToList)
             Dim reminderSent As Boolean = emailChangePassword.SendPasswordReminder(User, lastimeUpdated)
         End If
     End Sub
 
-    Private Sub SetUser(ByVal userLogged As Games, ByVal isLoggedCred As Boolean)
+    Protected Sub SetUser(ByVal userLogged As Games, ByVal isLoggedCred As Boolean)
         Dim getUserSQL As New StringBuilder
         With getUserSQL
             .Append($"exec [selUserData] @userEmail='{User}',")
@@ -128,6 +128,22 @@ Public Class Authenticate : Implements ILogin
             Dim setUser As New Logging(Now, "User Log set error: ", ex.ToString)
         End Try
     End Sub
+
+    ''' <summary>
+    ''' Returns a dataset of the user's
+    ''' options.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function SelUserOptions() As DataSet
+        Dim userOptions As New PlayerStats
+        Dim getUserSql As New StringBuilder
+        With getUserSql
+            .Append($"exec selUserDataTwoFactor @userEmail='{User}'")
+        End With
+        Dim userDS As New DataSet
+        userDS = userOptions.GetAllResults(getUserSql.ToString)
+        Return userDS
+    End Function
 
     ''' <summary>
     ''' Update or create password
@@ -211,7 +227,7 @@ Public Class Authenticate : Implements ILogin
     ''' <param name="saltyBytes"></param>
     ''' <param name="vanillaString"></param>
     ''' <returns></returns>
-    Private Function CalculateHash(saltyBytes As Byte(), vanillaString As String) As Byte()
+    Protected Function CalculateHash(saltyBytes As Byte(), vanillaString As String) As Byte()
         Dim hashedPasswordDS As New Games
         Dim updatedDS As New DataSet
         'Produce the salt/hashed password for db
@@ -232,7 +248,7 @@ Public Class Authenticate : Implements ILogin
     ''' <param name="hashBytefromForm"></param>
     ''' <param name="hashFromDB"></param>
     ''' <returns></returns>
-    Private Function CompareHash(hashBytefromForm As Byte(), hashFromDB As Byte()) As Boolean Implements ILogin.CompareHash
+    Protected Function CompareHash(hashBytefromForm As Byte(), hashFromDB As Byte()) As Boolean Implements ILogin.CompareHash
         For j = 0 To hashBytefromForm.Length - 1
             If Not hashBytefromForm(j).Equals(hashFromDB(j)) Then
                 Return False

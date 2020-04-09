@@ -165,6 +165,7 @@
     <Compile Include="Models\ScoreTheme.vb" />
     <Compile Include="Security\Authenticate.vb" />
     <Compile Include="Security\CurrentSession.vb" />
+    <Compile Include="Security\TwoFactorAuthenication.vb" />
     <Compile Include="SplashScreen.Designer.vb">
       <DependentUpon>SplashScreen.vb</DependentUpon>
     </Compile>
