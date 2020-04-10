@@ -181,4 +181,47 @@ Public Class Email
         End Try
         Return reminderSend
     End Function
+
+    Public Function SentTwoFactorCodeEmail(ByVal user As String, ByVal timeStamp As DateTime, ByVal code As Integer) As Boolean
+        Dim codeSent As Boolean = False
+        Dim smtp As New SmtpClient
+        Dim eMail As New MailMessage()
+        Dim bodyTable As New StringBuilder
+        Dim counterStats As Integer = 0
+        Dim emailPasswordTemp As String = File.ReadAllText(emailTempsFolder & "\EmailTwoFactorCode.html").ToString
+
+        Try
+            With smtp
+                .UseDefaultCredentials = My.Settings.emailDefaultCreds
+                .Credentials = New Net.NetworkCredential(My.Settings.emailCreds, My.Settings.passEmailCreds)
+                .Port = My.Settings.emailPort
+                .EnableSsl = True
+                .Host = My.Settings.emailServer
+            End With
+            eMail = New MailMessage()
+
+            With eMail
+                .Sender = New MailAddress(My.Settings.senderEmail)
+                .From = New MailAddress("scores@score.com")
+                .IsBodyHtml = True
+                .Subject = $"Two-Factor Code for {user}"
+            End With
+            For Each address In AddressList
+                eMail.To.Add(address)
+            Next
+            With bodyTable
+                .Append(emailPasswordTemp)
+            End With
+            eMail.Body = bodyTable.ToString.Replace("=user=", user).Replace("=pin=", code)
+            smtp.Send(eMail)
+            codeSent = True
+        Catch ex As Exception
+            Dim logAction As New Logging
+            logAction.LogAction()
+            Return codeSent
+        End Try
+
+        Return codeSent
+
+    End Function
 End Class

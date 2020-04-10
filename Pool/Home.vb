@@ -8,6 +8,23 @@ Public Class Home
         ScoreTheme.SetControl(New Button() {btnLogin, btnQuit}, True)
         lblHome.Visible = False
         Me.ShowIcon = True
+        If CurrentSession.IsLoggedIn Then
+            If CurrentSession.TwoFactorEnabled AndAlso CurrentSession.isTwoFactorCode Then
+                ScoreTheme.SetControl(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
+                ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword}, False)
+                lblUser.Visible = False
+                lblPassword.Visible = False
+                lblHome.Visible = True
+                EditPasswordToolStripMenuItem.Visible = True
+                logOutMnu.Visible = True
+                EditPlayerToolStripMenuItem.Visible = True
+                EditPlayerToolStripMenuItem.Enabled = True
+                EditToolStripMenuItem.Visible = True
+                lblHome.Text = $"Welcome {CurrentSession.DisplayName}!"
+                btnLogout.Location = btnGuest.Location
+                Me.Text = "Home"
+            End If
+        End If
     End Sub
 
     Private Sub btnPvP_Click(sender As Object, e As EventArgs) Handles btnPvP.Click
@@ -30,6 +47,23 @@ Public Class Home
             .Password = txtPassword.Text.ToString
         End With
         If Not String.IsNullOrEmpty(userAuthenticate.User) AndAlso Not String.IsNullOrWhiteSpace(userAuthenticate.Password) Then
+            Dim testOptions As New DataSet
+            testOptions = userAuthenticate.SelUserOptions
+            CurrentSession.TwoFactorEnabled = Convert.ToBoolean(Convert.ToInt16(testOptions.Tables(0).Rows(0).Item("twoFactorAuth").ToString))
+            If CurrentSession.TwoFactorEnabled.Equals(True) AndAlso CurrentSession.isTwoFactorCode.Equals(False) Then
+                userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
+                If userAuthenticate.GetLogin Then
+                    CurrentSession.PreviousForm = Me
+                    TwoFactorAuth.SelectedEmail = txtUser.Text
+                    LoadNextFormClose(Me, TwoFactorAuth)
+                    Exit Sub
+                Else
+                    Dim incorrectAlert As DialogResult = MessageBox.Show($"Incorrect Email and/or/also/maybe Password",
+    "Incorrect Creditials", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                    txtPassword.ResetText()
+                End If
+
+            End If
             userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
         Else
             userAuthenticate.isLoggedIn = False
@@ -111,9 +145,4 @@ Public Class Home
         End If
     End Sub
 
-    Private Sub btnTest_Click(sender As Object, e As EventArgs) Handles btnTest.Click
-        CurrentSession.PreviousForm = Me
-        TwoFactorAuth.Activate()
-        TwoFactorAuth.Show()
-    End Sub
 End Class

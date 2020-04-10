@@ -235,6 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="EmailTemps\EmailPasswordReminder.html" />
+    <Content Include="EmailTemps\EmailTwoFactorCode.html" />
     <Content Include="EmailTemps\LogEmailTemp.html" />
     <Content Include="EmailTemps\rollSafe.jpg" />
     <Content Include="EmailTemps\suprisedPikachu.png" />

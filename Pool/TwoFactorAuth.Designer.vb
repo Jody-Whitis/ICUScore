@@ -35,9 +35,10 @@ Partial Class TwoFactorAuth
         '
         Me.tbCode.BackColor = System.Drawing.Color.Aquamarine
         Me.tbCode.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbCode.Location = New System.Drawing.Point(101, 168)
+        Me.tbCode.Location = New System.Drawing.Point(152, 262)
+        Me.tbCode.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbCode.Name = "tbCode"
-        Me.tbCode.Size = New System.Drawing.Size(202, 24)
+        Me.tbCode.Size = New System.Drawing.Size(301, 33)
         Me.tbCode.TabIndex = 0
         Me.tbCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -46,9 +47,10 @@ Partial Class TwoFactorAuth
         Me.btnResend.BackColor = System.Drawing.Color.Aquamarine
         Me.btnResend.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnResend.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnResend.Location = New System.Drawing.Point(65, 217)
+        Me.btnResend.Location = New System.Drawing.Point(98, 339)
+        Me.btnResend.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnResend.Name = "btnResend"
-        Me.btnResend.Size = New System.Drawing.Size(113, 60)
+        Me.btnResend.Size = New System.Drawing.Size(170, 94)
         Me.btnResend.TabIndex = 1
         Me.btnResend.Text = "Resend Code"
         Me.btnResend.UseVisualStyleBackColor = False
@@ -58,9 +60,10 @@ Partial Class TwoFactorAuth
         Me.btnSubmit.BackColor = System.Drawing.Color.Aquamarine
         Me.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSubmit.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubmit.Location = New System.Drawing.Point(223, 217)
+        Me.btnSubmit.Location = New System.Drawing.Point(334, 339)
+        Me.btnSubmit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(113, 60)
+        Me.btnSubmit.Size = New System.Drawing.Size(170, 94)
         Me.btnSubmit.TabIndex = 2
         Me.btnSubmit.Text = "Submit"
         Me.btnSubmit.UseVisualStyleBackColor = False
@@ -70,9 +73,10 @@ Partial Class TwoFactorAuth
         Me.btnBack.BackColor = System.Drawing.Color.Aquamarine
         Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnBack.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBack.Location = New System.Drawing.Point(12, 326)
+        Me.btnBack.Location = New System.Drawing.Point(18, 509)
+        Me.btnBack.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(113, 60)
+        Me.btnBack.Size = New System.Drawing.Size(170, 94)
         Me.btnBack.TabIndex = 3
         Me.btnBack.Text = "Back"
         Me.btnBack.UseVisualStyleBackColor = False
@@ -82,9 +86,10 @@ Partial Class TwoFactorAuth
         Me.lblTwoFactor.AutoSize = True
         Me.lblTwoFactor.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTwoFactor.ForeColor = System.Drawing.Color.Aquamarine
-        Me.lblTwoFactor.Location = New System.Drawing.Point(21, 67)
+        Me.lblTwoFactor.Location = New System.Drawing.Point(32, 105)
+        Me.lblTwoFactor.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTwoFactor.Name = "lblTwoFactor"
-        Me.lblTwoFactor.Size = New System.Drawing.Size(370, 25)
+        Me.lblTwoFactor.Size = New System.Drawing.Size(600, 42)
         Me.lblTwoFactor.TabIndex = 4
         Me.lblTwoFactor.Text = "Enter the code send to this email."
         '
@@ -93,18 +98,19 @@ Partial Class TwoFactorAuth
         Me.lblResend.AutoSize = True
         Me.lblResend.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblResend.ForeColor = System.Drawing.Color.Aquamarine
-        Me.lblResend.Location = New System.Drawing.Point(21, 108)
+        Me.lblResend.Location = New System.Drawing.Point(32, 169)
+        Me.lblResend.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblResend.Name = "lblResend"
-        Me.lblResend.Size = New System.Drawing.Size(359, 25)
+        Me.lblResend.Size = New System.Drawing.Size(582, 42)
         Me.lblResend.TabIndex = 5
         Me.lblResend.Text = "Click Resend to send a new code."
         '
         'TwoFactorAuth
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
-        Me.ClientSize = New System.Drawing.Size(427, 398)
+        Me.ClientSize = New System.Drawing.Size(640, 622)
         Me.Controls.Add(Me.lblResend)
         Me.Controls.Add(Me.lblTwoFactor)
         Me.Controls.Add(Me.btnBack)
@@ -112,6 +118,7 @@ Partial Class TwoFactorAuth
         Me.Controls.Add(Me.btnResend)
         Me.Controls.Add(Me.tbCode)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "TwoFactorAuth"
         Me.Text = "Two-Factor Authentication"
         Me.ResumeLayout(False)

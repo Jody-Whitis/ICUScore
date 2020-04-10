@@ -20,6 +20,9 @@ Module CurrentSession
     Private _password As String
     Private _iD As Integer
     Private _userStatus As Integer
+    Private _twoFactorEnabled As Boolean = False
+    Private _subscribed As Boolean = False
+    Private _isTwoFactorCode As Boolean = False
     Public PreviousForm As Form = Home
     Public CurrentForm As Form = Nothing
     Private _CurrentScreen As AppState
@@ -98,6 +101,32 @@ Module CurrentSession
         End Set
     End Property
 
+    Public Property TwoFactorEnabled As Boolean
+        Get
+            Return _twoFactorEnabled
+        End Get
+        Set(value As Boolean)
+            _twoFactorEnabled = value
+        End Set
+    End Property
+
+    Public Property Subscribed As Boolean
+        Get
+            Return _subscribed
+        End Get
+        Set(value As Boolean)
+            _subscribed = value
+        End Set
+    End Property
+
+    Public Property isTwoFactorCode As Boolean
+        Get
+            Return _isTwoFactorCode
+        End Get
+        Set(value As Boolean)
+            _isTwoFactorCode = value
+        End Set
+    End Property
 #End Region
 
     'Never use this if you are disposing of the form
