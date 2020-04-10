@@ -8,7 +8,10 @@ Public Class Home
         ScoreTheme.SetControl(New Button() {btnLogin, btnQuit}, True)
         lblHome.Visible = False
         Me.ShowIcon = True
+        'Check if they a logged in user nagivates to here from outside, two-factor auth, etc
         If CurrentSession.IsLoggedIn Then
+            'Check if they have two factor enabled and they passed it
+            'Log im after two step auth
             If CurrentSession.TwoFactorEnabled AndAlso CurrentSession.isTwoFactorCode Then
                 ScoreTheme.SetControl(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
                 ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword}, False)
@@ -46,12 +49,17 @@ Public Class Home
             .User = txtUser.Text.ToString
             .Password = txtPassword.Text.ToString
         End With
+        'Check if inputs are entered
         If Not String.IsNullOrEmpty(userAuthenticate.User) AndAlso Not String.IsNullOrWhiteSpace(userAuthenticate.Password) Then
-            Dim testOptions As New DataSet
-            testOptions = userAuthenticate.SelUserOptions
-            CurrentSession.TwoFactorEnabled = Convert.ToBoolean(Convert.ToInt16(testOptions.Tables(0).Rows(0).Item("twoFactorAuth").ToString))
+            Dim userOptionsDS As New DataSet
+            userOptionsDS = userAuthenticate.SelUserOptions
+            CurrentSession.TwoFactorEnabled = Convert.ToBoolean(Convert.ToInt16(userOptionsDS.Tables(0).Rows(0).Item("twoFactorAuth").ToString))
+
+#Region "Two Factor Authentication"
+            'Pull this users options and check two factor settings and if they have not pass it yet.
             If CurrentSession.TwoFactorEnabled.Equals(True) AndAlso CurrentSession.isTwoFactorCode.Equals(False) Then
                 userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
+                'If they pass step one, then go to step two
                 If userAuthenticate.GetLogin Then
                     CurrentSession.PreviousForm = Me
                     TwoFactorAuth.SelectedEmail = txtUser.Text
@@ -64,6 +72,8 @@ Public Class Home
                 End If
 
             End If
+#End Region
+
             userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
         Else
             userAuthenticate.isLoggedIn = False

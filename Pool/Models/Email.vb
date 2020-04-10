@@ -92,6 +92,11 @@ Public Class Email
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Emails log to this application's email
+    ''' </summary>
+    ''' <param name="fileName"></param>
+    ''' <returns></returns>
     Public Function SendLogEmail(fileName As String) As Boolean
         Dim logSend As Boolean = False
         Dim emailLogTemp As String = File.ReadAllText(emailTempsFolder & "\LogEmailTemp.html").ToString
@@ -140,6 +145,12 @@ Public Class Email
         Return logSend
     End Function
 
+    ''' <summary>
+    ''' Emails a reminder to change your password.
+    ''' </summary>
+    ''' <param name="user"></param>
+    ''' <param name="timeStamp"></param>
+    ''' <returns></returns>
     Public Function SendPasswordReminder(ByVal user As String, ByVal timeStamp As DateTime) As Boolean
         Dim reminderSend As Boolean = False
         Dim smtp As New SmtpClient
@@ -182,6 +193,13 @@ Public Class Email
         Return reminderSend
     End Function
 
+    ''' <summary>
+    ''' Emails a code passed in for two factor authentication
+    ''' </summary>
+    ''' <param name="user"></param>
+    ''' <param name="timeStamp"></param>
+    ''' <param name="code"></param>
+    ''' <returns></returns>
     Public Function SentTwoFactorCodeEmail(ByVal user As String, ByVal timeStamp As DateTime, ByVal code As Integer) As Boolean
         Dim codeSent As Boolean = False
         Dim smtp As New SmtpClient
@@ -212,7 +230,7 @@ Public Class Email
             With bodyTable
                 .Append(emailPasswordTemp)
             End With
-            eMail.Body = bodyTable.ToString.Replace("=user=", user).Replace("=pin=", code)
+            eMail.Body = bodyTable.ToString.Replace("=User=", user).Replace("=pin=", code)
             smtp.Send(eMail)
             codeSent = True
         Catch ex As Exception

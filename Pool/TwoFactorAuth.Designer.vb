@@ -65,7 +65,7 @@ Partial Class TwoFactorAuth
         Me.btnSubmit.Name = "btnSubmit"
         Me.btnSubmit.Size = New System.Drawing.Size(170, 94)
         Me.btnSubmit.TabIndex = 2
-        Me.btnSubmit.Text = "Submit"
+        Me.btnSubmit.Text = "Submit Code"
         Me.btnSubmit.UseVisualStyleBackColor = False
         '
         'btnBack
@@ -86,12 +86,12 @@ Partial Class TwoFactorAuth
         Me.lblTwoFactor.AutoSize = True
         Me.lblTwoFactor.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTwoFactor.ForeColor = System.Drawing.Color.Aquamarine
-        Me.lblTwoFactor.Location = New System.Drawing.Point(32, 105)
+        Me.lblTwoFactor.Location = New System.Drawing.Point(11, 106)
         Me.lblTwoFactor.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTwoFactor.Name = "lblTwoFactor"
-        Me.lblTwoFactor.Size = New System.Drawing.Size(600, 42)
+        Me.lblTwoFactor.Size = New System.Drawing.Size(615, 42)
         Me.lblTwoFactor.TabIndex = 4
-        Me.lblTwoFactor.Text = "Enter the code send to this email."
+        Me.lblTwoFactor.Text = "Enter the code send to your email."
         '
         'lblResend
         '
