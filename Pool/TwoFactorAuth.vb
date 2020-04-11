@@ -16,14 +16,14 @@
 
     Private Sub TwoFactorAuth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         twoFactorUser.User = SelectedEmail
-        code = twoFactorUser.GeneratedCode()
-        Dim twoFactorEmail As New Email(New List(Of String) From {SelectedEmail})
-        twoFactorEmail.SentTwoFactorCodeEmail(SelectedEmail, Now.ToString("MM/dd/yyyy"), code)
+        SendCode()
         Me.CenterToScreen()
     End Sub
 
     Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
-        If tbCode.Text = code Then
+        Dim userInputCode As Integer = 0
+        Integer.TryParse(tbCode.Text.Trim, userInputCode)
+        If userInputCode > 0 AndAlso twoFactorUser.Authenticate(userInputCode) Then
             CurrentSession.isTwoFactorCode = True
             ScoreTheme.LoadNextFormClose(Me, Home)
             Me.Close()
@@ -34,14 +34,29 @@
     End Sub
 
     Private Sub btnResend_Click(sender As Object, e As EventArgs) Handles btnResend.Click
-        code = twoFactorUser.GeneratedCode() * 2
-        Dim twoFactorEmail As New Email(New List(Of String) From {SelectedEmail})
-        twoFactorEmail.SentTwoFactorCodeEmail(SelectedEmail, Now.ToString("MM/dd/yyyy"), code)
+        Dim previousCode As Integer = code
+        SendCode()
+        If code > 0 AndAlso code <> previousCode Then
+            Dim resendCode As DialogResult = MessageBox.Show($"A new code is sent to your inbox.",
+                "New code has been emailed", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            Dim incorrectAlert As DialogResult = MessageBox.Show($"Your code was not sent! Try again.",
+                "New code unable to generate", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         'Reset user's attempted creds on canceling auth
         ScoreTheme.LogOutUser()
         ScoreTheme.LoadNextFormClose(Me, Home)
+    End Sub
+
+    ''' <summary>
+    ''' Get generated pin and emails it to user's inbox
+    ''' </summary>
+    Private Sub SendCode()
+        code = twoFactorUser.GetCode()
+        Dim twoFactorEmail As New Email(New List(Of String) From {SelectedEmail})
+        twoFactorEmail.SentTwoFactorCodeEmail(SelectedEmail, Now.ToString("MM/dd/yyyy"), code)
     End Sub
 End Class
