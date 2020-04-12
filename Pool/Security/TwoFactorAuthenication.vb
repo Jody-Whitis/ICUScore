@@ -10,6 +10,11 @@
         End Set
     End Property
 
+    ''' <summary>
+    ''' Make a 4-6 digit code to set it
+    ''' to GeneratedCode property
+    ''' </summary>
+    ''' <returns></returns>
     Public Function GetCode() As Integer
         Try
             Dim generateNumber As New Random()
@@ -20,6 +25,12 @@
         Return GeneratedCode
     End Function
 
+    ''' <summary>
+    ''' Check against the user's input with the 
+    ''' last set generated code.
+    ''' </summary>
+    ''' <param name="userInput"></param>
+    ''' <returns></returns>
     Public Function Authenticate(userInput As Integer) As Boolean
         If userInput = GeneratedCode Then
             Return True

@@ -172,10 +172,10 @@
     <Compile Include="SplashScreen.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TwoFactorAuth.Designer.vb">
-      <DependentUpon>TwoFactorAuth.vb</DependentUpon>
+    <Compile Include="TwoFactorLogin.Designer.vb">
+      <DependentUpon>TwoFactorLogin.vb</DependentUpon>
     </Compile>
-    <Compile Include="TwoFactorAuth.vb">
+    <Compile Include="TwoFactorLogin.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -210,8 +210,8 @@
     <EmbeddedResource Include="SplashScreen.resx">
       <DependentUpon>SplashScreen.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TwoFactorAuth.resx">
-      <DependentUpon>TwoFactorAuth.vb</DependentUpon>
+    <EmbeddedResource Include="TwoFactorLogin.resx">
+      <DependentUpon>TwoFactorLogin.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

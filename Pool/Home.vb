@@ -62,8 +62,8 @@ Public Class Home
                 'If they pass step one, then go to step two
                 If userAuthenticate.GetLogin Then
                     CurrentSession.PreviousForm = Me
-                    TwoFactorAuth.SelectedEmail = txtUser.Text
-                    LoadNextFormClose(Me, TwoFactorAuth)
+                    TwoFactorLogin.SelectedEmail = txtUser.Text
+                    LoadNextFormClose(Me, TwoFactorLogin)
                     Exit Sub
                 Else
                     Dim incorrectAlert As DialogResult = MessageBox.Show($"Incorrect Email and/or/also/maybe Password",

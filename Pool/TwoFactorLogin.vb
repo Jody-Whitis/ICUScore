@@ -1,4 +1,4 @@
-﻿Public Class TwoFactorAuth
+﻿Public Class TwoFactorLogin
     Private _selectedEmail As String
 #Region "Vars/Properties"
     Public Property SelectedEmail As String
@@ -36,6 +36,21 @@
     Private Sub btnResend_Click(sender As Object, e As EventArgs) Handles btnResend.Click
         Dim previousCode As Integer = code
         SendCode()
+
+        'Resend if it's the same code so how
+        'In case of a memory issue, catch it and default the pin
+        'Prompt for a retry
+        Try
+            If previousCode = code Then
+                While previousCode = code
+                    SendCode()
+                End While
+            End If
+        Catch ex As Exception
+            Dim generateUnquieErorr As New Logging(Now.ToString("MM/dd/yyy hh:mm:ss"), "Unique pin", ex.ToString)
+            code = 0
+        End Try
+
         If code > 0 AndAlso code <> previousCode Then
             Dim resendCode As DialogResult = MessageBox.Show($"A new code is sent to your inbox.",
                 "New code has been emailed", MessageBoxButtons.OK, MessageBoxIcon.Information)
