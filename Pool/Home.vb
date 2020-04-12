@@ -13,19 +13,7 @@ Public Class Home
             'Check if they have two factor enabled and they passed it
             'Log im after two step auth
             If CurrentSession.TwoFactorEnabled AndAlso CurrentSession.isTwoFactorCode Then
-                ScoreTheme.SetControl(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
-                ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword}, False)
-                lblUser.Visible = False
-                lblPassword.Visible = False
-                lblHome.Visible = True
-                EditPasswordToolStripMenuItem.Visible = True
-                logOutMnu.Visible = True
-                EditPlayerToolStripMenuItem.Visible = True
-                EditPlayerToolStripMenuItem.Enabled = True
-                EditToolStripMenuItem.Visible = True
-                lblHome.Text = $"Welcome {CurrentSession.DisplayName}!"
-                btnLogout.Location = btnGuest.Location
-                Me.Text = "Home"
+                SetUserloginScreen()
             End If
         End If
     End Sub
@@ -83,19 +71,7 @@ Public Class Home
             End With
         End If
         If userAuthenticate.isLoggedIn.Equals(True) Then
-            ScoreTheme.SetControl(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
-            ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword}, False)
-            lblUser.Visible = False
-            lblPassword.Visible = False
-            lblHome.Visible = True
-            EditPasswordToolStripMenuItem.Visible = True
-            logOutMnu.Visible = True
-            EditPlayerToolStripMenuItem.Visible = True
-            EditPlayerToolStripMenuItem.Enabled = True
-            EditToolStripMenuItem.Visible = True
-            lblHome.Text = $"Welcome {CurrentSession.DisplayName}!"
-            btnLogout.Location = btnGuest.Location
-            Me.Text = "Home"
+            SetUserloginScreen()
         Else
             Dim incorrectAlert As DialogResult = MessageBox.Show($"Incorrect Email and/or/also/maybe Password",
     "Incorrect Creditials", MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -117,6 +93,7 @@ Public Class Home
         Dim guestDialog As DialogResult = MessageBox.Show($"Do you want to continue as a Guest? This will give you read-only access to view stats.",
     "Guest", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If guestDialog.Equals(DialogResult.Yes) Then
+#Region "Guest Login Screen"
             CurrentSession.DisplayName = String.Empty
             CurrentSession.ID = -1
             CurrentSession.IsLoggedIn = False
@@ -132,6 +109,7 @@ Public Class Home
             lblHome.Text = $"Welcome Guest!"
             btnLogout.Location = btnGuest.Location
             Me.Text = "Home"
+#End Region
         End If
     End Sub
 
@@ -153,6 +131,25 @@ Public Class Home
             CurrentSession.PreviousForm = Me
             LoadNextFormHide(Me, PlayerEditing)
         End If
+    End Sub
+
+    ''' <summary>
+    ''' Set the screen when user has been authenticated.
+    ''' </summary>
+    Private Sub SetUserloginScreen()
+        ScoreTheme.SetControl(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
+        ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword}, False)
+        lblUser.Visible = False
+        lblPassword.Visible = False
+        lblHome.Visible = True
+        EditPasswordToolStripMenuItem.Visible = True
+        logOutMnu.Visible = True
+        EditPlayerToolStripMenuItem.Visible = True
+        EditPlayerToolStripMenuItem.Enabled = True
+        EditToolStripMenuItem.Visible = True
+        lblHome.Text = $"Welcome {CurrentSession.DisplayName}!"
+        btnLogout.Location = btnGuest.Location
+        Me.Text = "Home"
     End Sub
 
 End Class
