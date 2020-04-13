@@ -42,9 +42,8 @@ Public Class Home
             Dim userOptionsDS As New DataSet
             userOptionsDS = userAuthenticate.SelUserOptions
             Dim twoFactorSettingBit As Integer = 0
-            Integer.TryParse(userOptionsDS.Tables(0).Rows(0).Item("twoFactorAuth").ToString(), twoFactorSettingBit)
+            If userOptionsDS.Tables(0).Rows.Count > 0 Then Integer.TryParse(userOptionsDS.Tables(0).Rows(0).Item("twoFactorAuth").ToString(), twoFactorSettingBit)
             If Not String.IsNullOrEmpty(twoFactorSettingBit) Then CurrentSession.TwoFactorEnabled = Convert.ToBoolean(twoFactorSettingBit)
-
 #Region "Two Factor Authentication"
             'Pull this users options and check two factor settings and if they have not pass it yet.
             If CurrentSession.TwoFactorEnabled.Equals(True) AndAlso CurrentSession.isTwoFactorCodeAuthenticate.Equals(False) Then
