@@ -104,22 +104,22 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="Email.vb" />
+    <Compile Include="Models\Email.vb" />
     <Compile Include="Home.Designer.vb">
       <DependentUpon>Home.vb</DependentUpon>
     </Compile>
     <Compile Include="Home.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ILogin.vb" />
-    <Compile Include="Logging.vb" />
+    <Compile Include="Interface\ILogin.vb" />
+    <Compile Include="Models\Logging.vb" />
     <Compile Include="PasswordChange.Designer.vb">
       <DependentUpon>PasswordChange.vb</DependentUpon>
     </Compile>
     <Compile Include="PasswordChange.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Permissions.vb" />
+    <Compile Include="Security\Permissions.vb" />
     <Compile Include="PlayerEditing.Designer.vb">
       <DependentUpon>PlayerEditing.vb</DependentUpon>
     </Compile>
@@ -133,7 +133,7 @@
       <DependentUpon>PvP.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Games.vb" />
+    <Compile Include="Models\Games.vb" />
     <Compile Include="HighScores.Designer.vb">
       <DependentUpon>HighScores.vb</DependentUpon>
     </Compile>
@@ -155,20 +155,27 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="PlayerStats.vb" />
+    <Compile Include="Models\PlayerStats.vb" />
     <Compile Include="Register.Designer.vb">
       <DependentUpon>Register.vb</DependentUpon>
     </Compile>
     <Compile Include="Register.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScoreTheme.vb" />
-    <Compile Include="Authenticate.vb" />
-    <Compile Include="CurrentSession.vb" />
+    <Compile Include="Models\ScoreTheme.vb" />
+    <Compile Include="Security\Authenticate.vb" />
+    <Compile Include="Security\CurrentSession.vb" />
+    <Compile Include="Security\TwoFactorAuthenication.vb" />
     <Compile Include="SplashScreen.Designer.vb">
       <DependentUpon>SplashScreen.vb</DependentUpon>
     </Compile>
     <Compile Include="SplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TwoFactorLogin.Designer.vb">
+      <DependentUpon>TwoFactorLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TwoFactorLogin.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -203,6 +210,9 @@
     <EmbeddedResource Include="SplashScreen.resx">
       <DependentUpon>SplashScreen.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TwoFactorLogin.resx">
+      <DependentUpon>TwoFactorLogin.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\app.manifest" />
@@ -225,6 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="EmailTemps\EmailPasswordReminder.html" />
+    <Content Include="EmailTemps\EmailTwoFactorCode.html" />
     <Content Include="EmailTemps\LogEmailTemp.html" />
     <Content Include="EmailTemps\rollSafe.jpg" />
     <Content Include="EmailTemps\suprisedPikachu.png" />

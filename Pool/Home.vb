@@ -8,6 +8,14 @@ Public Class Home
         ScoreTheme.SetControl(New Button() {btnLogin, btnQuit}, True)
         lblHome.Visible = False
         Me.ShowIcon = True
+        'Check if they a logged in user nagivates to here from outside, two-factor auth, etc
+        If CurrentSession.IsLoggedIn Then
+            'Check if they have two factor enabled and they passed it
+            'Log im after two step auth
+            If CurrentSession.TwoFactorEnabled AndAlso CurrentSession.isTwoFactorCodeAuthenticate Then
+                SetUserloginScreen()
+            End If
+        End If
     End Sub
 
     Private Sub btnPvP_Click(sender As Object, e As EventArgs) Handles btnPvP.Click
@@ -29,29 +37,42 @@ Public Class Home
             .User = txtUser.Text.ToString
             .Password = txtPassword.Text.ToString
         End With
+        'Check if inputs are entered
         If Not String.IsNullOrEmpty(userAuthenticate.User) AndAlso Not String.IsNullOrWhiteSpace(userAuthenticate.Password) Then
-            userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
-        Else
-            userAuthenticate.isLoggedIn = False
+            Dim userOptionsDS As New DataSet
+            userOptionsDS = userAuthenticate.SelUserOptions
+            Dim twoFactorSettingBit As Integer = 0
+            If userOptionsDS.Tables(0).Rows.Count > 0 Then Integer.TryParse(userOptionsDS.Tables(0).Rows(0).Item("twoFactorAuth").ToString(), twoFactorSettingBit)
+            If Not String.IsNullOrEmpty(twoFactorSettingBit) Then CurrentSession.TwoFactorEnabled = Convert.ToBoolean(twoFactorSettingBit)
+#Region "Two Factor Authentication"
+            'Pull this users options and check two factor settings and if they have not pass it yet.
+            If CurrentSession.TwoFactorEnabled.Equals(True) AndAlso CurrentSession.isTwoFactorCodeAuthenticate.Equals(False) Then
+                    userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
+                    'If they pass step one, then go to step two
+                    If userAuthenticate.GetLogin Then
+                        CurrentSession.PreviousForm = Me
+                        TwoFactorLogin.SelectedEmail = txtUser.Text
+                        LoadNextFormClose(Me, TwoFactorLogin)
+                        Exit Sub
+                    Else
+                        Dim incorrectAlert As DialogResult = MessageBox.Show($"Incorrect Email and/or/also/maybe Password",
+    "Incorrect Creditials", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                        txtPassword.ResetText()
+                    End If
+
+                End If
+#End Region
+
+                userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
+            Else
+                userAuthenticate.isLoggedIn = False
             With EditPlayerToolStripMenuItem
                 .Enabled = False
                 .Visible = False
             End With
         End If
         If userAuthenticate.isLoggedIn.Equals(True) Then
-            ScoreTheme.SetControl(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
-            ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword}, False)
-            lblUser.Visible = False
-            lblPassword.Visible = False
-            lblHome.Visible = True
-            EditPasswordToolStripMenuItem.Visible = True
-            logOutMnu.Visible = True
-            EditPlayerToolStripMenuItem.Visible = True
-            EditPlayerToolStripMenuItem.Enabled = True
-            EditToolStripMenuItem.Visible = True
-            lblHome.Text = $"Welcome {CurrentSession.DisplayName}!"
-            btnLogout.Location = btnGuest.Location
-            Me.Text = "Home"
+            SetUserloginScreen()
         Else
             Dim incorrectAlert As DialogResult = MessageBox.Show($"Incorrect Email and/or/also/maybe Password",
     "Incorrect Creditials", MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -73,6 +94,7 @@ Public Class Home
         Dim guestDialog As DialogResult = MessageBox.Show($"Do you want to continue as a Guest? This will give you read-only access to view stats.",
     "Guest", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If guestDialog.Equals(DialogResult.Yes) Then
+#Region "Guest Login Screen"
             CurrentSession.DisplayName = String.Empty
             CurrentSession.ID = -1
             CurrentSession.IsLoggedIn = False
@@ -88,6 +110,7 @@ Public Class Home
             lblHome.Text = $"Welcome Guest!"
             btnLogout.Location = btnGuest.Location
             Me.Text = "Home"
+#End Region
         End If
     End Sub
 
@@ -110,4 +133,24 @@ Public Class Home
             LoadNextFormHide(Me, PlayerEditing)
         End If
     End Sub
+
+    ''' <summary>
+    ''' Set the screen when user has been authenticated.
+    ''' </summary>
+    Private Sub SetUserloginScreen()
+        ScoreTheme.SetControl(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
+        ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword}, False)
+        lblUser.Visible = False
+        lblPassword.Visible = False
+        lblHome.Visible = True
+        EditPasswordToolStripMenuItem.Visible = True
+        logOutMnu.Visible = True
+        EditPlayerToolStripMenuItem.Visible = True
+        EditPlayerToolStripMenuItem.Enabled = True
+        EditToolStripMenuItem.Visible = True
+        lblHome.Text = $"Welcome {CurrentSession.DisplayName}!"
+        btnLogout.Location = btnGuest.Location
+        Me.Text = "Home"
+    End Sub
+
 End Class
