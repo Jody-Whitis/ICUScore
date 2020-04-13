@@ -21,6 +21,7 @@
             GeneratedCode = generateNumber.Next(1000, 9999)
         Catch ex As Exception
             Dim pinLogError As New Logging(Now.ToString, "Pin Generation", ex.ToString)
+            pinLogError.LogAction()
         End Try
         Return GeneratedCode
     End Function

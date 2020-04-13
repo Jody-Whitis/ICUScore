@@ -16,7 +16,7 @@
 
     Private Sub TwoFactorAuth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         twoFactorUser.User = SelectedEmail
-        SendCode()
+        SendCode(code)
         Me.CenterToScreen()
     End Sub
 
@@ -24,7 +24,7 @@
         Dim userInputCode As Integer = 0
         Integer.TryParse(tbCode.Text.Trim, userInputCode)
         If userInputCode > 0 AndAlso twoFactorUser.Authenticate(userInputCode) Then
-            CurrentSession.isTwoFactorCode = True
+            CurrentSession.isTwoFactorCodeAuthenticate = True
             ScoreTheme.LoadNextFormClose(Me, Home)
             Me.Close()
         Else
@@ -35,28 +35,23 @@
 
     Private Sub btnResend_Click(sender As Object, e As EventArgs) Handles btnResend.Click
         Dim previousCode As Integer = code
-        SendCode()
 
-        'Resend if it's the same code so how
         'In case of a memory issue, catch it and default the pin
         'Prompt for a retry
         Try
-            If previousCode = code Then
-                While previousCode = code
-                    SendCode()
-                End While
-            End If
+            SendCode(previousCode)
         Catch ex As Exception
             Dim generateUnquieErorr As New Logging(Now.ToString("MM/dd/yyy hh:mm:ss"), "Unique pin", ex.ToString)
+            generateUnquieErorr.LogAction()
             code = 0
         End Try
 
         If code > 0 AndAlso code <> previousCode Then
             Dim resendCode As DialogResult = MessageBox.Show($"A new code is sent to your inbox.",
-                "New code has been emailed", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                "New code sent!", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else
             Dim incorrectAlert As DialogResult = MessageBox.Show($"Your code was not sent! Try again.",
-                "New code unable to generate", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                "New code failed to send!", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
 
@@ -69,8 +64,13 @@
     ''' <summary>
     ''' Get generated pin and emails it to user's inbox
     ''' </summary>
-    Private Sub SendCode()
+    Private Sub SendCode(ByVal previousCode As Integer)
         code = twoFactorUser.GetCode()
+        If previousCode > 0 AndAlso previousCode = code Then
+            While previousCode = code
+                code = twoFactorUser.GetCode()
+            End While
+        End If
         Dim twoFactorEmail As New Email(New List(Of String) From {SelectedEmail})
         twoFactorEmail.SentTwoFactorCodeEmail(SelectedEmail, Now.ToString("MM/dd/yyyy"), code)
     End Sub

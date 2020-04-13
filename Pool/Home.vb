@@ -12,7 +12,7 @@ Public Class Home
         If CurrentSession.IsLoggedIn Then
             'Check if they have two factor enabled and they passed it
             'Log im after two step auth
-            If CurrentSession.TwoFactorEnabled AndAlso CurrentSession.isTwoFactorCode Then
+            If CurrentSession.TwoFactorEnabled AndAlso CurrentSession.isTwoFactorCodeAuthenticate Then
                 SetUserloginScreen()
             End If
         End If
@@ -41,30 +41,32 @@ Public Class Home
         If Not String.IsNullOrEmpty(userAuthenticate.User) AndAlso Not String.IsNullOrWhiteSpace(userAuthenticate.Password) Then
             Dim userOptionsDS As New DataSet
             userOptionsDS = userAuthenticate.SelUserOptions
-            CurrentSession.TwoFactorEnabled = Convert.ToBoolean(Convert.ToInt16(userOptionsDS.Tables(0).Rows(0).Item("twoFactorAuth").ToString))
+            Dim twoFactorSettingBit As Integer = 0
+            Integer.TryParse(userOptionsDS.Tables(0).Rows(0).Item("twoFactorAuth").ToString(), twoFactorSettingBit)
+            If Not String.IsNullOrEmpty(twoFactorSettingBit) Then CurrentSession.TwoFactorEnabled = Convert.ToBoolean(twoFactorSettingBit)
 
 #Region "Two Factor Authentication"
             'Pull this users options and check two factor settings and if they have not pass it yet.
-            If CurrentSession.TwoFactorEnabled.Equals(True) AndAlso CurrentSession.isTwoFactorCode.Equals(False) Then
-                userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
-                'If they pass step one, then go to step two
-                If userAuthenticate.GetLogin Then
-                    CurrentSession.PreviousForm = Me
-                    TwoFactorLogin.SelectedEmail = txtUser.Text
-                    LoadNextFormClose(Me, TwoFactorLogin)
-                    Exit Sub
-                Else
-                    Dim incorrectAlert As DialogResult = MessageBox.Show($"Incorrect Email and/or/also/maybe Password",
+            If CurrentSession.TwoFactorEnabled.Equals(True) AndAlso CurrentSession.isTwoFactorCodeAuthenticate.Equals(False) Then
+                    userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
+                    'If they pass step one, then go to step two
+                    If userAuthenticate.GetLogin Then
+                        CurrentSession.PreviousForm = Me
+                        TwoFactorLogin.SelectedEmail = txtUser.Text
+                        LoadNextFormClose(Me, TwoFactorLogin)
+                        Exit Sub
+                    Else
+                        Dim incorrectAlert As DialogResult = MessageBox.Show($"Incorrect Email and/or/also/maybe Password",
     "Incorrect Creditials", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-                    txtPassword.ResetText()
-                End If
+                        txtPassword.ResetText()
+                    End If
 
-            End If
+                End If
 #End Region
 
-            userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
-        Else
-            userAuthenticate.isLoggedIn = False
+                userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
+            Else
+                userAuthenticate.isLoggedIn = False
             With EditPlayerToolStripMenuItem
                 .Enabled = False
                 .Visible = False

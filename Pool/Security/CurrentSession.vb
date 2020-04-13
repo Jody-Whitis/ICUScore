@@ -119,7 +119,7 @@ Module CurrentSession
         End Set
     End Property
 
-    Public Property isTwoFactorCode As Boolean
+    Public Property isTwoFactorCodeAuthenticate As Boolean
         Get
             Return _isTwoFactorCode
         End Get

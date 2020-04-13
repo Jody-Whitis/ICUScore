@@ -140,7 +140,7 @@ Public Class ScoreTheme
         CurrentSession.IsLoggedIn = False
         CurrentSession.Subscribed = False
         CurrentSession.TwoFactorEnabled = False
-        CurrentSession.isTwoFactorCode = False
+        CurrentSession.isTwoFactorCodeAuthenticate = False
         Application.Restart()
     End Sub
 End Class
