@@ -46,6 +46,7 @@ Partial Class Home
         Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnNewUser = New System.Windows.Forms.Button()
         Me.btnGuest = New System.Windows.Forms.Button()
+        Me.ProfileEditingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -196,7 +197,7 @@ Partial Class Home
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
-        Me.MenuStrip1.Size = New System.Drawing.Size(1608, 96)
+        Me.MenuStrip1.Size = New System.Drawing.Size(804, 44)
         Me.MenuStrip1.TabIndex = 11
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -206,7 +207,7 @@ Partial Class Home
         Me.mnuHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mnuHome.ForeColor = System.Drawing.Color.Aquamarine
         Me.mnuHome.Name = "mnuHome"
-        Me.mnuHome.Size = New System.Drawing.Size(115, 90)
+        Me.mnuHome.Size = New System.Drawing.Size(115, 38)
         Me.mnuHome.Text = "Menu"
         '
         'logOutMnu
@@ -230,11 +231,11 @@ Partial Class Home
         '
         'EditToolStripMenuItem
         '
-        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditPasswordToolStripMenuItem, Me.EditPlayerToolStripMenuItem})
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditPasswordToolStripMenuItem, Me.ProfileEditingToolStripMenuItem, Me.EditPlayerToolStripMenuItem})
         Me.EditToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.EditToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(95, 37)
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(95, 38)
         Me.EditToolStripMenuItem.Text = "Edit"
         Me.EditToolStripMenuItem.Visible = False
         '
@@ -243,7 +244,7 @@ Partial Class Home
         Me.EditPasswordToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.EditPasswordToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.EditPasswordToolStripMenuItem.Name = "EditPasswordToolStripMenuItem"
-        Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(362, 44)
+        Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(368, 44)
         Me.EditPasswordToolStripMenuItem.Text = "Edit Password"
         '
         'EditPlayerToolStripMenuItem
@@ -251,7 +252,7 @@ Partial Class Home
         Me.EditPlayerToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.EditPlayerToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.EditPlayerToolStripMenuItem.Name = "EditPlayerToolStripMenuItem"
-        Me.EditPlayerToolStripMenuItem.Size = New System.Drawing.Size(362, 44)
+        Me.EditPlayerToolStripMenuItem.Size = New System.Drawing.Size(368, 44)
         Me.EditPlayerToolStripMenuItem.Text = "Player Editing"
         '
         'AboutToolStripMenuItem
@@ -260,7 +261,7 @@ Partial Class Home
         Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 90)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 38)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'AboutToolStripMenuItem1
@@ -298,6 +299,15 @@ Partial Class Home
         Me.btnGuest.TabIndex = 4
         Me.btnGuest.Text = "Guest"
         Me.btnGuest.UseVisualStyleBackColor = False
+        '
+        'ProfileEditingToolStripMenuItem
+        '
+        Me.ProfileEditingToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.ProfileEditingToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.ProfileEditingToolStripMenuItem.Name = "ProfileEditingToolStripMenuItem"
+        Me.ProfileEditingToolStripMenuItem.Size = New System.Drawing.Size(368, 44)
+        Me.ProfileEditingToolStripMenuItem.Text = "Profile Editing"
+        Me.ProfileEditingToolStripMenuItem.Visible = False
         '
         'Home
         '
@@ -354,4 +364,5 @@ Partial Class Home
     Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EditPasswordToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EditPlayerToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ProfileEditingToolStripMenuItem As ToolStripMenuItem
 End Class

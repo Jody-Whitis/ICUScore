@@ -69,7 +69,9 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SqlClient, Version=4.6.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SqlClient.4.7.0\lib\net461\System.Data.SqlClient.dll</HintPath>
@@ -117,6 +119,12 @@
       <DependentUpon>PasswordChange.vb</DependentUpon>
     </Compile>
     <Compile Include="PasswordChange.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfileEditing.Designer.vb">
+      <DependentUpon>ProfileEditing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileEditing.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Security\Permissions.vb" />
@@ -191,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PlayerEditing.resx">
       <DependentUpon>PlayerEditing.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfileEditing.resx">
+      <DependentUpon>ProfileEditing.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PvP.resx">
       <DependentUpon>PvP.vb</DependentUpon>

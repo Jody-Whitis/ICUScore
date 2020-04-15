@@ -42,8 +42,14 @@ Public Class Home
             Dim userOptionsDS As New DataSet
             userOptionsDS = userAuthenticate.SelUserOptions
             Dim twoFactorSettingBit As Integer = 0
+            Dim subscribedBit As Integer = 0
             If userOptionsDS.Tables(0).Rows.Count > 0 Then Integer.TryParse(userOptionsDS.Tables(0).Rows(0).Item("twoFactorAuth").ToString(), twoFactorSettingBit)
+            If userOptionsDS.Tables(0).Rows.Count > 0 Then Integer.TryParse(userOptionsDS.Tables(0).Rows(0).Item("subscribed").ToString(), subscribedBit)
+
             If Not String.IsNullOrEmpty(twoFactorSettingBit) Then CurrentSession.TwoFactorEnabled = Convert.ToBoolean(twoFactorSettingBit)
+            If Not String.IsNullOrEmpty(subscribedBit) Then CurrentSession.Subscribed = Convert.ToBoolean(subscribedBit)
+
+
 #Region "Two Factor Authentication"
             'Pull this users options and check two factor settings and if they have not pass it yet.
             If CurrentSession.TwoFactorEnabled.Equals(True) AndAlso CurrentSession.isTwoFactorCodeAuthenticate.Equals(False) Then
@@ -147,10 +153,16 @@ Public Class Home
         logOutMnu.Visible = True
         EditPlayerToolStripMenuItem.Visible = True
         EditPlayerToolStripMenuItem.Enabled = True
+        ProfileEditingToolStripMenuItem.Visible = True
         EditToolStripMenuItem.Visible = True
         lblHome.Text = $"Welcome {CurrentSession.DisplayName}!"
         btnLogout.Location = btnGuest.Location
         Me.Text = "Home"
     End Sub
 
+    Private Sub ProfileEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProfileEditingToolStripMenuItem.Click
+        If CurrentSession.IsLoggedIn.Equals(True) Then
+            ScoreTheme.LoadNextFormHide(Me, ProfileEditing)
+        End If
+    End Sub
 End Class
