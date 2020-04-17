@@ -71,6 +71,7 @@ Partial Class TwoFactorLogin
         'btnBack
         '
         Me.btnBack.BackColor = System.Drawing.Color.Aquamarine
+        Me.btnBack.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnBack.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBack.Location = New System.Drawing.Point(18, 509)
@@ -105,11 +106,13 @@ Partial Class TwoFactorLogin
         Me.lblResend.TabIndex = 5
         Me.lblResend.Text = "Click Resend to send a new code."
         '
-        'TwoFactorAuth
+        'TwoFactorLogin
         '
+        Me.AcceptButton = Me.btnSubmit
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
+        Me.CancelButton = Me.btnBack
         Me.ClientSize = New System.Drawing.Size(640, 622)
         Me.Controls.Add(Me.lblResend)
         Me.Controls.Add(Me.lblTwoFactor)
@@ -119,7 +122,7 @@ Partial Class TwoFactorLogin
         Me.Controls.Add(Me.tbCode)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.Name = "TwoFactorAuth"
+        Me.Name = "TwoFactorLogin"
         Me.Text = "Two-Factor Authentication"
         Me.ResumeLayout(False)
         Me.PerformLayout()
