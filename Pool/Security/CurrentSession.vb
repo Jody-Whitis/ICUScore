@@ -23,6 +23,7 @@ Module CurrentSession
     Private _twoFactorEnabled As Boolean = False
     Private _subscribed As Boolean = False
     Private _isTwoFactorAuthenticate As Boolean = False
+    Private _registered As Boolean = False
     Public PreviousForm As Form = Home
     Public CurrentForm As Form = Nothing
     Private _CurrentScreen As AppState
@@ -125,6 +126,15 @@ Module CurrentSession
         End Get
         Set(value As Boolean)
             _isTwoFactorAuthenticate = value
+        End Set
+    End Property
+
+    Public Property Registered As Boolean
+        Get
+            Return _registered
+        End Get
+        Set(value As Boolean)
+            _registered = value
         End Set
     End Property
 #End Region

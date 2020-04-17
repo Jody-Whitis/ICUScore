@@ -1,4 +1,5 @@
-﻿Imports Pool.ScoreTheme
+﻿Imports Microsoft.VisualBasic.ApplicationServices
+Imports Pool.ScoreTheme
 Public Class Home
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -11,7 +12,7 @@ Public Class Home
         'Check if they a logged in user nagivates to here from outside, two-factor auth, etc
         If CurrentSession.IsLoggedIn Then
             'Check if they have two factor enabled and they passed it
-            'Log im after two step auth
+            'Log in after two step auth
             If CurrentSession.TwoFactorEnabled AndAlso CurrentSession.isTwoFactorCodeAuthenticate Then
                 SetUserloginScreen()
             End If
@@ -37,49 +38,42 @@ Public Class Home
             .User = txtUser.Text.ToString
             .Password = txtPassword.Text.ToString
         End With
-        'Check if inputs are entered
-        If Not String.IsNullOrEmpty(userAuthenticate.User) AndAlso Not String.IsNullOrWhiteSpace(userAuthenticate.Password) Then
+
+        'Check step one login has passed
+        userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
+        If userAuthenticate.isLoggedIn.Equals(True) Then
             Dim userOptionsDS As New DataSet
             userOptionsDS = userAuthenticate.SelUserOptions
-            Dim twoFactorSettingBit As Integer = 0
-            Dim subscribedBit As Integer = 0
-            If userOptionsDS.Tables(0).Rows.Count > 0 Then Integer.TryParse(userOptionsDS.Tables(0).Rows(0).Item("twoFactorAuth").ToString(), twoFactorSettingBit)
-            If userOptionsDS.Tables(0).Rows.Count > 0 Then Integer.TryParse(userOptionsDS.Tables(0).Rows(0).Item("subscribed").ToString(), subscribedBit)
-
-            If Not String.IsNullOrEmpty(twoFactorSettingBit) Then CurrentSession.TwoFactorEnabled = Convert.ToBoolean(twoFactorSettingBit)
-            If Not String.IsNullOrEmpty(subscribedBit) Then CurrentSession.Subscribed = Convert.ToBoolean(subscribedBit)
-
-
+            If userOptionsDS.Tables(0).Rows.Count > 0 Then SetLoginUserSettings(userOptionsDS.Tables(0))
 #Region "Two Factor Authentication"
             'Pull this users options and check two factor settings and if they have not pass it yet.
             If CurrentSession.TwoFactorEnabled.Equals(True) AndAlso CurrentSession.isTwoFactorCodeAuthenticate.Equals(False) Then
-                    userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
-                    'If they pass step one, then go to step two
-                    If userAuthenticate.GetLogin Then
-                        CurrentSession.PreviousForm = Me
-                        TwoFactorLogin.SelectedEmail = txtUser.Text
-                        LoadNextFormClose(Me, TwoFactorLogin)
-                        Exit Sub
-                    Else
-                        Dim incorrectAlert As DialogResult = MessageBox.Show($"Incorrect Email and/or/also/maybe Password",
-    "Incorrect Creditials", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-                        txtPassword.ResetText()
-                    End If
-
+                'If they pass step one, then go to step two
+                If userAuthenticate.GetLogin Then
+                    CurrentSession.PreviousForm = Me
+                    TwoFactorLogin.SelectedEmail = txtUser.Text
+                    LoadNextFormClose(Me, TwoFactorLogin)
+                    Exit Sub
                 End If
+            End If
 #End Region
-
-                userAuthenticate.isLoggedIn = userAuthenticate.GetLogin()
-            Else
-                userAuthenticate.isLoggedIn = False
+            SetUserloginScreen()
+        Else
+            userAuthenticate.isLoggedIn = False
+#Region "Controls Menu"
             With EditPlayerToolStripMenuItem
                 .Enabled = False
                 .Visible = False
             End With
-        End If
-        If userAuthenticate.isLoggedIn.Equals(True) Then
-            SetUserloginScreen()
-        Else
+            With ProfileEditingToolStripMenuItem
+                .Enabled = False
+                .Visible = False
+            End With
+            With EditPasswordToolStripMenuItem
+                .Visible = False
+                .Enabled = False
+            End With
+#End Region
             Dim incorrectAlert As DialogResult = MessageBox.Show($"Incorrect Email and/or/also/maybe Password",
     "Incorrect Creditials", MessageBoxButtons.OK, MessageBoxIcon.Hand)
         End If
@@ -164,5 +158,21 @@ Public Class Home
         If CurrentSession.IsLoggedIn.Equals(True) Then
             ScoreTheme.LoadNextFormHide(Me, ProfileEditing)
         End If
+    End Sub
+
+    ''' <summary>
+    ''' Gets the login/attempted login's settings
+    ''' and set them in CurrentSession
+    ''' </summary>
+    ''' <param name="settingsDt"></param>
+    Private Sub SetLoginUserSettings(settingsDt As DataTable)
+        Dim twoFactorSettingBit As Integer = 0, subscribedBit As Integer = 0, registeredBit As Integer = 0
+        Integer.TryParse(settingsDt.Rows(0).Item("twoFactorAuth").ToString(), twoFactorSettingBit)
+        Integer.TryParse(settingsDt.Rows(0).Item("subscribed").ToString(), subscribedBit)
+        Integer.TryParse(settingsDt.Rows(0).Item("registered").ToString(), registeredBit)
+
+        CurrentSession.TwoFactorEnabled = Convert.ToBoolean(twoFactorSettingBit)
+        CurrentSession.Subscribed = Convert.ToBoolean(subscribedBit)
+        CurrentSession.Registered = Convert.ToBoolean(registeredBit)
     End Sub
 End Class
