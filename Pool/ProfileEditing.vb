@@ -5,6 +5,8 @@
         Public subscribed As Boolean
         Public twoFactor As Boolean
         Public registered As Boolean
+        Public emailAddress As String
+        Public displayName As String
     End Structure
 
     Dim intialUserSettings As New InitialSettings
@@ -46,9 +48,9 @@
                 "Saving Settings", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
 
         If warningSave.Equals(DialogResult.Yes) Then
-
             sqlString = GetUpdateSQL(intialUserSettings)
             results = updateUser.GetAllResults(sqlString)
+            SetUpdatedSettings()
         Else
             Exit Sub
         End If
@@ -65,6 +67,8 @@
         If intialUserSettings.registered <> cbDeactivate.Checked Then valuesChanged = True
         If intialUserSettings.twoFactor <> cbTwoFactorEnabled.Checked Then valuesChanged = True
         If intialUserSettings.subscribed <> cbSubscribed.Checked Then valuesChanged = True
+        If intialUserSettings.displayName <> tbDisplayName.Text Then valuesChanged = True
+        If intialUserSettings.emailAddress <> tbEmailAddress.Text Then valuesChanged = True
         Return valuesChanged
     End Function
 
@@ -74,6 +78,9 @@
     Private Sub SetCurrentUserSettings()
         cbTwoFactorEnabled.Checked = CurrentSession.TwoFactorEnabled
         cbSubscribed.Checked = CurrentSession.Subscribed
+        tbEmailAddress.Text = CurrentSession.UserEmail
+        tbDisplayName.Text = CurrentSession.DisplayName
+        lblTitle.Text += CurrentSession.DisplayName
     End Sub
 
     ''' <summary>
@@ -83,6 +90,8 @@
         intialUserSettings.twoFactor = cbTwoFactorEnabled.Checked
         intialUserSettings.subscribed = cbSubscribed.Checked
         intialUserSettings.registered = cbDeactivate.Checked
+        intialUserSettings.displayName = tbDisplayName.Text
+        intialUserSettings.emailAddress = tbEmailAddress.Text
     End Sub
 
     ''' <summary>
@@ -100,8 +109,35 @@
             If (initialSettings.subscribed <> cbSubscribed.Checked) Then .Append($"@subscribed={Convert.ToInt16(cbSubscribed.Checked)},")
             If (initialSettings.twoFactor <> cbTwoFactorEnabled.Checked) Then .Append($"@twoFactor={Convert.ToInt16(cbTwoFactorEnabled.Checked)},")
             If (initialSettings.registered <> cbDeactivate.Checked) Then .Append($"@active={Convert.ToInt16(cbDeactivate.Checked)}")
+            If (initialSettings.displayName <> tbDisplayName.Text) Then .Append($"@displayName={tbDisplayName.Text}")
+            If (initialSettings.emailAddress <> tbEmailAddress.Text) Then .Append($"@emailAddress={tbEmailAddress.Text}")
         End With
 
         Return updUserSettings.ToString.TrimEnd(",")
     End Function
+
+    ''' <summary>
+    ''' Set sessions updated settings
+    ''' </summary>
+    Private Sub SetUpdatedSettings()
+        Dim settingsDS As New DataSet
+        Dim updatedSettings As New TwoFactorAuthenication With {.User = tbEmailAddress.Text}
+        settingsDS = updatedSettings.SelUserOptions()
+        Try
+            CurrentSession.TwoFactorEnabled = Convert.ToBoolean(Convert.ToInt16(settingsDS.Tables(0).Rows(0).Item("twoFactorAuth").ToString))
+            CurrentSession.Subscribed = Convert.ToBoolean(Convert.ToInt16(settingsDS.Tables(0).Rows(0).Item("subscribed").ToString))
+            CurrentSession.DisplayName = settingsDS.Tables(0).Rows(0).Item("PlayerName").ToString
+            CurrentSession.UserEmail = settingsDS.Tables(0).Rows(0).Item("emailAddress").ToString
+
+            'If they just went to two factor and vice versa, then keep them logged in
+            If CurrentSession.TwoFactorEnabled.Equals(True) Then
+                CurrentSession.isTwoFactorCodeAuthenticate = True
+            ElseIf CurrentSession.TwoFactorEnabled.Equals(False) Then
+                CurrentSession.isTwoFactorCodeAuthenticate = False
+            End If
+        Catch ex As Exception
+            Dim updateLog As New Logging(Now.ToLongTimeString, "Updated User Settings", ex.ToString)
+            updateLog.LogAction()
+        End Try
+    End Sub
 End Class
