@@ -15,6 +15,9 @@ Public Class Home
             'Log in after two step auth
             If CurrentSession.TwoFactorEnabled AndAlso CurrentSession.isTwoFactorCodeAuthenticate Then
                 SetUserloginScreen()
+                'If they pass step 1 and disabled step 2
+            ElseIf CurrentSession.TwoFactorEnabled.Equals(False) Then
+                SetUserloginScreen()
             End If
         End If
     End Sub
@@ -156,7 +159,7 @@ Public Class Home
 
     Private Sub ProfileEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProfileEditingToolStripMenuItem.Click
         If CurrentSession.IsLoggedIn.Equals(True) Then
-            ScoreTheme.LoadNextFormHide(Me, ProfileEditing)
+            ScoreTheme.LoadNextFormClose(Me, ProfileEditing)
         End If
     End Sub
 
