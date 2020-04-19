@@ -311,7 +311,7 @@ Partial Class PvP
         Me.EditPasswordToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.EditPasswordToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.EditPasswordToolStripMenuItem.Name = "EditPasswordToolStripMenuItem"
-        Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(216, 26)
+        Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(230, 26)
         Me.EditPasswordToolStripMenuItem.Text = "Edit Password"
         '
         'PlayerEditToolStripMenuItem1
@@ -319,8 +319,8 @@ Partial Class PvP
         Me.PlayerEditToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
         Me.PlayerEditToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
         Me.PlayerEditToolStripMenuItem1.Name = "PlayerEditToolStripMenuItem1"
-        Me.PlayerEditToolStripMenuItem1.Size = New System.Drawing.Size(216, 26)
-        Me.PlayerEditToolStripMenuItem1.Text = "Player Edit"
+        Me.PlayerEditToolStripMenuItem1.Size = New System.Drawing.Size(230, 26)
+        Me.PlayerEditToolStripMenuItem1.Text = "Manage Players"
         '
         'AboutToolStripMenuItem
         '
@@ -360,13 +360,13 @@ Partial Class PvP
         Me.btnRegisterTest.BackColor = System.Drawing.Color.Aquamarine
         Me.btnRegisterTest.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnRegisterTest.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnRegisterTest.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRegisterTest.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRegisterTest.Location = New System.Drawing.Point(243, 595)
         Me.btnRegisterTest.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRegisterTest.Name = "btnRegisterTest"
         Me.btnRegisterTest.Size = New System.Drawing.Size(157, 45)
         Me.btnRegisterTest.TabIndex = 12
-        Me.btnRegisterTest.Text = "Player Edit"
+        Me.btnRegisterTest.Text = "Manage Players"
         Me.btnRegisterTest.UseVisualStyleBackColor = False
         '
         'Label1

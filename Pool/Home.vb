@@ -130,7 +130,7 @@ Public Class Home
     Private Sub EditPlayerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPlayerToolStripMenuItem.Click
         If Permissions.IsUser.Equals(True) Then
             CurrentSession.PreviousForm = Me
-            LoadNextFormHide(Me, PlayerEditing)
+            LoadNextFormHide(Me, PlayerManagement)
         End If
     End Sub
 

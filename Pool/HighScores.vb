@@ -369,8 +369,8 @@ Public Class HighScores
     Private Sub PlayerEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlayerEditingToolStripMenuItem.Click, btnPlayerEditing.Click
         If Permissions.IsUser.Equals(True) Then
             CurrentSession.PreviousForm = Me
-            PlayerEditing.Activate()
-            PlayerEditing.Show()
+            PlayerManagement.Activate()
+            PlayerManagement.Show()
             Me.Close()
         End If
     End Sub

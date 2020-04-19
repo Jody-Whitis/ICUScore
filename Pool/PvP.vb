@@ -590,8 +590,8 @@ Public Class PvP
     Private Sub PlayerEditToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PlayerEditToolStripMenuItem1.Click, btnRegisterTest.Click
         If Permissions.IsUser.Equals(True) Then
             CurrentSession.PreviousForm = Me
-            PlayerEditing.Activate()
-            PlayerEditing.Show()
+            PlayerManagement.Activate()
+            PlayerManagement.Show()
             Me.Close()
         End If
     End Sub

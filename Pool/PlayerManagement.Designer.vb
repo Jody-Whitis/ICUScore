@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class PlayerEditing
+Partial Class PlayerManagement
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class PlayerEditing
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PlayerEditing))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PlayerManagement))
         Me.btnBack = New System.Windows.Forms.Button()
         Me.cbPlayerNames = New System.Windows.Forms.ComboBox()
         Me.btnDelete = New System.Windows.Forms.Button()
@@ -141,7 +141,7 @@ Partial Class PlayerEditing
         Me.LogOutToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
-        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(154, 26)
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(216, 26)
         Me.LogOutToolStripMenuItem.Text = "Log Out"
         '
         'QuitToolStripMenuItem
@@ -149,7 +149,7 @@ Partial Class PlayerEditing
         Me.QuitToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
-        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(154, 26)
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(216, 26)
         Me.QuitToolStripMenuItem.Text = "Quit"
         '
         'EditToolStripMenuItem
@@ -183,7 +183,7 @@ Partial Class PlayerEditing
         Me.AboutToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
         Me.AboutToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
         Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
-        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(142, 26)
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(216, 26)
         Me.AboutToolStripMenuItem1.Text = "About"
         '
         'lblSelectedName
@@ -237,7 +237,7 @@ Partial Class PlayerEditing
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
         '
-        'PlayerEditing
+        'PlayerManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -259,8 +259,8 @@ Partial Class PlayerEditing
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.mnuPlayerEditing
         Me.MaximizeBox = False
-        Me.Name = "PlayerEditing"
-        Me.Text = "PlayerEditing"
+        Me.Name = "PlayerManagement"
+        Me.Text = "ManagePlayers"
         Me.mnuPlayerEditing.ResumeLayout(False)
         Me.mnuPlayerEditing.PerformLayout()
         Me.ResumeLayout(False)

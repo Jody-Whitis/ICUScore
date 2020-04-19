@@ -1,4 +1,4 @@
-﻿Public Class PlayerEditing
+﻿Public Class PlayerManagement
     Dim selectedPlayer As New PlayerStats
     Dim playerTable As New Hashtable
     Dim nonRegisterdPlayers As New Hashtable

@@ -233,7 +233,7 @@ Partial Class HighScores
         Me.EditPasswordToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
         Me.EditPasswordToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
         Me.EditPasswordToolStripMenuItem1.Name = "EditPasswordToolStripMenuItem1"
-        Me.EditPasswordToolStripMenuItem1.Size = New System.Drawing.Size(216, 26)
+        Me.EditPasswordToolStripMenuItem1.Size = New System.Drawing.Size(230, 26)
         Me.EditPasswordToolStripMenuItem1.Text = "Edit Password"
         '
         'PlayerEditingToolStripMenuItem
@@ -241,8 +241,8 @@ Partial Class HighScores
         Me.PlayerEditingToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.PlayerEditingToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.PlayerEditingToolStripMenuItem.Name = "PlayerEditingToolStripMenuItem"
-        Me.PlayerEditingToolStripMenuItem.Size = New System.Drawing.Size(216, 26)
-        Me.PlayerEditingToolStripMenuItem.Text = "Player Editing"
+        Me.PlayerEditingToolStripMenuItem.Size = New System.Drawing.Size(230, 26)
+        Me.PlayerEditingToolStripMenuItem.Text = "Manage Players"
         '
         'AboutToolStripMenuItem
         '
@@ -336,7 +336,7 @@ Partial Class HighScores
         Me.btnPlayerEditing.Name = "btnPlayerEditing"
         Me.btnPlayerEditing.Size = New System.Drawing.Size(92, 54)
         Me.btnPlayerEditing.TabIndex = 6
-        Me.btnPlayerEditing.Text = "Player Editing"
+        Me.btnPlayerEditing.Text = "Manage Player"
         Me.btnPlayerEditing.UseVisualStyleBackColor = False
         '
         'HighScores
