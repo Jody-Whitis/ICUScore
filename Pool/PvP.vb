@@ -590,17 +590,21 @@ Public Class PvP
     Private Sub PlayerEditToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PlayerEditToolStripMenuItem1.Click, btnRegisterTest.Click
         If Permissions.IsUser.Equals(True) Then
             CurrentSession.PreviousForm = Me
-            PlayerManagement.Activate()
-            PlayerManagement.Show()
-            Me.Close()
+            ScoreTheme.LoadNextFormClose(Me, PlayerManagement)
         End If
     End Sub
 
     Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
         If CurrentSession.IsLoggedIn.Equals(True) Then
             CurrentSession.setPreviousForm(Me)
-            PasswordChange.Show()
-            Me.Hide()
+            ScoreTheme.LoadNextFormHide(Me, PasswordChange)
+        End If
+    End Sub
+
+    Private Sub ProfileEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProfileEditingToolStripMenuItem.Click
+        If Permissions.IsUser.Equals(True) Then
+            CurrentSession.PreviousForm = Me
+            ScoreTheme.LoadNextFormClose(Me, ProfileEditing)
         End If
     End Sub
 
