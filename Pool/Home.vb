@@ -5,7 +5,7 @@ Public Class Home
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToScreen()
         CurrentScreen = AppState.Start
-        ScoreTheme.SetControl(New Button() {btnPvP, btnHS, btnLogout}, False)
+        ScoreTheme.SetControl(New Button() {btnPvP, btnHS, btnLogout, btnProfileEditing, btnManagePlayers}, False)
         ScoreTheme.SetControl(New Button() {btnLogin, btnQuit}, True)
         lblHome.Visible = False
         Me.ShowIcon = True
@@ -130,7 +130,7 @@ Public Class Home
         End If
     End Sub
 
-    Private Sub EditPlayerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPlayerToolStripMenuItem.Click
+    Private Sub EditPlayerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPlayerToolStripMenuItem.Click, btnManagePlayers.Click
         If Permissions.IsUser.Equals(True) Then
             CurrentSession.PreviousForm = Me
             LoadNextFormHide(Me, PlayerManagement)
@@ -141,7 +141,7 @@ Public Class Home
     ''' Set the screen when user has been authenticated.
     ''' </summary>
     Private Sub SetUserloginScreen()
-        ScoreTheme.SetControl(New Button() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
+        ScoreTheme.SetControl(New Button() {btnHS, btnPvP, btnLogout, btnNewUser, btnProfileEditing, btnManagePlayers}, True)
         ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword}, False)
         lblUser.Visible = False
         lblPassword.Visible = False
@@ -157,7 +157,7 @@ Public Class Home
         Me.Text = "Home"
     End Sub
 
-    Private Sub ProfileEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProfileEditingToolStripMenuItem.Click
+    Private Sub ProfileEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProfileEditingToolStripMenuItem.Click, btnProfileEditing.Click
         If CurrentSession.IsLoggedIn.Equals(True) Then
             ScoreTheme.LoadNextFormClose(Me, ProfileEditing)
         End If
@@ -178,4 +178,5 @@ Public Class Home
         CurrentSession.Subscribed = Convert.ToBoolean(subscribedBit)
         CurrentSession.Registered = Convert.ToBoolean(registeredBit)
     End Sub
+
 End Class
