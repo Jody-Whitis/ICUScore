@@ -22,6 +22,7 @@ Public Class ScoreTheme
         nextForm.Activate()
         nextForm.Show()
         currentForm.Cursor = Cursors.Default
+        CurrentSession.PreviousForm = currentForm
         currentForm.Hide()
     End Sub
 

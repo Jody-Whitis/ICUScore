@@ -238,8 +238,7 @@ Public Class HighScores
             btnBack.Text = "Home"
             ScoreTheme.SetErrorLabel(lblError)
         Else
-            Home.Show()
-            Me.Close()
+            ScoreTheme.LoadNextFormClose(Me, Home)
         End If
 
     End Sub
@@ -340,8 +339,7 @@ Public Class HighScores
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnPvP_Click(sender As Object, e As EventArgs) Handles btnPvP.Click
-        PvP.Show()
-        Me.Close()
+        ScoreTheme.LoadNextFormClose(Me, PvP)
     End Sub
 
     Private Sub QuitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click
@@ -353,25 +351,19 @@ Public Class HighScores
     End Sub
 
     Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
-        CurrentSession.PreviousForm = Me
         AboutThis.Activate()
         AboutThis.Show()
     End Sub
 
     Private Sub EditPasswordToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem1.Click
         If CurrentSession.IsLoggedIn.Equals(True) Then
-            CurrentSession.setPreviousForm(Me)
-            PasswordChange.Show()
-            Me.Hide()
+            ScoreTheme.LoadNextFormClose(Me, PasswordChange)
         End If
     End Sub
 
     Private Sub PlayerEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlayerEditingToolStripMenuItem.Click, btnPlayerEditing.Click
         If Permissions.IsUser.Equals(True) Then
-            CurrentSession.PreviousForm = Me
-            PlayerManagement.Activate()
-            PlayerManagement.Show()
-            Me.Close()
+            ScoreTheme.LoadNextFormClose(Me, PlayerManagement)
         End If
     End Sub
 

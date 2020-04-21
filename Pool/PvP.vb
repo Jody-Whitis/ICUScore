@@ -525,9 +525,7 @@ Public Class PvP
     End Sub
 
     Private Sub btnHighScore_Click(sender As Object, e As EventArgs) Handles btnHighScore.Click
-        Dim myForm As New HighScores
-        Me.Hide()
-        myForm.Show()
+        ScoreTheme.LoadNextFormClose(Me, HighScores)
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
@@ -540,9 +538,7 @@ Public Class PvP
             btnBack.Text = "Home"
             CurrentScreen = AppState.SelectPlayer
         Else
-            Home.Show()
-            HighScores.Close()
-            Me.Close()
+            ScoreTheme.LoadNextFormClose(Me, Home)
         End If
 
     End Sub
@@ -582,28 +578,24 @@ Public Class PvP
     End Sub
 
     Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
-        CurrentSession.PreviousForm = Me
         AboutThis.Activate()
         AboutThis.Show()
     End Sub
 
     Private Sub PlayerEditToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PlayerEditToolStripMenuItem1.Click, btnRegisterTest.Click
         If Permissions.IsUser.Equals(True) Then
-            CurrentSession.PreviousForm = Me
             ScoreTheme.LoadNextFormClose(Me, PlayerManagement)
         End If
     End Sub
 
     Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
         If CurrentSession.IsLoggedIn.Equals(True) Then
-            CurrentSession.setPreviousForm(Me)
-            ScoreTheme.LoadNextFormHide(Me, PasswordChange)
+            ScoreTheme.LoadNextFormClose(Me, PasswordChange)
         End If
     End Sub
 
     Private Sub ProfileEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProfileEditingToolStripMenuItem.Click
         If Permissions.IsUser.Equals(True) Then
-            CurrentSession.PreviousForm = Me
             ScoreTheme.LoadNextFormClose(Me, ProfileEditing)
         End If
     End Sub

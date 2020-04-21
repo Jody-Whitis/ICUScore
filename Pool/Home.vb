@@ -118,21 +118,18 @@ Public Class Home
     End Sub
 
     Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
-        CurrentSession.PreviousForm = Me
         AboutThis.Activate()
         AboutThis.Show()
     End Sub
 
     Private Sub EditPasswordToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
         If CurrentSession.IsLoggedIn.Equals(True) Then
-            CurrentSession.PreviousForm = Me
             LoadNextFormHide(Me, PasswordChange)
         End If
     End Sub
 
     Private Sub EditPlayerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPlayerToolStripMenuItem.Click, btnManagePlayers.Click
         If Permissions.IsUser.Equals(True) Then
-            CurrentSession.PreviousForm = Me
             LoadNextFormHide(Me, PlayerManagement)
         End If
     End Sub
@@ -159,7 +156,7 @@ Public Class Home
 
     Private Sub ProfileEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProfileEditingToolStripMenuItem.Click, btnProfileEditing.Click
         If CurrentSession.IsLoggedIn.Equals(True) Then
-            ScoreTheme.LoadNextFormClose(Me, ProfileEditing)
+            ScoreTheme.LoadNextFormHide(Me, ProfileEditing)
         End If
     End Sub
 

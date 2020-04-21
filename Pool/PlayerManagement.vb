@@ -48,20 +48,7 @@
                 cbPlayerNames.SelectedItem = "Choose"
                 btnBack.Text = "Home"
             Case Else
-                'If PreviousForm IsNot Nothing Then
-                '    With PreviousForm
-                '        .Activate()
-                '        .Refresh()
-                '        .Show()
-                '    End With
-                'Else
-                With Home
-                        .Activate()
-                        .Refresh()
-                        .Show()
-                    End With
-                'End If
-                Me.Close()
+                ScoreTheme.LoadNextFormClose(Me, Home)
         End Select
     End Sub
 
@@ -196,18 +183,12 @@
     End Sub
 
     Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
-        CurrentSession.PreviousForm = Me
         AboutThis.Activate()
         AboutThis.Show()
     End Sub
 
     Private Sub EditPasswordToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem1.Click
-        With PasswordChange
-            .Activate()
-            .Show()
-        End With
-        CurrentSession.PreviousForm = Me
-        Me.Hide()
+        ScoreTheme.LoadNextFormClose(Me, PasswordChange)
     End Sub
 
 
