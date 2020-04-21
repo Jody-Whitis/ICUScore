@@ -101,7 +101,7 @@ Partial Class Home
         Me.lblHome.AutoSize = True
         Me.lblHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHome.ForeColor = System.Drawing.Color.Aquamarine
-        Me.lblHome.Location = New System.Drawing.Point(161, 91)
+        Me.lblHome.Location = New System.Drawing.Point(178, 89)
         Me.lblHome.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHome.Name = "lblHome"
         Me.lblHome.Size = New System.Drawing.Size(329, 42)

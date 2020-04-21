@@ -34,6 +34,13 @@ Partial Class ProfileEditing
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.MenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'cbTwoFactorEnabled
@@ -73,7 +80,7 @@ Partial Class ProfileEditing
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(184, 94)
         Me.btnBack.TabIndex = 3
-        Me.btnBack.Text = "Home"
+        Me.btnBack.Text = "Cancel"
         Me.btnBack.UseVisualStyleBackColor = False
         '
         'btnSave
@@ -172,6 +179,60 @@ Partial Class ProfileEditing
         Me.lblTitle.TabIndex = 10
         Me.lblTitle.Text = "Profile Settings for "
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.MenuStrip1.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(694, 42)
+        Me.MenuStrip1.TabIndex = 11
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'MenuToolStripMenuItem
+        '
+        Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LogOutToolStripMenuItem, Me.QuitToolStripMenuItem})
+        Me.MenuToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
+        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 38)
+        Me.MenuToolStripMenuItem.Text = "Menu"
+        '
+        'LogOutToolStripMenuItem
+        '
+        Me.LogOutToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
+        Me.LogOutToolStripMenuItem.Text = "Log Out"
+        '
+        'QuitToolStripMenuItem
+        '
+        Me.QuitToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
+        Me.QuitToolStripMenuItem.Text = "Quit"
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem1})
+        Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 38)
+        Me.AboutToolStripMenuItem.Text = "About"
+        '
+        'AboutToolStripMenuItem1
+        '
+        Me.AboutToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.AboutToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
+        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(359, 44)
+        Me.AboutToolStripMenuItem1.Text = "About"
+        '
         'ProfileEditing
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
@@ -189,9 +250,13 @@ Partial Class ProfileEditing
         Me.Controls.Add(Me.cbDeactivate)
         Me.Controls.Add(Me.cbSubscribed)
         Me.Controls.Add(Me.cbTwoFactorEnabled)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "ProfileEditing"
         Me.Text = "ProfileEditing"
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -208,4 +273,10 @@ Partial Class ProfileEditing
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents lblTitle As Label
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents MenuToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LogOutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents QuitToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
 End Class

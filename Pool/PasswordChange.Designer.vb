@@ -32,6 +32,13 @@ Partial Class PasswordChange
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.MenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtNewPassword
@@ -76,7 +83,7 @@ Partial Class PasswordChange
         Me.lblUpdate.AutoSize = True
         Me.lblUpdate.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblUpdate.ForeColor = System.Drawing.Color.Aquamarine
-        Me.lblUpdate.Location = New System.Drawing.Point(79, 54)
+        Me.lblUpdate.Location = New System.Drawing.Point(79, 86)
         Me.lblUpdate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUpdate.Name = "lblUpdate"
         Me.lblUpdate.Size = New System.Drawing.Size(366, 44)
@@ -147,6 +154,60 @@ Partial Class PasswordChange
         Me.Label3.TabIndex = 8
         Me.Label3.Text = "Confirm Password"
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.MenuStrip1.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(554, 42)
+        Me.MenuStrip1.TabIndex = 9
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'MenuToolStripMenuItem
+        '
+        Me.MenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LogOutToolStripMenuItem, Me.QuitToolStripMenuItem})
+        Me.MenuToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
+        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 38)
+        Me.MenuToolStripMenuItem.Text = "Menu"
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem1})
+        Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 38)
+        Me.AboutToolStripMenuItem.Text = "About"
+        '
+        'AboutToolStripMenuItem1
+        '
+        Me.AboutToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.AboutToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
+        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(359, 44)
+        Me.AboutToolStripMenuItem1.Text = "About"
+        '
+        'LogOutToolStripMenuItem
+        '
+        Me.LogOutToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
+        Me.LogOutToolStripMenuItem.Text = "Log Out"
+        '
+        'QuitToolStripMenuItem
+        '
+        Me.QuitToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
+        Me.QuitToolStripMenuItem.Text = "Quit"
+        '
         'PasswordChange
         '
         Me.AcceptButton = Me.btnUpdatePassword
@@ -164,13 +225,17 @@ Partial Class PasswordChange
         Me.Controls.Add(Me.btnUpdatePassword)
         Me.Controls.Add(Me.txtNewPasswordConfirm)
         Me.Controls.Add(Me.txtNewPassword)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.MaximizeBox = False
         Me.Name = "PasswordChange"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "PasswordChange"
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -185,4 +250,10 @@ Partial Class PasswordChange
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents MenuToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents LogOutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents QuitToolStripMenuItem As ToolStripMenuItem
 End Class

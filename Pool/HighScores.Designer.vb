@@ -90,11 +90,11 @@ Partial Class HighScores
         Me.btnSubmit.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSubmit.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubmit.Location = New System.Drawing.Point(266, 795)
+        Me.btnSubmit.Location = New System.Drawing.Point(272, 725)
         Me.btnSubmit.Name = "btnSubmit"
         Me.btnSubmit.Size = New System.Drawing.Size(206, 81)
         Me.btnSubmit.TabIndex = 4
-        Me.btnSubmit.Text = "Submit"
+        Me.btnSubmit.Text = "Submit Score"
         Me.btnSubmit.UseVisualStyleBackColor = False
         '
         'btnBack
@@ -141,11 +141,11 @@ Partial Class HighScores
         Me.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnAdd.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.Location = New System.Drawing.Point(620, 928)
+        Me.btnAdd.Location = New System.Drawing.Point(272, 830)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(138, 84)
+        Me.btnAdd.Size = New System.Drawing.Size(206, 84)
         Me.btnAdd.TabIndex = 8
-        Me.btnAdd.Text = "Add"
+        Me.btnAdd.Text = "Add Game Mode"
         Me.btnAdd.UseVisualStyleBackColor = False
         '
         'txtNewGM
@@ -164,7 +164,7 @@ Partial Class HighScores
         Me.btnPvP.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnPvP.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnPvP.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPvP.Location = New System.Drawing.Point(300, 930)
+        Me.btnPvP.Location = New System.Drawing.Point(624, 930)
         Me.btnPvP.Name = "btnPvP"
         Me.btnPvP.Size = New System.Drawing.Size(138, 84)
         Me.btnPvP.TabIndex = 7
@@ -180,7 +180,6 @@ Partial Class HighScores
         Me.mnuHighScore.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem, Me.EditToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.mnuHighScore.Location = New System.Drawing.Point(0, 0)
         Me.mnuHighScore.Name = "mnuHighScore"
-        Me.mnuHighScore.Padding = New System.Windows.Forms.Padding(6, 2, 0, 2)
         Me.mnuHighScore.Size = New System.Drawing.Size(774, 41)
         Me.mnuHighScore.TabIndex = 10
         Me.mnuHighScore.Text = "MenuStrip1"
