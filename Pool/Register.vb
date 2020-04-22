@@ -139,10 +139,7 @@ Public Class Register
                 'We don't want to delete Player for wins records, just delete login
                 'and set Player register bit
                 insertPlayer.GetAllResults(registerSQL.ToString.TrimEnd(","))
-
-                Home.Activate()
-                Home.Show()
-                Me.Close()
+                ScoreTheme.LoadNextFormClose(Me, Home)
             Else
                 'Confirm your password
             End If

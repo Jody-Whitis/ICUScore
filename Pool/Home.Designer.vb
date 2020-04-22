@@ -40,12 +40,15 @@ Partial Class Home
         Me.logOutMnu = New System.Windows.Forms.ToolStripMenuItem()
         Me.quitMnu = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProfileEditingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditPasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditPlayerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnNewUser = New System.Windows.Forms.Button()
         Me.btnGuest = New System.Windows.Forms.Button()
+        Me.btnProfileEditing = New System.Windows.Forms.Button()
+        Me.btnManagePlayers = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -59,9 +62,9 @@ Partial Class Home
         Me.btnPvP.ForeColor = System.Drawing.Color.Black
         Me.btnPvP.Location = New System.Drawing.Point(117, 369)
         Me.btnPvP.Name = "btnPvP"
-        Me.btnPvP.Size = New System.Drawing.Size(196, 70)
+        Me.btnPvP.Size = New System.Drawing.Size(213, 70)
         Me.btnPvP.TabIndex = 6
-        Me.btnPvP.Text = "PVP"
+        Me.btnPvP.Text = "PvP Stats"
         Me.btnPvP.UseVisualStyleBackColor = False
         '
         'btnHS
@@ -69,13 +72,13 @@ Partial Class Home
         Me.btnHS.BackColor = System.Drawing.Color.Aquamarine
         Me.btnHS.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnHS.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnHS.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnHS.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnHS.ForeColor = System.Drawing.Color.Black
-        Me.btnHS.Location = New System.Drawing.Point(458, 369)
+        Me.btnHS.Location = New System.Drawing.Point(441, 369)
         Me.btnHS.Name = "btnHS"
-        Me.btnHS.Size = New System.Drawing.Size(196, 70)
+        Me.btnHS.Size = New System.Drawing.Size(213, 70)
         Me.btnHS.TabIndex = 7
-        Me.btnHS.Text = "HS"
+        Me.btnHS.Text = "HighScores"
         Me.btnHS.UseVisualStyleBackColor = False
         '
         'btnQuit
@@ -98,7 +101,7 @@ Partial Class Home
         Me.lblHome.AutoSize = True
         Me.lblHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHome.ForeColor = System.Drawing.Color.Aquamarine
-        Me.lblHome.Location = New System.Drawing.Point(238, 70)
+        Me.lblHome.Location = New System.Drawing.Point(178, 89)
         Me.lblHome.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHome.Name = "lblHome"
         Me.lblHome.Size = New System.Drawing.Size(329, 42)
@@ -133,9 +136,9 @@ Partial Class Home
         Me.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLogin.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.ForeColor = System.Drawing.Color.Black
-        Me.btnLogin.Location = New System.Drawing.Point(458, 445)
+        Me.btnLogin.Location = New System.Drawing.Point(441, 445)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(196, 75)
+        Me.btnLogin.Size = New System.Drawing.Size(213, 75)
         Me.btnLogin.TabIndex = 5
         Me.btnLogin.Text = "Login"
         Me.btnLogin.UseVisualStyleBackColor = False
@@ -196,7 +199,7 @@ Partial Class Home
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
-        Me.MenuStrip1.Size = New System.Drawing.Size(1608, 96)
+        Me.MenuStrip1.Size = New System.Drawing.Size(804, 43)
         Me.MenuStrip1.TabIndex = 11
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -206,7 +209,7 @@ Partial Class Home
         Me.mnuHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mnuHome.ForeColor = System.Drawing.Color.Aquamarine
         Me.mnuHome.Name = "mnuHome"
-        Me.mnuHome.Size = New System.Drawing.Size(115, 90)
+        Me.mnuHome.Size = New System.Drawing.Size(115, 37)
         Me.mnuHome.Text = "Menu"
         '
         'logOutMnu
@@ -230,7 +233,7 @@ Partial Class Home
         '
         'EditToolStripMenuItem
         '
-        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditPasswordToolStripMenuItem, Me.EditPlayerToolStripMenuItem})
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProfileEditingToolStripMenuItem, Me.EditPasswordToolStripMenuItem, Me.EditPlayerToolStripMenuItem})
         Me.EditToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.EditToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
@@ -238,12 +241,21 @@ Partial Class Home
         Me.EditToolStripMenuItem.Text = "Edit"
         Me.EditToolStripMenuItem.Visible = False
         '
+        'ProfileEditingToolStripMenuItem
+        '
+        Me.ProfileEditingToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.ProfileEditingToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.ProfileEditingToolStripMenuItem.Name = "ProfileEditingToolStripMenuItem"
+        Me.ProfileEditingToolStripMenuItem.Size = New System.Drawing.Size(383, 44)
+        Me.ProfileEditingToolStripMenuItem.Text = "Profile Editing"
+        Me.ProfileEditingToolStripMenuItem.Visible = False
+        '
         'EditPasswordToolStripMenuItem
         '
         Me.EditPasswordToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.EditPasswordToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.EditPasswordToolStripMenuItem.Name = "EditPasswordToolStripMenuItem"
-        Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(362, 44)
+        Me.EditPasswordToolStripMenuItem.Size = New System.Drawing.Size(383, 44)
         Me.EditPasswordToolStripMenuItem.Text = "Edit Password"
         '
         'EditPlayerToolStripMenuItem
@@ -251,8 +263,8 @@ Partial Class Home
         Me.EditPlayerToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.EditPlayerToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.EditPlayerToolStripMenuItem.Name = "EditPlayerToolStripMenuItem"
-        Me.EditPlayerToolStripMenuItem.Size = New System.Drawing.Size(362, 44)
-        Me.EditPlayerToolStripMenuItem.Text = "Player Editing"
+        Me.EditPlayerToolStripMenuItem.Size = New System.Drawing.Size(383, 44)
+        Me.EditPlayerToolStripMenuItem.Text = "Manage Players"
         '
         'AboutToolStripMenuItem
         '
@@ -260,7 +272,7 @@ Partial Class Home
         Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 90)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 37)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'AboutToolStripMenuItem1
@@ -280,7 +292,7 @@ Partial Class Home
         Me.btnNewUser.ForeColor = System.Drawing.Color.Black
         Me.btnNewUser.Location = New System.Drawing.Point(117, 445)
         Me.btnNewUser.Name = "btnNewUser"
-        Me.btnNewUser.Size = New System.Drawing.Size(196, 75)
+        Me.btnNewUser.Size = New System.Drawing.Size(213, 75)
         Me.btnNewUser.TabIndex = 3
         Me.btnNewUser.Text = "New User"
         Me.btnNewUser.UseVisualStyleBackColor = False
@@ -299,6 +311,38 @@ Partial Class Home
         Me.btnGuest.Text = "Guest"
         Me.btnGuest.UseVisualStyleBackColor = False
         '
+        'btnProfileEditing
+        '
+        Me.btnProfileEditing.BackColor = System.Drawing.Color.Aquamarine
+        Me.btnProfileEditing.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnProfileEditing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue
+        Me.btnProfileEditing.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnProfileEditing.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnProfileEditing.ForeColor = System.Drawing.Color.Black
+        Me.btnProfileEditing.Location = New System.Drawing.Point(117, 270)
+        Me.btnProfileEditing.Name = "btnProfileEditing"
+        Me.btnProfileEditing.Size = New System.Drawing.Size(213, 84)
+        Me.btnProfileEditing.TabIndex = 12
+        Me.btnProfileEditing.Text = "Profile Editing"
+        Me.btnProfileEditing.UseVisualStyleBackColor = False
+        Me.btnProfileEditing.Visible = False
+        '
+        'btnManagePlayers
+        '
+        Me.btnManagePlayers.BackColor = System.Drawing.Color.Aquamarine
+        Me.btnManagePlayers.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnManagePlayers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue
+        Me.btnManagePlayers.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnManagePlayers.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnManagePlayers.ForeColor = System.Drawing.Color.Black
+        Me.btnManagePlayers.Location = New System.Drawing.Point(441, 270)
+        Me.btnManagePlayers.Name = "btnManagePlayers"
+        Me.btnManagePlayers.Size = New System.Drawing.Size(213, 84)
+        Me.btnManagePlayers.TabIndex = 13
+        Me.btnManagePlayers.Text = "Manage Players"
+        Me.btnManagePlayers.UseVisualStyleBackColor = False
+        Me.btnManagePlayers.Visible = False
+        '
         'Home
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
@@ -306,6 +350,8 @@ Partial Class Home
         Me.BackColor = System.Drawing.Color.RoyalBlue
         Me.CancelButton = Me.btnQuit
         Me.ClientSize = New System.Drawing.Size(804, 709)
+        Me.Controls.Add(Me.btnManagePlayers)
+        Me.Controls.Add(Me.btnProfileEditing)
         Me.Controls.Add(Me.btnGuest)
         Me.Controls.Add(Me.btnNewUser)
         Me.Controls.Add(Me.MenuStrip1)
@@ -324,6 +370,7 @@ Partial Class Home
         Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximizeBox = False
         Me.Name = "Home"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Login"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
@@ -354,4 +401,7 @@ Partial Class Home
     Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EditPasswordToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EditPlayerToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ProfileEditingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents btnProfileEditing As Button
+    Friend WithEvents btnManagePlayers As Button
 End Class

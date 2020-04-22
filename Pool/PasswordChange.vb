@@ -25,8 +25,7 @@
                 isUpdated = passwordUpdate.ILogin_UpdatePassword(txtNewPassword.Text, txtCurrentPassword.Text)
             End If
             If isUpdated.Equals(True) Then
-                CurrentSession.PreviousForm.Show()
-                Me.Close()
+                ScoreTheme.LoadNextFormClose(Me, Home)
             Else
                 lblUpdate.ForeColor = Color.Red
                 lblUpdate.Text = "Incorrect Current/New Password"
@@ -38,15 +37,22 @@
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        If CurrentSession.PreviousForm IsNot Nothing Then
-            CurrentSession.PreviousForm.Show()
-        Else
-            Home.Refresh()
-            Home.Activate()
-            Home.Show()
-        End If
-        Me.Close()
+        ScoreTheme.LoadNextFormClose(Me, Home)
     End Sub
+
+    Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
+        AboutThis.Activate()
+        AboutThis.Show()
+    End Sub
+
+    Private Sub LogOutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
+        ScoreTheme.LogOutUser()
+    End Sub
+
+    Private Sub QuitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click
+        Application.Exit()
+    End Sub
+
 #End Region
 
 End Class

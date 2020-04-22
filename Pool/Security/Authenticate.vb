@@ -138,7 +138,7 @@ Public Class Authenticate : Implements ILogin
         Dim userOptions As New PlayerStats
         Dim getUserSql As New StringBuilder
         With getUserSql
-            .Append($"exec selUserDataTwoFactor @userEmail='{User}'")
+            .Append($"exec [selUserOptions] @userEmail='{User}'")
         End With
         Dim userDS As New DataSet
         userDS = userOptions.GetAllResults(getUserSql.ToString)

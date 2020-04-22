@@ -84,9 +84,7 @@ Public Class PvP
         txtWinsAgainst2.Text = player2.WinsAgainst1
 
 #Region "Case for which cBox is selected"
-        If CurrentScreen <> AppState.Register Then
-
-            Select Case selectedPlayer
+        Select Case selectedPlayer
                 Case 1
                     player1 = New PlayerStats
                     player1.PlayerName1 = cbPlayer1.SelectedItem
@@ -102,8 +100,8 @@ Public Class PvP
                     txtWins.Text = player1.Wins1
 
                     If cbPlayer2.SelectedItem IsNot Nothing Then
-                        CurrentScreen = AppState.Switch
-                        ScoreTheme.SetControl(New Button() {btnSave}, True)
+                    CurrentScreen = AppState.SelectPlayer
+                    ScoreTheme.SetControl(New Button() {btnSave}, True)
                         If player2.PID > 0 Then
                             SetPVPSets()
                         End If
@@ -130,8 +128,8 @@ Public Class PvP
                     ScoreTheme.SetErrorLabel(lblError)
                     txtWins2.Text = player2.Wins1
                     If ScoreTheme.ValidateCBox(cbPlayer1).Equals(True) Then
-                        CurrentScreen = AppState.Switch
-                        ScoreTheme.SetControl(New Button() {btnSave}, True)
+                    CurrentScreen = AppState.SelectPlayer
+                    ScoreTheme.SetControl(New Button() {btnSave}, True)
                         If player1.PID > 0 Then
                             SetPVPSets()
                         End If
@@ -151,10 +149,9 @@ Public Class PvP
                 lblError.Text = "Rivarly"
                 ScoreTheme.SetErrorLabel(lblError)
             End If
-        End If
 #End Region
 
-        If Permissions.IsUser.Equals(False) Then Exit Sub
+            If Permissions.IsUser.Equals(False) Then Exit Sub
         'Choose a valid 1 and 2
         If selectedCBox.SelectedItem IsNot Nothing AndAlso opposingCbox.SelectedItem IsNot Nothing Then
             If selectedCBox.SelectedItem.Equals("Choose") Or opposingCbox.SelectedItem.Equals("Choose") Or cbGames.SelectedItem.Equals("Choose") Or selectedCBox.SelectedItem.Equals(opposingCbox.SelectedItem) Then
@@ -299,7 +296,6 @@ Public Class PvP
                     btnPlayer1win.Enabled = True
                     btnPlayer2Wins.Enabled = True
                     btnBack.Text = "Back"
-                    CurrentScreen = AppState.Switch
                 Else 'we'll open current wins
                     CurrentScreen = AppState.SelectPlayer
                     Dim currentWins As String() = Nothing
@@ -480,7 +476,7 @@ Public Class PvP
         GetHighScores()
         ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, btnSave}, True)
         ScoreTheme.SetControl(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
-        CurrentScreen = AppState.Switch
+        CurrentScreen = AppState.SelectPlayer
         btnBack.Text = "Home"
     End Sub
 
@@ -525,27 +521,24 @@ Public Class PvP
         ScoreTheme.SetControl(New Control() {txtWinsagainst, txtWinsAgainst2, txtTotalAgainst, btnSave, lblWinsAgainst1, lblWinsAgainst2, lblTotalAgainst}, True)
         ScoreTheme.SetControl(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
         btnBack.Text = "Home"
-        CurrentScreen = AppState.Switch
+        CurrentScreen = AppState.SelectPlayer
     End Sub
 
     Private Sub btnHighScore_Click(sender As Object, e As EventArgs) Handles btnHighScore.Click
-        Dim myForm As New HighScores
-        Me.Hide()
-        myForm.Show()
+        ScoreTheme.LoadNextFormClose(Me, HighScores)
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        If CurrentScreen = AppState.Switch Then
+        If CurrentScreen = AppState.Winner Then
             ScoreTheme.SetControl(New Control() {btnPlayer1win, btnPlayer2Wins}, False)
             With btnSave
                 .Enabled = True
                 .Visible = True
             End With
             btnBack.Text = "Home"
+            CurrentScreen = AppState.SelectPlayer
         Else
-            Home.Show()
-            HighScores.Close()
-            Me.Close()
+            ScoreTheme.LoadNextFormClose(Me, Home)
         End If
 
     End Sub
@@ -578,32 +571,35 @@ Public Class PvP
             lblScoreBoard.Visible = False
             btnSave.Visible = False
         Else
-            btnSave.Visible = False
+            With btnSave
+                .Visible = True
+                .Enabled = True
+            End With
             lstAllWins.Items.Clear()
             lstAllWins.Items.Add("No games yet played")
         End If
     End Sub
 
     Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
-        CurrentSession.PreviousForm = Me
         AboutThis.Activate()
         AboutThis.Show()
     End Sub
 
     Private Sub PlayerEditToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PlayerEditToolStripMenuItem1.Click, btnRegisterTest.Click
         If Permissions.IsUser.Equals(True) Then
-            CurrentSession.PreviousForm = Me
-            PlayerEditing.Activate()
-            PlayerEditing.Show()
-            Me.Close()
+            ScoreTheme.LoadNextFormClose(Me, PlayerManagement)
         End If
     End Sub
 
     Private Sub EditPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditPasswordToolStripMenuItem.Click
         If CurrentSession.IsLoggedIn.Equals(True) Then
-            CurrentSession.setPreviousForm(Me)
-            PasswordChange.Show()
-            Me.Hide()
+            ScoreTheme.LoadNextFormClose(Me, PasswordChange)
+        End If
+    End Sub
+
+    Private Sub ProfileEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProfileEditingToolStripMenuItem.Click
+        If Permissions.IsUser.Equals(True) Then
+            ScoreTheme.LoadNextFormClose(Me, ProfileEditing)
         End If
     End Sub
 
