@@ -571,7 +571,10 @@ Public Class PvP
             lblScoreBoard.Visible = False
             btnSave.Visible = False
         Else
-            btnSave.Visible = False
+            With btnSave
+                .Visible = True
+                .Enabled = True
+            End With
             lstAllWins.Items.Clear()
             lstAllWins.Items.Add("No games yet played")
         End If
