@@ -156,7 +156,7 @@ Public Class Home
 
     Private Sub ProfileEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProfileEditingToolStripMenuItem.Click, btnProfileEditing.Click
         If CurrentSession.IsLoggedIn.Equals(True) Then
-            ScoreTheme.LoadNextFormHide(Me, ProfileEditing)
+            ScoreTheme.LoadNextFormClose(Me, ProfileEditing)
         End If
     End Sub
 

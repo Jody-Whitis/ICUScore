@@ -48,6 +48,7 @@ Partial Class HighScores
         Me.lblScoreBoard = New System.Windows.Forms.Label()
         Me.lblSelectedMode = New System.Windows.Forms.Label()
         Me.btnPlayerEditing = New System.Windows.Forms.Button()
+        Me.ProfileEditingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHighScore.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -180,7 +181,7 @@ Partial Class HighScores
         Me.mnuHighScore.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem, Me.EditToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.mnuHighScore.Location = New System.Drawing.Point(0, 0)
         Me.mnuHighScore.Name = "mnuHighScore"
-        Me.mnuHighScore.Size = New System.Drawing.Size(774, 41)
+        Me.mnuHighScore.Size = New System.Drawing.Size(774, 42)
         Me.mnuHighScore.TabIndex = 10
         Me.mnuHighScore.Text = "MenuStrip1"
         '
@@ -191,7 +192,7 @@ Partial Class HighScores
         Me.MenuToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
-        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(104, 37)
+        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(104, 38)
         Me.MenuToolStripMenuItem.Text = "Menu"
         '
         'LogOutToolStripMenuItem
@@ -199,7 +200,7 @@ Partial Class HighScores
         Me.LogOutToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
-        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(245, 44)
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
         Me.LogOutToolStripMenuItem.Text = "Log Out"
         '
         'QuitToolStripMenuItem
@@ -207,15 +208,15 @@ Partial Class HighScores
         Me.QuitToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
-        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(245, 44)
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
         Me.QuitToolStripMenuItem.Text = "Quit"
         '
         'EditToolStripMenuItem
         '
-        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditPasswordToolStripMenuItem1, Me.PlayerEditingToolStripMenuItem})
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProfileEditingToolStripMenuItem, Me.EditPasswordToolStripMenuItem1, Me.PlayerEditingToolStripMenuItem})
         Me.EditToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(95, 37)
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(95, 38)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
         'EditPasswordToolStripMenuItem1
@@ -239,7 +240,7 @@ Partial Class HighScores
         Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem1})
         Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 37)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 38)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'AboutToolStripMenuItem1
@@ -324,6 +325,14 @@ Partial Class HighScores
         Me.btnPlayerEditing.UseVisualStyleBackColor = False
         Me.btnPlayerEditing.Visible = False
         '
+        'ProfileEditingToolStripMenuItem
+        '
+        Me.ProfileEditingToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
+        Me.ProfileEditingToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.ProfileEditingToolStripMenuItem.Name = "ProfileEditingToolStripMenuItem"
+        Me.ProfileEditingToolStripMenuItem.Size = New System.Drawing.Size(383, 44)
+        Me.ProfileEditingToolStripMenuItem.Text = "Profile Editing"
+        '
         'HighScores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
@@ -386,4 +395,5 @@ Partial Class HighScores
     Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents EditPasswordToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents PlayerEditingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ProfileEditingToolStripMenuItem As ToolStripMenuItem
 End Class

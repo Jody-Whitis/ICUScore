@@ -108,9 +108,9 @@
             .Append($"@id={CurrentSession.ID},")
             If (initialSettings.subscribed <> cbSubscribed.Checked) Then .Append($"@subscribed={Convert.ToInt16(cbSubscribed.Checked)},")
             If (initialSettings.twoFactor <> cbTwoFactorEnabled.Checked) Then .Append($"@twoFactor={Convert.ToInt16(cbTwoFactorEnabled.Checked)},")
-            If (initialSettings.registered <> cbDeactivate.Checked) Then .Append($"@active={Convert.ToInt16(cbDeactivate.Checked)}")
-            If (initialSettings.displayName <> tbDisplayName.Text) Then .Append($"@displayName={tbDisplayName.Text}")
-            If (initialSettings.emailAddress <> tbEmailAddress.Text) Then .Append($"@emailAddress={tbEmailAddress.Text}")
+            If (initialSettings.registered <> cbDeactivate.Checked) Then .Append($"@active={Convert.ToInt16(cbDeactivate.Checked)},")
+            If (initialSettings.displayName <> tbDisplayName.Text) Then .Append($"@displayName='{tbDisplayName.Text}',")
+            If (initialSettings.emailAddress <> tbEmailAddress.Text) Then .Append($"@emailAddress='{tbEmailAddress.Text}',")
         End With
 
         Return updUserSettings.ToString.TrimEnd(",")

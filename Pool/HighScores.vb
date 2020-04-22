@@ -367,6 +367,12 @@ Public Class HighScores
         End If
     End Sub
 
+    Private Sub ProfileEditingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProfileEditingToolStripMenuItem.Click
+        If Permissions.IsUser.Equals(True) Then
+            ScoreTheme.LoadNextFormClose(Me, ProfileEditing)
+        End If
+    End Sub
+
 #End Region
 
 End Class
