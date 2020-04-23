@@ -1,4 +1,5 @@
-﻿Public Class ProfileEditing
+﻿Imports Pool.Models.Validation
+Public Class ProfileEditing
 
 #Region "Props and InitialSettings"
     Private Structure InitialSettings
@@ -10,6 +11,7 @@
     End Structure
 
     Dim intialUserSettings As New InitialSettings
+    Dim emailValidation As New EmailValidation
 #End Region
 
     Private Sub ProfileEditing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -40,6 +42,12 @@
         If isChanged.Equals(False) Then
             Dim nothingSelected As DialogResult = MessageBox.Show($"Selected a setting to change!",
                 "No settings selected", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+        'Validate new email
+        If emailValidation.isValid(tbEmailAddress.Text) Then
+            Dim emailInvalid As DialogResult = MessageBox.Show($"New Email is not valid!",
+               "Email Invalid Format", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 

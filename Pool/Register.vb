@@ -1,11 +1,11 @@
 ﻿Imports System.Text
-
+Imports Pool.Models.Validation
 Public Class Register
     Dim allCurrentPlayers As New DataSet
     Dim getAllCurrent As New PlayerStats
     Dim currentPlayersHT As New Hashtable
     Dim user As New NewUser
-
+    Dim emailValidation As New EmailValidation
     Public Structure NewUser
         Public userEmail As String
         Public passWord As String
@@ -119,7 +119,13 @@ Public Class Register
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
         Dim registerSQL As New StringBuilder
         If ValidateRegister(New TextBox() {txtUseremail, txtPassword, TxtPasswordConfirm, TxtPasswordConfirm}).Equals(True) Then
-            user.userEmail = txtUseremail.Text
+            If emailValidation.isValid(txtUseremail.Text) Then
+                user.userEmail = txtUseremail.Text
+            Else
+                Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields",
+                      "Missing Requirement", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                Exit Sub
+            End If
             user.passWord = TxtPasswordConfirm.Text
             user.displayName = GetDisplayName()
             If txtPassword.Text.Equals(TxtPasswordConfirm.Text) Then
