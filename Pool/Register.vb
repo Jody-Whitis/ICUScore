@@ -122,8 +122,8 @@ Public Class Register
             If inputValidation.isValid(txtUseremail.Text) Then
                 user.userEmail = txtUseremail.Text
             Else
-                Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields",
-                      "Missing Requirement", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                Dim emailValidation As DialogResult = MessageBox.Show($"Not a valid email format!",
+                      "Invalid email format", MessageBoxButtons.OK, MessageBoxIcon.Hand)
                 Exit Sub
             End If
             user.passWord = TxtPasswordConfirm.Text

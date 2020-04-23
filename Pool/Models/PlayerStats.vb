@@ -117,7 +117,7 @@ Public Class PlayerStats
 #End Region
         sqlString = String.Empty
         Wins1 += 1
-        ds = scoresDB.DBSQL($"exec dbo.[insWins_v1.1] @newPlayer = '{PlayerName}',@wins = {Wins1}")
+        ds = scoresDB.DBSQL($"exec dbo.[insWins_v1.1] @newPlayer = '{inputValidation.SQLValidation(PlayerName)}',@wins = {Wins1}")
         ds = scoresDB.DBSQL($"exec [selPlayers_v1.1] @playerId={PID},@wins={Wins1}") 'test sp
         Try
             Return ds.Tables(0).Rows(0).Item("Wins").ToString
