@@ -1,7 +1,8 @@
 ﻿Imports Microsoft.VisualBasic.ApplicationServices
 Imports Pool.ScoreTheme
+Imports Pool.Models.Validation
 Public Class Home
-
+    Dim inputValidation As New ValidationBase
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToScreen()
         CurrentScreen = AppState.Start
@@ -38,7 +39,7 @@ Public Class Home
         Dim userAuthenticate As New Authenticate
 
         With userAuthenticate
-            .User = txtUser.Text.ToString
+            .User = inputValidation.SQLValidation(txtUser.Text.ToString)
             .Password = txtPassword.Text.ToString
         End With
 

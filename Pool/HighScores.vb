@@ -1,6 +1,8 @@
 ﻿Imports System.Text
 Imports System.Linq
 Imports Pool.Logging
+Imports Pool.Models.Validation
+
 Public Class HighScores
 #Region "Global to form"
     Dim player As New PlayerStats
@@ -9,6 +11,7 @@ Public Class HighScores
     Dim allGames As New Hashtable
     Dim highScores As New DataSet
     Dim userPermissions As New Permissions
+    Dim inputValidation As New ValidationBase
 #End Region
 
     ''' <summary>
@@ -307,7 +310,7 @@ Public Class HighScores
         ElseIf CurrentScreen = AppState.Add Then
             If Not String.IsNullOrEmpty(txtNewGM.Text) Then
                 'try to insert if not blank
-                Dim newGM As String = $"[dbo].[insNewGame] @gameMode = '{txtNewGM.Text}'"
+                Dim newGM As String = $"[dbo].[insNewGame] @gameMode = '{inputValidation.SQLValidation(txtNewGM.Text)}'"
                 games.InsertGame(newGM)
                 allGames = games.GetAllPlayers()
                 ScoreTheme.FillBoxfromHT(cbGames, allGames)

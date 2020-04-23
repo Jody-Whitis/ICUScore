@@ -1,8 +1,9 @@
-﻿Public Class PlayerManagement
+﻿Imports Pool.Models.Validation
+Public Class PlayerManagement
     Dim selectedPlayer As New PlayerStats
     Dim playerTable As New Hashtable
     Dim nonRegisterdPlayers As New Hashtable
-
+    Dim inputValidation As New ValidationBase
     Private Sub PlayerEditing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ScoreTheme.SetControl(New Control() {btnBack, btnEdit, btnDelete}, True)
         tbEdit.Visible = False
@@ -68,7 +69,7 @@
                 Exit Sub
             End Try
 
-            Dim editSQL As String = $"exec [insNewPlayer_v1.2] @pID = {selectedPlayer.PID}, @newPlayer='{newName}',@result=0"
+            Dim editSQL As String = $"exec [insNewPlayer_v1.2] @pID = {selectedPlayer.PID}, @newPlayer='{inputValidation.SQLValidation(newName)}',@result=0"
             If Not String.IsNullOrEmpty(selectedPlayer.PID) AndAlso Not String.IsNullOrEmpty(newName) Then
                 Dim editAlert As DialogResult = MessageBox.Show($"Are you sure you want to change {selectedPlayer.PlayerName1} to {newName}?",
         "Change Name", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
@@ -156,7 +157,7 @@
         'If players have names, then update cbox and add them to db
         If CurrentScreen = AppState.Add Then
             If Not String.IsNullOrEmpty(tbEdit.Text) Then
-                selectedPlayer.PlayerName1 = tbEdit.Text.ToString
+                selectedPlayer.PlayerName1 = inputValidation.SQLValidation(tbEdit.Text.ToString)
                 If Not String.IsNullOrEmpty(selectedPlayer.PlayerName1) Then
                     Dim addAlert As DialogResult = MessageBox.Show($"Are you sure you want to add {selectedPlayer.PlayerName1}?",
         "Add Player", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)

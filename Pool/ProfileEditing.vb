@@ -11,7 +11,7 @@ Public Class ProfileEditing
     End Structure
 
     Dim intialUserSettings As New InitialSettings
-    Dim emailValidation As New EmailValidation
+    Dim inputValidation As New EmailValidation
 #End Region
 
     Private Sub ProfileEditing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -45,7 +45,7 @@ Public Class ProfileEditing
             Exit Sub
         End If
         'Validate new email
-        If emailValidation.isValid(tbEmailAddress.Text) Then
+        If Not inputValidation.isValid(tbEmailAddress.Text) Then
             Dim emailInvalid As DialogResult = MessageBox.Show($"New Email is not valid!",
                "Email Invalid Format", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -117,8 +117,8 @@ Public Class ProfileEditing
             If (initialSettings.subscribed <> cbSubscribed.Checked) Then .Append($"@subscribed={Convert.ToInt16(cbSubscribed.Checked)},")
             If (initialSettings.twoFactor <> cbTwoFactorEnabled.Checked) Then .Append($"@twoFactor={Convert.ToInt16(cbTwoFactorEnabled.Checked)},")
             If (initialSettings.registered <> cbDeactivate.Checked) Then .Append($"@active={Convert.ToInt16(cbDeactivate.Checked)},")
-            If (initialSettings.displayName <> tbDisplayName.Text) Then .Append($"@displayName='{tbDisplayName.Text}',")
-            If (initialSettings.emailAddress <> tbEmailAddress.Text) Then .Append($"@emailAddress='{tbEmailAddress.Text}',")
+            If (initialSettings.displayName <> tbDisplayName.Text) Then .Append($"@displayName='{inputValidation.SQLValidation(tbDisplayName.Text)}',")
+            If (initialSettings.emailAddress <> tbEmailAddress.Text) Then .Append($"@emailAddress='{inputValidation.SQLValidation(tbEmailAddress.Text)}',")
         End With
 
         Return updUserSettings.ToString.TrimEnd(",")
