@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports PoolDBConnect
 Imports PoolDBConnect.ScoreDBConnect
-
+Imports Pool.Models.Validation
 Public Class PlayerStats
     Implements PoolDBConnect.IDBConnect
 #Region "vars"
@@ -18,7 +18,7 @@ Public Class PlayerStats
 #End Region
     Private DBConnection As String = ("Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" & Path.GetDirectoryName(Application.StartupPath) & "\LocalResults.mdf;Integrated Security=True").Replace("\bin", "")
     Dim scoresDB As New ScoreDBConnect(DBConnection)
-
+    Dim inputValidation As New ValidationBase
 #Region "Properties"
     Public Property PlayerName1 As String
         Get
@@ -117,7 +117,7 @@ Public Class PlayerStats
 #End Region
         sqlString = String.Empty
         Wins1 += 1
-        ds = scoresDB.DBSQL($"exec dbo.[insWins_v1.1] @newPlayer = '{PlayerName}',@wins = {Wins1}")
+        ds = scoresDB.DBSQL($"exec dbo.[insWins_v1.1] @newPlayer = '{inputValidation.SQLValidation(PlayerName)}',@wins = {Wins1}")
         ds = scoresDB.DBSQL($"exec [selPlayers_v1.1] @playerId={PID},@wins={Wins1}") 'test sp
         Try
             Return ds.Tables(0).Rows(0).Item("Wins").ToString
@@ -151,7 +151,7 @@ Public Class PlayerStats
 #End Region
         Dim ds As New DataSet
         Dim sqlString = String.Empty
-        sqlString = $"exec insNewPlayer @newPlayer='{PlayerName1.Trim}'"
+        sqlString = $"exec insNewPlayer @newPlayer='{inputValidation.SQLValidation(PlayerName1)}'"
         Try
             ds = scoresDB.DBSQL(sqlString)
             Return String.Empty
@@ -170,7 +170,7 @@ Public Class PlayerStats
     End Function
 
     Public Function InsertPvPStats(ByVal opponentID As Integer, ByVal pvpID As Integer, ByVal gID As Integer) As String
-        Dim sqlstring As String = $"exec [inPvPStats] @pvpID = {pvpID},@pID={PID},@p2ID={opponentID},@win={WinsAgainst1},@winner={PlayerName1}, @gID={gID},@timeStamp='{Now.ToString()}'"
+        Dim sqlstring As String = $"exec [inPvPStats] @pvpID = {pvpID},@pID={PID},@p2ID={opponentID},@win={WinsAgainst1},@winner='{inputValidation.SQLValidation(PlayerName1)}', @gID={gID},@timeStamp='{Now.ToString()}'"
         Dim ds As New DataSet
         ds = scoresDB.DBSQL(sqlstring)
         If ds.Equals(Nothing) Then
@@ -213,8 +213,8 @@ Public Class PlayerStats
     Public Function InsertResult() As String Implements IDBConnect.InsertScore
         Dim ds As New DataSet
         Dim retval As String = String.Empty
-        ds = scoresDB.DBSQL("select wins from Players where playerName in ('" & PlayerName1 & "')")
-        ds = scoresDB.DBSQL("select wins from Players where playerName in ('" & PlayerName1 & "')")
+        ds = scoresDB.DBSQL("select wins from Players where playerName in ('" & inputValidation.SQLValidation(PlayerName1) & "')")
+        ds = scoresDB.DBSQL("select wins from Players where playerName in ('" & inputValidation.SQLValidation(PlayerName1) & "')")
 
         Try
             retval = ds.Tables(0).Rows(0).Item(0).ToString

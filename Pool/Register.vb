@@ -1,11 +1,11 @@
 ﻿Imports System.Text
-
+Imports Pool.Models.Validation
 Public Class Register
     Dim allCurrentPlayers As New DataSet
     Dim getAllCurrent As New PlayerStats
     Dim currentPlayersHT As New Hashtable
     Dim user As New NewUser
-
+    Dim inputValidation As New EmailValidation
     Public Structure NewUser
         Public userEmail As String
         Public passWord As String
@@ -119,7 +119,13 @@ Public Class Register
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
         Dim registerSQL As New StringBuilder
         If ValidateRegister(New TextBox() {txtUseremail, txtPassword, TxtPasswordConfirm, TxtPasswordConfirm}).Equals(True) Then
-            user.userEmail = txtUseremail.Text
+            If inputValidation.isValid(txtUseremail.Text) Then
+                user.userEmail = txtUseremail.Text
+            Else
+                Dim emailValidation As DialogResult = MessageBox.Show($"Not a valid email format!",
+                      "Invalid email format", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                Exit Sub
+            End If
             user.passWord = TxtPasswordConfirm.Text
             user.displayName = GetDisplayName()
             If txtPassword.Text.Equals(TxtPasswordConfirm.Text) Then
@@ -129,7 +135,7 @@ Public Class Register
 
                 With registerSQL
                     .Append("exec [insNewUser] ")
-                    .Append($"@userEmail='{user.userEmail}', @password='{user.passwordEncripted}',@displayName='{user.displayName}',")
+                    .Append($"@userEmail='{inputValidation.SQLValidation(user.userEmail)}', @password='{user.passwordEncripted}',@displayName='{inputValidation.SQLValidation(user.displayName)}',")
                     .Append($"@timeStamp='{Now.ToString("MM/dd/yyyy")}',")
                     If (user.pID > -1) Then
                         .Append($"@pId = '{user.pID}'")

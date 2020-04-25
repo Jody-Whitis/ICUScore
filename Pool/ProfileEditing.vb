@@ -1,4 +1,5 @@
-﻿Public Class ProfileEditing
+﻿Imports Pool.Models.Validation
+Public Class ProfileEditing
 
 #Region "Props and InitialSettings"
     Private Structure InitialSettings
@@ -10,6 +11,7 @@
     End Structure
 
     Dim intialUserSettings As New InitialSettings
+    Dim inputValidation As New EmailValidation
 #End Region
 
     Private Sub ProfileEditing_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -40,6 +42,12 @@
         If isChanged.Equals(False) Then
             Dim nothingSelected As DialogResult = MessageBox.Show($"Selected a setting to change!",
                 "No settings selected", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+        'Validate new email
+        If Not inputValidation.isValid(tbEmailAddress.Text) Then
+            Dim emailInvalid As DialogResult = MessageBox.Show($"New Email is not valid!",
+               "Email Invalid Format", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -109,8 +117,8 @@
             If (initialSettings.subscribed <> cbSubscribed.Checked) Then .Append($"@subscribed={Convert.ToInt16(cbSubscribed.Checked)},")
             If (initialSettings.twoFactor <> cbTwoFactorEnabled.Checked) Then .Append($"@twoFactor={Convert.ToInt16(cbTwoFactorEnabled.Checked)},")
             If (initialSettings.registered <> cbDeactivate.Checked) Then .Append($"@active={Convert.ToInt16(cbDeactivate.Checked)},")
-            If (initialSettings.displayName <> tbDisplayName.Text) Then .Append($"@displayName='{tbDisplayName.Text}',")
-            If (initialSettings.emailAddress <> tbEmailAddress.Text) Then .Append($"@emailAddress='{tbEmailAddress.Text}',")
+            If (initialSettings.displayName <> tbDisplayName.Text) Then .Append($"@displayName='{inputValidation.SQLValidation(tbDisplayName.Text)}',")
+            If (initialSettings.emailAddress <> tbEmailAddress.Text) Then .Append($"@emailAddress='{inputValidation.SQLValidation(tbEmailAddress.Text)}',")
         End With
 
         Return updUserSettings.ToString.TrimEnd(",")

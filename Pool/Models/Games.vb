@@ -1,6 +1,5 @@
 ﻿Imports System.IO
 Imports PoolDBConnect
-
 Public Class Games
     Implements PoolDBConnect.IDBConnect
     Private _gameMode As String

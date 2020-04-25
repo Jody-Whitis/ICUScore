@@ -106,6 +106,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Interface\IValidation.vb" />
     <Compile Include="Models\Email.vb" />
     <Compile Include="Home.Designer.vb">
       <DependentUpon>Home.vb</DependentUpon>
@@ -114,7 +115,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interface\ILogin.vb" />
+    <Compile Include="Models\EmailValidation.vb" />
     <Compile Include="Models\Logging.vb" />
+    <Compile Include="Models\ValidationBase.vb" />
     <Compile Include="PasswordChange.Designer.vb">
       <DependentUpon>PasswordChange.vb</DependentUpon>
     </Compile>

@@ -186,7 +186,7 @@ Public Class Email
             smtp.Send(eMail)
             reminderSend = True
         Catch ex As Exception
-            Dim logAction As New Logging
+            Dim logAction As New Logging(Now, "Password Reminder", ex.ToString)
             logAction.LogAction()
             Return reminderSend
         End Try
@@ -234,7 +234,7 @@ Public Class Email
             smtp.Send(eMail)
             codeSent = True
         Catch ex As Exception
-            Dim logAction As New Logging
+            Dim logAction As New Logging(Now, "Two-Factor Pin", ex.ToString)
             logAction.LogAction()
             Return codeSent
         End Try
