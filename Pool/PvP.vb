@@ -573,6 +573,9 @@ Public Class PvP
     End Sub
 
     Private Sub cbGames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGames.SelectedIndexChanged
+        txtWinsagainst.Text = 0
+        txtWinsAgainst2.Text = 0
+        txtTotalAgainst.Text = 0
         For Each gameEntry As DictionaryEntry In gamesHT
             If gameEntry.Value.Equals(cbGames.SelectedItem) Then
                 game = gameEntry.Key
@@ -580,12 +583,16 @@ Public Class PvP
             End If
         Next
         allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
-        If allWins IsNot Nothing AndAlso allWins.Tables(0).Rows.Count > 0 AndAlso Not cbGames.SelectedItem.Equals("Choose") Then
+        If allWins IsNot Nothing AndAlso allWins.Tables(0).Rows.Count > 0 AndAlso ScoreTheme.ValidateCBox(cbGames) Then
             GetHighScores()
             lstAllWins.Visible = True
             lblScoreBoard.Visible = True
             btnSave.Enabled = True
-            If Permissions.IsUser.Equals(True) Then btnSave.Visible = True
+            If Permissions.IsUser.Equals(True) Then
+                btnSave.Visible = True
+                SetPVPSets()
+                SetWinsAgainst()
+            End If
         ElseIf cbGames.SelectedItem.Equals("Choose") Then
             lstAllWins.Items.Clear()
             lstAllWins.Visible = False
