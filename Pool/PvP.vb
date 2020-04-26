@@ -201,10 +201,17 @@ Public Class PvP
     ''' Sets tBoxes and controls after we find pvp stats
     ''' </summary>
     Private Sub SetWinsAgainst()
-        totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
-        txtWinsagainst.Text = player1.WinsAgainst1.ToString
-        txtWinsAgainst2.Text = player2.WinsAgainst1.ToString
-        txtTotalAgainst.Text = totalGamesPvP.ToString
+        If pvpID > -1 Or pvpID2 > -1 Then
+            totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
+            txtWinsagainst.Text = player1.WinsAgainst1.ToString
+            txtWinsAgainst2.Text = player2.WinsAgainst1.ToString
+            txtTotalAgainst.Text = totalGamesPvP.ToString
+        Else
+            totalGamesPvP = 0
+            txtWinsagainst.Text = 0
+            txtWinsAgainst2.Text = 0
+            txtTotalAgainst.Text = 0
+        End If
     End Sub
 
     ''' <summary>
