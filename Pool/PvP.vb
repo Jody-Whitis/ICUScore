@@ -81,7 +81,7 @@ Public Class PvP
             'Player2
             SetScoreControlsScreen(cbPlayer2, New Control() {txtWins2, lblTotalWins2})
             'Both Players selected    
-            If ScoreTheme.ValidateCBox(cbPlayer1) AndAlso ScoreTheme.ValidateCBox(cbPlayer2) Then
+            If ScoreTheme.ValidateCBox(cbPlayer1) AndAlso ScoreTheme.ValidateCBox(cbPlayer2) AndAlso Not cbPlayer1.SelectedItem.Equals(cbPlayer2.SelectedItem) Then
                 ScoreTheme.SetControl(New Control() {lblWinsAgainst1, txtWinsagainst, lblWinsAgainst2, txtWinsAgainst2}, True)
                 'Both Players and a game is selected
                 SetScoreControlsScreen(cbGames, New Control() {btnSave, lblWinsAgainst1, txtWinsagainst, lblWinsAgainst2, txtWinsAgainst2, lblTotalAgainst, txtTotalAgainst})
@@ -185,14 +185,25 @@ Public Class PvP
 
         If CurrentSession.IsLoggedIn.Equals(False) Then Exit Sub
         'Choose a valid 1 and 2
-        If selectedCBox.SelectedItem IsNot Nothing AndAlso opposingCbox.SelectedItem IsNot Nothing Then
+        If ScoreTheme.ValidateCBox(selectedCBox) AndAlso ScoreTheme.ValidateCBox(opposingCbox) AndAlso Not selectedCBox.SelectedItem.Equals(opposingCbox.SelectedItem) Then
             SetControlsbyCbPlayers()
             SetScoreControlsScreen(cbGames, New Control() {lblScoreBoard, lstAllWins})
+            lblError.Visible = False
+        ElseIf selectedCBox.SelectedItem.Equals(opposingCbox.SelectedItem) Then
+            With btnSave
+                .Enabled = False
+                .Visible = False
+            End With
+            With lblError
+                .Text = "Don't Play Yourself!"
+                .Visible = True
+            End With
         Else
             With btnSave
                 .Enabled = False
                 .Visible = False
             End With
+            lblError.Visible = False
         End If
 
     End Sub

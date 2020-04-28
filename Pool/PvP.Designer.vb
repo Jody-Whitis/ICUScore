@@ -74,7 +74,7 @@ Partial Class PvP
         Me.txtWins.BackColor = System.Drawing.Color.Aquamarine
         Me.txtWins.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtWins.Location = New System.Drawing.Point(13, 215)
-        Me.txtWins.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtWins.Margin = New System.Windows.Forms.Padding(4)
         Me.txtWins.Multiline = True
         Me.txtWins.Name = "txtWins"
         Me.txtWins.ReadOnly = True
@@ -87,7 +87,7 @@ Partial Class PvP
         Me.txtWins2.BackColor = System.Drawing.Color.Aquamarine
         Me.txtWins2.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtWins2.Location = New System.Drawing.Point(519, 215)
-        Me.txtWins2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtWins2.Margin = New System.Windows.Forms.Padding(4)
         Me.txtWins2.Multiline = True
         Me.txtWins2.Name = "txtWins2"
         Me.txtWins2.ReadOnly = True
@@ -100,7 +100,7 @@ Partial Class PvP
         Me.lblError.AutoSize = True
         Me.lblError.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblError.ForeColor = System.Drawing.Color.Aquamarine
-        Me.lblError.Location = New System.Drawing.Point(257, 39)
+        Me.lblError.Location = New System.Drawing.Point(173, 38)
         Me.lblError.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblError.Name = "lblError"
         Me.lblError.Size = New System.Drawing.Size(82, 36)
@@ -115,7 +115,7 @@ Partial Class PvP
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSave.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.Location = New System.Drawing.Point(243, 519)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(157, 44)
         Me.btnSave.TabIndex = 10
@@ -132,7 +132,7 @@ Partial Class PvP
         Me.cbPlayer1.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbPlayer1.FormattingEnabled = True
         Me.cbPlayer1.Location = New System.Drawing.Point(12, 105)
-        Me.cbPlayer1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbPlayer1.Margin = New System.Windows.Forms.Padding(4)
         Me.cbPlayer1.Name = "cbPlayer1"
         Me.cbPlayer1.Size = New System.Drawing.Size(216, 27)
         Me.cbPlayer1.Sorted = True
@@ -148,7 +148,7 @@ Partial Class PvP
         Me.cbPlayer2.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbPlayer2.FormattingEnabled = True
         Me.cbPlayer2.Location = New System.Drawing.Point(430, 105)
-        Me.cbPlayer2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbPlayer2.Margin = New System.Windows.Forms.Padding(4)
         Me.cbPlayer2.Name = "cbPlayer2"
         Me.cbPlayer2.Size = New System.Drawing.Size(214, 27)
         Me.cbPlayer2.TabIndex = 2
@@ -161,7 +161,7 @@ Partial Class PvP
         Me.btnPlayer1win.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnPlayer1win.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPlayer1win.Location = New System.Drawing.Point(13, 520)
-        Me.btnPlayer1win.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnPlayer1win.Margin = New System.Windows.Forms.Padding(4)
         Me.btnPlayer1win.Name = "btnPlayer1win"
         Me.btnPlayer1win.Size = New System.Drawing.Size(216, 44)
         Me.btnPlayer1win.TabIndex = 14
@@ -176,7 +176,7 @@ Partial Class PvP
         Me.btnPlayer2Wins.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnPlayer2Wins.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPlayer2Wins.Location = New System.Drawing.Point(423, 520)
-        Me.btnPlayer2Wins.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnPlayer2Wins.Margin = New System.Windows.Forms.Padding(4)
         Me.btnPlayer2Wins.Name = "btnPlayer2Wins"
         Me.btnPlayer2Wins.Size = New System.Drawing.Size(218, 44)
         Me.btnPlayer2Wins.TabIndex = 15
@@ -191,7 +191,7 @@ Partial Class PvP
         Me.btnHighScore.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnHighScore.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnHighScore.Location = New System.Drawing.Point(467, 595)
-        Me.btnHighScore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnHighScore.Margin = New System.Windows.Forms.Padding(4)
         Me.btnHighScore.Name = "btnHighScore"
         Me.btnHighScore.Size = New System.Drawing.Size(174, 44)
         Me.btnHighScore.TabIndex = 13
@@ -206,7 +206,7 @@ Partial Class PvP
         Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnBack.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBack.Location = New System.Drawing.Point(13, 595)
-        Me.btnBack.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnBack.Margin = New System.Windows.Forms.Padding(4)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(157, 44)
         Me.btnBack.TabIndex = 11
@@ -221,7 +221,7 @@ Partial Class PvP
         Me.lstAllWins.FormattingEnabled = True
         Me.lstAllWins.ItemHeight = 19
         Me.lstAllWins.Location = New System.Drawing.Point(13, 375)
-        Me.lstAllWins.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.lstAllWins.Margin = New System.Windows.Forms.Padding(2)
         Me.lstAllWins.Name = "lstAllWins"
         Me.lstAllWins.Size = New System.Drawing.Size(628, 80)
         Me.lstAllWins.TabIndex = 9
@@ -232,7 +232,7 @@ Partial Class PvP
         Me.txtWinsagainst.BackColor = System.Drawing.Color.Aquamarine
         Me.txtWinsagainst.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtWinsagainst.Location = New System.Drawing.Point(13, 302)
-        Me.txtWinsagainst.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtWinsagainst.Margin = New System.Windows.Forms.Padding(4)
         Me.txtWinsagainst.Multiline = True
         Me.txtWinsagainst.Name = "txtWinsagainst"
         Me.txtWinsagainst.ReadOnly = True
@@ -245,7 +245,7 @@ Partial Class PvP
         Me.txtWinsAgainst2.BackColor = System.Drawing.Color.Aquamarine
         Me.txtWinsAgainst2.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtWinsAgainst2.Location = New System.Drawing.Point(516, 302)
-        Me.txtWinsAgainst2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtWinsAgainst2.Margin = New System.Windows.Forms.Padding(4)
         Me.txtWinsAgainst2.Multiline = True
         Me.txtWinsAgainst2.Name = "txtWinsAgainst2"
         Me.txtWinsAgainst2.ReadOnly = True
@@ -258,7 +258,7 @@ Partial Class PvP
         Me.txtTotalAgainst.BackColor = System.Drawing.Color.Aquamarine
         Me.txtTotalAgainst.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTotalAgainst.Location = New System.Drawing.Point(263, 302)
-        Me.txtTotalAgainst.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtTotalAgainst.Margin = New System.Windows.Forms.Padding(4)
         Me.txtTotalAgainst.Multiline = True
         Me.txtTotalAgainst.Name = "txtTotalAgainst"
         Me.txtTotalAgainst.ReadOnly = True
@@ -362,7 +362,7 @@ Partial Class PvP
         Me.cbGames.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbGames.FormattingEnabled = True
         Me.cbGames.Location = New System.Drawing.Point(179, 215)
-        Me.cbGames.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbGames.Margin = New System.Windows.Forms.Padding(4)
         Me.cbGames.Name = "cbGames"
         Me.cbGames.Size = New System.Drawing.Size(297, 27)
         Me.cbGames.TabIndex = 3
@@ -375,7 +375,7 @@ Partial Class PvP
         Me.btnRegisterTest.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnRegisterTest.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRegisterTest.Location = New System.Drawing.Point(243, 595)
-        Me.btnRegisterTest.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRegisterTest.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRegisterTest.Name = "btnRegisterTest"
         Me.btnRegisterTest.Size = New System.Drawing.Size(157, 45)
         Me.btnRegisterTest.TabIndex = 12
@@ -524,7 +524,7 @@ Partial Class PvP
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.Name = "PvP"
         Me.Text = "PvP"
