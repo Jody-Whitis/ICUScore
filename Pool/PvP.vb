@@ -228,18 +228,22 @@ Public Class PvP
     ''' <summary>
     ''' Search for a record for ID1 and ID2, get those datasets
     ''' Try to get the ID from those sets
-    ''' Try to parse from those, or if none then return -1
+    ''' Try to parse from those, or if none then return -1 and reset against on every index change
     ''' </summary>
     Public Sub SetPVPSets()
         pvpSet1 = player1.SearchPvPStats(player2.PID, game)
         pvpID = GetPvPID(pvpSet1)
         If pvpID > -1 Then
             Integer.TryParse(pvpSet1.Tables(0).Rows(0).Item("Wins"), player1.WinsAgainst1)
+        Else
+            player1.WinsAgainst1 = 0
         End If
         pvpSet2 = player2.SearchPvPStats(player1.PID, game)
         pvpID2 = GetPvPID(pvpSet2)
         If pvpID2 > -1 Then
             Integer.TryParse(pvpSet2.Tables(0).Rows(0).Item("Wins"), player2.WinsAgainst1)
+        Else
+            player2.WinsAgainst1 = 0
         End If
     End Sub
 
@@ -337,7 +341,6 @@ Public Class PvP
                     btnBack.Text = "Back"
                 Else 'we'll open current wins
                     CurrentScreen = AppState.SelectPlayer
-                    Dim currentWins As String() = Nothing
                     Dim winResult = Me.player1.GetAllResults($"exec [selPlayers_v1.1] @playerId={Me.player1.PID}")
                     Dim winResult2 = Me.player1.GetAllResults($"exec [selPlayers_v1.1] @playerId={Me.player2.PID}")
                     Try
@@ -501,9 +504,9 @@ Public Class PvP
         SetPVPSets()
         If pvpSet1.Tables(0).Rows.Count > 0 Then
             Integer.TryParse(pvpSet1.Tables(0).Rows(0).Item("Wins"), player1.WinsAgainst1)
-            SetWinsAgainst()
             isRiv = player1.getRivarly(player2.WinsAgainst1)
         End If
+        SetWinsAgainst()
         player1.WinsAgainst1 += 1
         txtWinsagainst.Text = player1.WinsAgainst1
         lblError.Text = player1.InsertPvPStats(player2.PID, pvpID, game)
