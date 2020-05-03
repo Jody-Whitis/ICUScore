@@ -84,12 +84,12 @@ Public Class PvP
             SetScoreControlsScreen(cbPlayer2, New Control() {txtWins2, lblTotalWins2})
             'Both Players selected    
             If ScoreTheme.ValidateCBox(cbPlayer1) AndAlso ScoreTheme.ValidateCBox(cbPlayer2) AndAlso Not cbPlayer1.SelectedItem.Equals(cbPlayer2.SelectedItem) Then
-                ScoreTheme.SetControl(New Control() {lblWinsAgainst1, txtWinsagainst, lblWinsAgainst2, txtWinsAgainst2}, True)
+                ScoreTheme.SetControl(New Control() {lblWinsAgainst1, txtWinsagainst, lblWinsAgainst2, txtWinsAgainst2, txtTotalAgainst, lblTotalAgainst}, True)
                 'Both Players and a game is selected
-                SetScoreControlsScreen(cbGames, New Control() {btnSave, lblWinsAgainst1, txtWinsagainst, lblWinsAgainst2, txtWinsAgainst2, lblTotalAgainst, txtTotalAgainst})
+                SetScoreControlsScreen(cbGames, New Control() {btnSave, lblWinsAgainst1, txtWinsagainst, lblWinsAgainst2, txtWinsAgainst2, lblTotalAgainst, txtTotalAgainst, btnSave})
                 CurrentScreen = AppState.Switch
             Else
-                ScoreTheme.SetControl(New Control() {lblWinsAgainst1, txtWinsagainst, lblWinsAgainst2, txtWinsAgainst2, lblTotalAgainst, txtTotalAgainst}, False)
+                ScoreTheme.SetControl(New Control() {lblWinsAgainst1, txtWinsagainst, lblWinsAgainst2, txtWinsAgainst2, lblTotalAgainst, txtTotalAgainst, btnSave}, False)
                 CurrentScreen = AppState.SelectPlayer
             End If
         End If
@@ -199,22 +199,20 @@ Public Class PvP
             SetScoreControlsScreen(cbGames, New Control() {lblScoreBoard, lstAllWins})
             lblError.Visible = False
         ElseIf selectedCBox.SelectedItem.Equals(opposingCbox.SelectedItem) Then
-            With btnSave
-                .Enabled = False
-                .Visible = False
-            End With
+            SetControlsbyCbPlayers()
             With lblError
                 .Text = "Don't Play Yourself!"
                 .Visible = True
             End With
             CurrentScreen = AppState.SelectPlayer
-        Else
-            With btnSave
+            Else
+                With btnSave
                 .Enabled = False
                 .Visible = False
             End With
             lblError.Visible = False
             CurrentScreen = AppState.SelectPlayer
+            SetControlsbyCbPlayers()
         End If
 
         If CurrentScreen <> AppState.Winner Then
@@ -611,9 +609,6 @@ Public Class PvP
     End Sub
 
     Private Sub cbGames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGames.SelectedIndexChanged
-        'txtWinsagainst.Text = 0
-        'txtWinsAgainst2.Text = 0
-        'txtTotalAgainst.Text = 0
         ResetWinsAgainst()
         If CurrentScreen = AppState.Winner Then
             CurrentScreen = AppState.SelectPlayer
