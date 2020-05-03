@@ -44,7 +44,7 @@ Public Class PvP
             lblError.Text = $"Hello {CurrentSession.UserEmail}"
             lblError.Visible = True
             cbPlayer1.SelectedItem = CurrentSession.DisplayName
-            cbPlayer1.Enabled = False
+            If Permissions.IsAdmin.Equals(False) Then cbPlayer1.Enabled = False
         Else
             cbPlayer1.SelectedItem = "Choose"
             lblError.Text = $"Hello Guest"
@@ -198,6 +198,7 @@ Public Class PvP
             SetControlsbyCbPlayers()
             SetScoreControlsScreen(cbGames, New Control() {lblScoreBoard, lstAllWins})
             lblError.Visible = False
+            'Don't play yourself
         ElseIf selectedCBox.SelectedItem.Equals(opposingCbox.SelectedItem) Then
             SetControlsbyCbPlayers()
             With lblError
@@ -205,7 +206,8 @@ Public Class PvP
                 .Visible = True
             End With
             CurrentScreen = AppState.SelectPlayer
-            Else
+            'not valid, hide save button
+        Else
                 With btnSave
                 .Enabled = False
                 .Visible = False
@@ -232,10 +234,6 @@ Public Class PvP
             txtWinsAgainst2.Text = player2.WinsAgainst1.ToString
             txtTotalAgainst.Text = totalGamesPvP.ToString
         Else
-            'totalGamesPvP = 0
-            'txtWinsagainst.Text = 0
-            'txtWinsAgainst2.Text = 0
-            'txtTotalAgainst.Text = 0
             ResetWinsAgainst()
         End If
     End Sub
@@ -306,6 +304,7 @@ Public Class PvP
 
                         End If
                     Next
+                    lstAllWins.SelectedItem = lstAllWins.Items.Item(0)
                 End If
             Catch ex As Exception
                 Dim exceptionLog As New Logging(Now, "GetHighScores : ", ex.ToString)
@@ -333,50 +332,26 @@ Public Class PvP
         Dim isRivarly As Boolean = False
         lblError.Visible = False
 
-        If CurrentScreen > AppState.Start Then
-            If ScoreTheme.ValidateCBox(cbPlayer1).Equals(True) And ScoreTheme.ValidateCBox(cbPlayer2).Equals(True) Then
-#Region "if wins are not empty then add new game, else display wins"
-                If Not String.IsNullOrEmpty(txtWins.Text) AndAlso Not String.IsNullOrEmpty(txtWins2.Text) Then
-                    CurrentScreen = AppState.Winner
-                    With player1
-                        .PlayerName1 = cbPlayer1.SelectedItem.ToString
-                        .Wins1 = txtWins.Text
-                    End With
-                    With player2
-                        .PlayerName1 = cbPlayer2.SelectedItem.ToString
-                        .Wins1 = txtWins2.Text
-                    End With
-                    btnPlayer1win.Text = Me.player1.PlayerName1 & "  WINS! "
-                    btnPlayer2Wins.Text = player2.PlayerName1 & "  WINS!"
-                    ScoreTheme.SetControl(New Button() {btnSave}, False)
-                    ScoreTheme.SetControl(New Control() {btnPlayer1win, btnPlayer2Wins}, True)
-                    btnBack.Text = "Back"
-                    CurrentScreen = AppState.Winner
-                Else 'we'll open current wins
-                    CurrentScreen = AppState.Switch
-                    Dim winResult = Me.player1.GetAllResults($"exec [selPlayers_v1.1] @playerId={Me.player1.PID}")
-                    Dim winResult2 = Me.player1.GetAllResults($"exec [selPlayers_v1.1] @playerId={Me.player2.PID}")
-                    Try
-                        txtWins.Text = $"{winResult.Tables(0).Rows.Item(0).Item("wins").ToString}"
-                        txtWins2.Text = $"{winResult2.Tables(0).Rows.Item(0).Item("wins").ToString}"
-                        CurrentScreen = AppState.Switch
-                    Catch ex As Exception
-                        Dim exceptionLog As New Logging(Now, "Wins Display: ", ex.ToString)
-                        exceptionLog.LogAction()
-                        lblError.Text = "Error"
-                        CurrentScreen = AppState.SelectPlayer
-                    End Try
-                    ScoreTheme.SetErrorLabel(lblError)
-                End If
-#End Region
-            Else
-                Dim selectionAlert As DialogResult = MessageBox.Show($"You must select both players?",
- "Missing Player", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
-            End If
+        If ScoreTheme.ValidateCBox(cbPlayer1).Equals(True) AndAlso ScoreTheme.ValidateCBox(cbPlayer2).Equals(True) Then
+            CurrentScreen = AppState.Winner
+            With player1
+                .PlayerName1 = cbPlayer1.SelectedItem.ToString
+                .Wins1 = txtWins.Text
+            End With
+            With player2
+                .PlayerName1 = cbPlayer2.SelectedItem.ToString
+                .Wins1 = txtWins2.Text
+            End With
+            btnPlayer1win.Text = Me.player1.PlayerName1 & "  WINS! "
+            btnPlayer2Wins.Text = player2.PlayerName1 & "  WINS!"
+            ScoreTheme.SetControl(New Button() {btnSave}, False)
+            ScoreTheme.SetControl(New Control() {btnPlayer1win, btnPlayer2Wins}, True)
+            btnBack.Text = "Back"
+            CurrentScreen = AppState.Winner
         Else
-            lblError.Text = "Error: Select Both Players"
-            ScoreTheme.SetErrorLabel(lblError)
-            CurrentScreen = AppState.NoPlayerEx
+            Dim selectionAlert As DialogResult = MessageBox.Show($"You must select both players?",
+ "Missing Player", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+            CurrentScreen = AppState.SelectPlayer
         End If
     End Sub
 
