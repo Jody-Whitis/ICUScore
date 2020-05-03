@@ -40,21 +40,14 @@ Public Class PvP
         End If
 #End Region
         Me.CenterToScreen()
+        lblError.Text = String.Empty
         If Not String.IsNullOrEmpty(CurrentSession.UserEmail) Then
-            lblError.Text = $"Hello {CurrentSession.UserEmail}"
-            lblError.Visible = True
             cbPlayer1.SelectedItem = CurrentSession.DisplayName
             If Permissions.IsAdmin.Equals(False) Then cbPlayer1.Enabled = False
         Else
             cbPlayer1.SelectedItem = "Choose"
-            lblError.Text = $"Hello Guest"
         End If
-        If CurrentScreen = AppState.NoPlayerEx Then
-            lblError.Visible = True
-            lstAllWins.Visible = True
-        Else
-            CurrentScreen = AppState.Start
-        End If
+        CurrentScreen = AppState.Start
         cbPlayer2.SelectedItem = "Choose"
         cbGames.SelectedItem = "Choose"
         If Not Permissions.IsUser Then
@@ -305,6 +298,7 @@ Public Class PvP
                         End If
                     Next
                     lstAllWins.SelectedItem = lstAllWins.Items.Item(0)
+                    lstAllWins.Enabled = True
                 End If
             Catch ex As Exception
                 Dim exceptionLog As New Logging(Now, "GetHighScores : ", ex.ToString)
@@ -600,17 +594,15 @@ Public Class PvP
             GetHighScores()
             lstAllWins.Visible = True
             lblScoreBoard.Visible = True
-            btnSave.Enabled = True
             If Permissions.IsUser.Equals(True) Then
                 btnSave.Visible = True
+                btnSave.Enabled = True
                 SetPVPSets()
                 SetWinsAgainst()
             End If
         ElseIf cbGames.SelectedItem.Equals("Choose") Then
             lstAllWins.Items.Clear()
-            lstAllWins.Visible = False
-            lblScoreBoard.Visible = False
-            btnSave.Visible = False
+            ScoreTheme.SetControl(New Control() {btnSave, lblScoreBoard, lstAllWins}, False)
         Else
             If Permissions.IsUser.Equals(True) AndAlso CurrentScreen = AppState.Switch Then
                 With btnSave
