@@ -43,7 +43,7 @@ Public Class HighScores
         If CurrentScreen = AppState.NoPlayerEx Then
             lblError.Visible = True
         Else
-            CurrentScreen = AppState.SelectPlayer
+            CurrentScreen = AppState.Switch
         End If
         ProcessEmailStatbyWeek()
         If Not Permissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
@@ -142,6 +142,12 @@ Public Class HighScores
                 lblError.Text = ex.Message.ToString
                 ScoreTheme.SetErrorLabel(lblError)
             End Try
+        Else
+            lstScores.Items.Clear()
+            lstScores.Items.Add("No games yet played ")
+            lstScores.Visible = True
+            lblScore.Visible = True
+            lstScores.Refresh()
         End If
     End Sub
 
@@ -160,13 +166,16 @@ Public Class HighScores
     Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
         lblError.Visible = False
         Dim score As Integer = -1
-        If CurrentScreen > 0 Then
+        If Permissions.IsUser.Equals(True) AndAlso CurrentScreen > AppState.Start Then
             'got a player
 
             If ScoreTheme.ValidateCBox(cbPlayers).Equals(True) Then
-                'got a new score
-                If Not String.IsNullOrEmpty(txtScore.Text) Then
-                    If Integer.TryParse(txtScore.Text.Trim, score) Then
+                'got a new score                
+                If Integer.TryParse(txtScore.Text.Trim, score) Then
+                    Dim submittedAlert As DialogResult = MessageBox.Show($"Are you sure you want to save this score?",
+"New Highscore Submission", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    If submittedAlert.Equals(DialogResult.Yes) Then
+
                         CurrentScreen = AppState.Winner
                         With player
                             .PlayerName1 = cbPlayers.SelectedItem.ToString
@@ -202,27 +211,22 @@ Public Class HighScores
                         highScores = games.GetAllResults("exec selAllScores @output=0")
                         GetHighScores(games.GameMode)
                         Refresh()
+                        txtScore.Text = String.Empty
                     Else
-                        lblError.Text = "Error: nan"
-                        ScoreTheme.SetErrorLabel(lblError)
+                        Exit Sub
                     End If
 
                 Else
+                        CurrentScreen = AppState.Switch
+                    txtScore.Text = String.Empty
+                    Dim nanAlert As DialogResult = MessageBox.Show($"You must enter a valid number!",
+"Invalid Score", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     CurrentScreen = AppState.SelectPlayer
-                    Try
-                        txtScore.Text = String.Empty
-                    Catch ex As Exception
-                        Dim exceptionLog As New Logging(Now, "Select Player from Empty score: ", ex.ToString)
-                        exceptionLog.LogAction()
-                        lblError.Text = "error"
-                    End Try
-                    ScoreTheme.SetErrorLabel(lblError)
                 End If
+            Else
+                Dim selectionAlert As DialogResult = MessageBox.Show($"You must select a game mode!",
+"Invalid Game Mode", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
-        Else
-            lblError.Text = "Error"
-            ScoreTheme.SetErrorLabel(lblError)
-            CurrentScreen = AppState.Register
         End If
     End Sub
 
@@ -253,14 +257,13 @@ Public Class HighScores
     ''' <param name="e"></param>
     Private Sub cbPlayers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPlayers.SelectedIndexChanged
         If Permissions.IsUser.Equals(True) Then
-            If CurrentScreen = AppState.SelectPlayer Then
-                player.PlayerName1 = cbPlayers.SelectedItem
-                ScoreTheme.SetErrorLabel(lblError)
-                If ScoreTheme.ValidateCBox(cbGames).Equals(True) AndAlso ScoreTheme.ValidateCBox(cbPlayers).Equals(True) Then
-                    btnSubmit.Visible = True
-                Else
-                    btnSubmit.Visible = False
-                End If
+            player.PlayerName1 = cbPlayers.SelectedItem
+            If ScoreTheme.ValidateCBox(cbGames).Equals(True) AndAlso ScoreTheme.ValidateCBox(cbPlayers).Equals(True) Then
+                CurrentScreen = AppState.SelectPlayer
+                btnSubmit.Visible = True
+            Else
+                CurrentScreen = AppState.Switch
+                btnSubmit.Visible = False
             End If
         End If
 
@@ -279,6 +282,9 @@ Public Class HighScores
             ScoreTheme.SetErrorLabel(lblError)
             lstScores.Visible = True
             lblScoreBoard.Visible = True
+            If lstScores.Items.Count = 0 Then
+                lstScores.Items.Add("No games yet played")
+            End If
         Else
             lstScores.Visible = False
             lblScoreBoard.Visible = False
