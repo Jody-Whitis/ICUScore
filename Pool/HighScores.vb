@@ -23,8 +23,7 @@ Public Class HighScores
     ''' <param name="e"></param>
     Private Sub HighScores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToScreen()
-        btnSubmit.Visible = False
-        lstScores.Visible = False
+        ScoreTheme.SetControl(New Control() {btnSubmit, lstScores}, False)
         CurrentScreen = AppState.Start
         If Permissions.IsAdmin.Equals(True) Then
             allPlayers = player.IDBConnect_GetAllPlayers()
@@ -52,7 +51,6 @@ Public Class HighScores
             EditPasswordToolStripMenuItem1.Visible = False
             PlayerEditingToolStripMenuItem.Visible = False
             EditToolStripMenuItem.Visible = False
-            btnPvP.Location = btnAdd.Location
         End If
     End Sub
 
@@ -132,8 +130,7 @@ Public Class HighScores
                     Dim lastUpdated As Date = score.Item("LastUpdated")
                     lstScores.Items.Add($"{playerNameScore} scored [{playerScore}] on {lastUpdated.ToString("MM/dd/yyyy")}")
                 Next
-                lstScores.Visible = True
-                lblScoreBoard.Visible = True
+                ScoreTheme.SetControl(New Control() {lstScores, lblScoreBoard}, True)
                 lstScores.Refresh()
             Catch ex As Exception
                 Dim exceptionLog As New Logging(Now, "Get High Score", ex.ToString)
@@ -145,8 +142,7 @@ Public Class HighScores
         Else
             lstScores.Items.Clear()
             lstScores.Items.Add("No games yet played ")
-            lstScores.Visible = True
-            lblScore.Visible = True
+            ScoreTheme.SetControl(New Control() {lstScores, lblScoreBoard}, True)
             lstScores.Refresh()
         End If
     End Sub
@@ -217,7 +213,7 @@ Public Class HighScores
                     End If
 
                 Else
-                        CurrentScreen = AppState.Switch
+                    CurrentScreen = AppState.Switch
                     txtScore.Text = String.Empty
                     Dim nanAlert As DialogResult = MessageBox.Show($"You must enter a valid number!",
 "Invalid Score", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -235,10 +231,7 @@ Public Class HighScores
             'Go back to prev
             txtNewGM.ResetText()
             txtNewGM.Visible = False
-            lstScores.Visible = True
-            cbGames.Visible = True
-            cbPlayers.Visible = True
-            txtScore.Visible = True
+            ScoreTheme.SetControl(New Control() {lstScores, cbGames, cbPlayers, txtScore}, True)
             lblNewGameMode.Visible = False
             ScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit}, True)
             CurrentScreen = AppState.SelectPlayer
@@ -260,10 +253,16 @@ Public Class HighScores
             player.PlayerName1 = cbPlayers.SelectedItem
             If ScoreTheme.ValidateCBox(cbGames).Equals(True) AndAlso ScoreTheme.ValidateCBox(cbPlayers).Equals(True) Then
                 CurrentScreen = AppState.SelectPlayer
-                btnSubmit.Visible = True
+                With btnSubmit
+                    .Visible = True
+                    .Enabled = True
+                End With
             Else
                 CurrentScreen = AppState.Switch
-                btnSubmit.Visible = False
+                With btnSubmit
+                    .Visible = False
+                    .Enabled = False
+                End With
             End If
         End If
 
@@ -280,14 +279,12 @@ Public Class HighScores
         If ScoreTheme.ValidateCBox(cbGames).Equals(True) Then
             GetHighScores(games.GameMode)
             ScoreTheme.SetErrorLabel(lblError)
-            lstScores.Visible = True
-            lblScoreBoard.Visible = True
+            ScoreTheme.SetControl(New Control() {lstScores, lblScoreBoard}, True)
             If lstScores.Items.Count = 0 Then
                 lstScores.Items.Add("No games yet played")
             End If
         Else
-            lstScores.Visible = False
-            lblScoreBoard.Visible = False
+            ScoreTheme.SetControl(New Control() {lstScores, lblScoreBoard}, False)
         End If
         cbPlayers_SelectedIndexChanged(Nothing, Nothing)
     End Sub
@@ -303,42 +300,34 @@ Public Class HighScores
         If CurrentScreen <> AppState.Add Then
             'transition to adding item
             CurrentScreen = AppState.Add
-            cbGames.Visible = False
-            cbPlayers.Visible = False
-            txtScore.Visible = False
-            lstScores.Visible = False
-            ScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode}, False)
-            txtNewGM.Visible = True
-            lblNewGameMode.Visible = True
+            ScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, cbGames, cbPlayers, txtScore, lstScores}, False)
+            ScoreTheme.SetControl(New Control() {txtNewGM, lblNewGameMode}, True)
             btnBack.Text = "Back"
             ScoreTheme.SetControl(New Control() {btnSubmit}, False)
 
         ElseIf CurrentScreen = AppState.Add Then
             If Not String.IsNullOrEmpty(txtNewGM.Text) Then
-                'try to insert if not blank
-                Dim newGM As String = $"[dbo].[insNewGame] @gameMode = '{inputValidation.SQLValidation(txtNewGM.Text)}'"
-                games.InsertGame(newGM)
-                allGames = games.GetAllPlayers()
-                ScoreTheme.FillBoxfromHT(cbGames, allGames)
-                highScores = games.GetAllResults("exec selAllScores @output=0")
-                txtNewGM.ResetText()
-                txtNewGM.Visible = False
-                lstScores.Visible = True
-                cbGames.Visible = True
-                cbPlayers.Visible = True
-                txtScore.Visible = True
-                lblNewGameMode.Visible = False
-                ScoreTheme.SetControl(New Control() {lblScore, lblNewGameMode, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit}, True)
-                CurrentScreen = AppState.SelectPlayer
-                btnBack.Text = "Home"
+                Dim submittedAlert As DialogResult = MessageBox.Show($"Are you sure you want to add this game?",
+"New Game Mode Submission", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                If submittedAlert.Equals(DialogResult.Yes) Then
+                    'try to insert if not blank
+                    Dim newGM As String = $"[dbo].[insNewGame] @gameMode = '{inputValidation.SQLValidation(txtNewGM.Text)}'"
+                    games.InsertGame(newGM)
+                    allGames = games.GetAllPlayers()
+                    ScoreTheme.FillBoxfromHT(cbGames, allGames)
+                    highScores = games.GetAllResults("exec selAllScores @output=0")
+                    txtNewGM.ResetText()
+                    ScoreTheme.SetControl(New Control() {txtNewGM, lblNewGameMode}, False)
+                    ScoreTheme.SetControl(New Control() {lblScore, lblNewGameMode, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit, txtScore, cbPlayers, cbGames, lstScores}, True)
+                    CurrentScreen = AppState.SelectPlayer
+                    btnBack.Text = "Home"
+                Else
+                    Exit Sub
+                End If
             Else
                 Dim incorrectAlert As DialogResult = MessageBox.Show($"You got to name it first",
   "No Name", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             End If
-        Else
-            lblError.Text = "Error: This new game mode needs a name"
-            ScoreTheme.SetErrorLabel(lblError)
-            lblError.Visible = True
         End If
     End Sub
 
