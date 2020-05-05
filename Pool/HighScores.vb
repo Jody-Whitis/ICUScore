@@ -46,8 +46,8 @@ Public Class HighScores
         End If
         ProcessEmailStatbyWeek()
         If Not Permissions.IsUser AndAlso Not userPermissions.isLoggedIn Then
-            ScoreTheme.GuestDisplay(New Control() {btnAdd, btnSubmit, cbPlayers, txtScore, txtNewGM,
-                                        lblSelectedPlayer, lblScore, lblNewGameMode, btnPlayerEditing}, False)
+            ScoreTheme.GuestDisplay(New Control() {btnAdd, btnSubmit, cbPlayers, txtScore,
+                                        lblSelectedPlayer, lblScore, btnPlayerEditing}, False)
             EditPasswordToolStripMenuItem1.Visible = False
             PlayerEditingToolStripMenuItem.Visible = False
             EditToolStripMenuItem.Visible = False
@@ -227,20 +227,7 @@ Public Class HighScores
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        If CurrentScreen = AppState.Add Then
-            'Go back to prev
-            txtNewGM.ResetText()
-            txtNewGM.Visible = False
-            ScoreTheme.SetControl(New Control() {lstScores, cbGames, cbPlayers, txtScore}, True)
-            lblNewGameMode.Visible = False
-            ScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit}, True)
-            CurrentScreen = AppState.SelectPlayer
-            btnBack.Text = "Home"
-            ScoreTheme.SetErrorLabel(lblError)
-        Else
-            ScoreTheme.LoadNextFormClose(Me, Home)
-        End If
-
+        ScoreTheme.LoadNextFormClose(Me, Home)
     End Sub
 
     ''' <summary>
@@ -297,37 +284,8 @@ Public Class HighScores
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        If CurrentScreen <> AppState.Add Then
-            'transition to adding item
-            CurrentScreen = AppState.Add
-            ScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, cbGames, cbPlayers, txtScore, lstScores}, False)
-            ScoreTheme.SetControl(New Control() {txtNewGM, lblNewGameMode}, True)
-            btnBack.Text = "Back"
-            ScoreTheme.SetControl(New Control() {btnSubmit}, False)
-
-        ElseIf CurrentScreen = AppState.Add Then
-            If Not String.IsNullOrEmpty(txtNewGM.Text) Then
-                Dim submittedAlert As DialogResult = MessageBox.Show($"Are you sure you want to add this game?",
-"New Game Mode Submission", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                If submittedAlert.Equals(DialogResult.Yes) Then
-                    'try to insert if not blank
-                    Dim newGM As String = $"[dbo].[insNewGame] @gameMode = '{inputValidation.SQLValidation(txtNewGM.Text)}'"
-                    games.InsertGame(newGM)
-                    allGames = games.GetAllPlayers()
-                    ScoreTheme.FillBoxfromHT(cbGames, allGames)
-                    highScores = games.GetAllResults("exec selAllScores @output=0")
-                    txtNewGM.ResetText()
-                    ScoreTheme.SetControl(New Control() {txtNewGM, lblNewGameMode}, False)
-                    ScoreTheme.SetControl(New Control() {lblScore, lblNewGameMode, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit, txtScore, cbPlayers, cbGames, lstScores}, True)
-                    CurrentScreen = AppState.SelectPlayer
-                    btnBack.Text = "Home"
-                Else
-                    Exit Sub
-                End If
-            Else
-                Dim incorrectAlert As DialogResult = MessageBox.Show($"You got to name it first",
-  "No Name", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-            End If
+        If Permissions.IsUser.Equals(True) Then
+            ScoreTheme.LoadNextFormClose(Me, GameModeEditing)
         End If
     End Sub
 
@@ -371,6 +329,41 @@ Public Class HighScores
         End If
     End Sub
 
+#End Region
+
+#Region "Old logic moved to new Form - 1.9.3.2"
+    '    If CurrentScreen <> AppState.Add Then
+    '            'transition to adding item
+    '            CurrentScreen = AppState.Add
+    '            ScoreTheme.SetControl(New Control() {lblScore, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, cbGames, cbPlayers, txtScore, lstScores}, False)
+    '            ScoreTheme.SetControl(New Control() {txtNewGM, lblNewGameMode}, True)
+    '            btnBack.Text = "Back"
+    '            ScoreTheme.SetControl(New Control() {btnSubmit}, False)
+
+    '        ElseIf CurrentScreen = AppState.Add Then
+    '    If Not String.IsNullOrEmpty(txtNewGM.Text) Then
+    '    Dim submittedAlert As DialogResult = MessageBox.Show($"Are you sure you want to add this game?",
+    '"New Game Mode Submission", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+    '    If submittedAlert.Equals(DialogResult.Yes) Then
+    '    'try to insert if not blank
+    '    Dim newGM As String = $"[dbo].[insNewGame] @gameMode = '{inputValidation.SQLValidation(txtNewGM.Text)}'"
+    '                    games.InsertGame(newGM)
+    '                    allGames = games.GetAllPlayers()
+    '                    ScoreTheme.FillBoxfromHT(cbGames, allGames)
+    '                    highScores = games.GetAllResults("exec selAllScores @output=0")
+    '                    txtNewGM.ResetText()
+    '                    ScoreTheme.SetControl(New Control() {txtNewGM, lblNewGameMode}, False)
+    '                    ScoreTheme.SetControl(New Control() {lblScore, lblNewGameMode, lblScoreBoard, lblSelectedPlayer, lblSelectedMode, btnSubmit, txtScore, cbPlayers, cbGames, lstScores}, True)
+    '                    CurrentScreen = AppState.SelectPlayer
+    '                    btnBack.Text = "Home"
+    '                Else
+    '    Exit Sub
+    '    End If
+    '    Else
+    '    Dim incorrectAlert As DialogResult = MessageBox.Show($"You got to name it first",
+    '  "No Name", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+    '    End If
+    '    End If
 #End Region
 
 End Class
