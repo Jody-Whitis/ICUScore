@@ -24,9 +24,10 @@ Partial Class GameModeEditing
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GameModeEditing))
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.tbNewGame = New System.Windows.Forms.TextBox()
         Me.btnSubmit = New System.Windows.Forms.Button()
         Me.btnBack = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
@@ -34,20 +35,20 @@ Partial Class GameModeEditing
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Aquamarine
-        Me.Label1.Location = New System.Drawing.Point(205, 45)
+        Me.Label1.Location = New System.Drawing.Point(160, 36)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(286, 39)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "New Game Mode"
         '
-        'TextBox1
+        'tbNewGame
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.Aquamarine
-        Me.TextBox1.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(59, 173)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(580, 34)
-        Me.TextBox1.TabIndex = 1
+        Me.tbNewGame.BackColor = System.Drawing.Color.Aquamarine
+        Me.tbNewGame.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbNewGame.Location = New System.Drawing.Point(167, 219)
+        Me.tbNewGame.Name = "tbNewGame"
+        Me.tbNewGame.Size = New System.Drawing.Size(367, 34)
+        Me.tbNewGame.TabIndex = 1
         '
         'btnSubmit
         '
@@ -55,7 +56,7 @@ Partial Class GameModeEditing
         Me.btnSubmit.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSubmit.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubmit.Location = New System.Drawing.Point(416, 261)
+        Me.btnSubmit.Location = New System.Drawing.Point(395, 397)
         Me.btnSubmit.Name = "btnSubmit"
         Me.btnSubmit.Size = New System.Drawing.Size(190, 95)
         Me.btnSubmit.TabIndex = 2
@@ -68,22 +69,34 @@ Partial Class GameModeEditing
         Me.btnBack.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnBack.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBack.Location = New System.Drawing.Point(84, 261)
+        Me.btnBack.Location = New System.Drawing.Point(12, 397)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(190, 95)
         Me.btnBack.TabIndex = 3
         Me.btnBack.Text = "Back"
         Me.btnBack.UseVisualStyleBackColor = False
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Aquamarine
+        Me.Label2.Location = New System.Drawing.Point(49, 219)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(111, 39)
+        Me.Label2.TabIndex = 4
+        Me.Label2.Text = "Name"
+        '
         'GameModeEditing
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
-        Me.ClientSize = New System.Drawing.Size(664, 481)
+        Me.ClientSize = New System.Drawing.Size(597, 504)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.btnSubmit)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.tbNewGame)
         Me.Controls.Add(Me.Label1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "GameModeEditing"
@@ -94,7 +107,8 @@ Partial Class GameModeEditing
     End Sub
 
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents tbNewGame As TextBox
     Friend WithEvents btnSubmit As Button
     Friend WithEvents btnBack As Button
+    Friend WithEvents Label2 As Label
 End Class
