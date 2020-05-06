@@ -106,6 +106,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="GameModeEditing.Designer.vb">
+      <DependentUpon>GameModeEditing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GameModeEditing.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Interface\IValidation.vb" />
     <Compile Include="Models\Email.vb" />
     <Compile Include="Home.Designer.vb">
@@ -193,6 +199,9 @@
   <ItemGroup>
     <EmbeddedResource Include="AboutThis.resx">
       <DependentUpon>AboutThis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameModeEditing.resx">
+      <DependentUpon>GameModeEditing.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.vb</DependentUpon>
