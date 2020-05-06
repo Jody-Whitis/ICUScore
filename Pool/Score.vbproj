@@ -130,6 +130,12 @@
     <Compile Include="PasswordChange.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PasswordRecovery.Designer.vb">
+      <DependentUpon>PasswordRecovery.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordRecovery.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ProfileEditing.Designer.vb">
       <DependentUpon>ProfileEditing.vb</DependentUpon>
     </Compile>
@@ -208,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PasswordChange.resx">
       <DependentUpon>PasswordChange.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordRecovery.resx">
+      <DependentUpon>PasswordRecovery.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlayerManagement.resx">
       <DependentUpon>PlayerManagement.vb</DependentUpon>

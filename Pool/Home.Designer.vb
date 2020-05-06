@@ -49,6 +49,7 @@ Partial Class Home
         Me.btnGuest = New System.Windows.Forms.Button()
         Me.btnProfileEditing = New System.Windows.Forms.Button()
         Me.btnManagePlayers = New System.Windows.Forms.Button()
+        Me.btnPasswordRecover = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -136,7 +137,7 @@ Partial Class Home
         Me.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLogin.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.ForeColor = System.Drawing.Color.Black
-        Me.btnLogin.Location = New System.Drawing.Point(441, 445)
+        Me.btnLogin.Location = New System.Drawing.Point(569, 444)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(213, 75)
         Me.btnLogin.TabIndex = 5
@@ -199,7 +200,7 @@ Partial Class Home
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
-        Me.MenuStrip1.Size = New System.Drawing.Size(804, 43)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1608, 96)
         Me.MenuStrip1.TabIndex = 11
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -209,7 +210,7 @@ Partial Class Home
         Me.mnuHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mnuHome.ForeColor = System.Drawing.Color.Aquamarine
         Me.mnuHome.Name = "mnuHome"
-        Me.mnuHome.Size = New System.Drawing.Size(115, 37)
+        Me.mnuHome.Size = New System.Drawing.Size(115, 90)
         Me.mnuHome.Text = "Menu"
         '
         'logOutMnu
@@ -272,7 +273,7 @@ Partial Class Home
         Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 37)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 90)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'AboutToolStripMenuItem1
@@ -290,9 +291,9 @@ Partial Class Home
         Me.btnNewUser.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnNewUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNewUser.ForeColor = System.Drawing.Color.Black
-        Me.btnNewUser.Location = New System.Drawing.Point(117, 445)
+        Me.btnNewUser.Location = New System.Drawing.Point(12, 445)
         Me.btnNewUser.Name = "btnNewUser"
-        Me.btnNewUser.Size = New System.Drawing.Size(213, 75)
+        Me.btnNewUser.Size = New System.Drawing.Size(196, 75)
         Me.btnNewUser.TabIndex = 3
         Me.btnNewUser.Text = "New User"
         Me.btnNewUser.UseVisualStyleBackColor = False
@@ -343,6 +344,20 @@ Partial Class Home
         Me.btnManagePlayers.UseVisualStyleBackColor = False
         Me.btnManagePlayers.Visible = False
         '
+        'btnPasswordRecover
+        '
+        Me.btnPasswordRecover.BackColor = System.Drawing.Color.Aquamarine
+        Me.btnPasswordRecover.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnPasswordRecover.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnPasswordRecover.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPasswordRecover.ForeColor = System.Drawing.Color.Black
+        Me.btnPasswordRecover.Location = New System.Drawing.Point(294, 445)
+        Me.btnPasswordRecover.Name = "btnPasswordRecover"
+        Me.btnPasswordRecover.Size = New System.Drawing.Size(196, 75)
+        Me.btnPasswordRecover.TabIndex = 14
+        Me.btnPasswordRecover.Text = "Password Recovery"
+        Me.btnPasswordRecover.UseVisualStyleBackColor = False
+        '
         'Home
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
@@ -350,6 +365,7 @@ Partial Class Home
         Me.BackColor = System.Drawing.Color.RoyalBlue
         Me.CancelButton = Me.btnQuit
         Me.ClientSize = New System.Drawing.Size(804, 709)
+        Me.Controls.Add(Me.btnPasswordRecover)
         Me.Controls.Add(Me.btnManagePlayers)
         Me.Controls.Add(Me.btnProfileEditing)
         Me.Controls.Add(Me.btnGuest)
@@ -404,4 +420,5 @@ Partial Class Home
     Friend WithEvents ProfileEditingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents btnProfileEditing As Button
     Friend WithEvents btnManagePlayers As Button
+    Friend WithEvents btnPasswordRecover As Button
 End Class

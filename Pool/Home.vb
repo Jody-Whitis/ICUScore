@@ -177,4 +177,7 @@ Public Class Home
         CurrentSession.Registered = Convert.ToBoolean(registeredBit)
     End Sub
 
+    Private Sub btnPasswordRecover_Click(sender As Object, e As EventArgs) Handles btnPasswordRecover.Click
+        ScoreTheme.LoadNextFormClose(Me, PasswordRecovery)
+    End Sub
 End Class
