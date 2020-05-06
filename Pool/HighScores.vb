@@ -265,10 +265,11 @@ Public Class HighScores
         games.GameMode = cbGames.SelectedItem
         If ScoreTheme.ValidateCBox(cbGames).Equals(True) Then
             GetHighScores(games.GameMode)
-            ScoreTheme.SetErrorLabel(lblError)
             ScoreTheme.SetControl(New Control() {lstScores, lblScoreBoard}, True)
             If lstScores.Items.Count = 0 Then
                 lstScores.Items.Add("No games yet played")
+            Else
+                lstScores.SelectedItem = lstScores.Items(0)
             End If
         Else
             ScoreTheme.SetControl(New Control() {lstScores, lblScoreBoard}, False)
