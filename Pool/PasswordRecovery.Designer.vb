@@ -24,7 +24,7 @@ Partial Class PasswordRecovery
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PasswordRecovery))
         Me.tbEmailAddress = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSend = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnConfirm = New System.Windows.Forms.Button()
         Me.tbPassword = New System.Windows.Forms.TextBox()
@@ -35,31 +35,34 @@ Partial Class PasswordRecovery
         'tbEmailAddress
         '
         Me.tbEmailAddress.BackColor = System.Drawing.Color.Aquamarine
-        Me.tbEmailAddress.Location = New System.Drawing.Point(190, 262)
+        Me.tbEmailAddress.Location = New System.Drawing.Point(127, 168)
+        Me.tbEmailAddress.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.tbEmailAddress.Name = "tbEmailAddress"
-        Me.tbEmailAddress.Size = New System.Drawing.Size(356, 31)
+        Me.tbEmailAddress.Size = New System.Drawing.Size(239, 22)
         Me.tbEmailAddress.TabIndex = 0
         '
-        'Button1
+        'btnSend
         '
-        Me.Button1.BackColor = System.Drawing.Color.Aquamarine
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button1.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(78, 452)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(175, 119)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Send Temporary Password"
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnSend.BackColor = System.Drawing.Color.Aquamarine
+        Me.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnSend.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSend.Location = New System.Drawing.Point(52, 289)
+        Me.btnSend.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnSend.Name = "btnSend"
+        Me.btnSend.Size = New System.Drawing.Size(117, 76)
+        Me.btnSend.TabIndex = 1
+        Me.btnSend.Text = "Send Temporary Password"
+        Me.btnSend.UseVisualStyleBackColor = False
         '
         'btnCancel
         '
         Me.btnCancel.BackColor = System.Drawing.Color.Aquamarine
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCancel.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(14, 656)
+        Me.btnCancel.Location = New System.Drawing.Point(9, 420)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(175, 124)
+        Me.btnCancel.Size = New System.Drawing.Size(117, 79)
         Me.btnCancel.TabIndex = 2
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = False
@@ -69,9 +72,10 @@ Partial Class PasswordRecovery
         Me.btnConfirm.BackColor = System.Drawing.Color.Aquamarine
         Me.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnConfirm.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnConfirm.Location = New System.Drawing.Point(330, 452)
+        Me.btnConfirm.Location = New System.Drawing.Point(220, 289)
+        Me.btnConfirm.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnConfirm.Name = "btnConfirm"
-        Me.btnConfirm.Size = New System.Drawing.Size(175, 119)
+        Me.btnConfirm.Size = New System.Drawing.Size(117, 76)
         Me.btnConfirm.TabIndex = 3
         Me.btnConfirm.Text = "Confirm"
         Me.btnConfirm.UseVisualStyleBackColor = False
@@ -79,9 +83,10 @@ Partial Class PasswordRecovery
         'tbPassword
         '
         Me.tbPassword.BackColor = System.Drawing.Color.Aquamarine
-        Me.tbPassword.Location = New System.Drawing.Point(190, 358)
+        Me.tbPassword.Location = New System.Drawing.Point(127, 229)
+        Me.tbPassword.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.tbPassword.Name = "tbPassword"
-        Me.tbPassword.Size = New System.Drawing.Size(356, 31)
+        Me.tbPassword.Size = New System.Drawing.Size(239, 22)
         Me.tbPassword.TabIndex = 4
         Me.tbPassword.UseSystemPasswordChar = True
         '
@@ -90,9 +95,10 @@ Partial Class PasswordRecovery
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Aquamarine
-        Me.Label1.Location = New System.Drawing.Point(19, 262)
+        Me.Label1.Location = New System.Drawing.Point(13, 168)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(165, 32)
+        Me.Label1.Size = New System.Drawing.Size(100, 20)
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "Email Address"
         '
@@ -101,26 +107,28 @@ Partial Class PasswordRecovery
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Aquamarine
-        Me.Label2.Location = New System.Drawing.Point(8, 357)
+        Me.Label2.Location = New System.Drawing.Point(5, 228)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(176, 32)
+        Me.Label2.Size = New System.Drawing.Size(108, 20)
         Me.Label2.TabIndex = 6
         Me.Label2.Text = "Temp Password"
         '
         'PasswordRecovery
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.RoyalBlue
-        Me.ClientSize = New System.Drawing.Size(573, 792)
+        Me.ClientSize = New System.Drawing.Size(382, 507)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.tbPassword)
         Me.Controls.Add(Me.btnConfirm)
         Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnSend)
         Me.Controls.Add(Me.tbEmailAddress)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "PasswordRecovery"
         Me.Text = "PasswordRecovery"
         Me.ResumeLayout(False)
@@ -129,7 +137,7 @@ Partial Class PasswordRecovery
     End Sub
 
     Friend WithEvents tbEmailAddress As TextBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnSend As Button
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnConfirm As Button
     Friend WithEvents tbPassword As TextBox
