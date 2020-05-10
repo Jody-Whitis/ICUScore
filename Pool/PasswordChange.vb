@@ -25,10 +25,12 @@
                 isUpdated = passwordUpdate.ILogin_UpdatePassword(txtNewPassword.Text, txtCurrentPassword.Text)
             End If
             If isUpdated.Equals(True) Then
+                Dim RequiredField As DialogResult = MessageBox.Show($"Password is Updated!",
+        "Updated Password", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ScoreTheme.LoadNextFormClose(Me, Home)
             Else
-                lblUpdate.ForeColor = Color.Red
-                lblUpdate.Text = "Incorrect Current/New Password"
+                Dim RequiredField As DialogResult = MessageBox.Show($"Incorrect Password!",
+        "Incorrect Password", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         Else
             Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields",

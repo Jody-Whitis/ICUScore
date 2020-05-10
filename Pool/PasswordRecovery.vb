@@ -1,6 +1,7 @@
-﻿Public Class PasswordRecovery
+﻿Imports Pool.Models.Validation
+Public Class PasswordRecovery
     Dim userLogin As New PasswordRecover
-
+    Dim emailValidation As New EmailValidation
     Private Sub PasswordRecovery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToScreen()
     End Sub
@@ -12,6 +13,7 @@
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
         userLogin.User = tbEmailAddress.Text.Trim
         userLogin.Password = tbPassword.Text.Trim
+
         If userLogin.GetLogin Then
             ''if password matches the temporary then
             ''set session and prompt a change
@@ -26,13 +28,23 @@
 
     Private Sub btnSend_Click(sender As Object, e As EventArgs) Handles btnSend.Click
         Dim tempPassword As New Email(New List(Of String) From {tbEmailAddress.Text})
-        Dim generatePassword As String = userLogin.GeneratePassword()
-        If tempPassword.SendTempPassword(tbEmailAddress.Text, generatePassword, Now.ToString) Then
-            Dim passwordAlert As DialogResult = MessageBox.Show($"Enter your password sent to this email",
+        Dim generatePassword As String = String.Empty
+        Dim passwordUpdated As Boolean = False
+        If emailValidation.isValid(tbEmailAddress.Text) Then
+            'generate temp password
+            'update for that email
+            generatePassword = userLogin.GeneratePassword()
+            'passwordUpdated = userLogin.ILogin_UpdatePassword(generatePassword)
+
+            'Password sent
+            If passwordUpdated AndAlso tempPassword.SendTempPassword(tbEmailAddress.Text, generatePassword, Now.ToString) Then
+                Dim passwordAlert As DialogResult = MessageBox.Show($"Enter your password sent to this email",
 "Temporary Password Send", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        Else
-            Dim passwordAlert As DialogResult = MessageBox.Show($"Your Temporary Password is not sent!",
+            Else
+                Dim passwordAlert As DialogResult = MessageBox.Show($"Your Temporary Password is not sent!",
 "Error sending Password", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
         End If
 
     End Sub

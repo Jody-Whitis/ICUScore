@@ -5,7 +5,7 @@ Imports Pool.Games
 Public Class Authenticate : Implements ILogin
 
 #Region "Props/Constr"
-    Private Structure HashFormat
+    Protected Structure HashFormat
         Public length As Integer
         Public salt As Byte()
         Public hash As Byte()
@@ -151,7 +151,7 @@ Public Class Authenticate : Implements ILogin
     ''' Insert colon delimited base64 string into DB
     ''' </summary>
     ''' <returns></returns>
-    Public Function ILogin_UpdatePassword(newPassword As String, currentPassword As String) As Boolean Implements ILogin.UpdatePassword
+    Public Overridable Function ILogin_UpdatePassword(newPassword As String, currentPassword As String) As Boolean Implements ILogin.UpdatePassword
         'Get Salt for inserting
         Dim saltCrpto As New RNGCryptoServiceProvider
         Dim hashedPasswordDS As New Games
