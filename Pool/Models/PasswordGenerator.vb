@@ -2,7 +2,7 @@
 
 Public Class PasswordGenerator
 
-    Private _generatingChars As String = "abcdefghijklmnopqrstuvwxyz!@#$%^&*?1234567890"
+    Private _generatingChars As String = "abcdefghijklmnopqrstuvwxyz!@#$%^&*?-1234567890"
     Private _generatingLength As Integer = 0
     Private _randomLength As Integer = 0
     Private _generatedPassword As String = String.Empty
@@ -60,7 +60,12 @@ Public Class PasswordGenerator
         Try
             For i = 0 To RandomLength
                 Dim indexOfChar As Integer = _generatorLength.Next(0, GeneratingLength - 1)
-                generatingString.Append(GeneratingChars(indexOfChar))
+                Dim generatedSingleChar As Char = GeneratingChars(indexOfChar)
+                If IsUpperCase(generatedSingleChar) Then
+                    generatingString.Append(generatedSingleChar.ToString.ToUpper)
+                Else
+                    generatingString.Append(generatedSingleChar.ToString.ToLower)
+                End If
             Next
         Catch ex As Exception
             IsGenerated = False
@@ -68,6 +73,21 @@ Public Class PasswordGenerator
         End Try
         IsGenerated = True
         Return generatingString.ToString
+    End Function
+
+    ''' <summary>
+    ''' Toss up for upper case chars
+    ''' </summary>
+    ''' <param name="character"></param>
+    ''' <returns></returns>
+    Private Function IsUpperCase(character As Char) As Boolean
+        Dim moduleBit As Integer = _generatorLength.Next(0, 100) Mod 2
+        Select Case moduleBit
+            Case 1
+                Return True
+            Case Else
+                Return False
+        End Select
     End Function
 
 End Class
