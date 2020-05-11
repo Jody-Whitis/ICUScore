@@ -17,9 +17,9 @@ Public Class PasswordRecovery
         If userLogin.GetLogin Then
             ''if password matches the temporary then
             ''set session and prompt a change
-            Dim passwordAlert As DialogResult = MessageBox.Show($"You will need a new password now!",
+            Dim passwordAlert As DialogResult = MessageBox.Show($"You will need to change your password now!",
     "Update Password", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            'ScoreTheme.LoadNextFormClose(Me, PasswordChange)
+            ScoreTheme.LoadNextFormClose(Me, PasswordChange)
         Else
             Dim passwordAlert As DialogResult = MessageBox.Show($"You creditials are incorrect!",
           "Invalid Password", MessageBoxButtons.OK, MessageBoxIcon.Stop)
