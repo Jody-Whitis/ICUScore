@@ -24,6 +24,7 @@ Module CurrentSession
     Private _subscribed As Boolean = False
     Private _isTwoFactorAuthenticate As Boolean = False
     Private _registered As Boolean = False
+    Private _isUsingTempPassword As Boolean = False
     Public PreviousForm As Form = Home
     Public CurrentForm As Form = Nothing
     Private _CurrentScreen As AppState
@@ -135,6 +136,15 @@ Module CurrentSession
         End Get
         Set(value As Boolean)
             _registered = value
+        End Set
+    End Property
+
+    Public Property IsUsingTempPassword As Boolean
+        Get
+            Return _isUsingTempPassword
+        End Get
+        Set(value As Boolean)
+            _isUsingTempPassword = value
         End Set
     End Property
 #End Region

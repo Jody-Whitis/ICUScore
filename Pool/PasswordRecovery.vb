@@ -1,6 +1,6 @@
 ﻿Imports Pool.Models.Validation
 Public Class PasswordRecovery
-    Dim userLogin As New PasswordUpdater
+    Dim userLogin As New PasswordUpdaterRecovery
     Dim emailValidation As New EmailValidation
     Private Sub PasswordRecovery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToScreen()
@@ -17,6 +17,7 @@ Public Class PasswordRecovery
         If userLogin.GetLogin Then
             ''if password matches the temporary then
             ''set session and prompt a change
+            CurrentSession.IsUsingTempPassword = True
             Dim passwordAlert As DialogResult = MessageBox.Show($"You will need to change your password now!",
     "Update Password", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             ScoreTheme.LoadNextFormClose(Me, PasswordChange)
@@ -30,14 +31,17 @@ Public Class PasswordRecovery
         Dim tempPassword As New Email(New List(Of String) From {tbEmailAddress.Text})
         Dim generatedPassword As New PasswordGenerator
         Dim generatePassword As String = String.Empty
+        Dim passwordUpdated As Boolean = False
         If emailValidation.isValid(tbEmailAddress.Text) Then
             'generate temp password
             'update for that email
+            userLogin.User = tbEmailAddress.Text.Trim
+            userLogin.isLoggedIn = True
             generatePassword = generatedPassword.GeneratedPassword
-            'passwordUpdated = userLogin.ILogin_UpdatePassword(generatePassword)
-
+            passwordUpdated = userLogin.ILogin_UpdatePassword(generatePassword)
+            userLogin.Password = generatePassword
             'Password sent
-            If generatedPassword.IsGenerated AndAlso tempPassword.SendTempPassword(tbEmailAddress.Text, generatePassword, Now.ToString) Then
+            If passwordUpdated AndAlso tempPassword.SendTempPassword(tbEmailAddress.Text, generatePassword, Now.ToString) Then
                 Dim passwordAlert As DialogResult = MessageBox.Show($"Enter your password sent to this email",
 "Temporary Password Send", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Else

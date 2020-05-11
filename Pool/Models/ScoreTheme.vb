@@ -142,6 +142,7 @@ Public Class ScoreTheme
         CurrentSession.Subscribed = False
         CurrentSession.TwoFactorEnabled = False
         CurrentSession.isTwoFactorCodeAuthenticate = False
+        CurrentSession.IsUsingTempPassword = False
         Application.Restart()
     End Sub
 End Class

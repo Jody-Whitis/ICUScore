@@ -32,7 +32,7 @@ Public Class Authenticate : Implements ILogin
     ''' Generate hash from salt and lenght from DB
     ''' Compare and return login status
     ''' </summary>
-    Public Function GetLogin() As Boolean Implements ILogin.GetLogin
+    Public Overridable Function GetLogin() As Boolean Implements ILogin.GetLogin
         Dim isLoginCreds As Boolean = False
         Dim hashedPasswordDS As New Games
         Dim hashpwdFromDB As String = String.Empty
@@ -79,7 +79,7 @@ Public Class Authenticate : Implements ILogin
 
         'If their login, then put a timestamp
         If isLoginCreds.Equals(True) Then
-            CurrentSession.Password = hashpwdfromDB
+            CurrentSession.Password = hashpwdFromDB
             Dim insertLoginSQl As New StringBuilder
             With insertLoginSQl
                 .Append("exec [insLoginUser] ")
