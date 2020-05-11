@@ -1,13 +1,8 @@
 ﻿Imports System.Security.Cryptography
 Imports System.Text
 
-Public Class PasswordRecover
+Public Class PasswordUpdater
     Inherits Authenticate
-
-    Public Function GeneratePassword() As String
-
-        Return String.Empty
-    End Function
 
     ''' <summary>
     ''' Set to temporary password sent to this user.

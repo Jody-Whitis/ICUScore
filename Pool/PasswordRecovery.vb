@@ -1,6 +1,6 @@
 ﻿Imports Pool.Models.Validation
 Public Class PasswordRecovery
-    Dim userLogin As New PasswordRecover
+    Dim userLogin As New PasswordUpdater
     Dim emailValidation As New EmailValidation
     Private Sub PasswordRecovery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToScreen()
@@ -28,16 +28,16 @@ Public Class PasswordRecovery
 
     Private Sub btnSend_Click(sender As Object, e As EventArgs) Handles btnSend.Click
         Dim tempPassword As New Email(New List(Of String) From {tbEmailAddress.Text})
+        Dim generatedPassword As New PasswordGenerator
         Dim generatePassword As String = String.Empty
-        Dim passwordUpdated As Boolean = False
         If emailValidation.isValid(tbEmailAddress.Text) Then
             'generate temp password
             'update for that email
-            generatePassword = userLogin.GeneratePassword()
+            generatePassword = generatedPassword.GeneratedPassword
             'passwordUpdated = userLogin.ILogin_UpdatePassword(generatePassword)
 
             'Password sent
-            If passwordUpdated AndAlso tempPassword.SendTempPassword(tbEmailAddress.Text, generatePassword, Now.ToString) Then
+            If generatedPassword.IsGenerated AndAlso tempPassword.SendTempPassword(tbEmailAddress.Text, generatePassword, Now.ToString) Then
                 Dim passwordAlert As DialogResult = MessageBox.Show($"Enter your password sent to this email",
 "Temporary Password Send", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Else
