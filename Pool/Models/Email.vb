@@ -271,7 +271,7 @@ Public Class Email
                 .Sender = New MailAddress(My.Settings.senderEmail)
                 .From = New MailAddress("scores@score.com")
                 .IsBodyHtml = True
-                .Subject = $"Temporary password for {user}"
+                .Subject = $"Temporary Password Request"
             End With
             For Each address In AddressList
                 eMail.To.Add(address)
@@ -280,6 +280,8 @@ Public Class Email
                 .Append(emailPasswordTemp)
             End With
             eMail.Body = bodyTable.ToString.Replace("=pwd=", generatedPassword)
+            Dim rsAttached As New Attachment(emailTempsFolder & "\angryCat.jpg")
+            eMail.Attachments.Add(rsAttached)
             smtp.Send(eMail)
             reminderSend = True
         Catch ex As Exception

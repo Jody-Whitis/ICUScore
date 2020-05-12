@@ -38,12 +38,13 @@ Public Class PasswordRecovery
             userLogin.User = tbEmailAddress.Text.Trim
             userLogin.isLoggedIn = True
             generatePassword = generatedPassword.GeneratedPassword
-            passwordUpdated = userLogin.ILogin_UpdatePassword(generatePassword)
+            passwordUpdated = userLogin.ILogin_UpdatePassword(generatePassword, 1)
             userLogin.Password = generatePassword
             'Password sent
             If passwordUpdated AndAlso tempPassword.SendTempPassword(tbEmailAddress.Text, generatePassword, Now.ToString) Then
                 Dim passwordAlert As DialogResult = MessageBox.Show($"Enter your password sent to this email",
 "Temporary Password Send", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                ScoreTheme.SetControl(New Control() {tbPassword, lblTempPassword}, True)
             Else
                 Dim passwordAlert As DialogResult = MessageBox.Show($"Your Temporary Password is not sent!",
 "Error sending Password", MessageBoxButtons.OK, MessageBoxIcon.Error)

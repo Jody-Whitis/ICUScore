@@ -29,15 +29,15 @@ Partial Class PasswordChange
         Me.lblUpdate = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.txtCurrentPassword = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblCurrentPassword = New System.Windows.Forms.Label()
+        Me.lblNewPassword = New System.Windows.Forms.Label()
+        Me.lblConfirmPassword = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -118,41 +118,41 @@ Partial Class PasswordChange
         Me.txtCurrentPassword.Size = New System.Drawing.Size(356, 34)
         Me.txtCurrentPassword.TabIndex = 1
         '
-        'Label1
+        'lblCurrentPassword
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Aquamarine
-        Me.Label1.Location = New System.Drawing.Point(146, 175)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(251, 30)
-        Me.Label1.TabIndex = 6
-        Me.Label1.Text = "Current Password"
+        Me.lblCurrentPassword.AutoSize = True
+        Me.lblCurrentPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCurrentPassword.ForeColor = System.Drawing.Color.Aquamarine
+        Me.lblCurrentPassword.Location = New System.Drawing.Point(146, 175)
+        Me.lblCurrentPassword.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblCurrentPassword.Name = "lblCurrentPassword"
+        Me.lblCurrentPassword.Size = New System.Drawing.Size(251, 30)
+        Me.lblCurrentPassword.TabIndex = 6
+        Me.lblCurrentPassword.Text = "Current Password"
         '
-        'Label2
+        'lblNewPassword
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Aquamarine
-        Me.Label2.Location = New System.Drawing.Point(159, 285)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(201, 30)
-        Me.Label2.TabIndex = 7
-        Me.Label2.Text = "New Password"
+        Me.lblNewPassword.AutoSize = True
+        Me.lblNewPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewPassword.ForeColor = System.Drawing.Color.Aquamarine
+        Me.lblNewPassword.Location = New System.Drawing.Point(159, 285)
+        Me.lblNewPassword.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblNewPassword.Name = "lblNewPassword"
+        Me.lblNewPassword.Size = New System.Drawing.Size(201, 30)
+        Me.lblNewPassword.TabIndex = 7
+        Me.lblNewPassword.Text = "New Password"
         '
-        'Label3
+        'lblConfirmPassword
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.Aquamarine
-        Me.Label3.Location = New System.Drawing.Point(133, 397)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(253, 30)
-        Me.Label3.TabIndex = 8
-        Me.Label3.Text = "Confirm Password"
+        Me.lblConfirmPassword.AutoSize = True
+        Me.lblConfirmPassword.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblConfirmPassword.ForeColor = System.Drawing.Color.Aquamarine
+        Me.lblConfirmPassword.Location = New System.Drawing.Point(133, 397)
+        Me.lblConfirmPassword.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblConfirmPassword.Name = "lblConfirmPassword"
+        Me.lblConfirmPassword.Size = New System.Drawing.Size(253, 30)
+        Me.lblConfirmPassword.TabIndex = 8
+        Me.lblConfirmPassword.Text = "Confirm Password"
         '
         'MenuStrip1
         '
@@ -162,7 +162,7 @@ Partial Class PasswordChange
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(554, 42)
+        Me.MenuStrip1.Size = New System.Drawing.Size(554, 41)
         Me.MenuStrip1.TabIndex = 9
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -172,32 +172,15 @@ Partial Class PasswordChange
         Me.MenuToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.MenuToolStripMenuItem.Name = "MenuToolStripMenuItem"
-        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 38)
+        Me.MenuToolStripMenuItem.Size = New System.Drawing.Size(115, 37)
         Me.MenuToolStripMenuItem.Text = "Menu"
-        '
-        'AboutToolStripMenuItem
-        '
-        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem1})
-        Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
-        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 38)
-        Me.AboutToolStripMenuItem.Text = "About"
-        '
-        'AboutToolStripMenuItem1
-        '
-        Me.AboutToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
-        Me.AboutToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
-        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
-        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(359, 44)
-        Me.AboutToolStripMenuItem1.Text = "About"
         '
         'LogOutToolStripMenuItem
         '
         Me.LogOutToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.LogOutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
-        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(263, 44)
         Me.LogOutToolStripMenuItem.Text = "Log Out"
         '
         'QuitToolStripMenuItem
@@ -205,8 +188,25 @@ Partial Class PasswordChange
         Me.QuitToolStripMenuItem.BackColor = System.Drawing.Color.RoyalBlue
         Me.QuitToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
-        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(359, 44)
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(263, 44)
         Me.QuitToolStripMenuItem.Text = "Quit"
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem1})
+        Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 37)
+        Me.AboutToolStripMenuItem.Text = "About"
+        '
+        'AboutToolStripMenuItem1
+        '
+        Me.AboutToolStripMenuItem1.BackColor = System.Drawing.Color.RoyalBlue
+        Me.AboutToolStripMenuItem1.ForeColor = System.Drawing.Color.Aquamarine
+        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(242, 44)
+        Me.AboutToolStripMenuItem1.Text = "About"
         '
         'PasswordChange
         '
@@ -216,9 +216,9 @@ Partial Class PasswordChange
         Me.BackColor = System.Drawing.Color.RoyalBlue
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(554, 629)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblConfirmPassword)
+        Me.Controls.Add(Me.lblNewPassword)
+        Me.Controls.Add(Me.lblCurrentPassword)
         Me.Controls.Add(Me.txtCurrentPassword)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.lblUpdate)
@@ -247,9 +247,9 @@ Partial Class PasswordChange
     Friend WithEvents lblUpdate As Label
     Friend WithEvents btnCancel As Button
     Friend WithEvents txtCurrentPassword As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
+    Friend WithEvents lblCurrentPassword As Label
+    Friend WithEvents lblNewPassword As Label
+    Friend WithEvents lblConfirmPassword As Label
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents MenuToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem

@@ -9,7 +9,7 @@ Public Class PasswordUpdaterRecovery
     ''' </summary>
     ''' <param name="newPassword"></param>
     ''' <returns></returns>
-    Public Overloads Function ILogin_UpdatePassword(newPassword As String) As Boolean
+    Public Overloads Function ILogin_UpdatePassword(newPassword As String, tempPassword As Integer) As Boolean
         'Get Salt for inserting
         Dim saltCrpto As New RNGCryptoServiceProvider
         Dim hashedPasswordDS As New Games
@@ -31,7 +31,7 @@ Public Class PasswordUpdaterRecovery
             .Append($"@user = '{User}',")
             .Append($"@newPassword = '{$"1500:{Convert.ToBase64String(saltyByteFromForm)}:{Convert.ToBase64String(hashBytefromForm)}"}',")
             .Append($"@isLogin = '{Convert.ToInt32(isLoggedIn)}', ")
-            .Append($"@tempPassword=1,")
+            .Append($"@tempPassword={tempPassword},")
             .Append($"@timestamp = '{Now.ToString}'")
         End With
 

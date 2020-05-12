@@ -4,7 +4,7 @@
         Me.CenterToScreen()
         CurrentScreen = AppState.Edit
         If CurrentSession.IsUsingTempPassword Then
-            ScoreTheme.SetControl(New Control() {txtCurrentPassword}, False)
+            ScoreTheme.SetControl(New Control() {txtCurrentPassword, btnCancel}, False)
         End If
     End Sub
 
@@ -35,11 +35,11 @@
     Private Sub btnUpdatePassword_Click(sender As Object, e As EventArgs) Handles btnUpdatePassword.Click
         Dim isUpdated As Boolean = False
         lblUpdate.ForeColor = Color.Aquamarine
-
+        'update real one but delete temp
         If CurrentSession.IsUsingTempPassword Then
             If isValidatedEntry(New Control() {txtNewPassword, txtNewPasswordConfirm}).Equals(True) AndAlso txtNewPassword.Text.Equals(txtNewPasswordConfirm.Text) Then
                 Dim tempPasswordUser As New PasswordUpdaterRecovery With {.User = CurrentSession.UserEmail, .isLoggedIn = True}
-                isUpdated = tempPasswordUser.ILogin_UpdatePassword(txtNewPassword.Text)
+                isUpdated = tempPasswordUser.ILogin_UpdatePassword(txtNewPassword.Text, 0)
                 CurrentSession.IsUsingTempPassword = False
             End If
         Else
