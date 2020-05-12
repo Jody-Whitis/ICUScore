@@ -61,7 +61,7 @@ Partial Class Home
         Me.btnPvP.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnPvP.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPvP.ForeColor = System.Drawing.Color.Black
-        Me.btnPvP.Location = New System.Drawing.Point(117, 369)
+        Me.btnPvP.Location = New System.Drawing.Point(117, 313)
         Me.btnPvP.Name = "btnPvP"
         Me.btnPvP.Size = New System.Drawing.Size(213, 70)
         Me.btnPvP.TabIndex = 6
@@ -75,7 +75,7 @@ Partial Class Home
         Me.btnHS.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnHS.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnHS.ForeColor = System.Drawing.Color.Black
-        Me.btnHS.Location = New System.Drawing.Point(441, 369)
+        Me.btnHS.Location = New System.Drawing.Point(441, 316)
         Me.btnHS.Name = "btnHS"
         Me.btnHS.Size = New System.Drawing.Size(213, 70)
         Me.btnHS.TabIndex = 7
@@ -137,9 +137,9 @@ Partial Class Home
         Me.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLogin.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.ForeColor = System.Drawing.Color.Black
-        Me.btnLogin.Location = New System.Drawing.Point(569, 444)
+        Me.btnLogin.Location = New System.Drawing.Point(458, 381)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(213, 75)
+        Me.btnLogin.Size = New System.Drawing.Size(196, 75)
         Me.btnLogin.TabIndex = 5
         Me.btnLogin.Text = "Login"
         Me.btnLogin.UseVisualStyleBackColor = False
@@ -200,7 +200,7 @@ Partial Class Home
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
-        Me.MenuStrip1.Size = New System.Drawing.Size(1608, 96)
+        Me.MenuStrip1.Size = New System.Drawing.Size(804, 43)
         Me.MenuStrip1.TabIndex = 11
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -210,7 +210,7 @@ Partial Class Home
         Me.mnuHome.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mnuHome.ForeColor = System.Drawing.Color.Aquamarine
         Me.mnuHome.Name = "mnuHome"
-        Me.mnuHome.Size = New System.Drawing.Size(115, 90)
+        Me.mnuHome.Size = New System.Drawing.Size(115, 37)
         Me.mnuHome.Text = "Menu"
         '
         'logOutMnu
@@ -273,7 +273,7 @@ Partial Class Home
         Me.AboutToolStripMenuItem.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AboutToolStripMenuItem.ForeColor = System.Drawing.Color.Aquamarine
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 90)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(128, 37)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'AboutToolStripMenuItem1
@@ -291,7 +291,7 @@ Partial Class Home
         Me.btnNewUser.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnNewUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNewUser.ForeColor = System.Drawing.Color.Black
-        Me.btnNewUser.Location = New System.Drawing.Point(12, 445)
+        Me.btnNewUser.Location = New System.Drawing.Point(117, 381)
         Me.btnNewUser.Name = "btnNewUser"
         Me.btnNewUser.Size = New System.Drawing.Size(196, 75)
         Me.btnNewUser.TabIndex = 3
@@ -320,7 +320,7 @@ Partial Class Home
         Me.btnProfileEditing.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnProfileEditing.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnProfileEditing.ForeColor = System.Drawing.Color.Black
-        Me.btnProfileEditing.Location = New System.Drawing.Point(117, 270)
+        Me.btnProfileEditing.Location = New System.Drawing.Point(117, 194)
         Me.btnProfileEditing.Name = "btnProfileEditing"
         Me.btnProfileEditing.Size = New System.Drawing.Size(213, 84)
         Me.btnProfileEditing.TabIndex = 12
@@ -336,7 +336,7 @@ Partial Class Home
         Me.btnManagePlayers.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnManagePlayers.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnManagePlayers.ForeColor = System.Drawing.Color.Black
-        Me.btnManagePlayers.Location = New System.Drawing.Point(441, 270)
+        Me.btnManagePlayers.Location = New System.Drawing.Point(441, 194)
         Me.btnManagePlayers.Name = "btnManagePlayers"
         Me.btnManagePlayers.Size = New System.Drawing.Size(213, 84)
         Me.btnManagePlayers.TabIndex = 13
@@ -351,7 +351,7 @@ Partial Class Home
         Me.btnPasswordRecover.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnPasswordRecover.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPasswordRecover.ForeColor = System.Drawing.Color.Black
-        Me.btnPasswordRecover.Location = New System.Drawing.Point(294, 445)
+        Me.btnPasswordRecover.Location = New System.Drawing.Point(294, 581)
         Me.btnPasswordRecover.Name = "btnPasswordRecover"
         Me.btnPasswordRecover.Size = New System.Drawing.Size(196, 75)
         Me.btnPasswordRecover.TabIndex = 14

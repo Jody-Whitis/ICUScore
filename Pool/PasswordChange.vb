@@ -4,7 +4,7 @@
         Me.CenterToScreen()
         CurrentScreen = AppState.Edit
         If CurrentSession.IsUsingTempPassword Then
-            ScoreTheme.SetControl(New Control() {txtCurrentPassword, btnCancel}, False)
+            ScoreTheme.SetControl(New Control() {txtCurrentPassword, btnCancel, lblCurrentPassword}, False)
         End If
     End Sub
 
