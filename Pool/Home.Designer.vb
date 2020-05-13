@@ -49,6 +49,7 @@ Partial Class Home
         Me.btnGuest = New System.Windows.Forms.Button()
         Me.btnProfileEditing = New System.Windows.Forms.Button()
         Me.btnManagePlayers = New System.Windows.Forms.Button()
+        Me.btnPasswordRecover = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -60,7 +61,7 @@ Partial Class Home
         Me.btnPvP.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnPvP.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 10.125!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPvP.ForeColor = System.Drawing.Color.Black
-        Me.btnPvP.Location = New System.Drawing.Point(117, 369)
+        Me.btnPvP.Location = New System.Drawing.Point(117, 313)
         Me.btnPvP.Name = "btnPvP"
         Me.btnPvP.Size = New System.Drawing.Size(213, 70)
         Me.btnPvP.TabIndex = 6
@@ -74,7 +75,7 @@ Partial Class Home
         Me.btnHS.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnHS.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnHS.ForeColor = System.Drawing.Color.Black
-        Me.btnHS.Location = New System.Drawing.Point(441, 369)
+        Me.btnHS.Location = New System.Drawing.Point(441, 316)
         Me.btnHS.Name = "btnHS"
         Me.btnHS.Size = New System.Drawing.Size(213, 70)
         Me.btnHS.TabIndex = 7
@@ -136,9 +137,9 @@ Partial Class Home
         Me.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLogin.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.ForeColor = System.Drawing.Color.Black
-        Me.btnLogin.Location = New System.Drawing.Point(441, 445)
+        Me.btnLogin.Location = New System.Drawing.Point(458, 381)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(213, 75)
+        Me.btnLogin.Size = New System.Drawing.Size(196, 75)
         Me.btnLogin.TabIndex = 5
         Me.btnLogin.Text = "Login"
         Me.btnLogin.UseVisualStyleBackColor = False
@@ -290,9 +291,9 @@ Partial Class Home
         Me.btnNewUser.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnNewUser.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNewUser.ForeColor = System.Drawing.Color.Black
-        Me.btnNewUser.Location = New System.Drawing.Point(117, 445)
+        Me.btnNewUser.Location = New System.Drawing.Point(117, 381)
         Me.btnNewUser.Name = "btnNewUser"
-        Me.btnNewUser.Size = New System.Drawing.Size(213, 75)
+        Me.btnNewUser.Size = New System.Drawing.Size(196, 75)
         Me.btnNewUser.TabIndex = 3
         Me.btnNewUser.Text = "New User"
         Me.btnNewUser.UseVisualStyleBackColor = False
@@ -319,7 +320,7 @@ Partial Class Home
         Me.btnProfileEditing.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnProfileEditing.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnProfileEditing.ForeColor = System.Drawing.Color.Black
-        Me.btnProfileEditing.Location = New System.Drawing.Point(117, 270)
+        Me.btnProfileEditing.Location = New System.Drawing.Point(117, 194)
         Me.btnProfileEditing.Name = "btnProfileEditing"
         Me.btnProfileEditing.Size = New System.Drawing.Size(213, 84)
         Me.btnProfileEditing.TabIndex = 12
@@ -335,13 +336,27 @@ Partial Class Home
         Me.btnManagePlayers.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnManagePlayers.Font = New System.Drawing.Font("Gill Sans Ultra Bold", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnManagePlayers.ForeColor = System.Drawing.Color.Black
-        Me.btnManagePlayers.Location = New System.Drawing.Point(441, 270)
+        Me.btnManagePlayers.Location = New System.Drawing.Point(441, 194)
         Me.btnManagePlayers.Name = "btnManagePlayers"
         Me.btnManagePlayers.Size = New System.Drawing.Size(213, 84)
         Me.btnManagePlayers.TabIndex = 13
         Me.btnManagePlayers.Text = "Manage Players"
         Me.btnManagePlayers.UseVisualStyleBackColor = False
         Me.btnManagePlayers.Visible = False
+        '
+        'btnPasswordRecover
+        '
+        Me.btnPasswordRecover.BackColor = System.Drawing.Color.Aquamarine
+        Me.btnPasswordRecover.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnPasswordRecover.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnPasswordRecover.Font = New System.Drawing.Font("Gill Sans Ultra Bold Condensed", 7.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPasswordRecover.ForeColor = System.Drawing.Color.Black
+        Me.btnPasswordRecover.Location = New System.Drawing.Point(294, 581)
+        Me.btnPasswordRecover.Name = "btnPasswordRecover"
+        Me.btnPasswordRecover.Size = New System.Drawing.Size(196, 75)
+        Me.btnPasswordRecover.TabIndex = 14
+        Me.btnPasswordRecover.Text = "Password Recovery"
+        Me.btnPasswordRecover.UseVisualStyleBackColor = False
         '
         'Home
         '
@@ -350,6 +365,7 @@ Partial Class Home
         Me.BackColor = System.Drawing.Color.RoyalBlue
         Me.CancelButton = Me.btnQuit
         Me.ClientSize = New System.Drawing.Size(804, 709)
+        Me.Controls.Add(Me.btnPasswordRecover)
         Me.Controls.Add(Me.btnManagePlayers)
         Me.Controls.Add(Me.btnProfileEditing)
         Me.Controls.Add(Me.btnGuest)
@@ -404,4 +420,5 @@ Partial Class Home
     Friend WithEvents ProfileEditingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents btnProfileEditing As Button
     Friend WithEvents btnManagePlayers As Button
+    Friend WithEvents btnPasswordRecover As Button
 End Class

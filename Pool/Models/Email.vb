@@ -242,4 +242,53 @@ Public Class Email
         Return codeSent
 
     End Function
+
+    ''' <summary>
+    ''' Send a temporary password in an email in the list
+    ''' </summary>
+    ''' <param name="user"></param>
+    ''' <param name="generatedPassword"></param>
+    ''' <param name="timeStamp"></param>
+    ''' <returns></returns>
+    Public Function SendTempPassword(ByVal user As String, ByVal generatedPassword As String, ByVal timeStamp As DateTime) As Boolean
+        Dim reminderSend As Boolean = False
+        Dim smtp As New SmtpClient
+        Dim eMail As New MailMessage()
+        Dim bodyTable As New StringBuilder
+        Dim counterStats As Integer = 0
+        Dim emailPasswordTemp As String = File.ReadAllText(emailTempsFolder & "\EmailTemporaryPassword.html").ToString
+        Try
+            With smtp
+                .UseDefaultCredentials = My.Settings.emailDefaultCreds
+                .Credentials = New Net.NetworkCredential(My.Settings.emailCreds, My.Settings.passEmailCreds)
+                .Port = My.Settings.emailPort
+                .EnableSsl = True
+                .Host = My.Settings.emailServer
+            End With
+            eMail = New MailMessage()
+
+            With eMail
+                .Sender = New MailAddress(My.Settings.senderEmail)
+                .From = New MailAddress("scores@score.com")
+                .IsBodyHtml = True
+                .Subject = $"Temporary Password Request"
+            End With
+            For Each address In AddressList
+                eMail.To.Add(address)
+            Next
+            With bodyTable
+                .Append(emailPasswordTemp)
+            End With
+            eMail.Body = bodyTable.ToString.Replace("=pwd=", generatedPassword)
+            Dim rsAttached As New Attachment(emailTempsFolder & "\angryCat.jpg")
+            eMail.Attachments.Add(rsAttached)
+            smtp.Send(eMail)
+            reminderSend = True
+        Catch ex As Exception
+            Dim logAction As New Logging(Now, "Temporary Password", ex.ToString)
+            logAction.LogAction()
+            Return reminderSend
+        End Try
+        Return reminderSend
+    End Function
 End Class

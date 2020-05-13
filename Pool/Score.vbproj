@@ -123,11 +123,18 @@
     <Compile Include="Interface\ILogin.vb" />
     <Compile Include="Models\EmailValidation.vb" />
     <Compile Include="Models\Logging.vb" />
+    <Compile Include="Models\PasswordGenerator.vb" />
     <Compile Include="Models\ValidationBase.vb" />
     <Compile Include="PasswordChange.Designer.vb">
       <DependentUpon>PasswordChange.vb</DependentUpon>
     </Compile>
     <Compile Include="PasswordChange.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswordRecovery.Designer.vb">
+      <DependentUpon>PasswordRecovery.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordRecovery.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ProfileEditing.Designer.vb">
@@ -136,6 +143,7 @@
     <Compile Include="ProfileEditing.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Security\PasswordUpdaterRecovery.vb" />
     <Compile Include="Security\Permissions.vb" />
     <Compile Include="PlayerManagement.Designer.vb">
       <DependentUpon>PlayerManagement.vb</DependentUpon>
@@ -209,6 +217,9 @@
     <EmbeddedResource Include="PasswordChange.resx">
       <DependentUpon>PasswordChange.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PasswordRecovery.resx">
+      <DependentUpon>PasswordRecovery.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PlayerManagement.resx">
       <DependentUpon>PlayerManagement.vb</DependentUpon>
     </EmbeddedResource>
@@ -258,7 +269,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="EmailTemps\EmailPasswordReminder.html" />
+    <Content Include="EmailTemps\EmailTemporaryPassword.html" />
     <Content Include="EmailTemps\EmailTwoFactorCode.html" />
+    <Content Include="EmailTemps\angryCat.jpg" />
     <Content Include="EmailTemps\LogEmailTemp.html" />
     <Content Include="EmailTemps\rollSafe.jpg" />
     <Content Include="EmailTemps\suprisedPikachu.png" />

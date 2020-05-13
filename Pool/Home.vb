@@ -104,7 +104,7 @@ Public Class Home
             CurrentSession.IsLoggedIn = False
             CurrentSession.Permissions = Permissions.UserStatus.Guest
             ScoreTheme.SetControl(New Control() {btnHS, btnPvP, btnLogout, btnNewUser}, True)
-            ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword}, False)
+            ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword, btnPasswordRecover}, False)
             EditPasswordToolStripMenuItem.Visible = False
             EditToolStripMenuItem.Visible = False
             lblUser.Visible = False
@@ -140,7 +140,7 @@ Public Class Home
     ''' </summary>
     Private Sub SetUserloginScreen()
         ScoreTheme.SetControl(New Button() {btnHS, btnPvP, btnLogout, btnNewUser, btnProfileEditing, btnManagePlayers}, True)
-        ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword}, False)
+        ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword, btnPasswordRecover}, False)
         lblUser.Visible = False
         lblPassword.Visible = False
         lblHome.Visible = True
@@ -177,4 +177,7 @@ Public Class Home
         CurrentSession.Registered = Convert.ToBoolean(registeredBit)
     End Sub
 
+    Private Sub btnPasswordRecover_Click(sender As Object, e As EventArgs) Handles btnPasswordRecover.Click
+        ScoreTheme.LoadNextFormClose(Me, PasswordRecovery)
+    End Sub
 End Class

@@ -5,7 +5,7 @@ Imports Pool.Games
 Public Class Authenticate : Implements ILogin
 
 #Region "Props/Constr"
-    Private Structure HashFormat
+    Protected Structure HashFormat
         Public length As Integer
         Public salt As Byte()
         Public hash As Byte()
@@ -32,7 +32,7 @@ Public Class Authenticate : Implements ILogin
     ''' Generate hash from salt and lenght from DB
     ''' Compare and return login status
     ''' </summary>
-    Public Function GetLogin() As Boolean Implements ILogin.GetLogin
+    Public Overridable Function GetLogin() As Boolean Implements ILogin.GetLogin
         Dim isLoginCreds As Boolean = False
         Dim hashedPasswordDS As New Games
         Dim hashpwdFromDB As String = String.Empty
@@ -79,7 +79,7 @@ Public Class Authenticate : Implements ILogin
 
         'If their login, then put a timestamp
         If isLoginCreds.Equals(True) Then
-            CurrentSession.Password = hashpwdfromDB
+            CurrentSession.Password = hashpwdFromDB
             Dim insertLoginSQl As New StringBuilder
             With insertLoginSQl
                 .Append("exec [insLoginUser] ")
@@ -151,7 +151,7 @@ Public Class Authenticate : Implements ILogin
     ''' Insert colon delimited base64 string into DB
     ''' </summary>
     ''' <returns></returns>
-    Public Function ILogin_UpdatePassword(newPassword As String, currentPassword As String) As Boolean Implements ILogin.UpdatePassword
+    Public Overridable Function ILogin_UpdatePassword(newPassword As String, currentPassword As String) As Boolean Implements ILogin.UpdatePassword
         'Get Salt for inserting
         Dim saltCrpto As New RNGCryptoServiceProvider
         Dim hashedPasswordDS As New Games

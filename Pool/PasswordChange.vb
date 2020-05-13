@@ -3,6 +3,9 @@
     Private Sub PasswordChange_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToScreen()
         CurrentScreen = AppState.Edit
+        If CurrentSession.IsUsingTempPassword Then
+            ScoreTheme.SetControl(New Control() {txtCurrentPassword, btnCancel, lblCurrentPassword}, False)
+        End If
     End Sub
 
 #Region "Functions/Subs"
@@ -14,26 +17,37 @@
         Next
         Return True
     End Function
+
+    Private Sub SetAlerts(isUpdated)
+        If isUpdated.Equals(True) Then
+            Dim RequiredField As DialogResult = MessageBox.Show($"Password is Updated!",
+    "Updated Password", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ScoreTheme.LoadNextFormClose(Me, Home)
+        Else
+            Dim RequiredField As DialogResult = MessageBox.Show($"Incorrect Password!",
+    "Incorrect Password", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+    End Sub
+
 #End Region
 
 #Region "Event Handlers"
     Private Sub btnUpdatePassword_Click(sender As Object, e As EventArgs) Handles btnUpdatePassword.Click
         Dim isUpdated As Boolean = False
         lblUpdate.ForeColor = Color.Aquamarine
-        If isValidatedEntry(New Control() {txtCurrentPassword, txtNewPassword, txtNewPasswordConfirm}).Equals(True) Then
-            If txtNewPassword.Text.Equals(txtNewPasswordConfirm.Text) Then
-                isUpdated = passwordUpdate.ILogin_UpdatePassword(txtNewPassword.Text, txtCurrentPassword.Text)
-            End If
-            If isUpdated.Equals(True) Then
-                ScoreTheme.LoadNextFormClose(Me, Home)
-            Else
-                lblUpdate.ForeColor = Color.Red
-                lblUpdate.Text = "Incorrect Current/New Password"
+        'update real one but delete temp
+        If CurrentSession.IsUsingTempPassword Then
+            If isValidatedEntry(New Control() {txtNewPassword, txtNewPasswordConfirm}).Equals(True) AndAlso txtNewPassword.Text.Equals(txtNewPasswordConfirm.Text) Then
+                Dim tempPasswordUser As New PasswordUpdaterRecovery With {.User = CurrentSession.UserEmail, .isLoggedIn = True}
+                isUpdated = tempPasswordUser.ILogin_UpdatePassword(txtNewPassword.Text, 0)
+                CurrentSession.IsUsingTempPassword = False
             End If
         Else
-            Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields",
-        "Missing Requirement", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            If isValidatedEntry(New Control() {txtCurrentPassword, txtNewPassword, txtNewPasswordConfirm}).Equals(True) AndAlso txtNewPassword.Text.Equals(txtNewPasswordConfirm.Text) Then
+                isUpdated = passwordUpdate.ILogin_UpdatePassword(txtNewPassword.Text, txtCurrentPassword.Text)
+            End If
         End If
+        SetAlerts(isUpdated)
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
