@@ -44,12 +44,14 @@ Public Class PasswordRecovery
             If passwordUpdated AndAlso tempPassword.SendTempPassword(tbEmailAddress.Text, generatePassword, Now.ToString) Then
                 Dim passwordAlert As DialogResult = MessageBox.Show($"Enter your password sent to this email",
 "Temporary Password Send", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                ScoreTheme.SetControl(New Control() {tbPassword, lblTempPassword}, True)
+                ScoreTheme.SetControl(New Control() {tbPassword, lblTempPassword, btnConfirm}, True)
             Else
                 Dim passwordAlert As DialogResult = MessageBox.Show($"Your Temporary Password is not sent!",
 "Error sending Password", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
-
+        Else
+            Dim emailAlert As DialogResult = MessageBox.Show($"Email is invalid",
+"Error sending email", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
     End Sub

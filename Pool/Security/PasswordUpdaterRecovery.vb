@@ -63,7 +63,7 @@ Public Class PasswordUpdaterRecovery
             hashpwdFromDB = pwdHashDS.Tables(0).Rows(0).Item("password")
             hashFormatSplit = hashpwdFromDB.Split(":")
         Catch ex As Exception
-            Dim logHashSplitFail As New Logging(Now, "Hash Split Failed", ex.ToString)
+            Dim logHashSplitFail As New Logging(Now, "Login failed hash split", ex.ToString)
             logHashSplitFail.LogAction()
             'logHashSplitFail.LogActionEmail()
             Return False
