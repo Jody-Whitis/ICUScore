@@ -473,37 +473,41 @@ Public Class PvP
     ''' <param name="e"></param>
     Private Sub btnPlayer1win_Click(sender As Object, e As EventArgs) Handles btnPlayer1win.Click
         CurrentScreen = AppState.Winner
-        Dim gameResults As String = String.Empty
+        Dim submittedAlert As DialogResult = MessageBox.Show($"Are you sure you want to submit this win for {player1.PlayerName1}?",
+"New Win Submittion", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If submittedAlert.Equals(DialogResult.Yes) Then
+            Dim gameResults As String = String.Empty
 #Region "Beta sql"
-        'adapter = New SqlDataAdapter("exec dbo.[insWins_v1.1] @newPlayer = '" & playerStats1.PlayerName1 & "',@wins = " & playerStats1.Wins1, sqlConnection)
+            'adapter = New SqlDataAdapter("exec dbo.[insWins_v1.1] @newPlayer = '" & playerStats1.PlayerName1 & "',@wins = " & playerStats1.Wins1, sqlConnection)
 #End Region
-        gameResults = player1.InsertGame("")
-        If (gameResults).Contains("Error") Then
-            lblError.Text = gameResults
-        Else
-            txtWins.Text = gameResults
+            gameResults = player1.InsertGame("")
+            If (gameResults).Contains("Error") Then
+                lblError.Text = gameResults
+            Else
+                txtWins.Text = gameResults
+            End If
+            allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
+            GetHighScores()
+            SetPVPSets()
+            If pvpSet1.Tables(0).Rows.Count > 0 Then
+                Integer.TryParse(pvpSet1.Tables(0).Rows(0).Item("Wins"), player1.WinsAgainst1)
+                isRiv = player1.getRivarly(player2.WinsAgainst1)
+            End If
+            SetWinsAgainst()
+            player1.WinsAgainst1 += 1
+            txtWinsagainst.Text = player1.WinsAgainst1
+            lblError.Text = player1.InsertPvPStats(player2.PID, pvpID, game)
+            totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
+            txtTotalAgainst.Text = totalGamesPvP.ToString
+            ScoreTheme.SetErrorLabel(lblError)
+            allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
+            GetHighScores()
+            SetControlsbyCbPlayers()
+            SetScoreControlsScreen(cbGames, New Control() {lblScoreBoard, lstAllWins})
+            ScoreTheme.SetControl(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
+            CurrentScreen = AppState.Switch
+            btnBack.Text = "Home"
         End If
-        allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
-        GetHighScores()
-        SetPVPSets()
-        If pvpSet1.Tables(0).Rows.Count > 0 Then
-            Integer.TryParse(pvpSet1.Tables(0).Rows(0).Item("Wins"), player1.WinsAgainst1)
-            isRiv = player1.getRivarly(player2.WinsAgainst1)
-        End If
-        SetWinsAgainst()
-        player1.WinsAgainst1 += 1
-        txtWinsagainst.Text = player1.WinsAgainst1
-        lblError.Text = player1.InsertPvPStats(player2.PID, pvpID, game)
-        totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
-        txtTotalAgainst.Text = totalGamesPvP.ToString
-        ScoreTheme.SetErrorLabel(lblError)
-        allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
-        GetHighScores()
-        SetControlsbyCbPlayers()
-        SetScoreControlsScreen(cbGames, New Control() {lblScoreBoard, lstAllWins})
-        ScoreTheme.SetControl(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
-        CurrentScreen = AppState.Switch
-        btnBack.Text = "Home"
     End Sub
 
     ''' <summary>
@@ -515,39 +519,43 @@ Public Class PvP
     ''' <param name="e"></param>
     Private Sub btnPlayer2Wins_Click(sender As Object, e As EventArgs) Handles btnPlayer2Wins.Click
         CurrentScreen = AppState.Winner
-        Dim gameResults As String = String.Empty
+        Dim submittedAlert As DialogResult = MessageBox.Show($"Are you sure you want to submit this win for {player2.PlayerName1}?",
+"New Win Submittion", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If submittedAlert.Equals(DialogResult.Yes) Then
+            Dim gameResults As String = String.Empty
 #Region "beta sql"
-        'playerStats2.Wins1 += 1
-        'adapter = New SqlDataAdapter("exec dbo.[insWins_v1.1] @newPlayer = '" & playerStats2.PlayerName1 & "',@wins = " & playerStats2.Wins1, sqlConnection)
-        'End Try
+            'playerStats2.Wins1 += 1
+            'adapter = New SqlDataAdapter("exec dbo.[insWins_v1.1] @newPlayer = '" & playerStats2.PlayerName1 & "',@wins = " & playerStats2.Wins1, sqlConnection)
+            'End Try
 #End Region
-        gameResults = player2.InsertGame("")
-        If (gameResults).Contains("Error") Then
-            lblError.Text = gameResults
-        Else
-            txtWins2.Text = gameResults
+            gameResults = player2.InsertGame("")
+            If (gameResults).Contains("Error") Then
+                lblError.Text = gameResults
+            Else
+                txtWins2.Text = gameResults
+            End If
+            allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
+            GetHighScores()
+            SetPVPSets()
+            If pvpSet2.Tables(0).Rows.Count > 0 Then
+                Integer.TryParse(pvpSet2.Tables(0).Rows(0).Item("Wins"), player2.WinsAgainst1)
+                SetWinsAgainst()
+                isRiv = player2.getRivarly(player1.WinsAgainst1)
+            End If
+            player2.WinsAgainst1 += 1
+            txtWinsAgainst2.Text = player2.WinsAgainst1
+            lblError.Text = player2.InsertPvPStats(player1.PID, pvpID2, game)
+            totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
+            txtTotalAgainst.Text = totalGamesPvP.ToString
+            ScoreTheme.SetErrorLabel(lblError)
+            allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
+            GetHighScores()
+            SetControlsbyCbPlayers()
+            SetScoreControlsScreen(cbGames, New Control() {lblScoreBoard, lstAllWins})
+            ScoreTheme.SetControl(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
+            btnBack.Text = "Home"
+            CurrentScreen = AppState.Switch
         End If
-        allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
-        GetHighScores()
-        SetPVPSets()
-        If pvpSet2.Tables(0).Rows.Count > 0 Then
-            Integer.TryParse(pvpSet2.Tables(0).Rows(0).Item("Wins"), player2.WinsAgainst1)
-            SetWinsAgainst()
-            isRiv = player2.getRivarly(player1.WinsAgainst1)
-        End If
-        player2.WinsAgainst1 += 1
-        txtWinsAgainst2.Text = player2.WinsAgainst1
-        lblError.Text = player2.InsertPvPStats(player1.PID, pvpID2, game)
-        totalGamesPvP = player1.WinsAgainst1 + player2.WinsAgainst1
-        txtTotalAgainst.Text = totalGamesPvP.ToString
-        ScoreTheme.SetErrorLabel(lblError)
-        allWins = player1.GetAllResults($"exec [selAllWins_v1] @gID={game},@output=0")
-        GetHighScores()
-        SetControlsbyCbPlayers()
-        SetScoreControlsScreen(cbGames, New Control() {lblScoreBoard, lstAllWins})
-        ScoreTheme.SetControl(New Button() {btnPlayer1win, btnPlayer2Wins}, False)
-        btnBack.Text = "Home"
-        CurrentScreen = AppState.Switch
     End Sub
 
     Private Sub btnHighScore_Click(sender As Object, e As EventArgs) Handles btnHighScore.Click
