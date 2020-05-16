@@ -1,5 +1,7 @@
-﻿Public Class PasswordChange
+﻿Imports Pool.Models.Validation
+Public Class PasswordChange
     Dim passwordUpdate As New Authenticate(CurrentSession.UserEmail, CurrentSession.Password, CurrentSession.IsLoggedIn)
+    Dim passwordValidation As New PasswordValidation
     Private Sub PasswordChange_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToScreen()
         CurrentScreen = AppState.Edit
@@ -24,7 +26,7 @@
     "Updated Password", MessageBoxButtons.OK, MessageBoxIcon.Information)
             ScoreTheme.LoadNextFormClose(Me, Home)
         Else
-            Dim RequiredField As DialogResult = MessageBox.Show($"Incorrect Password!",
+            Dim RequiredField As DialogResult = MessageBox.Show($"Incorrect Password or is invalid format!",
     "Incorrect Password", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
@@ -37,13 +39,15 @@
         lblUpdate.ForeColor = Color.Aquamarine
         'update real one but delete temp
         If CurrentSession.IsUsingTempPassword Then
-            If isValidatedEntry(New Control() {txtNewPassword, txtNewPasswordConfirm}).Equals(True) AndAlso txtNewPassword.Text.Equals(txtNewPasswordConfirm.Text) Then
+            If isValidatedEntry(New Control() {txtNewPassword, txtNewPasswordConfirm}).Equals(True) AndAlso txtNewPassword.Text.Equals(txtNewPasswordConfirm.Text) _
+                AndAlso passwordValidation.isValid(txtNewPassword.Text.Trim) Then
                 Dim tempPasswordUser As New PasswordUpdaterRecovery With {.User = CurrentSession.UserEmail, .isLoggedIn = True}
                 isUpdated = tempPasswordUser.ILogin_UpdatePassword(txtNewPassword.Text, 0)
                 CurrentSession.IsUsingTempPassword = False
             End If
         Else
-            If isValidatedEntry(New Control() {txtCurrentPassword, txtNewPassword, txtNewPasswordConfirm}).Equals(True) AndAlso txtNewPassword.Text.Equals(txtNewPasswordConfirm.Text) Then
+            If isValidatedEntry(New Control() {txtCurrentPassword, txtNewPassword, txtNewPasswordConfirm}).Equals(True) AndAlso txtNewPassword.Text.Equals(txtNewPasswordConfirm.Text) _
+                AndAlso passwordValidation.isValid(txtNewPassword.Text.Trim) Then
                 isUpdated = passwordUpdate.ILogin_UpdatePassword(txtNewPassword.Text, txtCurrentPassword.Text)
             End If
         End If

@@ -5,6 +5,7 @@ Public Class Register
     Dim getAllCurrent As New PlayerStats
     Dim currentPlayersHT As New Hashtable
     Dim user As New NewUser
+    Dim passwordValidation As New PasswordValidation
     Dim inputValidation As New EmailValidation
     Public Structure NewUser
         Public userEmail As String
@@ -131,7 +132,7 @@ Public Class Register
             If confirmationAlert.Equals(DialogResult.Yes) Then
                 user.passWord = TxtPasswordConfirm.Text
                 user.displayName = GetDisplayName()
-                If txtPassword.Text.Equals(TxtPasswordConfirm.Text) Then
+                If txtPassword.Text.Equals(TxtPasswordConfirm.Text.Trim) AndAlso passwordValidation.isValid(txtPassword.Text.Trim) Then
                     Dim hashPassword As New Authenticate(txtUseremail.Text, txtPassword.Text)
                     Dim insertPlayer As New PlayerStats
                     user.passwordEncripted = hashPassword.GetEncriptedString()
@@ -150,12 +151,12 @@ Public Class Register
                     insertPlayer.GetAllResults(registerSQL.ToString.TrimEnd(","))
                     ScoreTheme.LoadNextFormClose(Me, Home)
                 Else
-                    Dim RequiredField As DialogResult = MessageBox.Show($"Make sure to confirm your password!",
+                    Dim RequiredField As DialogResult = MessageBox.Show($"Make sure to confirm your password and it contains at least 1 upper and lower case along with a number!",
         "Missing Requirement", MessageBoxButtons.OK, MessageBoxIcon.Hand)
                 End If
             End If
         Else
-                Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields",
+            Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields",
         "Missing Requirement", MessageBoxButtons.OK, MessageBoxIcon.Hand)
         End If
 
