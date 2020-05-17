@@ -124,6 +124,7 @@
     <Compile Include="Models\EmailValidation.vb" />
     <Compile Include="Models\Logging.vb" />
     <Compile Include="Models\PasswordGenerator.vb" />
+    <Compile Include="Models\PasswordValidation.vb" />
     <Compile Include="Models\ValidationBase.vb" />
     <Compile Include="PasswordChange.Designer.vb">
       <DependentUpon>PasswordChange.vb</DependentUpon>

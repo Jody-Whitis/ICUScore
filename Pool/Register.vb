@@ -5,6 +5,7 @@ Public Class Register
     Dim getAllCurrent As New PlayerStats
     Dim currentPlayersHT As New Hashtable
     Dim user As New NewUser
+    Dim passwordValidation As New PasswordValidation
     Dim inputValidation As New EmailValidation
     Public Structure NewUser
         Public userEmail As String
@@ -126,28 +127,33 @@ Public Class Register
                       "Invalid email format", MessageBoxButtons.OK, MessageBoxIcon.Hand)
                 Exit Sub
             End If
-            user.passWord = TxtPasswordConfirm.Text
-            user.displayName = GetDisplayName()
-            If txtPassword.Text.Equals(TxtPasswordConfirm.Text) Then
-                Dim hashPassword As New Authenticate(txtUseremail.Text, txtPassword.Text)
-                Dim insertPlayer As New PlayerStats
-                user.passwordEncripted = hashPassword.GetEncriptedString()
+            Dim confirmationAlert As DialogResult = MessageBox.Show($"Are you sure you want to register as {GetDisplayName()}?",
+"Registering Account", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If confirmationAlert.Equals(DialogResult.Yes) Then
+                user.passWord = TxtPasswordConfirm.Text
+                user.displayName = GetDisplayName()
+                If txtPassword.Text.Equals(TxtPasswordConfirm.Text.Trim) AndAlso passwordValidation.isValid(txtPassword.Text.Trim) Then
+                    Dim hashPassword As New Authenticate(txtUseremail.Text, txtPassword.Text)
+                    Dim insertPlayer As New PlayerStats
+                    user.passwordEncripted = hashPassword.GetEncriptedString()
 
-                With registerSQL
-                    .Append("exec [insNewUser] ")
-                    .Append($"@userEmail='{inputValidation.SQLValidation(user.userEmail)}', @password='{user.passwordEncripted}',@displayName='{inputValidation.SQLValidation(user.displayName)}',")
-                    .Append($"@timeStamp='{Now.ToString("MM/dd/yyyy")}',")
-                    If (user.pID > -1) Then
-                        .Append($"@pId = '{user.pID}'")
-                    End If
-                End With
-                'register an existing or create a new one in players and login
-                'We don't want to delete Player for wins records, just delete login
-                'and set Player register bit
-                insertPlayer.GetAllResults(registerSQL.ToString.TrimEnd(","))
-                ScoreTheme.LoadNextFormClose(Me, Home)
-            Else
-                'Confirm your password
+                    With registerSQL
+                        .Append("exec [insNewUser] ")
+                        .Append($"@userEmail='{inputValidation.SQLValidation(user.userEmail)}', @password='{user.passwordEncripted}',@displayName='{inputValidation.SQLValidation(user.displayName)}',")
+                        .Append($"@timeStamp='{Now.ToString("MM/dd/yyyy")}',")
+                        If (user.pID > -1) Then
+                            .Append($"@pId = '{user.pID}'")
+                        End If
+                    End With
+                    'register an existing or create a new one in players and login
+                    'We don't want to delete Player for wins records, just delete login
+                    'and set Player register bit
+                    insertPlayer.GetAllResults(registerSQL.ToString.TrimEnd(","))
+                    ScoreTheme.LoadNextFormClose(Me, Home)
+                Else
+                    Dim RequiredField As DialogResult = MessageBox.Show($"Make sure to confirm your password and it contains at least 1 upper and lower case along with a number!",
+        "Missing Requirement", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                End If
             End If
         Else
             Dim RequiredField As DialogResult = MessageBox.Show($"Missing required fields",
