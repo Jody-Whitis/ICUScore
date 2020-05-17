@@ -26,7 +26,7 @@ Public Class PasswordChange
     "Updated Password", MessageBoxButtons.OK, MessageBoxIcon.Information)
             ScoreTheme.LoadNextFormClose(Me, Home)
         Else
-            Dim RequiredField As DialogResult = MessageBox.Show($"Incorrect Password or is invalid format!",
+            Dim RequiredField As DialogResult = MessageBox.Show($"Confirm your password and that it contains at lease 1 uppercase, lowercase and a number!",
     "Incorrect Password", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub

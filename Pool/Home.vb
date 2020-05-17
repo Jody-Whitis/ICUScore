@@ -66,15 +66,12 @@ Public Class Home
             userAuthenticate.isLoggedIn = False
 #Region "Controls Menu"
             With EditPlayerToolStripMenuItem
-                .Enabled = False
                 .Visible = False
             End With
             With ProfileEditingToolStripMenuItem
-                .Enabled = False
                 .Visible = False
             End With
             With EditPasswordToolStripMenuItem
-                .Visible = False
                 .Enabled = False
             End With
 #End Region
@@ -139,17 +136,29 @@ Public Class Home
     ''' Set the screen when user has been authenticated.
     ''' </summary>
     Private Sub SetUserloginScreen()
-        ScoreTheme.SetControl(New Button() {btnHS, btnPvP, btnLogout, btnNewUser, btnProfileEditing, btnManagePlayers}, True)
-        ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword, btnPasswordRecover}, False)
-        lblUser.Visible = False
-        lblPassword.Visible = False
-        lblHome.Visible = True
-        EditPasswordToolStripMenuItem.Visible = True
+        ScoreTheme.SetControl(New Control() {btnHS, btnPvP, btnLogout, btnNewUser, btnProfileEditing, btnManagePlayers, lblHome}, True)
+        ScoreTheme.SetControl(New Control() {btnLogin, btnNewUser, btnGuest, txtUser, txtPassword, btnPasswordRecover, lblUser, lblPassword}, False)
+
+#Region "Menu strip items"
+        With EditPasswordToolStripMenuItem
+            .Visible = True
+            .Enabled = True
+        End With
         logOutMnu.Visible = True
-        EditPlayerToolStripMenuItem.Visible = True
-        EditPlayerToolStripMenuItem.Enabled = True
-        ProfileEditingToolStripMenuItem.Visible = True
-        EditToolStripMenuItem.Visible = True
+        With EditPlayerToolStripMenuItem
+            .Visible = True
+            .Enabled = True
+        End With
+        With ProfileEditingToolStripMenuItem
+            .Visible = True
+            .Enabled = True
+        End With
+        With EditToolStripMenuItem
+            .Visible = True
+            .Enabled = True
+        End With
+#End Region
+
         lblHome.Text = $"Welcome {CurrentSession.DisplayName}!"
         btnLogout.Location = btnGuest.Location
         Me.Text = "Home"
