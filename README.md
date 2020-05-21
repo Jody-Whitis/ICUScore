@@ -12,4 +12,4 @@ Customization options for two-factor enabling and subscription to emails.
 
 ScreenShots:
 
-https://drive.google.com/open?id=1USA5gRWIs_wsE2SDJQO_ELbDooX7LnRB
+https://drive.google.com/open?id=1kM3fJNZW0kwVTdhRPJrVEUEnJ7R0VBzs
